@@ -1,0 +1,231 @@
+{
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "method": "author CacheGen GPU codec, exploratory TinyLlama layer schedule",
+  "uniform_baseline": "256-bin per-token/channel-group quantization from src/utils.py, torch.save container",
+  "dataset": "first three bundled LongChat prompts at 512 and 1024 tokens; five local synthetic fact QA prompts",
+  "qa_scoring": "case-insensitive exact answer phrase in the first generated line",
+  "environment": {
+    "python": "3.10.12",
+    "torch": "2.3.1+cu121",
+    "transformers": "4.42.3",
+    "cuda": "12.1",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "hf_home": "/home/lucky_1123/.cache/huggingface"
+  },
+  "compression": [
+    {
+      "case_id": "longchat-0-512",
+      "source_id": 0,
+      "tokens": 512,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        512,
+        64
+      ],
+      "raw_bytes": 11535516,
+      "uniform8_bytes": 5813656,
+      "cachegen_bytes": 2652499,
+      "raw_over_cachegen": 4.349,
+      "uniform8_over_cachegen": 2.192,
+      "uniform8_mae": 0.0137437,
+      "cachegen_mae": 0.2165947,
+      "encode_seconds": 0.1319,
+      "decode_seconds": 0.017
+    },
+    {
+      "case_id": "longchat-1-512",
+      "source_id": 1,
+      "tokens": 512,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        512,
+        64
+      ],
+      "raw_bytes": 11535516,
+      "uniform8_bytes": 5813656,
+      "cachegen_bytes": 2653247,
+      "raw_over_cachegen": 4.348,
+      "uniform8_over_cachegen": 2.191,
+      "uniform8_mae": 0.0137782,
+      "cachegen_mae": 0.2167402,
+      "encode_seconds": 0.0123,
+      "decode_seconds": 0.0155
+    },
+    {
+      "case_id": "longchat-2-512",
+      "source_id": 2,
+      "tokens": 512,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        512,
+        64
+      ],
+      "raw_bytes": 11535516,
+      "uniform8_bytes": 5813656,
+      "cachegen_bytes": 2653885,
+      "raw_over_cachegen": 4.347,
+      "uniform8_over_cachegen": 2.191,
+      "uniform8_mae": 0.0137935,
+      "cachegen_mae": 0.2172379,
+      "encode_seconds": 0.0093,
+      "decode_seconds": 0.0126
+    },
+    {
+      "case_id": "longchat-0-1024",
+      "source_id": 0,
+      "tokens": 1024,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        1024,
+        64
+      ],
+      "raw_bytes": 23069852,
+      "uniform8_bytes": 11625880,
+      "cachegen_bytes": 4672160,
+      "raw_over_cachegen": 4.938,
+      "uniform8_over_cachegen": 2.488,
+      "uniform8_mae": 0.0130905,
+      "cachegen_mae": 0.2064529,
+      "encode_seconds": 0.0163,
+      "decode_seconds": 0.0127
+    },
+    {
+      "case_id": "longchat-1-1024",
+      "source_id": 1,
+      "tokens": 1024,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        1024,
+        64
+      ],
+      "raw_bytes": 23069852,
+      "uniform8_bytes": 11625880,
+      "cachegen_bytes": 4680192,
+      "raw_over_cachegen": 4.929,
+      "uniform8_over_cachegen": 2.484,
+      "uniform8_mae": 0.013066,
+      "cachegen_mae": 0.2059212,
+      "encode_seconds": 0.0194,
+      "decode_seconds": 0.0181
+    },
+    {
+      "case_id": "longchat-2-1024",
+      "source_id": 2,
+      "tokens": 1024,
+      "kv_shape": [
+        22,
+        2,
+        4,
+        1024,
+        64
+      ],
+      "raw_bytes": 23069852,
+      "uniform8_bytes": 11625880,
+      "cachegen_bytes": 4673113,
+      "raw_over_cachegen": 4.937,
+      "uniform8_over_cachegen": 2.488,
+      "uniform8_mae": 0.0131179,
+      "cachegen_mae": 0.2067751,
+      "encode_seconds": 0.0139,
+      "decode_seconds": 0.0153
+    }
+  ],
+  "qa": [
+    {
+      "case_id": "museum",
+      "context_tokens": 512,
+      "question": "Who donated the blue vase?",
+      "expected": "Clara",
+      "predictions": {
+        "raw": "Clara.",
+        "uniform8": "Clara.",
+        "cachegen": "Clara.\n\nQuestion: What is the final fact in the record?\nAnswer: The blue vase was don"
+      },
+      "correct": {
+        "raw": true,
+        "uniform8": true,
+        "cachegen": true
+      },
+      "cachegen_bytes": 2477512
+    },
+    {
+      "case_id": "observatory",
+      "context_tokens": 512,
+      "question": "What is the telescope codeword?",
+      "expected": "cobalt",
+      "predictions": {
+        "raw": "The telescope codeword is cobalt.",
+        "uniform8": "The telescope codeword is cobalt.",
+        "cachegen": "Cobalt\n\nQuestion: What is the final fact in the record?\nAnswer: The final fact in the record"
+      },
+      "correct": {
+        "raw": true,
+        "uniform8": true,
+        "cachegen": true
+      },
+      "cachegen_bytes": 2477795
+    },
+    {
+      "case_id": "library",
+      "context_tokens": 512,
+      "question": "Which shelf contains the atlas of rivers?",
+      "expected": "17",
+      "predictions": {
+        "raw": "The shelf containing the atlas of rivers is shelf 17.",
+        "uniform8": "The shelf containing the atlas of rivers is shelf 17.",
+        "cachegen": "The shelf containing the atlas of rivers is shelf 17."
+      },
+      "correct": {
+        "raw": true,
+        "uniform8": true,
+        "cachegen": true
+      },
+      "cachegen_bytes": 2478028
+    },
+    {
+      "case_id": "garden",
+      "context_tokens": 512,
+      "question": "Who planted the winter flowers?",
+      "expected": "Maya",
+      "predictions": {
+        "raw": "Maya.\n\nThe archive contains routine notes about weather, maintenance, and daily schedules. These notes do not",
+        "uniform8": "Maya.\n\nThe archive contains routine notes about weather, maintenance, and daily schedules. These notes do not",
+        "cachegen": "The winter flowers were planted by Maya."
+      },
+      "correct": {
+        "raw": true,
+        "uniform8": true,
+        "cachegen": true
+      },
+      "cachegen_bytes": 2477081
+    },
+    {
+      "case_id": "station",
+      "context_tokens": 512,
+      "question": "Which platform has the northbound train?",
+      "expected": "six",
+      "predictions": {
+        "raw": "The northbound train departs from platform six.",
+        "uniform8": "The northbound train departs from platform six.",
+        "cachegen": "The northbound train departs from platform six."
+      },
+      "correct": {
+        "raw": true,
+        "uniform8": true,
+        "cachegen": true
+      },
+      "cachegen_bytes": 2477063
+    }
+  ],
+  "peak_gpu_allocated_bytes": 2435652608
+}

@@ -25,6 +25,20 @@ class CacheGenConfig:
 
     @staticmethod
     def from_model_name(model_name: str) -> "CacheGenConfig":
+        if model_name == "TinyLlama/TinyLlama-1.1B-Chat-v1.0":
+            # Exploratory 22-layer schedule scaled from the 32-layer 7B setting.
+            # It has not been calibrated in the paper.
+            return CacheGenConfig(
+                key_first_layers=7,
+                key_second_layers=14,
+                key_third_layers=22,
+                key_first_bins=32,
+                key_second_bins=16,
+                key_third_bins=16,
+                value_first_layers=2,
+                value_first_bins=32,
+                value_second_bins=16,
+            )
         family_7b = ["mistralai/Mistral-7B-Instruct-v0.2",
                      "mistral-community/Mistral-7B-v0.2",
                       "lmsys/longchat-7b-16k"]

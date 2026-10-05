@@ -52,14 +52,24 @@ def legacy_to_blob(cache):
     return torch.stack([torch.stack((key[0], value[0]), dim=0) for key, value in cache], dim=0)
 
 
-def make_codec(tokens):
+def make_codec(tokens, level=2):
     from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
     from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
     from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
 
+    if level not in (1, 2, 3):
+        raise ValueError("CacheGen level must be 1, 2 or 3")
     config = LMCacheEngineConfig.from_defaults(chunk_size=tokens)
     metadata = LMCacheEngineMetadata(MODEL_ID, 1, 0, "huggingface")
-    return CacheGenSerializer(config, metadata), CacheGenDeserializer(config, metadata)
+    previous = os.environ.get("QUANT_LEVEL")
+    try:
+        os.environ["QUANT_LEVEL"] = str(level)
+        return CacheGenSerializer(config, metadata), CacheGenDeserializer(config, metadata)
+    finally:
+        if previous is None:
+            os.environ.pop("QUANT_LEVEL", None)
+        else:
+            os.environ["QUANT_LEVEL"] = previous
 
 
 def timed_cuda(function):

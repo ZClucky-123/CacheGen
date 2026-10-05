@@ -1,4 +1,6 @@
 import unittest
+import os
+from unittest.mock import patch
 
 from lmcache.storage_backend.serde.cachegen_basics import CacheGenConfig
 
@@ -18,6 +20,14 @@ class TinyLlamaConfigTests(unittest.TestCase):
             (config.value_first_layers, config.value_first_bins, config.value_second_bins),
             (2, 32, 16),
         )
+
+    def test_three_tinyllama_levels_have_ordered_precision(self):
+        bins = []
+        for level in (1, 2, 3):
+            with patch.dict(os.environ, {"QUANT_LEVEL": str(level)}):
+                config = CacheGenConfig.from_model_name("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+            bins.append((config.key_first_bins, config.key_third_bins, config.value_second_bins))
+        self.assertEqual(bins, [(16, 12, 12), (32, 16, 16), (32, 32, 32)])
 
 
 if __name__ == "__main__":

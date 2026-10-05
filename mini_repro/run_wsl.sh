@@ -12,4 +12,16 @@ export HF_HUB_OFFLINE=1
 export CUDA_HOME=/usr/local/cuda-12.1
 export MAX_JOBS=2
 
-exec "$venv/bin/python" -m mini_repro.run "$@"
+experiment="${1:-mini}"
+case "$experiment" in
+  mini|quality|ttft|adaptive) shift || true ;;
+  -*) experiment="mini" ;;
+  *) echo "Unknown experiment: $experiment" >&2; exit 2 ;;
+esac
+case "$experiment" in
+  mini) module="mini_repro.run" ;;
+  quality) module="mini_repro.quality_size" ;;
+  ttft) module="mini_repro.ttft" ;;
+  adaptive) module="mini_repro.adaptive" ;;
+esac
+exec "$venv/bin/python" -m "$module" "$@"

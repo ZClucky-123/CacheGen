@@ -39,3 +39,19 @@ bash /mnt/d/a_study/大三上/大模型网络/code/CacheGen-mini/mini_repro/run_
 ```
 
 可用 `--compression-limit 1 --qa-limit 1` 做快速检查。输出覆盖 `results/tinyllama/metrics.json`。如从零搭建，请在 D 盘 WSL 内创建虚拟环境，安装 `requirements-mini.txt`，配置 CUDA 12.1 `nvcc`，并从作者 `LMCache/third_party/torchac_cuda` 编译安装扩展；本实验优先使用清华 pip 镜像和 `hf-mirror.com` 获取依赖与模型。构建和下载前应重新核对目标路径、可用空间及下载规模。
+
+## 三组后续实验
+
+这三组脚本复用以上离线环境和仓库内的数据。运行前在 WSL 中进入本工作树，或把下面的 `mini_repro/run_wsl.sh` 换成它的绝对路径。所有输出写到本工作树的 `results/tinyllama/`，不会覆盖上面的 `metrics.json`。
+
+```bash
+bash mini_repro/run_wsl.sh quality --samples 20 --lengths 512 1024 1536 --continuation 32 --qa-per-position 10
+bash mini_repro/run_wsl.sh ttft --samples 3 --lengths 512 1024 1536 --bandwidth-gbps 0.1 1 10
+bash mini_repro/run_wsl.sh adaptive --cases 5 --length 1024 --chunk-size 256 --traces 5 --slo 0.5
+```
+
+- `quality` 输出 `quality_size.json`。对同一 LongChat 上下文，比较 FP16、真正打包的统一 4 位、统一 8 位、CacheGen 1/2/3 级的完整传输字节数及未见后续文本的平均负对数似然。KV 不保存最后一个上下文 token 的 logits，因此困惑度代理指标从后续文本**第二个** token 开始计分。另测事实在上下文开头、中间、末尾时的逐题答案，并单列原始 KV 本身答对的题数。三档 TinyLlama 参数由 7B 设置缩放而来，未经论文校准。
+- `ttft` 输出 `ttft.json`。比较文本重新 prefill、统一 8 位 KV、CacheGen 2 级 KV。相同的上下文先离线编码，经单机 socket 限速传送后，分别测传输、恢复和首 token 推理时间；离线编码耗时单列，并按方法、带宽、上下文长度汇总中位数与 P95。结果是**本机受控链路测量**，不能代表两台服务器之间的真实网络性能；高带宽档还会受到 Python 线程及系统调度开销影响。文本会往返分词校验，确保三条路径使用相同上下文。
+- `adaptive` 输出 `adaptive.json`。把完整上下文 KV 分块，预编码三档位流，读取 `test_data/bw.jsonl` 的 Gbps 轨迹，比较自适应、固定 1/2/3 级和文本回退。每条记录列出选择的等级、按字节/带宽**估算**的传输时间、本机实测的恢复与首 token 时间、SLO 超限和答案。`--bandwidth-scale 0.01` 可人为放慢轨迹，检查是否触发降级及回退；缩放后的轨迹不能当作论文原带宽。
+
+完整运行的样本数可通过参数控制。先用 `quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1`、`ttft --samples 1 --lengths 512 --bandwidth-gbps 1` 和 `adaptive --cases 1 --length 512 --traces 1` 检查环境。质量实验应比较**同等质量下**的体积，不能仅以压缩比宣称方法有效；自适应脚本的网络时间是轨迹估计值，不是线上 TTFT。

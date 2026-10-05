@@ -55,3 +55,7 @@ bash mini_repro/run_wsl.sh adaptive --cases 5 --length 1024 --chunk-size 256 --t
 - `adaptive` 输出 `adaptive.json`。把完整上下文 KV 分块，预编码三档位流，读取 `test_data/bw.jsonl` 的 Gbps 轨迹，比较自适应、固定 1/2/3 级和文本回退。每条记录列出选择的等级、按字节/带宽**估算**的传输时间、本机实测的恢复与首 token 时间、SLO 超限和答案。`--bandwidth-scale 0.01` 可人为放慢轨迹，检查是否触发降级及回退；缩放后的轨迹不能当作论文原带宽。
 
 完整运行的样本数可通过参数控制。先用 `quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1`、`ttft --samples 1 --lengths 512 --bandwidth-gbps 1` 和 `adaptive --cases 1 --length 512 --traces 1` 检查环境。质量实验应比较**同等质量下**的体积，不能仅以压缩比宣称方法有效；自适应脚本的网络时间是轨迹估计值，不是线上 TTFT。
+
+## 本机实验结果索引
+
+完整复现记录（配置、依赖、实验与论文差异）见 [REPRODUCTION_REPORT.md](REPRODUCTION_REPORT.md)；结果文件索引与核心数值见 [results/tinyllama/README.md](../results/tinyllama/README.md)。

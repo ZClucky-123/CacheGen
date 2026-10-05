@@ -1,0 +1,2967 @@
+{
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "measurement": "trace transfer estimate + locally measured reconstruction and first-token time; no live network",
+  "parameters": {
+    "cases": 5,
+    "length": 1024,
+    "chunk_size": 256,
+    "traces": 5,
+    "bandwidth_scale": 1.0,
+    "slo_seconds": 0.5
+  },
+  "cases": [
+    {
+      "case_id": "fact-0-1024-start",
+      "position": "start",
+      "answer": "Clara",
+      "raw_prediction": "The blue vase was donated by Clara.",
+      "raw_correct": true,
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059081,
+          "local_reconstruct_seconds": 0.023458,
+          "local_first_token_seconds": 0.029281,
+          "estimated_ttft_seconds": 0.111821,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.034181,
+          "local_reconstruct_seconds": 0.015741,
+          "local_first_token_seconds": 0.028902,
+          "estimated_ttft_seconds": 0.078825,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.050633,
+          "local_reconstruct_seconds": 0.022827,
+          "local_first_token_seconds": 0.036123,
+          "estimated_ttft_seconds": 0.109583,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059081,
+          "local_reconstruct_seconds": 0.020435,
+          "local_first_token_seconds": 0.025962,
+          "estimated_ttft_seconds": 0.105478,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 4e-05,
+          "local_reconstruct_seconds": 0.185406,
+          "local_first_token_seconds": 0.03146,
+          "estimated_ttft_seconds": 0.216906,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012601,
+          "local_reconstruct_seconds": 0.016009,
+          "local_first_token_seconds": 0.031549,
+          "estimated_ttft_seconds": 0.060159,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007283,
+          "local_reconstruct_seconds": 0.017854,
+          "local_first_token_seconds": 0.024333,
+          "estimated_ttft_seconds": 0.049469,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010812,
+          "local_reconstruct_seconds": 0.012875,
+          "local_first_token_seconds": 0.028904,
+          "estimated_ttft_seconds": 0.052591,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012601,
+          "local_reconstruct_seconds": 0.015123,
+          "local_first_token_seconds": 0.034033,
+          "estimated_ttft_seconds": 0.061757,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.179219,
+          "local_first_token_seconds": 0.031769,
+          "estimated_ttft_seconds": 0.210997,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012804,
+          "local_reconstruct_seconds": 0.012467,
+          "local_first_token_seconds": 0.030273,
+          "estimated_ttft_seconds": 0.055544,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007423,
+          "local_reconstruct_seconds": 0.012328,
+          "local_first_token_seconds": 0.03295,
+          "estimated_ttft_seconds": 0.052702,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010994,
+          "local_reconstruct_seconds": 0.014133,
+          "local_first_token_seconds": 0.027936,
+          "estimated_ttft_seconds": 0.053063,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012804,
+          "local_reconstruct_seconds": 0.021624,
+          "local_first_token_seconds": 0.035251,
+          "estimated_ttft_seconds": 0.069679,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.179433,
+          "local_first_token_seconds": 0.029297,
+          "estimated_ttft_seconds": 0.208738,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011667,
+          "local_reconstruct_seconds": 0.019541,
+          "local_first_token_seconds": 0.041395,
+          "estimated_ttft_seconds": 0.072603,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.006743,
+          "local_reconstruct_seconds": 0.01512,
+          "local_first_token_seconds": 0.02666,
+          "estimated_ttft_seconds": 0.048523,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010005,
+          "local_reconstruct_seconds": 0.019802,
+          "local_first_token_seconds": 0.03194,
+          "estimated_ttft_seconds": 0.061748,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011667,
+          "local_reconstruct_seconds": 0.015469,
+          "local_first_token_seconds": 0.024204,
+          "estimated_ttft_seconds": 0.05134,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 8e-06,
+          "local_reconstruct_seconds": 0.181639,
+          "local_first_token_seconds": 0.029592,
+          "estimated_ttft_seconds": 0.211239,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.01623,
+          "local_reconstruct_seconds": 0.019065,
+          "local_first_token_seconds": 0.028259,
+          "estimated_ttft_seconds": 0.063554,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.009403,
+          "local_reconstruct_seconds": 0.014571,
+          "local_first_token_seconds": 0.027543,
+          "estimated_ttft_seconds": 0.051517,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.013941,
+          "local_reconstruct_seconds": 0.017505,
+          "local_first_token_seconds": 0.029169,
+          "estimated_ttft_seconds": 0.060615,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.01623,
+          "local_reconstruct_seconds": 0.01683,
+          "local_first_token_seconds": 0.040532,
+          "estimated_ttft_seconds": 0.073591,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 1.1e-05,
+          "local_reconstruct_seconds": 0.181917,
+          "local_first_token_seconds": 0.040047,
+          "estimated_ttft_seconds": 0.221976,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "case_id": "fact-1-1024-middle",
+      "position": "middle",
+      "answer": "Maya",
+      "raw_prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+      "raw_correct": true,
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059048,
+          "local_reconstruct_seconds": 0.014868,
+          "local_first_token_seconds": 0.03596,
+          "estimated_ttft_seconds": 0.109876,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.034128,
+          "local_reconstruct_seconds": 0.013929,
+          "local_first_token_seconds": 0.029839,
+          "estimated_ttft_seconds": 0.077895,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record in the archive?\nAnswer",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.05057,
+          "local_reconstruct_seconds": 0.016732,
+          "local_first_token_seconds": 0.032742,
+          "estimated_ttft_seconds": 0.100043,
+          "slo_violation": false,
+          "prediction": "The winter flowers was donated by Maya.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059048,
+          "local_reconstruct_seconds": 0.015829,
+          "local_first_token_seconds": 0.035909,
+          "estimated_ttft_seconds": 0.110786,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 4.1e-05,
+          "local_reconstruct_seconds": 0.172442,
+          "local_first_token_seconds": 0.031092,
+          "estimated_ttft_seconds": 0.203575,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012645,
+          "local_reconstruct_seconds": 0.021859,
+          "local_first_token_seconds": 0.057718,
+          "estimated_ttft_seconds": 0.092222,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007308,
+          "local_reconstruct_seconds": 0.011877,
+          "local_first_token_seconds": 0.031933,
+          "estimated_ttft_seconds": 0.051118,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record in the archive?\nAnswer",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.01084,
+          "local_reconstruct_seconds": 0.013909,
+          "local_first_token_seconds": 0.030891,
+          "estimated_ttft_seconds": 0.05564,
+          "slo_violation": false,
+          "prediction": "The winter flowers was donated by Maya.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012645,
+          "local_reconstruct_seconds": 0.014442,
+          "local_first_token_seconds": 0.028336,
+          "estimated_ttft_seconds": 0.055423,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.178423,
+          "local_first_token_seconds": 0.030201,
+          "estimated_ttft_seconds": 0.208632,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012822,
+          "local_reconstruct_seconds": 0.019032,
+          "local_first_token_seconds": 0.031492,
+          "estimated_ttft_seconds": 0.063347,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007427,
+          "local_reconstruct_seconds": 0.015922,
+          "local_first_token_seconds": 0.028524,
+          "estimated_ttft_seconds": 0.051872,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record in the archive?\nAnswer",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010998,
+          "local_reconstruct_seconds": 0.015442,
+          "local_first_token_seconds": 0.031431,
+          "estimated_ttft_seconds": 0.057871,
+          "slo_violation": false,
+          "prediction": "The winter flowers was donated by Maya.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012822,
+          "local_reconstruct_seconds": 0.019219,
+          "local_first_token_seconds": 0.032781,
+          "estimated_ttft_seconds": 0.064823,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.181131,
+          "local_first_token_seconds": 0.059305,
+          "estimated_ttft_seconds": 0.240445,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011696,
+          "local_reconstruct_seconds": 0.016157,
+          "local_first_token_seconds": 0.034799,
+          "estimated_ttft_seconds": 0.062652,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.006758,
+          "local_reconstruct_seconds": 0.013596,
+          "local_first_token_seconds": 0.027503,
+          "estimated_ttft_seconds": 0.047858,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record in the archive?\nAnswer",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010021,
+          "local_reconstruct_seconds": 0.01867,
+          "local_first_token_seconds": 0.030295,
+          "estimated_ttft_seconds": 0.058986,
+          "slo_violation": false,
+          "prediction": "The winter flowers was donated by Maya.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011696,
+          "local_reconstruct_seconds": 0.02015,
+          "local_first_token_seconds": 0.035215,
+          "estimated_ttft_seconds": 0.067061,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 8e-06,
+          "local_reconstruct_seconds": 0.209315,
+          "local_first_token_seconds": 0.050405,
+          "estimated_ttft_seconds": 0.259729,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016317,
+          "local_reconstruct_seconds": 0.019457,
+          "local_first_token_seconds": 0.028107,
+          "estimated_ttft_seconds": 0.06388,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.009447,
+          "local_reconstruct_seconds": 0.016279,
+          "local_first_token_seconds": 0.03388,
+          "estimated_ttft_seconds": 0.059606,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record in the archive?\nAnswer",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.013991,
+          "local_reconstruct_seconds": 0.018469,
+          "local_first_token_seconds": 0.029231,
+          "estimated_ttft_seconds": 0.061691,
+          "slo_violation": false,
+          "prediction": "The winter flowers was donated by Maya.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016317,
+          "local_reconstruct_seconds": 0.018281,
+          "local_first_token_seconds": 0.030964,
+          "estimated_ttft_seconds": 0.065562,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 1.1e-05,
+          "local_reconstruct_seconds": 0.176907,
+          "local_first_token_seconds": 0.026769,
+          "estimated_ttft_seconds": 0.203687,
+          "slo_violation": false,
+          "prediction": "Maya\n\nQuestion: What was the final fact in the record for the winter flowers?",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "case_id": "fact-2-1024-end",
+      "position": "end",
+      "answer": "Nora",
+      "raw_prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+      "raw_correct": true,
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059154,
+          "local_reconstruct_seconds": 0.01906,
+          "local_first_token_seconds": 0.034402,
+          "estimated_ttft_seconds": 0.112616,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.034226,
+          "local_reconstruct_seconds": 0.016452,
+          "local_first_token_seconds": 0.040949,
+          "estimated_ttft_seconds": 0.091627,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.05068,
+          "local_reconstruct_seconds": 0.016289,
+          "local_first_token_seconds": 0.028621,
+          "estimated_ttft_seconds": 0.095589,
+          "slo_violation": false,
+          "prediction": "Nora donated the river atlas.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059154,
+          "local_reconstruct_seconds": 0.016267,
+          "local_first_token_seconds": 0.027249,
+          "estimated_ttft_seconds": 0.102671,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 4e-05,
+          "local_reconstruct_seconds": 0.177259,
+          "local_first_token_seconds": 0.028038,
+          "estimated_ttft_seconds": 0.205338,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012604,
+          "local_reconstruct_seconds": 0.018226,
+          "local_first_token_seconds": 0.038854,
+          "estimated_ttft_seconds": 0.069685,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007289,
+          "local_reconstruct_seconds": 0.009581,
+          "local_first_token_seconds": 0.028632,
+          "estimated_ttft_seconds": 0.045502,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010815,
+          "local_reconstruct_seconds": 0.016,
+          "local_first_token_seconds": 0.028898,
+          "estimated_ttft_seconds": 0.055713,
+          "slo_violation": false,
+          "prediction": "Nora donated the river atlas.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012604,
+          "local_reconstruct_seconds": 0.012982,
+          "local_first_token_seconds": 0.024164,
+          "estimated_ttft_seconds": 0.049751,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.181149,
+          "local_first_token_seconds": 0.037116,
+          "estimated_ttft_seconds": 0.218273,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012849,
+          "local_reconstruct_seconds": 0.023745,
+          "local_first_token_seconds": 0.031536,
+          "estimated_ttft_seconds": 0.06813,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007452,
+          "local_reconstruct_seconds": 0.017058,
+          "local_first_token_seconds": 0.032457,
+          "estimated_ttft_seconds": 0.056967,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.011027,
+          "local_reconstruct_seconds": 0.021811,
+          "local_first_token_seconds": 0.057049,
+          "estimated_ttft_seconds": 0.089886,
+          "slo_violation": false,
+          "prediction": "Nora donated the river atlas.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012849,
+          "local_reconstruct_seconds": 0.01526,
+          "local_first_token_seconds": 0.029333,
+          "estimated_ttft_seconds": 0.057443,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.182464,
+          "local_first_token_seconds": 0.034524,
+          "estimated_ttft_seconds": 0.216997,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011668,
+          "local_reconstruct_seconds": 0.020924,
+          "local_first_token_seconds": 0.036651,
+          "estimated_ttft_seconds": 0.069242,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.006746,
+          "local_reconstruct_seconds": 0.013752,
+          "local_first_token_seconds": 0.030543,
+          "estimated_ttft_seconds": 0.051041,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010006,
+          "local_reconstruct_seconds": 0.015757,
+          "local_first_token_seconds": 0.028091,
+          "estimated_ttft_seconds": 0.053853,
+          "slo_violation": false,
+          "prediction": "Nora donated the river atlas.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011668,
+          "local_reconstruct_seconds": 0.014956,
+          "local_first_token_seconds": 0.03143,
+          "estimated_ttft_seconds": 0.058055,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 8e-06,
+          "local_reconstruct_seconds": 0.198115,
+          "local_first_token_seconds": 0.035091,
+          "estimated_ttft_seconds": 0.233214,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.01626,
+          "local_reconstruct_seconds": 0.02088,
+          "local_first_token_seconds": 0.032426,
+          "estimated_ttft_seconds": 0.069566,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.009426,
+          "local_reconstruct_seconds": 0.012502,
+          "local_first_token_seconds": 0.035321,
+          "estimated_ttft_seconds": 0.057249,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.013964,
+          "local_reconstruct_seconds": 0.013207,
+          "local_first_token_seconds": 0.035435,
+          "estimated_ttft_seconds": 0.062606,
+          "slo_violation": false,
+          "prediction": "Nora donated the river atlas.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.01626,
+          "local_reconstruct_seconds": 0.020067,
+          "local_first_token_seconds": 0.040778,
+          "estimated_ttft_seconds": 0.077105,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 1.1e-05,
+          "local_reconstruct_seconds": 0.168238,
+          "local_first_token_seconds": 0.024345,
+          "estimated_ttft_seconds": 0.192595,
+          "slo_violation": false,
+          "prediction": "Nora\n\nQuestion: What is the name of the river atlas that was donated by",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "case_id": "fact-3-1024-start",
+      "position": "start",
+      "answer": "Ethan",
+      "raw_prediction": "Ethan donated the silver compass.",
+      "raw_correct": true,
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059079,
+          "local_reconstruct_seconds": 0.01076,
+          "local_first_token_seconds": 0.025483,
+          "estimated_ttft_seconds": 0.095322,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.034181,
+          "local_reconstruct_seconds": 0.008655,
+          "local_first_token_seconds": 0.020607,
+          "estimated_ttft_seconds": 0.063443,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.050632,
+          "local_reconstruct_seconds": 0.009099,
+          "local_first_token_seconds": 0.027636,
+          "estimated_ttft_seconds": 0.087367,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059079,
+          "local_reconstruct_seconds": 0.010302,
+          "local_first_token_seconds": 0.035125,
+          "estimated_ttft_seconds": 0.104506,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 4.1e-05,
+          "local_reconstruct_seconds": 0.123815,
+          "local_first_token_seconds": 0.019961,
+          "estimated_ttft_seconds": 0.143816,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012599,
+          "local_reconstruct_seconds": 0.009247,
+          "local_first_token_seconds": 0.021277,
+          "estimated_ttft_seconds": 0.043122,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007281,
+          "local_reconstruct_seconds": 0.007505,
+          "local_first_token_seconds": 0.019605,
+          "estimated_ttft_seconds": 0.034392,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010811,
+          "local_reconstruct_seconds": 0.008898,
+          "local_first_token_seconds": 0.025255,
+          "estimated_ttft_seconds": 0.044965,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012599,
+          "local_reconstruct_seconds": 0.008933,
+          "local_first_token_seconds": 0.019253,
+          "estimated_ttft_seconds": 0.040785,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.123029,
+          "local_first_token_seconds": 0.020515,
+          "estimated_ttft_seconds": 0.143552,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012803,
+          "local_reconstruct_seconds": 0.008769,
+          "local_first_token_seconds": 0.018414,
+          "estimated_ttft_seconds": 0.039986,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007422,
+          "local_reconstruct_seconds": 0.007415,
+          "local_first_token_seconds": 0.019152,
+          "estimated_ttft_seconds": 0.033989,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010993,
+          "local_reconstruct_seconds": 0.008968,
+          "local_first_token_seconds": 0.021592,
+          "estimated_ttft_seconds": 0.041553,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012803,
+          "local_reconstruct_seconds": 0.008397,
+          "local_first_token_seconds": 0.019708,
+          "estimated_ttft_seconds": 0.040908,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.122909,
+          "local_first_token_seconds": 0.017963,
+          "estimated_ttft_seconds": 0.140881,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011666,
+          "local_reconstruct_seconds": 0.008602,
+          "local_first_token_seconds": 0.018753,
+          "estimated_ttft_seconds": 0.03902,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.006742,
+          "local_reconstruct_seconds": 0.007863,
+          "local_first_token_seconds": 0.01831,
+          "estimated_ttft_seconds": 0.032915,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010005,
+          "local_reconstruct_seconds": 0.007942,
+          "local_first_token_seconds": 0.0171,
+          "estimated_ttft_seconds": 0.035047,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011666,
+          "local_reconstruct_seconds": 0.008255,
+          "local_first_token_seconds": 0.017522,
+          "estimated_ttft_seconds": 0.037443,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 8e-06,
+          "local_reconstruct_seconds": 0.125217,
+          "local_first_token_seconds": 0.018693,
+          "estimated_ttft_seconds": 0.143918,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016227,
+          "local_reconstruct_seconds": 0.008908,
+          "local_first_token_seconds": 0.018834,
+          "estimated_ttft_seconds": 0.04397,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.009402,
+          "local_reconstruct_seconds": 0.00719,
+          "local_first_token_seconds": 0.01847,
+          "estimated_ttft_seconds": 0.035062,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.013939,
+          "local_reconstruct_seconds": 0.008349,
+          "local_first_token_seconds": 0.018495,
+          "estimated_ttft_seconds": 0.040783,
+          "slo_violation": false,
+          "prediction": "The silver compass was donated by Ethan.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016227,
+          "local_reconstruct_seconds": 0.00893,
+          "local_first_token_seconds": 0.019993,
+          "estimated_ttft_seconds": 0.045151,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass to the museum.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 1.1e-05,
+          "local_reconstruct_seconds": 0.123664,
+          "local_first_token_seconds": 0.01825,
+          "estimated_ttft_seconds": 0.141925,
+          "slo_violation": false,
+          "prediction": "Ethan donated the silver compass.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "case_id": "fact-4-1024-middle",
+      "position": "middle",
+      "answer": "Priya",
+      "raw_prediction": "Priya donated the antique clock.",
+      "raw_correct": true,
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059054,
+          "local_reconstruct_seconds": 0.008548,
+          "local_first_token_seconds": 0.018517,
+          "estimated_ttft_seconds": 0.086118,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.034135,
+          "local_reconstruct_seconds": 0.00742,
+          "local_first_token_seconds": 0.018109,
+          "estimated_ttft_seconds": 0.059664,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.050575,
+          "local_reconstruct_seconds": 0.008477,
+          "local_first_token_seconds": 0.016944,
+          "estimated_ttft_seconds": 0.075995,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.059054,
+          "local_reconstruct_seconds": 0.008131,
+          "local_first_token_seconds": 0.017627,
+          "estimated_ttft_seconds": 0.084811,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015,
+            2.219284632798856,
+            0.6499744908681054
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 4.1e-05,
+          "local_reconstruct_seconds": 0.13514,
+          "local_first_token_seconds": 0.034363,
+          "estimated_ttft_seconds": 0.169544,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012647,
+          "local_reconstruct_seconds": 0.020395,
+          "local_first_token_seconds": 0.05366,
+          "estimated_ttft_seconds": 0.086702,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007311,
+          "local_reconstruct_seconds": 0.013132,
+          "local_first_token_seconds": 0.03459,
+          "estimated_ttft_seconds": 0.055033,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010842,
+          "local_reconstruct_seconds": 0.018247,
+          "local_first_token_seconds": 0.030241,
+          "estimated_ttft_seconds": 0.05933,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012647,
+          "local_reconstruct_seconds": 0.018679,
+          "local_first_token_seconds": 0.03594,
+          "estimated_ttft_seconds": 0.067266,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 1,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            6.967839152558909,
+            2.124279519431539,
+            8.966478960741442,
+            7.9473672428190225
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.171374,
+          "local_first_token_seconds": 0.035551,
+          "estimated_ttft_seconds": 0.206934,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012824,
+          "local_reconstruct_seconds": 0.01983,
+          "local_first_token_seconds": 0.02857,
+          "estimated_ttft_seconds": 0.061224,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.007429,
+          "local_reconstruct_seconds": 0.016933,
+          "local_first_token_seconds": 0.028197,
+          "estimated_ttft_seconds": 0.052558,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.011,
+          "local_reconstruct_seconds": 0.014111,
+          "local_first_token_seconds": 0.042549,
+          "estimated_ttft_seconds": 0.067659,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.012824,
+          "local_reconstruct_seconds": 0.02275,
+          "local_first_token_seconds": 0.034294,
+          "estimated_ttft_seconds": 0.069868,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 2,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.839600387349869,
+            9.335863713334165,
+            8.314914932383612,
+            2.3460314795621677
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 9e-06,
+          "local_reconstruct_seconds": 0.197395,
+          "local_first_token_seconds": 0.039816,
+          "estimated_ttft_seconds": 0.23722,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011698,
+          "local_reconstruct_seconds": 0.021349,
+          "local_first_token_seconds": 0.029985,
+          "estimated_ttft_seconds": 0.063033,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.00676,
+          "local_reconstruct_seconds": 0.018417,
+          "local_first_token_seconds": 0.030142,
+          "estimated_ttft_seconds": 0.055319,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.010023,
+          "local_reconstruct_seconds": 0.009594,
+          "local_first_token_seconds": 0.030734,
+          "estimated_ttft_seconds": 0.050351,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.011698,
+          "local_reconstruct_seconds": 0.015235,
+          "local_first_token_seconds": 0.034552,
+          "estimated_ttft_seconds": 0.061486,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 3,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            4.704815564373942,
+            3.1889098539188727,
+            8.674157267938563,
+            6.910653295628093
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 8e-06,
+          "local_reconstruct_seconds": 0.158324,
+          "local_first_token_seconds": 0.046843,
+          "estimated_ttft_seconds": 0.205175,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "adaptive",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016321,
+          "local_reconstruct_seconds": 0.012884,
+          "local_first_token_seconds": 0.034924,
+          "estimated_ttft_seconds": 0.064128,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed1",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "estimated_transfer_seconds": 0.009451,
+          "local_reconstruct_seconds": 0.014202,
+          "local_first_token_seconds": 0.034,
+          "estimated_ttft_seconds": 0.057653,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed2",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "estimated_transfer_seconds": 0.013995,
+          "local_reconstruct_seconds": 0.013076,
+          "local_first_token_seconds": 0.032156,
+          "estimated_ttft_seconds": 0.059227,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "fixed3",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "estimated_transfer_seconds": 0.016321,
+          "local_reconstruct_seconds": 0.019509,
+          "local_first_token_seconds": 0.039143,
+          "estimated_ttft_seconds": 0.074973,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        },
+        {
+          "trace_id": 4,
+          "strategy": "text",
+          "bandwidth_gbps": [
+            7.109590483662323,
+            2.990188076243645,
+            3.141458331790304,
+            3.3173868470836387
+          ],
+          "levels": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "estimated_transfer_seconds": 1.1e-05,
+          "local_reconstruct_seconds": 0.151224,
+          "local_first_token_seconds": 0.031869,
+          "estimated_ttft_seconds": 0.183104,
+          "slo_violation": false,
+          "prediction": "Priya donated the antique clock.",
+          "correct": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "adaptive": {
+      "runs": 25,
+      "slo_violations": 0,
+      "correct": 25,
+      "mean_estimated_ttft_seconds": 0.07070088000000001
+    },
+    "fixed1": {
+      "runs": 25,
+      "slo_violations": 0,
+      "correct": 25,
+      "mean_estimated_ttft_seconds": 0.05407195999999999
+    },
+    "fixed2": {
+      "runs": 25,
+      "slo_violations": 0,
+      "correct": 25,
+      "mean_estimated_ttft_seconds": 0.0636702
+    },
+    "fixed3": {
+      "runs": 25,
+      "slo_violations": 0,
+      "correct": 25,
+      "mean_estimated_ttft_seconds": 0.06790887999999999
+    },
+    "text": {
+      "runs": 25,
+      "slo_violations": 0,
+      "correct": 25,
+      "mean_estimated_ttft_seconds": 0.19873639999999998
+    }
+  },
+  "peak_gpu_allocated_bytes": 2435652608
+}

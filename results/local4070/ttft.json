@@ -1,0 +1,70 @@
+{
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "measurement": "single-host rate-limited socket; offline encoding excluded from TTFT",
+  "parameters": {
+    "samples": 1,
+    "lengths": [
+      512
+    ],
+    "bandwidth_gbps": [
+      1.0
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "longchat-0-512",
+      "source_id": 0,
+      "context_tokens": 512,
+      "measurements": [
+        {
+          "method": "text",
+          "bandwidth_gbps": 1.0,
+          "bytes": 2274,
+          "offline_encode_seconds": 0.0,
+          "transfer_seconds": 0.000854,
+          "reconstruct_seconds": 0.0,
+          "first_token_seconds": 0.087312,
+          "ttft_wall_seconds": 0.089234
+        },
+        {
+          "method": "uniform8",
+          "bandwidth_gbps": 1.0,
+          "bytes": 5813720,
+          "offline_encode_seconds": 0.019709,
+          "transfer_seconds": 0.051159,
+          "reconstruct_seconds": 0.005198,
+          "first_token_seconds": 0.04708,
+          "ttft_wall_seconds": 0.103817
+        },
+        {
+          "method": "cachegen2",
+          "bandwidth_gbps": 1.0,
+          "bytes": 2652512,
+          "offline_encode_seconds": 0.056624,
+          "transfer_seconds": 0.02211,
+          "reconstruct_seconds": 0.010562,
+          "first_token_seconds": 0.032301,
+          "ttft_wall_seconds": 0.065214
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "text@1Gbps@512tokens": {
+      "samples": 1,
+      "median_seconds": 0.089234,
+      "p95_seconds": 0.089234
+    },
+    "uniform8@1Gbps@512tokens": {
+      "samples": 1,
+      "median_seconds": 0.103817,
+      "p95_seconds": 0.103817
+    },
+    "cachegen2@1Gbps@512tokens": {
+      "samples": 1,
+      "median_seconds": 0.065214,
+      "p95_seconds": 0.065214
+    }
+  },
+  "peak_gpu_allocated_bytes": 2326133760
+}

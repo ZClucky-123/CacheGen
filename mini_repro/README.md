@@ -1,5 +1,25 @@
 # CacheGen 本机小规模验证
 
+## 当前 RTX 4070 Laptop 环境
+
+当前机器使用 Ubuntu 20.04 WSL2、RTX 4070 Laptop 8 GB。仓库根目录的 `.venv/` 保存专用 Python 3.10 环境、CUDA 12.1 编译工具链、模型及编译缓存；下文原始实验的 RTX 4060 和 D 盘路径是历史配置。
+
+本机入口自动设置 Python、CUDA、离线模型缓存和编译参数，默认结果保存在 `results/local4070/`。在仓库根目录运行：
+
+```bash
+bash mini_repro/run_local.sh test
+bash mini_repro/run_local.sh mini --compression-limit 1 --qa-limit 1
+bash mini_repro/run_local.sh quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1
+bash mini_repro/run_local.sh ttft --samples 1 --lengths 512 --bandwidth-gbps 1
+bash mini_repro/run_local.sh adaptive --cases 1 --length 512 --traces 1
+```
+
+同一实验再次运行会覆盖本机同名 JSON；要保留不同批次，请用 `--results` 指定其他输出文件。环境验收信息保存在 `results/local4070/environment.json`，实际安装版本保存在 `.venv/requirements-resolved.txt`。
+
+环境沿用 `requirements-mini.txt`：Python 3.10、PyTorch 2.3.1/cu121、Transformers 4.42.3、NumPy 1.26.4。Ninja 更新到 `1.11.1.2`，修复原 `1.11.1.1` 的 wheel 元数据空行导致 `pip check` 误报平台不支持的问题（[上游记录](https://github.com/scikit-build/ninja-python-distributions/issues/256)）。PyTorch 使用[官方 cu121 软件源](https://pytorch.org/get-started/previous-versions/#v231)。CUDA 12.1.105 编译器由 [NVIDIA 官方 12.1.1 清单](https://developer.download.nvidia.com/compute/cuda/redist/redistrib_12.1.1.json)中的 `cuda_nvcc`、`cuda_cudart`、`cuda_cccl` 组件组成，下载后按清单核对 SHA-256，合并解压到 `.venv/cuda-12.1`。作者 CUDA 扩展须在本机 Python/PyTorch 环境中重新编译，架构为 `8.9`，并发为 `2`。
+
+## 原始 RTX 4060 验证记录
+
 本实验在 D 盘的 Ubuntu WSL2 中，用 TinyLlama-1.1B 的真实 KV 缓存调用作者的 `CacheGenSerializer` / `CacheGenDeserializer`。这是**方法验证**，模型和分层量化参数均与论文实验不同，不能将结果当作论文的 7B/70B 基准复现。
 
 ## 本次配置

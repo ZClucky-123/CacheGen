@@ -1,0 +1,317 @@
+{
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "scope": "offline TinyLlama exploratory schedules; not paper-calibrated",
+  "nll_definition": "teacher-forced continuation tokens 2..N; first held-out token omitted",
+  "methods": [
+    "raw",
+    "uniform4",
+    "uniform8",
+    "cachegen1",
+    "cachegen2",
+    "cachegen3"
+  ],
+  "parameters": {
+    "samples": 1,
+    "lengths": [
+      512
+    ],
+    "continuation": 8,
+    "qa_per_position": 1,
+    "max_new_tokens": 20,
+    "results": "/home/wuren/CacheGen/results/local4070/quality_size.json"
+  },
+  "continuation": [
+    {
+      "case_id": "longchat-0-512",
+      "source_id": 0,
+      "context_tokens": 512,
+      "continuation_tokens_scored": 7,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 11535516,
+          "nll": 0.653667,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.0,
+          "decode_seconds": 0.0
+        },
+        {
+          "method": "uniform4",
+          "bytes": 2930136,
+          "nll": 0.668481,
+          "kv_mae": 0.247574,
+          "offline_encode_seconds": 0.0324,
+          "decode_seconds": 0.0061
+        },
+        {
+          "method": "uniform8",
+          "bytes": 5813720,
+          "nll": 0.654446,
+          "kv_mae": 0.013743,
+          "offline_encode_seconds": 0.0041,
+          "decode_seconds": 0.003
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 1944868,
+          "nll": 0.825769,
+          "kv_mae": 0.289147,
+          "offline_encode_seconds": 0.0281,
+          "decode_seconds": 0.0088
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 2652512,
+          "nll": 0.657738,
+          "kv_mae": 0.216597,
+          "offline_encode_seconds": 0.0067,
+          "decode_seconds": 0.0059
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 3244116,
+          "nll": 0.649274,
+          "kv_mae": 0.116282,
+          "offline_encode_seconds": 0.0067,
+          "decode_seconds": 0.0063
+        }
+      ]
+    }
+  ],
+  "qa": [
+    {
+      "case_id": "fact-0-512-start",
+      "context_tokens": 512,
+      "position": "start",
+      "fact_start": 0,
+      "answer": "Clara",
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 11535516,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.0,
+          "decode_seconds": 0.0
+        },
+        {
+          "method": "uniform4",
+          "bytes": 2930136,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0025,
+          "decode_seconds": 0.0026
+        },
+        {
+          "method": "uniform8",
+          "bytes": 5813720,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0053,
+          "decode_seconds": 0.0031
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 1790800,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0056,
+          "decode_seconds": 0.0054
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 2477051,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0073,
+          "decode_seconds": 0.0078
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 3030567,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0063,
+          "decode_seconds": 0.0057
+        }
+      ]
+    },
+    {
+      "case_id": "fact-0-512-middle",
+      "context_tokens": 512,
+      "position": "middle",
+      "fact_start": 247,
+      "answer": "Clara",
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 11535516,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.0,
+          "decode_seconds": 0.0
+        },
+        {
+          "method": "uniform4",
+          "bytes": 2930136,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.0029,
+          "decode_seconds": 0.0024
+        },
+        {
+          "method": "uniform8",
+          "bytes": 5813720,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.0045,
+          "decode_seconds": 0.0035
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 1799066,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.011,
+          "decode_seconds": 0.0101
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 2486830,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.007,
+          "decode_seconds": 0.0076
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 3047029,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true,
+          "offline_encode_seconds": 0.009,
+          "decode_seconds": 0.0148
+        }
+      ]
+    },
+    {
+      "case_id": "fact-0-512-end",
+      "context_tokens": 512,
+      "position": "end",
+      "fact_start": 495,
+      "answer": "Clara",
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 11535516,
+          "prediction": "Clara.\n\nQuestion: What is the final fact in the record?\nAnswer: The blue",
+          "correct": true,
+          "offline_encode_seconds": 0.0,
+          "decode_seconds": 0.0
+        },
+        {
+          "method": "uniform4",
+          "bytes": 2930136,
+          "prediction": "Clara.\n\nQuestion: What is the final fact in the record?\nAnswer: The blue",
+          "correct": true,
+          "offline_encode_seconds": 0.0026,
+          "decode_seconds": 0.0029
+        },
+        {
+          "method": "uniform8",
+          "bytes": 5813720,
+          "prediction": "Clara.\n\nQuestion: What is the final fact in the record?\nAnswer: The blue",
+          "correct": true,
+          "offline_encode_seconds": 0.0043,
+          "decode_seconds": 0.0023
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 1792910,
+          "prediction": "Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.007,
+          "decode_seconds": 0.0077
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 2478567,
+          "prediction": "Clara.\n\nQuestion: What is the final fact in the record?\nAnswer: The blue",
+          "correct": true,
+          "offline_encode_seconds": 0.011,
+          "decode_seconds": 0.0089
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 3032301,
+          "prediction": "Clara.",
+          "correct": true,
+          "offline_encode_seconds": 0.0108,
+          "decode_seconds": 0.0076
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "raw": {
+      "continuation_cases": 1,
+      "mean_nll": 0.653667,
+      "mean_perplexity_proxy": 1.9225780120232545,
+      "mean_bytes": 11535516.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    },
+    "uniform4": {
+      "continuation_cases": 1,
+      "mean_nll": 0.668481,
+      "mean_perplexity_proxy": 1.9512710875702544,
+      "mean_bytes": 2930136.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    },
+    "uniform8": {
+      "continuation_cases": 1,
+      "mean_nll": 0.654446,
+      "mean_perplexity_proxy": 1.9240762837957082,
+      "mean_bytes": 5813720.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    },
+    "cachegen1": {
+      "continuation_cases": 1,
+      "mean_nll": 0.825769,
+      "mean_perplexity_proxy": 2.2836362065184708,
+      "mean_bytes": 1944868.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    },
+    "cachegen2": {
+      "continuation_cases": 1,
+      "mean_nll": 0.657738,
+      "mean_perplexity_proxy": 1.9304207802333526,
+      "mean_bytes": 2652512.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    },
+    "cachegen3": {
+      "continuation_cases": 1,
+      "mean_nll": 0.649274,
+      "mean_perplexity_proxy": 1.9141506510676873,
+      "mean_bytes": 3244116.0,
+      "qa_cases": 3,
+      "qa_correct": 3,
+      "qa_correct_when_raw_correct": 3,
+      "raw_correct_cases": 3
+    }
+  },
+  "peak_gpu_allocated_bytes": 2334198784
+}

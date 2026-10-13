@@ -19,10 +19,11 @@
     "cuda_runtime": "12.1"
   },
   "git": {
-    "head": "203aa6ae8a5993a46a236dc426eec926d63e78a7",
+    "head": "c0dc0530321faf2e972784fbab8aa4dd236b57bc",
     "status": [
       " M results/local4070/metrics.json",
-      "?? results/reproduction/"
+      "?? results/reproduction/20261013T021108116639Z/",
+      "?? results/reproduction/20261013T060232923276Z/"
     ]
   },
   "codec_binary": {

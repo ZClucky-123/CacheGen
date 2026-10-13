@@ -1,0 +1,353 @@
+{
+  "profile": {
+    "version": 1,
+    "purpose": "formal-small-scale",
+    "seed": 0,
+    "quality_tolerances": {
+      "max_nll_delta": 0.02,
+      "max_qa_drop": 0.1
+    },
+    "quality": {
+      "samples": 20,
+      "lengths": [
+        512,
+        1024,
+        1536
+      ],
+      "continuation": 32,
+      "qa_per_position": 10,
+      "max_new_tokens": 20
+    },
+    "ttft": {
+      "samples": 3,
+      "lengths": [
+        512,
+        1024,
+        1536
+      ],
+      "bandwidth_gbps": [
+        0.1,
+        1,
+        10
+      ],
+      "cachegen_levels": [
+        2,
+        3
+      ],
+      "warmup": 2,
+      "repeats": 10
+    },
+    "adaptive": {
+      "cases": 5,
+      "length": 1024,
+      "chunk_size": 256,
+      "traces": 5,
+      "bandwidth_scales": [
+        1,
+        0.01
+      ],
+      "slos": [
+        0.2,
+        0.5
+      ],
+      "max_new_tokens": 20,
+      "warmup": 1,
+      "repeats": 3
+    }
+  },
+  "profile_path": "/home/wuren/CacheGen/mini_repro/profiles/formal4070.json",
+  "status": "completed",
+  "started_utc": "2026-10-13T06:02:32.924009+00:00",
+  "jobs": [
+    {
+      "name": "quality",
+      "kind": "quality",
+      "result": "quality.json",
+      "parameters": {
+        "samples": 20,
+        "lengths": [
+          512,
+          1024,
+          1536
+        ],
+        "continuation": 32,
+        "qa_per_position": 10,
+        "max_new_tokens": 20,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.quality_size",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/quality.json",
+        "--samples",
+        "20",
+        "--lengths",
+        "512",
+        "1024",
+        "1536",
+        "--continuation",
+        "32",
+        "--qa-per-position",
+        "10",
+        "--max-new-tokens",
+        "20",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 245.298
+    },
+    {
+      "name": "ttft",
+      "kind": "ttft",
+      "result": "ttft.json",
+      "parameters": {
+        "samples": 3,
+        "lengths": [
+          512,
+          1024,
+          1536
+        ],
+        "bandwidth_gbps": [
+          0.1,
+          1,
+          10
+        ],
+        "cachegen_levels": [
+          2,
+          3
+        ],
+        "warmup": 2,
+        "repeats": 10,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.ttft",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/ttft.json",
+        "--samples",
+        "3",
+        "--lengths",
+        "512",
+        "1024",
+        "1536",
+        "--bandwidth-gbps",
+        "0.1",
+        "1",
+        "10",
+        "--cachegen-levels",
+        "2",
+        "3",
+        "--warmup",
+        "2",
+        "--repeats",
+        "10",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 303.943
+    },
+    {
+      "name": "adaptive-scale-1-slo-0.2",
+      "kind": "adaptive",
+      "result": "adaptive-scale-1-slo-0.2.json",
+      "parameters": {
+        "cases": 5,
+        "length": 1024,
+        "chunk_size": 256,
+        "traces": 5,
+        "max_new_tokens": 20,
+        "warmup": 1,
+        "repeats": 3,
+        "bandwidth_scale": 1,
+        "slo": 0.2,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.adaptive",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/adaptive-scale-1-slo-0.2.json",
+        "--cases",
+        "5",
+        "--length",
+        "1024",
+        "--chunk-size",
+        "256",
+        "--traces",
+        "5",
+        "--max-new-tokens",
+        "20",
+        "--warmup",
+        "1",
+        "--repeats",
+        "3",
+        "--bandwidth-scale",
+        "1",
+        "--slo",
+        "0.2",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 117.403
+    },
+    {
+      "name": "adaptive-scale-1-slo-0.5",
+      "kind": "adaptive",
+      "result": "adaptive-scale-1-slo-0.5.json",
+      "parameters": {
+        "cases": 5,
+        "length": 1024,
+        "chunk_size": 256,
+        "traces": 5,
+        "max_new_tokens": 20,
+        "warmup": 1,
+        "repeats": 3,
+        "bandwidth_scale": 1,
+        "slo": 0.5,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.adaptive",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/adaptive-scale-1-slo-0.5.json",
+        "--cases",
+        "5",
+        "--length",
+        "1024",
+        "--chunk-size",
+        "256",
+        "--traces",
+        "5",
+        "--max-new-tokens",
+        "20",
+        "--warmup",
+        "1",
+        "--repeats",
+        "3",
+        "--bandwidth-scale",
+        "1",
+        "--slo",
+        "0.5",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 139.883
+    },
+    {
+      "name": "adaptive-scale-0.01-slo-0.2",
+      "kind": "adaptive",
+      "result": "adaptive-scale-0.01-slo-0.2.json",
+      "parameters": {
+        "cases": 5,
+        "length": 1024,
+        "chunk_size": 256,
+        "traces": 5,
+        "max_new_tokens": 20,
+        "warmup": 1,
+        "repeats": 3,
+        "bandwidth_scale": 0.01,
+        "slo": 0.2,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.adaptive",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/adaptive-scale-0.01-slo-0.2.json",
+        "--cases",
+        "5",
+        "--length",
+        "1024",
+        "--chunk-size",
+        "256",
+        "--traces",
+        "5",
+        "--max-new-tokens",
+        "20",
+        "--warmup",
+        "1",
+        "--repeats",
+        "3",
+        "--bandwidth-scale",
+        "0.01",
+        "--slo",
+        "0.2",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 170.358
+    },
+    {
+      "name": "adaptive-scale-0.01-slo-0.5",
+      "kind": "adaptive",
+      "result": "adaptive-scale-0.01-slo-0.5.json",
+      "parameters": {
+        "cases": 5,
+        "length": 1024,
+        "chunk_size": 256,
+        "traces": 5,
+        "max_new_tokens": 20,
+        "warmup": 1,
+        "repeats": 3,
+        "bandwidth_scale": 0.01,
+        "slo": 0.5,
+        "seed": 0
+      },
+      "status": "completed",
+      "command": [
+        "/home/wuren/CacheGen/.venv/bin/python",
+        "-u",
+        "-m",
+        "mini_repro.adaptive",
+        "--results",
+        "/home/wuren/CacheGen/results/reproduction/20261013T060232923276Z/adaptive-scale-0.01-slo-0.5.json",
+        "--cases",
+        "5",
+        "--length",
+        "1024",
+        "--chunk-size",
+        "256",
+        "--traces",
+        "5",
+        "--max-new-tokens",
+        "20",
+        "--warmup",
+        "1",
+        "--repeats",
+        "3",
+        "--bandwidth-scale",
+        "0.01",
+        "--slo",
+        "0.5",
+        "--seed",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 160.475
+    }
+  ],
+  "finished_utc": "2026-10-13T06:21:35.131403+00:00"
+}

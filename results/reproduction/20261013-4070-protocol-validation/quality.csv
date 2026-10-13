@@ -1,7 +1,0 @@
-job,context_tokens,method,continuation_contexts,mean_nll,mean_nll_delta,mean_bytes,compression_ratio,qa_contexts,raw_correct_contexts,qa_retention_on_raw_correct,meets_descriptive_threshold
-quality,512,cachegen1,1,0.825769,0.17210199999999998,1944854.0,5.93130178409279,3,3,1.0,False
-quality,512,cachegen2,1,0.657738,0.004071000000000047,2652498.0,4.3489254280304825,3,3,1.0,True
-quality,512,cachegen3,1,0.649274,-0.00439299999999998,3244102.0,3.5558425721509375,3,3,1.0,True
-quality,512,raw,1,0.653667,0.0,11535516.0,1.0,3,3,1.0,True
-quality,512,uniform4,1,0.668481,0.014813999999999994,2930136.0,3.936853442980121,3,3,1.0,True
-quality,512,uniform8,1,0.654446,0.0007789999999999742,5813720.0,1.9841884370076301,3,3,1.0,True

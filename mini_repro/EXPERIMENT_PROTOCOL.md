@@ -1,10 +1,10 @@
-# RTX 4070 小规模复现实验协议
+# TinyLlama 小规模复现实验协议
 
-目标是复现当前仓库实现的三个实验关系：缓存体积与输出质量、带宽与首 token 延迟、量化等级选择与截止时间。使用已有离线 TinyLlama 环境；这不是论文原模型、原数据规模和原系统的完整复现。
+目标是复现当前仓库实现的三个实验关系：缓存体积与输出质量、带宽与首 token 延迟、量化等级选择与截止时间。环境准备和执行方式见 [README.md](README.md)，机器配置与实测结果保存在各运行批次中。这不是论文原模型、原数据规模和原系统的完整复现。
 
 ## 固定实验设计
 
-正式配置为 `mini_repro/profiles/formal4070.json`，验收配置为 `validation4070.json`。验收配置只验证整个流程，不能用于报告正式实验结论。正式配置不根据验收结果调整阈值。
+正式配置为 `mini_repro/profiles/formal4070.json`，验收配置为 `validation4070.json`。文件名保留历史标识，实验条件不绑定特定 GPU 型号。验收配置只验证整个流程，不能用于报告正式实验结论。正式配置不根据验收结果调整阈值。
 
 | 实验 | 数据与条件 | 对照与测量 |
 |---|---|---|
@@ -28,14 +28,14 @@
 ## 执行与验收
 
 ```bash
-bash mini_repro/run_local.sh reproduce --dry-run
-bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/validation4070.json
-bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/formal4070.json
-bash mini_repro/run_local.sh test
+python -m mini_repro.reproduce --dry-run
+python -m mini_repro.reproduce --profile mini_repro/profiles/validation4070.json
+python -m mini_repro.reproduce --profile mini_repro/profiles/formal4070.json
+python -m unittest discover -s tests -v
 ```
 
 默认每次创建 `results/reproduction/<UTC时间>/`，禁止覆盖已有批次。保存配置、命令、源文件/数据/模型 SHA-256、软件/GPU 信息、每次观测和日志，再生成 CSV 与 Markdown 报告。失败保留已完成结果并标记状态，不能把未完成批次称为成功。
 
 验收包括：配置/覆盖保护/失败状态测试、计时重复与顺序测试、剩余预算与首 token 预留回归测试、配对质量门槛测试，以及本机 GPU 完成一遍验收配置。正式配置的结果必须实际运行后才能报告；不能用验收批次代替。
 
-只修改 `mini_repro/`、相关测试和新增结果；保留已有用户结果，保持原作者编码器不变，不添加依赖。后续补论文差分编码、解码流水线或换 7B 模型需要另一个实验协议。
+结果归档只纳入经过完整性核对的正式批次，机器环境与结果放在同一目录；验收、冒烟、中断及零散调试记录留在本机。后续补论文差分编码、解码流水线或换 7B 模型需要另一个实验协议。

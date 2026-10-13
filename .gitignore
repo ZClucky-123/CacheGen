@@ -6,3 +6,10 @@ __pycache__/
 *.safetensors
 *.bin
 *.log
+
+# Keep generated runs local; explicitly archive complete formal batches.
+results/*
+!results/reproduction/
+results/reproduction/*
+!results/reproduction/README.md
+!results/reproduction/20261013T060232923276Z/

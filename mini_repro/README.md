@@ -1,110 +1,126 @@
-# CacheGen 本机小规模实验
+# CacheGen 小规模复现实验
 
-## 当前 RTX 4070 Laptop 环境
+本目录使用 TinyLlama 的真实 KV cache，执行压缩体积与质量、传输与首 token 延迟、带宽自适应三组实验。本文说明如何准备环境、执行实验和读取结果；实验条件及评价口径见 [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)，已归档批次的机器配置和实测结果见 [结果索引](../results/reproduction/README.md)。
 
-当前机器使用 Ubuntu 20.04 WSL2、RTX 4070 Laptop 8 GB。仓库根目录的 `.venv/` 保存专用 Python 3.10 环境、CUDA 12.1 编译工具链、模型及编译缓存；下文原始实验的 RTX 4060 和 D 盘路径是历史配置。
+当前实验使用仓库编解码器和探索性的 TinyLlama 量化配置，尚未实现论文的差分编码、跨服务器传输及传输与解码重叠，不能作为论文完整复现。自适应实验的网络时间按带宽轨迹估算。
 
-本机入口自动设置 Python、CUDA、离线模型缓存和编译参数，默认结果保存在 `results/local4070/`。在仓库根目录运行：
+## 1. 准备环境
 
-```bash
-bash mini_repro/run_local.sh test
-bash mini_repro/run_local.sh mini --compression-limit 1 --qa-limit 1
-bash mini_repro/run_local.sh quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1
-bash mini_repro/run_local.sh ttft --samples 1 --lengths 512 --bandwidth-gbps 1 --warmup 1 --repeats 2
-bash mini_repro/run_local.sh adaptive --cases 1 --length 512 --traces 1 --warmup 1 --repeats 2
-```
+以下命令均在**仓库根目录**执行。需要 Linux 或 WSL2、Python 3.10、与 PyTorch 2.3.1 / CUDA 12.1 兼容的 NVIDIA GPU 和驱动，以及 CUDA 12.1 Toolkit（含 `nvcc`）和 C++ 编译器。CUDA 扩展需要在目标机器的 Python / PyTorch 环境中编译。
 
-同一实验再次运行会覆盖本机同名 JSON；要保留不同批次，请用 `--results` 指定其他输出文件。环境验收信息保存在 `results/local4070/environment.json`，实际安装版本保存在 `.venv/requirements-resolved.txt`。
-
-环境沿用 `requirements-mini.txt`：Python 3.10、PyTorch 2.3.1/cu121、Transformers 4.42.3、NumPy 1.26.4。Ninja 更新到 `1.11.1.2`，修复原 `1.11.1.1` 的 wheel 元数据空行导致 `pip check` 误报平台不支持的问题（[上游记录](https://github.com/scikit-build/ninja-python-distributions/issues/256)）。PyTorch 使用[官方 cu121 软件源](https://pytorch.org/get-started/previous-versions/#v231)。CUDA 12.1.105 编译器由 [NVIDIA 官方 12.1.1 清单](https://developer.download.nvidia.com/compute/cuda/redist/redistrib_12.1.1.json)中的 `cuda_nvcc`、`cuda_cudart`、`cuda_cccl` 组件组成，下载后按清单核对 SHA-256，合并解压到 `.venv/cuda-12.1`。作者 CUDA 扩展须在本机 Python/PyTorch 环境中重新编译，架构为 `8.9`，并发为 `2`。
-
-## 正式小规模实验入口
-
-上面的少量样本命令用于环境检查。正式实验使用固定配置和统一入口，设计及测量边界见 [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)：
+创建并激活环境，安装固定版本依赖：
 
 ```bash
-# 预览完整条件与命令，不访问 GPU、不创建结果目录
-bash mini_repro/run_local.sh reproduce --dry-run
-# 验证整套记录和汇总流程；该批次只用于验收
-bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/validation4070.json
-# 运行正式小规模实验
-bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/formal4070.json
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install torch==2.3.1 --index-url https://download.pytorch.org/whl/cu121
+python -m pip install -r mini_repro/requirements-mini.txt
 ```
 
-正式配置包括 60 个文本片段、90 个位置/长度问答条件、1080 次 TTFT 计时，以及 4 组带宽倍率/SLO 下的 1800 次自适应计时。问答条件来自 10 个事实；自适应使用其中 5 个事实。重复计时和同题的不同轨迹不能当作独立题目。
+PyTorch 软件源来自[官方 2.3.1 安装说明](https://pytorch.org/get-started/previous-versions/#v231)。其余依赖版本见 [requirements-mini.txt](requirements-mini.txt)。
 
-TTFT 默认预热 2 次、测量 10 次，比较文本、uniform8、CacheGen 2/3，记录实际链路吞吐。自适应默认预热 1 次、测量 3 次，比较剩余预算策略、原静态预算策略、固定 1/2/3 级及文本重算；剩余预算策略扣除已花费成本和校准的首 token 时间，仅用当前带宽预测后续成本。
-
-每批结果保存到新的 `results/reproduction/<UTC时间>/`。配置、命令、环境、模型/数据/源码与 CUDA 扩展二进制指纹、逐次观测、日志均保留；`report.md` 和三份 CSV 按长度汇总配对体积/质量、TTFT 中位数/P95、SLO 超限。脚本校验预定样本数与重复次数，结果不完整会标为失败；已有批次禁止覆盖。
-
-报告按预声明的 NLL/QA 描述性阈值标识可比较的质量配置，不能只凭压缩率宣称质量不变。验收批次会醒目标识，不能代替正式结果。这里复现的是**当前仓库编解码器的小规模实验**：尚无论文 anchor/delta 编码、服务器间传输或传输解码流水线。自适应的网络时间仍是轨迹估计值。
-
-需要重新生成报告时，在本机环境中执行：
+指定已安装的 CUDA Toolkit，安装仓库内的 LMCache 和 CUDA 编解码扩展。下面的 `CUDA_HOME` 是路径示例，应改为目标机器的实际位置；PyTorch wheel 自带的 CUDA 运行时不包含编译所需的 `nvcc`。
 
 ```bash
-.venv/bin/python -m mini_repro.report results/reproduction/<批次目录>
+export CUDA_HOME=/usr/local/cuda-12.1
+export PATH="$CUDA_HOME/bin:$PATH"
+export MAX_JOBS=2
+python -m pip install --no-build-isolation --no-deps ./LMCache
+python -m pip install --no-build-isolation --no-deps ./LMCache/third_party/torchac_cuda
+python -m pip check
 ```
 
-下面的 RTX 4060 记录、单独脚本及其结果属于历史实验，不是这个正式配置的新结果。
-
-## 原始 RTX 4060 验证记录
-
-本实验在 D 盘的 Ubuntu WSL2 中，用 TinyLlama-1.1B 的真实 KV 缓存调用作者的 `CacheGenSerializer` / `CacheGenDeserializer`。这是**方法验证**，模型和分层量化参数均与论文实验不同，不能将结果当作论文的 7B/70B 基准复现。
-
-## 本次配置
-
-- 机器：RTX 4060 Laptop 8 GiB；Ubuntu 22.04 WSL2 虚拟磁盘 `D:\WSL\Ubuntu\ext4.vhdx`。
-- Python 3.10；PyTorch 2.3.1+cu121；Transformers 4.42.3；CUDA `nvcc` 12.1.105；作者的 `LMCache/third_party/torchac_cuda` 源码本机编译。
-- 模型：`TinyLlama/TinyLlama-1.1B-Chat-v1.0`，FP16；权重 2,200,119,864 字节，SHA-256 `6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933`。
-- Python 环境：`/home/lucky_1123/.venvs/cachegen-mini`；模型缓存：`/home/lucky_1123/.cache/huggingface`。这两条路径都位于 D 盘 WSL 虚拟磁盘内。
-- 软件及本地运行费用：0；没有使用付费 API。
-
-配置的 22 层边界为 7/14/22，key bins 为 32/16/16，value bins 为前 2 层 32、其余 16。这是把作者的 32 层 7B 配置按层数缩放的探索性配置，**未经论文校准**。
-
-## 数据和指标
-
-- 压缩：作者仓库 `test_data/longchat.jsonl` 的前 3 个 prompt，每个截取 512 和 1024 token，共 6 个 KV 缓存。截断片段只测真实模型 KV 的编码、解码、体积和平均绝对误差，不用原数据集标签计算准确率。
-- 问答：5 个本地构造的短事实，各置于 512-token 上下文末尾。对相同问题比较原始 KV、作者 CacheGen KV 和统一 8 位量化 KV 的贪心输出。准确率只表示答案短语是否出现在输出首行中，不能反映 LongChat 全集或复杂长上下文表现。
-- 字节数：原始 KV 和统一 8 位量化均使用 `torch.save` 容器计数，包含元数据；CacheGen 使用作者 `to_bytes()` 返回的完整 pickle 字节数。统一 8 位量化按作者 `src/utils.py` 的每 token、每组 256 通道最大值公式实现，并计入比例因子。
-- 时间：单次 GPU 同步后实测的编码、解码时间。首次调用包含一些预热开销；这些时间不能作为稳定吞吐基准。
-
-## 已测结果
-
-| 长度 | 样本数 | 原始 KV | 统一 8 位 | CacheGen | 原始 / CacheGen | 8 位 / CacheGen |
-|---:|---:|---:|---:|---:|---:|---:|
-| 512 token | 3 | 11.54 MB | 5.81 MB | 平均 2.65 MB | 平均 4.35× | 平均 2.19× |
-| 1024 token | 3 | 23.07 MB | 11.63 MB | 平均 4.68 MB | 平均 4.93× | 平均 2.49× |
-
-5 个合成问答中，原始、统一 8 位和 CacheGen 的答案短语均为 **5/5**。CacheGen 的输出有时在答案后继续生成其他文字；完整原文和逐例指标保存在 [`results/tinyllama/metrics.json`](../results/tinyllama/metrics.json)。CacheGen KV 平均绝对误差约为 0.21（统一 8 位约 0.013），说明本配置以更大误差换取更小体积；这个小测试不能证明一般场景的回答质量保持不变。
-
-峰值 PyTorch GPU 分配约 2.44 GB（不包括驱动及其他进程占用）。本机环境约占 D 盘：venv 5.1 GiB、模型缓存 2.1 GiB、pip 下载缓存 2.8 GiB；CUDA 编译器和 WSL 系统文件另计。`ext4.vhdx` 当前约 18.0 GB，迁移前备份约 7.15 GB，均在 D 盘。需要清理空间时，先核对路径后再处理备份或缓存。
-
-## 重新运行
-
-已完成本机依赖安装，脚本设置离线模式，运行时不下载模型或包。在 Ubuntu WSL 中：
+设置源码及缓存位置。之后每次打开新终端，都需要激活同一 Python 环境并设置这些变量及 `CUDA_HOME`：
 
 ```bash
-bash /mnt/d/a_study/大三上/大模型网络/code/CacheGen-mini/mini_repro/run_wsl.sh
+export PYTHONPATH="$PWD:$PWD/LMCache${PYTHONPATH:+:$PYTHONPATH}"
+export HF_HOME="$PWD/.venv/huggingface"
+export TORCH_EXTENSIONS_DIR="$PWD/.venv/torch_extensions"
 ```
 
-可用 `--compression-limit 1 --qa-limit 1` 做快速检查。输出覆盖 `results/tinyllama/metrics.json`。如从零搭建，请在 D 盘 WSL 内创建虚拟环境，安装 `requirements-mini.txt`，配置 CUDA 12.1 `nvcc`，并从作者 `LMCache/third_party/torchac_cuda` 编译安装扩展；本实验优先使用清华 pip 镜像和 `hf-mirror.com` 获取依赖与模型。构建和下载前应重新核对目标路径、可用空间及下载规模。
+## 2. 准备固定版本模型
 
-## 三组后续实验
-
-这三组脚本复用以上离线环境和仓库内的数据。运行前在 WSL 中进入本工作树，或把下面的 `mini_repro/run_wsl.sh` 换成它的绝对路径。所有输出写到本工作树的 `results/tinyllama/`，不会覆盖上面的 `metrics.json`。
+首次下载需要联网；执行前不要启用后面的离线开关。模型固定为 `TinyLlama/TinyLlama-1.1B-Chat-v1.0`，revision 与实验脚本一致。下载到同一个 `HF_HOME`，不要用 `local_dir` 改变缓存布局：
 
 ```bash
-bash mini_repro/run_wsl.sh quality --samples 20 --lengths 512 1024 1536 --continuation 32 --qa-per-position 10
-bash mini_repro/run_wsl.sh ttft --samples 3 --lengths 512 1024 1536 --bandwidth-gbps 0.1 1 10
-bash mini_repro/run_wsl.sh adaptive --cases 5 --length 1024 --chunk-size 256 --traces 5 --slo 0.5
+python - <<'PY'
+from huggingface_hub import snapshot_download
+
+snapshot_download(
+    repo_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    revision="fe8a4ea1ffedaf415f4da2f062534de366a451e6",
+    allow_patterns=["*.json", "tokenizer.model", "model.safetensors"],
+)
+PY
 ```
 
-- `quality` 输出 `quality_size.json`。对同一 LongChat 上下文，比较 FP16、真正打包的统一 4 位、统一 8 位、CacheGen 1/2/3 级的完整传输字节数及未见后续文本的平均负对数似然。KV 不保存最后一个上下文 token 的 logits，因此困惑度代理指标从后续文本**第二个** token 开始计分。另测事实在上下文开头、中间、末尾时的逐题答案，并单列原始 KV 本身答对的题数。三档 TinyLlama 参数由 7B 设置缩放而来，未经论文校准。
-- `ttft` 输出 `ttft.json`。比较文本重新 prefill、统一 8 位 KV、CacheGen 2 级 KV。相同的上下文先离线编码，经单机 socket 限速传送后，分别测传输、恢复和首 token 推理时间；离线编码耗时单列，并按方法、带宽、上下文长度汇总中位数与 P95。结果是**本机受控链路测量**，不能代表两台服务器之间的真实网络性能；高带宽档还会受到 Python 线程及系统调度开销影响。文本会往返分词校验，确保三条路径使用相同上下文。
-- `adaptive` 输出 `adaptive.json`。把完整上下文 KV 分块，预编码三档位流，读取 `test_data/bw.jsonl` 的 Gbps 轨迹，比较自适应、固定 1/2/3 级和文本回退。每条记录列出选择的等级、按字节/带宽**估算**的传输时间、本机实测的恢复与首 token 时间、SLO 超限和答案。`--bandwidth-scale 0.01` 可人为放慢轨迹，检查是否触发降级及回退；缩放后的轨迹不能当作论文原带宽。
+`snapshot_download` 的 revision 和文件筛选用法见 [Hugging Face 下载文档](https://huggingface.co/docs/huggingface_hub/v0.23.4/guides/download)。准备完成后启用离线运行：
 
-完整运行的样本数可通过参数控制。先用 `quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1`、`ttft --samples 1 --lengths 512 --bandwidth-gbps 1` 和 `adaptive --cases 1 --length 512 --traces 1` 检查环境。质量实验应比较**同等质量下**的体积，不能仅以压缩比宣称方法有效；自适应脚本的网络时间是轨迹估计值，不是线上 TTFT。
+```bash
+export TRANSFORMERS_OFFLINE=1
+export HF_HUB_OFFLINE=1
+```
 
-## 本机实验结果索引
+实验数据已包含在仓库的 `test_data/longchat.jsonl` 和 `test_data/bw.jsonl` 中。合成事实问答由脚本生成。
 
-完整复现记录（配置、依赖、实验与论文差异）见 [REPRODUCTION_REPORT.md](REPRODUCTION_REPORT.md)；结果文件索引与核心数值见 [results/tinyllama/README.md](../results/tinyllama/README.md)。
+## 3. 检查与正式执行
+
+已完成上述环境准备后，依次执行：
+
+```bash
+# 检查编解码器、计时、策略、结果校验和报告逻辑
+python -m unittest discover -s tests -v
+
+# 预览正式配置和命令；不使用 GPU、不创建结果目录
+python -m mini_repro.reproduce --dry-run
+
+# 小样本流程验收；其结果不能用于正式实验结论
+python -m mini_repro.reproduce --profile mini_repro/profiles/validation4070.json
+
+# 完整执行正式小规模实验
+python -m mini_repro.reproduce --profile mini_repro/profiles/formal4070.json
+```
+
+配置文件名中的 `4070` 是历史标识，文件内容规定的是样本、长度、带宽、重复次数和质量阈值，可在兼容的 GPU 上执行。正式配置包含：
+
+| 实验 | 规模 |
+| --- | --- |
+| 压缩体积与质量 | 60 个续写上下文、90 个问答条件；每个条件比较 6 种方法 |
+| 传输与首 token 延迟 | 3 条文本 × 3 种长度 × 3 档带宽 × 4 种方法 × 10 次测量，共 1080 次；预热另计 |
+| 带宽自适应 | 5 个事实 × 5 条轨迹 × 6 种策略 × 3 次测量 × 4 组带宽倍率/时限，共 1800 次 |
+
+默认每次创建 `results/reproduction/<UTC时间>/`，已有同名批次会报错。可用 `--output-root` 和 `--run-id` 指定输出位置；修改实验设计时，复制配置文件并用 `--profile` 指向副本。上下文、问题及生成内容必须在 TinyLlama 的 2048-token 窗口内。
+
+## 4. 单独执行实验
+
+调试或补充测量时，可以单独运行以下模块。显式指定新输出路径，避免覆盖历史结果：
+
+```bash
+mkdir -p results/manual
+python -m mini_repro.quality_size --samples 20 --lengths 512 1024 1536 --continuation 32 --qa-per-position 10 --results results/manual/quality.json
+python -m mini_repro.ttft --samples 3 --lengths 512 1024 1536 --bandwidth-gbps 0.1 1 10 --cachegen-levels 2 3 --warmup 2 --repeats 10 --results results/manual/ttft.json
+python -m mini_repro.adaptive --cases 5 --length 1024 --chunk-size 256 --traces 5 --slo 0.5 --warmup 1 --repeats 3 --results results/manual/adaptive.json
+```
+
+上述命令再次运行会覆盖各自的同名文件。单项输出不包含完整批次的 manifest、元数据及自动汇总；需要可比较的整套记录时使用 `mini_repro.reproduce`。模块的完整参数可通过 `python -m mini_repro.<模块名> --help` 查看。
+
+## 5. 读取与归档结果
+
+完整批次包含以下文件：
+
+| 文件 | 内容 |
+| --- | --- |
+| `manifest.json` | 实验配置、命令、任务状态及耗时 |
+| `metadata.json` | 机器与软件版本、Git 提交、模型/源码/数据指纹 |
+| `quality.json`、`ttft.json`、`adaptive-*.json` | 逐例质量和逐次计时记录 |
+| `quality.csv`、`ttft.csv`、`adaptive.csv` | 按实验条件汇总的指标 |
+| `report.md` | 质量门槛、压缩率、首 token 延迟及自适应结果 |
+| `*.log` | 任务日志，默认仅保留在本机 |
+
+先确认 `manifest.json` 的状态为 `completed` 且所有任务完成，再阅读 `report.md`。脚本会核对预定样本数、方法数和重复次数；中断或失败的批次保留现场，但不能作为完整实验结论。
+
+重建已有完整批次的报告时，执行 `python -m mini_repro.report results/reproduction/<批次目录>`。这会更新该批次的汇总文件；原始逐次记录保留。
+
+仓库仅归档经过核对的完整正式批次。新运行目录默认被 `.gitignore` 忽略；归档时应确认用途为 `formal-small-scale`、所有任务完成，再添加目录白名单和结果索引。机器配置、实际耗时与结果解释应写在该批次目录内。验收、冒烟、中断及零散调试结果保留在本机。
+
+`run_local.sh` 和 `run_wsl.sh` 是已有机器的环境快捷脚本，包含特定路径约定。跨机器执行使用本文的 Python 模块入口；当前归档批次的本机快捷命令见[结果索引](../results/reproduction/README.md)。

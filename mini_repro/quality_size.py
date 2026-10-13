@@ -15,7 +15,7 @@ from mini_repro.experiment_common import (
     build_positioned_case, load_longchat_segments, pack_uniform, unpack_uniform,
 )
 from mini_repro.run import (
-    MODEL_ID, ROOT, answer_from_cache, blob_to_legacy, make_codec, prefill,
+    MODEL_ID, MODEL_REVISION, ROOT, answer_from_cache, blob_to_legacy, make_codec, prefill,
     save_results, serialized_size, timed_cuda,
 )
 
@@ -42,13 +42,13 @@ def continuation_nll(model, blob, continuation_ids):
     return shifted_nll(logits, continuation_ids)
 
 
-def load_local_model():
+def load_local_model(seed=0):
     if not torch.cuda.is_available():
         raise RuntimeError("author CacheGen codec requires CUDA")
-    torch.manual_seed(0)
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, local_files_only=True)
+    torch.manual_seed(seed)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID, revision=MODEL_REVISION, local_files_only=True)
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_ID, local_files_only=True, torch_dtype=torch.float16, low_cpu_mem_usage=False
+        MODEL_ID, revision=MODEL_REVISION, local_files_only=True, torch_dtype=torch.float16, low_cpu_mem_usage=False
     ).to("cuda").eval()
     return model, tokenizer
 
@@ -107,13 +107,14 @@ def main():
     parser.add_argument("--continuation", type=int, default=32)
     parser.add_argument("--qa-per-position", type=int, default=10)
     parser.add_argument("--max-new-tokens", type=int, default=20)
+    parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
     args = parser.parse_args()
     if args.samples < 0 or args.qa_per_position < 0 or (args.samples == 0 and args.qa_per_position == 0):
         parser.error("request at least one continuation or QA case")
     if min(args.lengths) < 1 or args.continuation < 2 or args.max_new_tokens < 1:
         parser.error("lengths and token counts must be positive")
-    model, tokenizer = load_local_model()
+    model, tokenizer = load_local_model(seed=args.seed)
     if max(args.lengths) + max(args.continuation, args.max_new_tokens + 64) > model.config.max_position_embeddings:
         parser.error("selected context plus suffix may exceed TinyLlama's window")
     data = {

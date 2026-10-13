@@ -15,6 +15,7 @@ from mini_repro.data import QA_CASES, answer_matches, build_qa_context, load_lon
 
 
 MODEL_ID = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+MODEL_REVISION = "fe8a4ea1ffedaf415f4da2f062534de366a451e6"
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RESULTS = ROOT / "results" / "tinyllama" / "metrics.json"
 

@@ -1,6 +1,8 @@
 """Single-host, rate-limited transfer and first-token timing experiment."""
 
 import argparse
+import math
+import random
 import socket
 import threading
 import time
@@ -21,7 +23,7 @@ QUESTION = "\nQuestion: What is the main topic?\nAnswer:"
 
 def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=4096):
     """Send exact bytes over a local socket, pacing the sender at target Gbps."""
-    if bandwidth_gbps <= 0 or chunk_bytes <= 0:
+    if not math.isfinite(bandwidth_gbps) or bandwidth_gbps <= 0 or chunk_bytes <= 0:
         raise ValueError("bandwidth and chunk size must be positive")
     sender, receiver = socket.socketpair()
     errors = []
@@ -67,13 +69,40 @@ def timed_gpu(function):
     return value, time.perf_counter() - start
 
 
+def measurement_schedule(methods, bandwidths, *, warmup, repeats, seed):
+    """Balance every method per repetition while randomizing execution order."""
+    if warmup < 0 or repeats < 1:
+        raise ValueError("warmup must be nonnegative and repeats must be positive")
+    if not methods or len(set(methods)) != len(methods):
+        raise ValueError("methods must be nonempty and unique")
+    if not bandwidths or any(not math.isfinite(value) or value <= 0 for value in bandwidths):
+        raise ValueError("bandwidths must be positive and finite")
+    if len(set(bandwidths)) != len(bandwidths):
+        raise ValueError("bandwidths must be unique")
+    rng = random.Random(seed)
+    schedule = []
+    for bandwidth in bandwidths:
+        for phase, count in (("warmup", warmup), ("measure", repeats)):
+            for repetition in range(1, count + 1):
+                order = list(methods)
+                rng.shuffle(order)
+                for position, method in enumerate(order):
+                    schedule.append({"phase": phase, "repetition": repetition,
+                                     "method_order": position, "method": method,
+                                     "bandwidth_gbps": bandwidth})
+    return schedule
+
+
 def summarize_ttft(cases):
-    """Median and interpolated P95 per method, bandwidth, context length."""
+    """Pooled timing median/P95, with context and repetition counts separated."""
     groups = defaultdict(list)
-    for case in cases:
+    context_counts = defaultdict(lambda: defaultdict(int))
+    for index, case in enumerate(cases):
+        context = case.get("case_id", f"context-{index}")
         for row in case["measurements"]:
             key = f"{row['method']}@{row['bandwidth_gbps']:g}Gbps@{case['context_tokens']}tokens"
             groups[key].append(row["ttft_wall_seconds"])
+            context_counts[key][context] += 1
     result = {}
     for key, values in groups.items():
         ordered = sorted(values)
@@ -81,7 +110,11 @@ def summarize_ttft(cases):
         lower = int(rank)
         upper = min(lower + 1, len(ordered) - 1)
         p95 = ordered[lower] + (ordered[upper] - ordered[lower]) * (rank - lower)
-        result[key] = {"samples": len(ordered), "median_seconds": round(median(ordered), 6),
+        result[key] = {"samples": len(ordered), "timing_repetitions": len(ordered),
+                       "contexts": len(context_counts[key]),
+                       "repetitions_per_context": dict(context_counts[key]),
+                       "aggregation": "pooled timings across contexts and repetitions",
+                       "median_seconds": round(median(ordered), 6),
                        "p95_seconds": round(p95, 6)}
     return result
 
@@ -91,7 +124,7 @@ def first_token(model, context_ids, question_ids, cache=None):
     ids = question_ids if cache is not None else context_ids + question_ids
     inputs = torch.tensor([ids], dtype=torch.long, device="cuda")
     if cache is None:
-        logits = model(input_ids=inputs, use_cache=False).logits
+        logits = model(input_ids=inputs, use_cache=True).logits
     else:
         logits = model(input_ids=inputs, past_key_values=blob_to_legacy(cache), use_cache=True).logits
     return int(logits[0, -1].argmax().item())
@@ -102,65 +135,99 @@ def main():
     parser.add_argument("--samples", type=int, default=3)
     parser.add_argument("--lengths", type=int, nargs="+", default=[512, 1024, 1536])
     parser.add_argument("--bandwidth-gbps", type=float, nargs="+", default=[0.1, 1.0, 10.0])
+    parser.add_argument("--cachegen-levels", type=int, nargs="+", choices=[1, 2, 3], default=[2, 3])
+    parser.add_argument("--warmup", type=int, default=2)
+    parser.add_argument("--repeats", type=int, default=10)
+    parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
     args = parser.parse_args()
-    if args.samples < 1 or min(args.lengths) < 1 or min(args.bandwidth_gbps) <= 0:
-        parser.error("samples, lengths and bandwidths must be positive")
-    model, tokenizer = load_local_model()
+    if args.samples < 1 or min(args.lengths) < 1:
+        parser.error("samples and lengths must be positive")
+    methods = ["text", "uniform8"] + [f"cachegen{level}" for level in args.cachegen_levels]
+    try:
+        measurement_schedule(methods, args.bandwidth_gbps, warmup=args.warmup,
+                             repeats=args.repeats, seed=args.seed)
+    except ValueError as error:
+        parser.error(str(error))
+    model, tokenizer = load_local_model(seed=args.seed)
     question_ids = tokenizer.encode(QUESTION, add_special_tokens=False)
     if max(args.lengths) + len(question_ids) > model.config.max_position_embeddings:
         parser.error("context plus question exceeds model window")
     cases = load_longchat_segments(ROOT / "test_data" / "longchat.jsonl", tokenizer,
                                    lengths=args.lengths, sample_count=args.samples, continuation_tokens=2)
-    data = {"model": MODEL_ID, "measurement": "single-host rate-limited socket; offline encoding excluded from TTFT",
+    data = {"model": MODEL_ID,
+            "measurement": "single-host paced socket; receive complete payload, then reconstruct and generate first token; offline encoding excluded",
+            "scope": "existing repository codec on TinyLlama; no streamed decode overlap or paper-scale model",
+            "summary_definition": "median/P95 pool repeated timings; contexts counts independent source prefixes, not repetitions",
+            "methods": methods,
             "parameters": {"samples": args.samples, "lengths": args.lengths,
-                           "bandwidth_gbps": args.bandwidth_gbps}, "cases": []}
+                           "bandwidth_gbps": args.bandwidth_gbps,
+                           "cachegen_levels": args.cachegen_levels, "warmup": args.warmup,
+                           "repeats": args.repeats, "seed": args.seed}, "cases": []}
     save_results(args.results, data)
-    for case in cases:
+    for case_index, case in enumerate(cases):
         context_ids = case["context_ids"]
         text = tokenizer.decode(context_ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)
         if tokenizer.encode(text, add_special_tokens=False) != context_ids:
             raise RuntimeError(f"text token roundtrip differs for {case['case_id']}; cannot compare identical contexts")
         blob = prefill(model, context_ids)
         uniform_payload, uniform_encode_s = timed_gpu(lambda: pack_uniform(blob, bits=8))
-        encoder, decoder = make_codec(len(context_ids), level=2)
-        cachegen_payload, cachegen_encode_s = timed_gpu(lambda: encoder.to_bytes(blob))
         payloads = {
-            "text": (text.encode("utf-8"), 0.0),
-            "uniform8": (uniform_payload, uniform_encode_s),
-            "cachegen2": (cachegen_payload, cachegen_encode_s),
+            "text": (text.encode("utf-8"), 0.0, None),
+            "uniform8": (uniform_payload, uniform_encode_s, unpack_uniform),
         }
+        for level in args.cachegen_levels:
+            encoder, decoder = make_codec(len(context_ids), level=level)
+            payload, encode_s = timed_gpu(lambda: encoder.to_bytes(blob))
+            payloads[f"cachegen{level}"] = (payload, encode_s, decoder.from_bytes)
         row = {"case_id": case["case_id"], "source_id": case["source_id"],
-               "context_tokens": len(context_ids), "measurements": []}
-        for bandwidth in args.bandwidth_gbps:
-            for method, (payload, offline_encode_s) in payloads.items():
-                start = time.perf_counter()
-                received, transfer_s = rate_limited_transfer(payload, bandwidth)
-                if method == "text":
-                    text_ids = tokenizer.encode(received.decode("utf-8"), add_special_tokens=False)
-                    if text_ids != context_ids:
-                        raise RuntimeError("text changed after transport")
-                    restored = None
-                    reconstruction_s = 0.0
-                    _, first_s = timed_gpu(lambda: first_token(model, text_ids, question_ids))
-                else:
-                    restore = (lambda: unpack_uniform(received)) if method == "uniform8" else (lambda: decoder.from_bytes(received))
-                    restored, reconstruction_s = timed_gpu(restore)
-                    token, first_s = timed_gpu(lambda: first_token(model, context_ids, question_ids, restored))
-                    del restored, token
-                wall_s = time.perf_counter() - start
+               "context_tokens": len(context_ids), "schedule_seed": args.seed + case_index,
+               "warmup_measurements": args.warmup * len(methods) * len(args.bandwidth_gbps),
+               "measurements": []}
+        schedule = measurement_schedule(methods, args.bandwidth_gbps, warmup=args.warmup,
+                                        repeats=args.repeats, seed=row["schedule_seed"])
+        for step in schedule:
+            method, bandwidth = step["method"], step["bandwidth_gbps"]
+            payload, offline_encode_s, restore = payloads[method]
+            start = time.perf_counter()
+            received, transfer_s = rate_limited_transfer(payload, bandwidth)
+            if method == "text":
+                reconstruct_start = time.perf_counter()
+                text_ids = tokenizer.encode(received.decode("utf-8"), add_special_tokens=False)
+                reconstruction_s = time.perf_counter() - reconstruct_start
+                if text_ids != context_ids:
+                    raise RuntimeError("text changed after transport")
+                token, first_s = timed_gpu(lambda: first_token(model, text_ids, question_ids))
+            else:
+                restored, reconstruction_s = timed_gpu(lambda: restore(received))
+                token, first_s = timed_gpu(lambda: first_token(model, context_ids, question_ids, restored))
+                del restored
+            wall_s = time.perf_counter() - start
+            if step["phase"] == "measure":
+                realized_bandwidth = len(payload) * 8 / transfer_s / 1e9
                 row["measurements"].append({
-                    "method": method, "bandwidth_gbps": bandwidth, "bytes": len(payload),
-                    "offline_encode_seconds": round(offline_encode_s, 6),
+                    "method": method, "bandwidth_gbps": bandwidth,
+                    "repetition": step["repetition"], "method_order": step["method_order"],
+                    "bytes": len(payload), "offline_encode_seconds": round(offline_encode_s, 6),
                     "transfer_seconds": round(transfer_s, 6),
+                    "realized_bandwidth_gbps": round(realized_bandwidth, 6),
+                    "realized_to_target_bandwidth_ratio": round(realized_bandwidth / bandwidth, 6),
                     "reconstruct_seconds": round(reconstruction_s, 6),
-                    "first_token_seconds": round(first_s, 6),
+                    "reconstruct_kind": "tokenize" if method == "text" else "decode",
+                    "first_token_seconds": round(first_s, 6), "first_token_id": token,
                     "ttft_wall_seconds": round(wall_s, 6),
                 })
+        text_tokens = {item["first_token_id"] for item in row["measurements"] if item["method"] == "text"}
+        if len(text_tokens) != 1:
+            raise RuntimeError(f"text baseline generated inconsistent first tokens for {case['case_id']}")
+        baseline_token = text_tokens.pop()
+        row["text_first_token_id"] = baseline_token
+        for item in row["measurements"]:
+            item["matches_text_first_token"] = item["first_token_id"] == baseline_token
         data["cases"].append(row)
         save_results(args.results, data)
         print(f"ttft {row['case_id']}", flush=True)
-        del blob, uniform_payload, cachegen_payload, encoder, decoder
+        del blob, uniform_payload, payloads, encoder, decoder, payload, restore, received
         torch.cuda.empty_cache()
     data["summary"] = summarize_ttft(data["cases"])
     data["peak_gpu_allocated_bytes"] = torch.cuda.max_memory_allocated()

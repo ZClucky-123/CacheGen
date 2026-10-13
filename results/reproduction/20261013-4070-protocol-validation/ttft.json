@@ -1,0 +1,223 @@
+{
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "measurement": "single-host paced socket; receive complete payload, then reconstruct and generate first token; offline encoding excluded",
+  "scope": "existing repository codec on TinyLlama; no streamed decode overlap or paper-scale model",
+  "summary_definition": "median/P95 pool repeated timings; contexts counts independent source prefixes, not repetitions",
+  "methods": [
+    "text",
+    "uniform8",
+    "cachegen2",
+    "cachegen3"
+  ],
+  "parameters": {
+    "samples": 1,
+    "lengths": [
+      512
+    ],
+    "bandwidth_gbps": [
+      1.0
+    ],
+    "cachegen_levels": [
+      2,
+      3
+    ],
+    "warmup": 1,
+    "repeats": 2,
+    "seed": 0
+  },
+  "cases": [
+    {
+      "case_id": "longchat-0-512",
+      "source_id": 0,
+      "context_tokens": 512,
+      "schedule_seed": 0,
+      "warmup_measurements": 4,
+      "measurements": [
+        {
+          "method": "text",
+          "bandwidth_gbps": 1.0,
+          "repetition": 1,
+          "method_order": 0,
+          "bytes": 2274,
+          "offline_encode_seconds": 0.0,
+          "transfer_seconds": 0.000325,
+          "realized_bandwidth_gbps": 0.05603,
+          "realized_to_target_bandwidth_ratio": 0.05603,
+          "reconstruct_seconds": 0.000423,
+          "reconstruct_kind": "tokenize",
+          "first_token_seconds": 0.042388,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.043218,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "uniform8",
+          "bandwidth_gbps": 1.0,
+          "repetition": 1,
+          "method_order": 1,
+          "bytes": 5813720,
+          "offline_encode_seconds": 0.014628,
+          "transfer_seconds": 0.047565,
+          "realized_bandwidth_gbps": 0.97782,
+          "realized_to_target_bandwidth_ratio": 0.97782,
+          "reconstruct_seconds": 0.003133,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.027289,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.078184,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "cachegen3",
+          "bandwidth_gbps": 1.0,
+          "repetition": 1,
+          "method_order": 2,
+          "bytes": 3244116,
+          "offline_encode_seconds": 0.005997,
+          "transfer_seconds": 0.026561,
+          "realized_bandwidth_gbps": 0.977116,
+          "realized_to_target_bandwidth_ratio": 0.977116,
+          "reconstruct_seconds": 0.005717,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.039557,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.072035,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "cachegen2",
+          "bandwidth_gbps": 1.0,
+          "repetition": 1,
+          "method_order": 3,
+          "bytes": 2652512,
+          "offline_encode_seconds": 0.029961,
+          "transfer_seconds": 0.021727,
+          "realized_bandwidth_gbps": 0.976675,
+          "realized_to_target_bandwidth_ratio": 0.976675,
+          "reconstruct_seconds": 0.005494,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.033787,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.061198,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "text",
+          "bandwidth_gbps": 1.0,
+          "repetition": 2,
+          "method_order": 0,
+          "bytes": 2274,
+          "offline_encode_seconds": 0.0,
+          "transfer_seconds": 0.000307,
+          "realized_bandwidth_gbps": 0.059269,
+          "realized_to_target_bandwidth_ratio": 0.059269,
+          "reconstruct_seconds": 0.000497,
+          "reconstruct_kind": "tokenize",
+          "first_token_seconds": 0.04808,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.048976,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "cachegen2",
+          "bandwidth_gbps": 1.0,
+          "repetition": 2,
+          "method_order": 1,
+          "bytes": 2652512,
+          "offline_encode_seconds": 0.029961,
+          "transfer_seconds": 0.021756,
+          "realized_bandwidth_gbps": 0.975352,
+          "realized_to_target_bandwidth_ratio": 0.975352,
+          "reconstruct_seconds": 0.005482,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.026946,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.054439,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "uniform8",
+          "bandwidth_gbps": 1.0,
+          "repetition": 2,
+          "method_order": 2,
+          "bytes": 5813720,
+          "offline_encode_seconds": 0.014628,
+          "transfer_seconds": 0.047485,
+          "realized_bandwidth_gbps": 0.979455,
+          "realized_to_target_bandwidth_ratio": 0.979455,
+          "reconstruct_seconds": 0.002644,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.027809,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.078134,
+          "matches_text_first_token": true
+        },
+        {
+          "method": "cachegen3",
+          "bandwidth_gbps": 1.0,
+          "repetition": 2,
+          "method_order": 3,
+          "bytes": 3244116,
+          "offline_encode_seconds": 0.005997,
+          "transfer_seconds": 0.026594,
+          "realized_bandwidth_gbps": 0.975885,
+          "realized_to_target_bandwidth_ratio": 0.975885,
+          "reconstruct_seconds": 0.005227,
+          "reconstruct_kind": "decode",
+          "first_token_seconds": 0.023447,
+          "first_token_id": 450,
+          "ttft_wall_seconds": 0.05547,
+          "matches_text_first_token": true
+        }
+      ],
+      "text_first_token_id": 450
+    }
+  ],
+  "summary": {
+    "text@1Gbps@512tokens": {
+      "samples": 2,
+      "timing_repetitions": 2,
+      "contexts": 1,
+      "repetitions_per_context": {
+        "longchat-0-512": 2
+      },
+      "aggregation": "pooled timings across contexts and repetitions",
+      "median_seconds": 0.046097,
+      "p95_seconds": 0.048688
+    },
+    "uniform8@1Gbps@512tokens": {
+      "samples": 2,
+      "timing_repetitions": 2,
+      "contexts": 1,
+      "repetitions_per_context": {
+        "longchat-0-512": 2
+      },
+      "aggregation": "pooled timings across contexts and repetitions",
+      "median_seconds": 0.078159,
+      "p95_seconds": 0.078182
+    },
+    "cachegen3@1Gbps@512tokens": {
+      "samples": 2,
+      "timing_repetitions": 2,
+      "contexts": 1,
+      "repetitions_per_context": {
+        "longchat-0-512": 2
+      },
+      "aggregation": "pooled timings across contexts and repetitions",
+      "median_seconds": 0.063753,
+      "p95_seconds": 0.071207
+    },
+    "cachegen2@1Gbps@512tokens": {
+      "samples": 2,
+      "timing_repetitions": 2,
+      "contexts": 1,
+      "repetitions_per_context": {
+        "longchat-0-512": 2
+      },
+      "aggregation": "pooled timings across contexts and repetitions",
+      "median_seconds": 0.057819,
+      "p95_seconds": 0.06086
+    }
+  },
+  "peak_gpu_allocated_bytes": 2349496320
+}

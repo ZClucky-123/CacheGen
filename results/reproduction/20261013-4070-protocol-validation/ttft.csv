@@ -1,0 +1,5 @@
+job,context_tokens,bandwidth_gbps,method,contexts,observations,median_seconds,p95_seconds,quality_comparison,speedup_vs_text,text_speedup_quality_comparison,speedup_vs_uniform8,uniform8_speedup_quality_comparison,mean_transfer_seconds,mean_effective_bandwidth_gbps
+ttft,512,1.0,cachegen2,1,2,0.0578185,0.06086005,meets_descriptive_threshold,0.79727076973633,meets_descriptive_threshold,1.3517991646272387,meets_descriptive_threshold,0.0217415,0.9760135
+ttft,512,1.0,cachegen3,1,2,0.0637525,0.07120675,meets_descriptive_threshold,0.7230618407121289,meets_descriptive_threshold,1.225975451943061,meets_descriptive_threshold,0.0265775,0.9765005
+ttft,512,1.0,text,1,2,0.046097,0.0486881,meets_descriptive_threshold,1.0,meets_descriptive_threshold,1.6955333318871078,meets_descriptive_threshold,0.000316,0.057649500000000006
+ttft,512,1.0,uniform8,1,2,0.078159,0.0781815,meets_descriptive_threshold,0.5897849256003787,meets_descriptive_threshold,1.0,meets_descriptive_threshold,0.047525,0.9786375

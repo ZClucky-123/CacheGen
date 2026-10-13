@@ -1,0 +1,75 @@
+{
+  "python": "3.10.14",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.31",
+  "packages": {
+    "torch": "2.3.1+cu121",
+    "transformers": "4.42.3",
+    "numpy": "1.26.4",
+    "torchac": "0.9.3",
+    "torchac_cuda": "0.0.0",
+    "lmcache": "0.1"
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "total_memory_bytes": 8585216000,
+    "capability": [
+      8,
+      9
+    ],
+    "cuda_runtime": "12.1"
+  },
+  "git": {
+    "head": "203aa6ae8a5993a46a236dc426eec926d63e78a7",
+    "status": [
+      " M results/local4070/metrics.json",
+      "?? results/reproduction/"
+    ]
+  },
+  "codec_binary": {
+    "path": "/home/wuren/CacheGen/.venv/lib/python3.10/site-packages/torchac_cuda.cpython-310-x86_64-linux-gnu.so",
+    "sha256": "3683de94c33dc2c99e6ebb01406a43c82b72e0e729dfeee8448d00d1ceef15a3"
+  },
+  "source_and_data_sha256": {
+    "mini_repro/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mini_repro/adaptive.py": "c98efdcfa768aba9879126ce66efb9c7c2f98c2d0721c4ede648be7b756e373a",
+    "mini_repro/data.py": "8037732ebd55528c77dd3b6f4905d82dbcdc845bc233747f0a76cd76afb00770",
+    "mini_repro/experiment_common.py": "403027265c9a183a35ae580fb301b148a2f658a30dab1fed35aa6577cc7625a5",
+    "mini_repro/quality_size.py": "2116470194b459f0243ec8868278e9e81345312c0aee61a64948f475b6ac9753",
+    "mini_repro/report.py": "4a66f05dd84c47e7ef1232937784ec8305b1eb79756f5f2942884ff07f1f516a",
+    "mini_repro/reproduce.py": "64d79b7363974d4490d0be612e164a8ae2a0eb7c000a5d8f519b8f9c520f4162",
+    "mini_repro/run.py": "04e2e29b497079d651f139583bd2dcdfc5075434590bfbac2c6523a83d55da6c",
+    "mini_repro/ttft.py": "bdb2f215167ae28e3c8623702e03e9e93cc0a1944b3c37945ae6a7b067d069e0",
+    "LMCache/lmcache/storage_backend/serde/cachegen_basics.py": "653b0b4c22900c17ba05404f81b18ff96afb3e2633be3beb3485f9587756a573",
+    "LMCache/lmcache/storage_backend/serde/cachegen_decoder.py": "fcd529f0c889cd69d15fe9061d2b63b864e691455d964d21896cc327a3b4fc3e",
+    "LMCache/lmcache/storage_backend/serde/cachegen_encoder.py": "b8a0ec7b4d1c787ac885f03b86d361d2e64e88c0b12486c0ac271e1c9ec71832",
+    "LMCache/third_party/torchac_cuda/cal_cdf.cu": "41186d8c79f20abf9fb22887f26942a59a1e62f7be3d5c6e98595cc779cc6339",
+    "LMCache/third_party/torchac_cuda/include/torchac_kernel_layer.cu": "0e4db96fb8caae54e50514eb871f39e338748915a46727401bed74f28c6cf756",
+    "LMCache/third_party/torchac_cuda/main.cpp": "0fbb7827efbe7904669264a56304b3c01d5f44cb24b06d8a8c02b40437086767",
+    "LMCache/third_party/torchac_cuda/torchac_kernel.cuh": "d1b1c6401c14562295b42e2ebd662429dd1740ab1ea69e9810a2f60ad0c3e80f",
+    "LMCache/third_party/torchac_cuda/torchac_kernel_dec.cu": "551670c1c49f24b73e3376635cd95697b8008a97fac69168b9e1b7893fe5d647",
+    "LMCache/third_party/torchac_cuda/torchac_kernel_dec_new.cu": "a78b1320d3838f6f2028c6401d79b4eef8301ec90025913cc07a41268ca7d9d1",
+    "LMCache/third_party/torchac_cuda/torchac_kernel_enc.cu": "c0c46b159085210bb37913cde991031b85b8a71e9dcae04d716eb741b0f2a6c6",
+    "LMCache/third_party/torchac_cuda/torchac_kernel_enc_new.cu": "724e59dba0f1921792f7ab60205886a35cac8c369185ebf769c63826c8e39bcd",
+    "test_data/longchat.jsonl": "00908018c100549f71dbd45d1a7889e1ab9fb8985a3b4cf05426605e5ef89a5f",
+    "test_data/bw.jsonl": "260527ab8033aa37439c7f6f2dc341ac567c0ed40f848bf18bf7a4f6fe9285cb"
+  },
+  "model": {
+    "id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6",
+    "files_sha256": {
+      "config.json": "486bedda3a6988332e60d9638a09ca4b260d34ebcf1b19e22cf3b140b63d8fe9",
+      "generation_config.json": "18046d04f5bd8b4998095ecabdd17a1bf0053d9acdccead4a05be4a3575f3c5c",
+      "model.safetensors": "6e6001da2106d4757498752a021df6c2bdc332c650aae4bae6b0c004dcf14933",
+      "special_tokens_map.json": "82d96d7a9e6ced037f12394b7ea6a5b02e6ca87e0d11edaa8d60d9be857ce7db",
+      "tokenizer.json": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e",
+      "tokenizer.model": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+      "tokenizer_config.json": "7b41ba7d0eb91e77914ca3dafde559ea3e19878769b7e68409e89bed5222e77a"
+    }
+  },
+  "limitations": [
+    "TinyLlama exploratory quantization schedules",
+    "current encoder has no anchor/delta path",
+    "TTFT local paced socket; receive then decode",
+    "adaptive uses estimated network time"
+  ]
+}

@@ -1,0 +1,13 @@
+job,context_tokens,bandwidth_scale,slo_seconds,strategy,contexts,observations,slo_violations,slo_violation_rate,median_estimated_ttft_seconds,p95_estimated_ttft_seconds,qa_case_trace_pairs,qa_correct_pairs,raw_correct_case_trace_pairs,qa_retention_on_raw_correct_pairs
+adaptive-scale-1-slo-0.2,512,1.0,0.2,adaptive,1,2,0,0.0,0.059091,0.0592593,1,1,1,1.0
+adaptive-scale-1-slo-0.2,512,1.0,0.2,adaptive_static,1,2,0,0.0,0.058744500000000005,0.05967105,1,1,1,1.0
+adaptive-scale-1-slo-0.2,512,1.0,0.2,fixed1,1,2,0,0.0,0.0452795,0.045382549999999994,1,1,1,1.0
+adaptive-scale-1-slo-0.2,512,1.0,0.2,fixed2,1,2,0,0.0,0.0540195,0.05428005,1,1,1,1.0
+adaptive-scale-1-slo-0.2,512,1.0,0.2,fixed3,1,2,0,0.0,0.058898,0.06041,1,1,1,1.0
+adaptive-scale-1-slo-0.2,512,1.0,0.2,text,1,2,0,0.0,0.07813,0.0800281,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,adaptive,1,2,0,0.0,0.09063399999999999,0.09661360000000001,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,adaptive_static,1,2,0,0.0,0.086519,0.0878177,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,fixed1,1,2,2,1.0,1.7330515,1.73824405,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,fixed2,1,2,2,1.0,2.5502029999999998,2.5526717,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,fixed3,1,2,2,1.0,2.9869760000000003,2.9900567000000002,1,1,1,1.0
+adaptive-scale-0.01-slo-0.2,512,0.01,0.2,text,1,2,0,0.0,0.091316,0.09596089999999999,1,1,1,1.0

@@ -1,0 +1,736 @@
+{
+  "schema_version": 2,
+  "status": "complete",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "measurement": "trace transfer estimate + repeatedly measured local reconstruction and first-token time; no live network",
+  "strategies": [
+    "adaptive",
+    "adaptive_static",
+    "fixed1",
+    "fixed2",
+    "fixed3",
+    "text"
+  ],
+  "policy": "adaptive forecasts remaining known chunk sizes/costs at current bandwidth only, subtracts spent estimated time, and reserves calibrated first-token latency; adaptive_static uses SLO/chunk_count",
+  "limitations": [
+    "Scheduler is a causal local heuristic, not an exact implementation of the paper scheduler.",
+    "Transfer is an estimate without streaming/decode overlap or a network socket.",
+    "Text uses original token IDs for recomputation; decoded UTF-8 length is a transfer-size proxy without receive-side retokenization.",
+    "QA evaluated once per case/trace/strategy and reused across timing repeats; repeats are not independent QA samples."
+  ],
+  "parameters": {
+    "cases": 1,
+    "length": 512,
+    "chunk_size": 256,
+    "traces": 1,
+    "bandwidth_scale": 1.0,
+    "slo_seconds": 0.2,
+    "max_new_tokens": 20,
+    "repeats": 2,
+    "warmup": 1,
+    "seed": 0
+  },
+  "cases": [
+    {
+      "case_id": "fact-0-512-start",
+      "position": "start",
+      "answer": "Clara",
+      "question": "Who donated the blue vase?",
+      "fact_start": 0,
+      "raw_prediction": "Clara donated the blue vase.",
+      "raw_correct": true,
+      "calibration": {
+        "first_token_reserve_seconds": 0.022803654999734135,
+        "raw_first_token_seconds": [
+          0.02647746200000256,
+          0.022803654999734135,
+          0.020857132999935857
+        ],
+        "first_token_warmup": 1,
+        "chunks": [
+          {
+            "start": 0,
+            "end": 256,
+            "text": {
+              "bytes": 1268,
+              "prefill_seconds": 0.027670822499885617,
+              "prefill_calibration_seconds": [
+                0.028016281999953208,
+                0.027325362999818026
+              ]
+            },
+            "levels": {
+              "1": {
+                "bytes": 1081398,
+                "decode_seconds": 0.0031556864998947276,
+                "decode_calibration_seconds": [
+                  0.00383815399982268,
+                  0.0024732189999667753
+                ],
+                "offline_encode_seconds": 0.04451366600005713
+              },
+              "2": {
+                "bytes": 1604003,
+                "decode_seconds": 0.003099659500094276,
+                "decode_calibration_seconds": [
+                  0.0035858699998243537,
+                  0.0026134490003641986
+                ],
+                "offline_encode_seconds": 0.0036510320001070795
+              },
+              "3": {
+                "bytes": 1881714,
+                "decode_seconds": 0.002314540500037765,
+                "decode_calibration_seconds": [
+                  0.0022433839999393967,
+                  0.0023856970001361333
+                ],
+                "offline_encode_seconds": 0.0035945409999840194
+              }
+            }
+          },
+          {
+            "start": 256,
+            "end": 512,
+            "text": {
+              "bytes": 1287,
+              "prefill_seconds": 0.0313565879998805,
+              "prefill_calibration_seconds": [
+                0.02844069299999319,
+                0.03427248299976782
+              ]
+            },
+            "levels": {
+              "1": {
+                "bytes": 1059835,
+                "decode_seconds": 0.002742341999692144,
+                "decode_calibration_seconds": [
+                  0.0032176659997276147,
+                  0.002267017999656673
+                ],
+                "offline_encode_seconds": 0.003641771999809862
+              },
+              "2": {
+                "bytes": 1576791,
+                "decode_seconds": 0.0030570990002161125,
+                "decode_calibration_seconds": [
+                  0.003531445000135136,
+                  0.002582753000297089
+                ],
+                "offline_encode_seconds": 0.003630599999723927
+              },
+              "3": {
+                "bytes": 1836677,
+                "decode_seconds": 0.0023629565000646835,
+                "decode_calibration_seconds": [
+                  0.002431926000099338,
+                  0.002293987000030029
+                ],
+                "offline_encode_seconds": 0.004149825999775203
+              }
+            }
+          }
+        ]
+      },
+      "measurements": [
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "repeat": 0,
+          "order_in_repeat": 0,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.004806,
+          "local_first_token_seconds": 0.022883,
+          "estimated_ttft_seconds": 0.057218,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "repeat": 0,
+          "order_in_repeat": 1,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 1,
+              "forecast_seconds": 0.036172474523149714,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.1587509981126465,
+              "level": 1,
+              "forecast_seconds": 0.0044293747991884375,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.045678376686541955,
+          "estimated_transfer_seconds": 0.016977,
+          "local_reconstruct_seconds": 0.004463,
+          "local_first_token_seconds": 0.023726,
+          "estimated_ttft_seconds": 0.045165,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "adaptive_static",
+          "repeat": 0,
+          "order_in_repeat": 2,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.004795,
+          "local_first_token_seconds": 0.025451,
+          "estimated_ttft_seconds": 0.059774,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "repeat": 0,
+          "order_in_repeat": 3,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.004815,
+          "local_first_token_seconds": 0.024559,
+          "estimated_ttft_seconds": 0.058904,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "repeat": 0,
+          "order_in_repeat": 4,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            0,
+            0
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 0,
+              "forecast_seconds": 0.05906353511095519,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.1495075945133009,
+              "level": 0,
+              "forecast_seconds": 0.03135863663123628,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.08185104211793538,
+          "estimated_transfer_seconds": 2e-05,
+          "local_reconstruct_seconds": 0.055043,
+          "local_first_token_seconds": 0.025176,
+          "estimated_ttft_seconds": 0.080239,
+          "slo_violation": false,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "repeat": 0,
+          "order_in_repeat": 5,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            2,
+            2
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 2,
+              "forecast_seconds": 0.05112934030951684,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.15141802220424216,
+              "level": 2,
+              "forecast_seconds": 0.005567016237286563,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.054148994033044406,
+          "estimated_transfer_seconds": 0.025189,
+          "local_reconstruct_seconds": 0.005395,
+          "local_first_token_seconds": 0.023147,
+          "estimated_ttft_seconds": 0.05373,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed3",
+          "repeat": 1,
+          "order_in_repeat": 0,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.006089,
+          "local_first_token_seconds": 0.02496,
+          "estimated_ttft_seconds": 0.060578,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "adaptive",
+          "repeat": 1,
+          "order_in_repeat": 1,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.005208,
+          "local_first_token_seconds": 0.024541,
+          "estimated_ttft_seconds": 0.059278,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "adaptive_static",
+          "repeat": 1,
+          "order_in_repeat": 2,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            3,
+            3
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 3,
+              "forecast_seconds": 0.057251050473265744,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.14827664339689067,
+              "level": 3,
+              "forecast_seconds": 0.005286557193644774,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.057009913796754116,
+          "estimated_transfer_seconds": 0.029529,
+          "local_reconstruct_seconds": 0.004675,
+          "local_first_token_seconds": 0.023512,
+          "estimated_ttft_seconds": 0.057715,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "text",
+          "repeat": 1,
+          "order_in_repeat": 3,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            0,
+            0
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 0,
+              "forecast_seconds": 0.05906353511095519,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.1495075945133009,
+              "level": 0,
+              "forecast_seconds": 0.03135863663123628,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.08185104211793538,
+          "estimated_transfer_seconds": 2e-05,
+          "local_reconstruct_seconds": 0.05379,
+          "local_first_token_seconds": 0.022211,
+          "estimated_ttft_seconds": 0.076021,
+          "slo_violation": false,
+          "prediction": "Clara donated the blue vase.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed1",
+          "repeat": 1,
+          "order_in_repeat": 4,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            1,
+            1
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 1,
+              "forecast_seconds": 0.036172474523149714,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.1587509981126465,
+              "level": 1,
+              "forecast_seconds": 0.0044293747991884375,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.045678376686541955,
+          "estimated_transfer_seconds": 0.016977,
+          "local_reconstruct_seconds": 0.005079,
+          "local_first_token_seconds": 0.023338,
+          "estimated_ttft_seconds": 0.045394,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        },
+        {
+          "trace_id": 0,
+          "strategy": "fixed2",
+          "repeat": 1,
+          "order_in_repeat": 5,
+          "bandwidth_gbps": [
+            0.5658192386631183,
+            5.0257944021785015
+          ],
+          "levels": [
+            2,
+            2
+          ],
+          "decisions": [
+            {
+              "chunk_index": 0,
+              "bandwidth_gbps": 0.5658192386631183,
+              "remaining_budget_seconds": 0.17719634500026588,
+              "level": 2,
+              "forecast_seconds": 0.05112934030951684,
+              "forecast_feasible": true
+            },
+            {
+              "chunk_index": 1,
+              "bandwidth_gbps": 5.0257944021785015,
+              "remaining_budget_seconds": 0.15141802220424216,
+              "level": 2,
+              "forecast_seconds": 0.005567016237286563,
+              "forecast_feasible": true
+            }
+          ],
+          "first_token_reserve_seconds": 0.022803654999734135,
+          "plan_feasible": true,
+          "decision_forecasts_feasible": true,
+          "premeasured_estimated_ttft_seconds": 0.054148994033044406,
+          "estimated_transfer_seconds": 0.025189,
+          "local_reconstruct_seconds": 0.0047,
+          "local_first_token_seconds": 0.024421,
+          "estimated_ttft_seconds": 0.054309,
+          "slo_violation": false,
+          "prediction": "The blue vase was donated by Clara.",
+          "correct": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "adaptive": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.059091,
+      "p95_estimated_ttft_seconds": 0.059259299999999994,
+      "mean_estimated_ttft_seconds": 0.059091
+    },
+    "adaptive_static": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.058744500000000005,
+      "p95_estimated_ttft_seconds": 0.05967105,
+      "mean_estimated_ttft_seconds": 0.058744500000000005
+    },
+    "fixed1": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.0452795,
+      "p95_estimated_ttft_seconds": 0.04538255,
+      "mean_estimated_ttft_seconds": 0.0452795
+    },
+    "fixed2": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.0540195,
+      "p95_estimated_ttft_seconds": 0.05428005,
+      "mean_estimated_ttft_seconds": 0.0540195
+    },
+    "fixed3": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.058898,
+      "p95_estimated_ttft_seconds": 0.06041,
+      "mean_estimated_ttft_seconds": 0.058898
+    },
+    "text": {
+      "runs": 2,
+      "qa_cases": 1,
+      "qa_conditions": 1,
+      "unique_fact_cases": 1,
+      "qa_count_definition": "qa_cases and qa_conditions count unique fact/trace conditions; unique_fact_cases counts fact contexts; runs counts timing repetitions",
+      "slo_violations": 0,
+      "correct": 1,
+      "qa_correct": 1,
+      "median_estimated_ttft_seconds": 0.07813,
+      "p95_estimated_ttft_seconds": 0.0800281,
+      "mean_estimated_ttft_seconds": 0.07813
+    }
+  },
+  "peak_gpu_allocated_bytes": 2347310080
+}

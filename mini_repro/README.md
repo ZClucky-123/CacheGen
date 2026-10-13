@@ -1,4 +1,4 @@
-# CacheGen 本机小规模验证
+# CacheGen 本机小规模实验
 
 ## 当前 RTX 4070 Laptop 环境
 
@@ -10,13 +10,42 @@
 bash mini_repro/run_local.sh test
 bash mini_repro/run_local.sh mini --compression-limit 1 --qa-limit 1
 bash mini_repro/run_local.sh quality --samples 1 --lengths 512 --continuation 8 --qa-per-position 1
-bash mini_repro/run_local.sh ttft --samples 1 --lengths 512 --bandwidth-gbps 1
-bash mini_repro/run_local.sh adaptive --cases 1 --length 512 --traces 1
+bash mini_repro/run_local.sh ttft --samples 1 --lengths 512 --bandwidth-gbps 1 --warmup 1 --repeats 2
+bash mini_repro/run_local.sh adaptive --cases 1 --length 512 --traces 1 --warmup 1 --repeats 2
 ```
 
 同一实验再次运行会覆盖本机同名 JSON；要保留不同批次，请用 `--results` 指定其他输出文件。环境验收信息保存在 `results/local4070/environment.json`，实际安装版本保存在 `.venv/requirements-resolved.txt`。
 
 环境沿用 `requirements-mini.txt`：Python 3.10、PyTorch 2.3.1/cu121、Transformers 4.42.3、NumPy 1.26.4。Ninja 更新到 `1.11.1.2`，修复原 `1.11.1.1` 的 wheel 元数据空行导致 `pip check` 误报平台不支持的问题（[上游记录](https://github.com/scikit-build/ninja-python-distributions/issues/256)）。PyTorch 使用[官方 cu121 软件源](https://pytorch.org/get-started/previous-versions/#v231)。CUDA 12.1.105 编译器由 [NVIDIA 官方 12.1.1 清单](https://developer.download.nvidia.com/compute/cuda/redist/redistrib_12.1.1.json)中的 `cuda_nvcc`、`cuda_cudart`、`cuda_cccl` 组件组成，下载后按清单核对 SHA-256，合并解压到 `.venv/cuda-12.1`。作者 CUDA 扩展须在本机 Python/PyTorch 环境中重新编译，架构为 `8.9`，并发为 `2`。
+
+## 正式小规模实验入口
+
+上面的少量样本命令用于环境检查。正式实验使用固定配置和统一入口，设计及测量边界见 [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)：
+
+```bash
+# 预览完整条件与命令，不访问 GPU、不创建结果目录
+bash mini_repro/run_local.sh reproduce --dry-run
+# 验证整套记录和汇总流程；该批次只用于验收
+bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/validation4070.json
+# 运行正式小规模实验
+bash mini_repro/run_local.sh reproduce --profile mini_repro/profiles/formal4070.json
+```
+
+正式配置包括 60 个文本片段、90 个位置/长度问答条件、1080 次 TTFT 计时，以及 4 组带宽倍率/SLO 下的 1800 次自适应计时。问答条件来自 10 个事实；自适应使用其中 5 个事实。重复计时和同题的不同轨迹不能当作独立题目。
+
+TTFT 默认预热 2 次、测量 10 次，比较文本、uniform8、CacheGen 2/3，记录实际链路吞吐。自适应默认预热 1 次、测量 3 次，比较剩余预算策略、原静态预算策略、固定 1/2/3 级及文本重算；剩余预算策略扣除已花费成本和校准的首 token 时间，仅用当前带宽预测后续成本。
+
+每批结果保存到新的 `results/reproduction/<UTC时间>/`。配置、命令、环境、模型/数据/源码与 CUDA 扩展二进制指纹、逐次观测、日志均保留；`report.md` 和三份 CSV 按长度汇总配对体积/质量、TTFT 中位数/P95、SLO 超限。脚本校验预定样本数与重复次数，结果不完整会标为失败；已有批次禁止覆盖。
+
+报告按预声明的 NLL/QA 描述性阈值标识可比较的质量配置，不能只凭压缩率宣称质量不变。验收批次会醒目标识，不能代替正式结果。这里复现的是**当前仓库编解码器的小规模实验**：尚无论文 anchor/delta 编码、服务器间传输或传输解码流水线。自适应的网络时间仍是轨迹估计值。
+
+需要重新生成报告时，在本机环境中执行：
+
+```bash
+.venv/bin/python -m mini_repro.report results/reproduction/<批次目录>
+```
+
+下面的 RTX 4060 记录、单独脚本及其结果属于历史实验，不是这个正式配置的新结果。
 
 ## 原始 RTX 4060 验证记录
 

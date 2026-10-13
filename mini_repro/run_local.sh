@@ -20,7 +20,7 @@ fi
 
 experiment="${1:-mini}"
 case "$experiment" in
-  mini|quality|ttft|adaptive|test) shift || true ;;
+  mini|quality|ttft|adaptive|reproduce|test) shift || true ;;
   -*) experiment="mini" ;;
   *) echo "Unknown experiment: $experiment" >&2; exit 2 ;;
 esac
@@ -29,6 +29,7 @@ case "$experiment" in
   quality) module="mini_repro.quality_size"; output="quality_size.json" ;;
   ttft) module="mini_repro.ttft"; output="ttft.json" ;;
   adaptive) module="mini_repro.adaptive"; output="adaptive.json" ;;
+  reproduce) exec "$venv/bin/python" -u -m mini_repro.reproduce "$@" ;;
   test) exec "$venv/bin/python" -m unittest discover -s "$repo_root/tests" -v "$@" ;;
 esac
 exec "$venv/bin/python" -m "$module" --results "$repo_root/results/local4070/$output" "$@"

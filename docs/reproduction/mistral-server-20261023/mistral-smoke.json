@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "model": "mistral-community/Mistral-7B-v0.2",
+  "revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "gpu": "Tesla T4",
+  "torch": "2.3.1+cu121",
+  "cuda_runtime": "12.1",
+  "compiled_architectures": [
+    "sm_75",
+    "sm_89"
+  ],
+  "model_loading": "original src.utils.define_model_and_tokenizer (FastChat load_8bit=True)",
+  "input_tokens": 14,
+  "kv_shape": [
+    32,
+    2,
+    8,
+    14,
+    128
+  ],
+  "raw_kv_bytes": 1835008,
+  "encoded_bytes": 4829528,
+  "kv_mse": 0.07187682390213013,
+  "peak_gpu_allocated_bytes": 8217165824,
+  "generated_text": "Explain in one short sentence why caching helps repeated computation.\n\nAnswer:\n\nCaching helps repeated computation",
+  "elapsed_seconds": 42.39
+}

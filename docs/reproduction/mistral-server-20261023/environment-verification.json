@@ -1,0 +1,41 @@
+{
+  "status": "validated",
+  "validated_at_utc": "2026-10-23T07:44:36.706986+00:00",
+  "python": "3.10.12",
+  "system": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+  "versions": {
+    "torch": "2.3.1+cu121",
+    "transformers": "4.42.3",
+    "numpy": "1.26.4",
+    "packaging": "24.1",
+    "wavedrom": "2.0.3.post3",
+    "protobuf": "5.27.2",
+    "fschat": "0.2.36",
+    "accelerate": "0.32.1",
+    "bitsandbytes": "0.43.3",
+    "peft": "0.11.1",
+    "torchac": "0.9.3",
+    "torchac_cuda": "0.0.0",
+    "lmcache": "0.1"
+  },
+  "cuda_runtime": "12.1",
+  "cuda_compiler": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2023 NVIDIA Corporation\nBuilt on Mon_Apr__3_17:16:06_PDT_2023\nCuda compilation tools, release 12.1, V12.1.105\nBuild cuda_12.1.r12.1/compiler.32688072_0\n",
+  "gpu": "Tesla T4",
+  "cuda_architectures": [
+    "sm_75",
+    "sm_89"
+  ],
+  "cuda_extension_sha256": "df0b6c1320305e5084029f8ab31fb22bfbd25acab8ee5e20b11e14a4d8b6819b",
+  "repository_commit": "cc14424f75ed69b695e8e4e3e06e2728a083ce4f",
+  "repository_tracked_changes": "",
+  "unit_tests": {
+    "count": 41,
+    "status": "passed"
+  },
+  "mistral_smoke": "passed",
+  "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "model_weights_sha256_verified": true,
+  "offline_model_validation": true,
+  "runtime_packaging_preserved": "24.1",
+  "build_conflict_fix": "WaveDrom 2.0.3.post3 built in a separate temporary environment with setuptools-scm 8.1.0"
+}

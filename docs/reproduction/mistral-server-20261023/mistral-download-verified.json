@@ -1,0 +1,22 @@
+{
+  "model": "mistral-community/Mistral-7B-v0.2",
+  "revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "files": [
+    {
+      "file": "model-00001-of-00003.safetensors",
+      "bytes": 4943162336,
+      "sha256": "fbebdaa87478f5b1f9d01539963874db56958ff8cf8d801e465d78ce24328069"
+    },
+    {
+      "file": "model-00002-of-00003.safetensors",
+      "bytes": 4999819336,
+      "sha256": "79a5f871a0fbb7919f263d78caff0d4d3b7a1d444552db3011ada70f48fd5ee4"
+    },
+    {
+      "file": "model-00003-of-00003.safetensors",
+      "bytes": 4540516344,
+      "sha256": "3db96f068de2a5b5947692954c252a5f74a1c8ad7d87ea950b5e396a7ddeca27"
+    }
+  ],
+  "status": "verified"
+}

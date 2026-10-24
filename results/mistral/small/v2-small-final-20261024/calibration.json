@@ -1,0 +1,330 @@
+{
+  "mode": "local_socket_serial",
+  "boundary": "socket setup + sender/receiver + pacing + bytes materialization; debug equality outside transfer clock",
+  "rows": [
+    {
+      "payload_bytes": 65536,
+      "target_gbps": null,
+      "repeat": 0,
+      "seconds": 0.0003780350089073181,
+      "actual_gbps": 1.386876843801888,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": null,
+      "repeat": 1,
+      "seconds": 0.0004000663757324219,
+      "actual_gbps": 1.3105025360858165,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": null,
+      "repeat": 2,
+      "seconds": 0.000382743775844574,
+      "actual_gbps": 1.3698145680960854,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 0.1,
+      "repeat": 0,
+      "seconds": 0.005421966314315796,
+      "actual_gbps": 0.0966970227416768,
+      "actual_to_target": 0.966970227416768,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 0.1,
+      "repeat": 1,
+      "seconds": 0.0053977444767951965,
+      "actual_gbps": 0.09713094094281499,
+      "actual_to_target": 0.9713094094281499,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 0.1,
+      "repeat": 2,
+      "seconds": 0.005377441644668579,
+      "actual_gbps": 0.09749766425076896,
+      "actual_to_target": 0.9749766425076896,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 1,
+      "repeat": 0,
+      "seconds": 0.0006571933627128601,
+      "actual_gbps": 0.7977682516995703,
+      "actual_to_target": 0.7977682516995703,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 1,
+      "repeat": 1,
+      "seconds": 0.0006808936595916748,
+      "actual_gbps": 0.769999826866372,
+      "actual_to_target": 0.769999826866372,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 1,
+      "repeat": 2,
+      "seconds": 0.0006500482559204102,
+      "actual_gbps": 0.8065370458653952,
+      "actual_to_target": 0.8065370458653952,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 10,
+      "repeat": 0,
+      "seconds": 0.0004308745265007019,
+      "actual_gbps": 1.21679971257049,
+      "actual_to_target": 0.12167997125704899,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 10,
+      "repeat": 1,
+      "seconds": 0.00040856748819351196,
+      "actual_gbps": 1.2832347534997173,
+      "actual_to_target": 0.12832347534997174,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 65536,
+      "target_gbps": 10,
+      "repeat": 2,
+      "seconds": 0.0003665238618850708,
+      "actual_gbps": 1.4304334711075335,
+      "actual_to_target": 0.14304334711075334,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": null,
+      "repeat": 0,
+      "seconds": 0.0010428279638290405,
+      "actual_gbps": 8.044095757845648,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": null,
+      "repeat": 1,
+      "seconds": 0.0014064833521842957,
+      "actual_gbps": 5.964242653119449,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": null,
+      "repeat": 2,
+      "seconds": 0.0009648352861404419,
+      "actual_gbps": 8.69434205039942,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 0.1,
+      "repeat": 0,
+      "seconds": 0.08427266031503677,
+      "actual_gbps": 0.0995412743426022,
+      "actual_to_target": 0.9954127434260219,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 0.1,
+      "repeat": 1,
+      "seconds": 0.0843074694275856,
+      "actual_gbps": 0.09950017545248757,
+      "actual_to_target": 0.9950017545248757,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 0.1,
+      "repeat": 2,
+      "seconds": 0.08429251611232758,
+      "actual_gbps": 0.09951782657456094,
+      "actual_to_target": 0.9951782657456094,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 1,
+      "repeat": 0,
+      "seconds": 0.008768253028392792,
+      "actual_gbps": 0.9567023183337149,
+      "actual_to_target": 0.9567023183337149,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 1,
+      "repeat": 1,
+      "seconds": 0.00879921019077301,
+      "actual_gbps": 0.9533364720388684,
+      "actual_to_target": 0.9533364720388684,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 1,
+      "repeat": 2,
+      "seconds": 0.008731327950954437,
+      "actual_gbps": 0.9607482443816608,
+      "actual_to_target": 0.9607482443816608,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 10,
+      "repeat": 0,
+      "seconds": 0.001155756413936615,
+      "actual_gbps": 7.258110704683535,
+      "actual_to_target": 0.7258110704683535,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 10,
+      "repeat": 1,
+      "seconds": 0.0011595115065574646,
+      "actual_gbps": 7.234605221732887,
+      "actual_to_target": 0.7234605221732887,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 1048576,
+      "target_gbps": 10,
+      "repeat": 2,
+      "seconds": 0.0011517703533172607,
+      "actual_gbps": 7.283229661051466,
+      "actual_to_target": 0.7283229661051467,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": null,
+      "repeat": 0,
+      "seconds": 0.014403633773326874,
+      "actual_gbps": 4.659162059804271,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": null,
+      "repeat": 1,
+      "seconds": 0.01029890775680542,
+      "actual_gbps": 6.5161146778555326,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": null,
+      "repeat": 2,
+      "seconds": 0.004657663404941559,
+      "actual_gbps": 14.408268302256598,
+      "actual_to_target": null,
+      "target_reached_90pct": null
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 0.1,
+      "repeat": 0,
+      "seconds": 0.6727059558033943,
+      "actual_gbps": 0.09975958057314019,
+      "actual_to_target": 0.9975958057314018,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 0.1,
+      "repeat": 1,
+      "seconds": 0.6728787422180176,
+      "actual_gbps": 0.09973396362439438,
+      "actual_to_target": 0.9973396362439437,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 0.1,
+      "repeat": 2,
+      "seconds": 0.6720243617892265,
+      "actual_gbps": 0.09986076073392113,
+      "actual_to_target": 0.9986076073392112,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 1,
+      "repeat": 0,
+      "seconds": 0.06849805265665054,
+      "actual_gbps": 0.9797192970782117,
+      "actual_to_target": 0.9797192970782117,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 1,
+      "repeat": 1,
+      "seconds": 0.0684322640299797,
+      "actual_gbps": 0.9806611684015024,
+      "actual_to_target": 0.9806611684015024,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 1,
+      "repeat": 2,
+      "seconds": 0.07228533923625946,
+      "actual_gbps": 0.9283883109500182,
+      "actual_to_target": 0.9283883109500182,
+      "target_reached_90pct": true
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 10,
+      "repeat": 0,
+      "seconds": 0.007520422339439392,
+      "actual_gbps": 8.923549897997166,
+      "actual_to_target": 0.8923549897997166,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 10,
+      "repeat": 1,
+      "seconds": 0.007480219006538391,
+      "actual_gbps": 8.97151058563135,
+      "actual_to_target": 0.897151058563135,
+      "target_reached_90pct": false
+    },
+    {
+      "payload_bytes": 8388608,
+      "target_gbps": 10,
+      "repeat": 2,
+      "seconds": 0.007495209574699402,
+      "actual_gbps": 8.953567386098262,
+      "actual_to_target": 0.8953567386098262,
+      "target_reached_90pct": false
+    }
+  ]
+}

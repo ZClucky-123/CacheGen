@@ -1,0 +1,16 @@
+{
+  "protocol": "cachegen-shared-v2", "scale": "larger", "model": "tinyllama", "seed": 0, "cpu_threads": 8,
+  "data": {"longchat": "test_data/longchat.jsonl", "triviaqa": "test_data/tqa.jsonl", "bandwidth": "test_data/bw.jsonl"},
+  "scoring": {"answer": "author_first_lf_line", "normalization": "standard_em_f1", "aliases": "dataset_only", "stop": "eos_or_token_limit"},
+  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_retention": 0.9},
+  "quality": {"samples": 20, "lengths": [512, 1024, 1536], "continuation": 32, "qa_per_position": 10, "max_new_tokens": 24,
+              "methods": ["raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+  "triviaqa": {"samples": 7, "max_prompt_tokens": 2000, "max_new_tokens": 32},
+  "ttft": {"samples": 5, "lengths": [512, 1024, 1536], "bandwidth_gbps": [0.1, 1, 10], "warmup": 2, "repeats": 10,
+           "methods": ["text", "raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+  "adaptive": {"cases": 5, "length": 1024, "chunk_size": 256, "traces": 5, "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+               "max_new_tokens": 20, "warmup": 1, "repeats": 3, "mode": "socket_serial",
+               "strategies": ["adaptive", "adaptive_static", "fixed1", "fixed2", "fixed3", "text"]},
+  "calibration": {"payload_bytes": [65536, 1048576, 8388608, 67108864], "repeats": 5},
+  "checks": {"generation_tokens": 8}
+}

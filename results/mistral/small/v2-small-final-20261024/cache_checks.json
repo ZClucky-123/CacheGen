@@ -1,0 +1,186 @@
+{
+  "status": "passed",
+  "tolerances": {
+    "atol": 0.1,
+    "rtol": 0.02,
+    "nll_abs": 0.01
+  },
+  "cases": [
+    {
+      "case_id": "longchat-0-256",
+      "context_tokens": 256,
+      "suffix_tokens": 14,
+      "kv_shape": [
+        32,
+        2,
+        8,
+        256,
+        128
+      ],
+      "raw_logits_max_error": 0.015625,
+      "optimized_logits_max_error": 0.0078125,
+      "generated_ids": [
+        415,
+        2191,
+        9067,
+        349,
+        272,
+        3905,
+        302,
+        1524
+      ],
+      "natural_suffix_ids": [
+        2825,
+        302
+      ],
+      "natural_generated_ids": [
+        5782,
+        304,
+        8520,
+        28725,
+        9836,
+        6992,
+        298,
+        11418
+      ],
+      "repeat_cache_unchanged": true,
+      "raw_chunks_and_text_chunks_match": true
+    },
+    {
+      "case_id": "longchat-1-256",
+      "context_tokens": 256,
+      "suffix_tokens": 14,
+      "kv_shape": [
+        32,
+        2,
+        8,
+        256,
+        128
+      ],
+      "raw_logits_max_error": 0.015625,
+      "optimized_logits_max_error": 0.00390625,
+      "generated_ids": [
+        415,
+        2191,
+        9067,
+        349,
+        272,
+        7196,
+        302,
+        4392
+      ],
+      "natural_suffix_ids": [
+        25449,
+        7161
+      ],
+      "natural_generated_ids": [
+        24920,
+        297,
+        272,
+        6387,
+        28723,
+        28187,
+        9095,
+        541
+      ],
+      "repeat_cache_unchanged": true,
+      "raw_chunks_and_text_chunks_match": true
+    },
+    {
+      "case_id": "longchat-0-512",
+      "context_tokens": 512,
+      "suffix_tokens": 14,
+      "kv_shape": [
+        32,
+        2,
+        8,
+        512,
+        128
+      ],
+      "raw_logits_max_error": 0.01953125,
+      "optimized_logits_max_error": 0.00390625,
+      "generated_ids": [
+        415,
+        2191,
+        9067,
+        349,
+        272,
+        3905,
+        302,
+        1524
+      ],
+      "natural_suffix_ids": [
+        1162,
+        28733
+      ],
+      "natural_generated_ids": [
+        15823,
+        28723,
+        1263,
+        2757,
+        28725,
+        1524,
+        541,
+        347
+      ],
+      "repeat_cache_unchanged": true,
+      "raw_chunks_and_text_chunks_match": true
+    },
+    {
+      "case_id": "longchat-1-512",
+      "context_tokens": 512,
+      "suffix_tokens": 14,
+      "kv_shape": [
+        32,
+        2,
+        8,
+        512,
+        128
+      ],
+      "raw_logits_max_error": 0.01953125,
+      "optimized_logits_max_error": 0.0078125,
+      "generated_ids": [
+        415,
+        2191,
+        9067,
+        349,
+        272,
+        7196,
+        302,
+        4392
+      ],
+      "natural_suffix_ids": [
+        28733,
+        15823
+      ],
+      "natural_generated_ids": [
+        297,
+        1287,
+        1581,
+        4342,
+        28723,
+        28705,
+        13,
+        8602
+      ],
+      "repeat_cache_unchanged": true,
+      "raw_chunks_and_text_chunks_match": true
+    }
+  ],
+  "complete_nll_checks": [
+    {
+      "case_id": "longchat-0-256",
+      "tokens_scored": 16,
+      "full_nll": 0.9118030071258545,
+      "reuse_nll": 0.9120365381240845,
+      "absolute_error": 0.00023353099822998047
+    },
+    {
+      "case_id": "longchat-1-256",
+      "tokens_scored": 16,
+      "full_nll": 0.5362882018089294,
+      "reuse_nll": 0.5365661382675171,
+      "absolute_error": 0.0002779364585876465
+    }
+  ]
+}

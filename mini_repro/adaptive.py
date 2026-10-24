@@ -30,6 +30,27 @@ def representation_cost(chunk, level, bandwidth_gbps):
     return transfer, compute
 
 
+def next_decision(chunks, index, bandwidth, slo, elapsed, strategy, first_token_reserve=0.0):
+    """Shared causal decision for estimates and actual socket execution."""
+    if strategy not in STRATEGIES or not 0 <= index < len(chunks) or bandwidth <= 0:
+        raise ValueError('invalid strategy, chunk index or bandwidth')
+    chunk = chunks[index]
+    remaining = slo - first_token_reserve - elapsed
+    forecasts = {level: sum(sum(representation_cost(item, level, bandwidth))
+                            for item in chunks[index:]) for level in (3, 2, 1, 0)}
+    if strategy == 'adaptive':
+        level = next((level for level in (3, 2, 1, 0) if forecasts[level] <= remaining + 1e-12), None)
+        if level is None:
+            level = min((3, 2, 1, 0), key=lambda candidate: sum(representation_cost(chunk, candidate, bandwidth)))
+    elif strategy == 'adaptive_static':
+        level = choose_strategy(chunk['levels'], bandwidth, slo / len(chunks))
+    else:
+        level = 0 if strategy == 'text' else int(strategy[-1])
+    return {'chunk_index': index, 'bandwidth_gbps': bandwidth, 'remaining_budget_seconds': remaining,
+            'level': level, 'forecast_seconds': forecasts[level],
+            'forecast_feasible': forecasts[level] <= remaining + 1e-12}
+
+
 def plan_chunks(chunks, bandwidths, slo_seconds, strategy="adaptive", first_token_reserve=0.0):
     """Plan using known chunk metadata and only the current observed bandwidth.
 
@@ -51,29 +72,14 @@ def plan_chunks(chunks, bandwidths, slo_seconds, strategy="adaptive", first_toke
     for index, (chunk, bw) in enumerate(zip(chunks, bandwidths)):
         if not math.isfinite(bw) or bw <= 0:
             raise ValueError("bandwidth must be positive")
-        remaining = slo_seconds - first_token_reserve - transfer_seconds - compute_seconds
-        forecasts = {level: sum(sum(representation_cost(item, level, bw))
-                                for item in chunks[index:]) for level in (3, 2, 1, 0)}
-        if strategy == "adaptive":
-            level = next((level for level in (3, 2, 1, 0)
-                          if forecasts[level] <= remaining + 1e-12), None)
-            if level is None:
-                level = min((3, 2, 1, 0), key=lambda candidate:
-                            sum(representation_cost(chunk, candidate, bw)))
-        elif strategy == "adaptive_static":
-            level = choose_strategy(chunk["levels"], bw, slo_seconds / len(chunks))
-        elif strategy == "text":
-            level = 0
-        else:
-            level = int(strategy[-1])
+        decision = next_decision(chunks, index, bw, slo_seconds, transfer_seconds + compute_seconds,
+                                 strategy, first_token_reserve)
+        level = decision['level']
         transfer, compute = representation_cost(chunk, level, bw)
         transfer_seconds += transfer
         compute_seconds += compute
         levels.append(level)
-        decisions.append({"chunk_index": index, "bandwidth_gbps": bw,
-                          "remaining_budget_seconds": remaining, "level": level,
-                          "forecast_seconds": forecasts[level],
-                          "forecast_feasible": forecasts[level] <= remaining + 1e-12})
+        decisions.append(decision)
     estimated_ttft = transfer_seconds + compute_seconds + first_token_reserve
     return {"levels": levels, "transfer_seconds": transfer_seconds,
             "premeasured_compute_seconds": compute_seconds,

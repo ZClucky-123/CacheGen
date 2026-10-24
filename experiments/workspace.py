@@ -71,10 +71,16 @@ class Workspace:
                   "progress": manifest.get("progress", manifest.get("stages", {}))}
         if manifest.get("started_utc"):
             started = datetime.fromisoformat(manifest["started_utc"])
-            end = datetime.fromisoformat(manifest.get("finished_utc", datetime.now(timezone.utc).isoformat()))
+            terminal = manifest["status"] in ("completed", "failed", "interrupted")
+            end = datetime.fromisoformat(manifest.get("finished_utc", datetime.now(timezone.utc).isoformat())) if terminal else datetime.now(timezone.utc)
             result.update(started_china_time=started.astimezone(timezone(timedelta(hours=8))).isoformat(),
                           elapsed_minutes=round((end-started).total_seconds()/60, 1))
         config = manifest.get("configuration", {})
+        if "protocol" in manifest:
+            result["jobs"] = [{"name": job["name"], "status": job.get("status", "pending"),
+                               "observations": job.get("observations", 0)} for job in manifest.get("jobs", [])]
+            result["protocol"] = manifest["protocol"]
+            result["pid"] = manifest.get("pid")
         if (run / "quality.json").exists():
             quality = json.loads((run / "quality.json").read_text())
             spec = config.get("quality", {})
@@ -94,5 +100,6 @@ class Workspace:
         if (run / "artifacts.json").exists():
             result["artifacts"] = json.loads((run / "artifacts.json").read_text())["status"]
         if (run / "exit_code").exists():
-            result["exit_code"] = int((run / "exit_code").read_text())
+            key = "previous_attempt_exit_code" if manifest["status"] in ("running", "initializing") else "exit_code"
+            result[key] = int((run / "exit_code").read_text())
         return result

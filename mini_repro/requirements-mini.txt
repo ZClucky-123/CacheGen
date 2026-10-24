@@ -8,3 +8,4 @@ sentencepiece==0.2.0
 redis==5.0.7
 torchac==0.9.3
 wheel==0.43.0
+matplotlib==3.8.4

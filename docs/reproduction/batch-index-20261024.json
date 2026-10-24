@@ -1,0 +1,81 @@
+{
+  "batches": [
+    {
+      "role": "historical",
+      "run_directory": "results/reproduction/20261013T060232923276Z",
+      "status": "completed",
+      "protocol": "historical-v1",
+      "exit_code": null
+    },
+    {
+      "role": "historical",
+      "run_directory": "results/mistral/20261024T064543Z",
+      "status": "completed",
+      "protocol": "historical-v1",
+      "exit_code": 0
+    },
+    {
+      "role": "historical",
+      "run_directory": "results/mistral/20261024T064353Z",
+      "status": "failed",
+      "protocol": "historical-v1",
+      "exit_code": 1
+    },
+    {
+      "role": "diagnostic",
+      "run_directory": "results/tinyllama/minimal/v2-check-01",
+      "status": "failed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 1
+    },
+    {
+      "role": "resume-validation",
+      "run_directory": "results/mistral/minimal/v2-check-01",
+      "status": "completed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 0,
+      "observations": 134
+    },
+    {
+      "role": "diagnostic",
+      "run_directory": "results/tinyllama/minimal/v2-check-02",
+      "status": "completed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 0,
+      "observations": 134
+    },
+    {
+      "role": "diagnostic",
+      "run_directory": "results/tinyllama/minimal/v2-wire-check",
+      "status": "completed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 0,
+      "observations": 134
+    },
+    {
+      "role": "accepted-minimal",
+      "run_directory": "results/tinyllama/minimal/v2-final-check",
+      "status": "completed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 0,
+      "observations": 134
+    },
+    {
+      "role": "superseded",
+      "run_directory": "results/mistral/small/v2-small-20261024",
+      "status": "interrupted",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 143,
+      "observations": 443
+    },
+    {
+      "role": "accepted-small",
+      "run_directory": "results/mistral/small/v2-small-final-20261024",
+      "status": "completed",
+      "protocol": "cachegen-shared-v2",
+      "exit_code": 0,
+      "observations": 552
+    }
+  ],
+  "note": "Only accepted-small contributes the final Mistral primary report; historical and diagnostic observations are not pooled."
+}

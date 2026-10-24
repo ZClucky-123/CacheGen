@@ -1,0 +1,1310 @@
+diff --git a/LMCache/lmcache/storage_backend/serde/cachegen_decoder.py b/LMCache/lmcache/storage_backend/serde/cachegen_decoder.py
+index 49accc1..754ca7c 100644
+--- a/LMCache/lmcache/storage_backend/serde/cachegen_decoder.py
++++ b/LMCache/lmcache/storage_backend/serde/cachegen_decoder.py
+@@ -112,8 +112,8 @@ def decode_function_gpu(
+     return key, value
+ 
+ class CacheGenDeserializer(Deserializer):
+-    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata):
+-        self.cachegen_config = CacheGenConfig.from_model_name(metadata.model_name)
++    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata, cachegen_config=None):
++        self.cachegen_config = cachegen_config or CacheGenConfig.from_model_name(metadata.model_name)
+         self.chunk_size = config.chunk_size
+         self.output_buffer = None
+         self.fmt = metadata.fmt
+@@ -136,8 +136,9 @@ class CacheGenDeserializer(Deserializer):
+ 
+ 
+     def get_output_buffer(self, nlayers: int, nchannels: int, ntokens: int):
+-        if self.output_buffer is None or self.output_buffer.shape[1] != 2 * nlayers * nchannels:
+-            self.output_buffer = torch.zeros((self.chunk_size, 2 * nlayers * nchannels), dtype=torch.uint8).cuda()
++        if (self.output_buffer is None or self.output_buffer.shape[1] != 2 * nlayers * nchannels
++                or self.output_buffer.shape[0] < ntokens):
++            self.output_buffer = torch.zeros((max(self.chunk_size, ntokens), 2 * nlayers * nchannels), dtype=torch.uint8).cuda()
+         return self.output_buffer[:ntokens, :]
+ 
+     @_lmcache_nvtx_annotate
+diff --git a/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py b/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
+index 2495d2d..4cb9f4d 100644
+--- a/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
++++ b/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
+@@ -53,7 +53,7 @@ def torch_quant_vectorized(bins: torch.Tensor, input_groups: torch.Tensor) -> Tu
+     """
+     MAX = (bins // 2 - 1)[:, None, None] # shape [nlayers, 1, 1]
+     max1 = torch.amax(torch.abs(input_groups), dim=-1, keepdim=True) # shape [nlayers, ntokens, 1]
+-    factor = MAX / max1 # shape [nlayers, ntokens, 1]
++    factor = MAX / max1.clamp_min(torch.finfo(max1.dtype).tiny) # zero groups remain zero
+     xq = torch.round(input_groups * factor + MAX).to(torch.int8) # shape [nlayers, ntokens, nchannels]
+     
+     return xq, max1
+@@ -301,8 +301,8 @@ def encode_function(
+         )
+ 
+ class CacheGenSerializer(Serializer):
+-    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata):
+-        self.cachegen_config = CacheGenConfig.from_model_name(metadata.model_name)
++    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata, cachegen_config=None):
++        self.cachegen_config = cachegen_config or CacheGenConfig.from_model_name(metadata.model_name)
+         self.chunk_size = config.chunk_size
+         self.fmt = metadata.fmt
+         self.key_bins = self.make_key_bins(self.cachegen_config)
+diff --git a/README.md b/README.md
+index 8ac9cb2..8d7c5b9 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,7 @@
++# 当前 TinyLlama / Mistral 公共复现入口
++
++共享 `cachegen-shared-v2` 框架已放入现有 `experiments/` 与 `mini_repro/`，覆盖三组实验、六个任务，支持 tmux 后台、逐观测检查点和严格恢复。请先阅读 [运行、查看、恢复及较大配置](docs/reproduction/SHARED_FRAMEWORK.md)、[对齐审查](docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)及[历史批次边界](docs/reproduction/HISTORY.md)。下文原论文入口和旧批次说明保留用于历史核查。
++
+ # CacheGen：KV 缓存压缩与小规模复现
+ 
+ 本仓库基于 CacheGen（SIGCOMM 2024）的作者代码，保留原始实验脚本，并提供 **Mistral-7B** 和 **TinyLlama** 两组小规模复现实验。可以在这里阅读编解码实现、查看已归档结果，或使用统一入口开展后续实验。
+diff --git a/docs/reproduction/WORKSPACE_GUIDE.md b/docs/reproduction/WORKSPACE_GUIDE.md
+index b4ca638..8041a36 100644
+--- a/docs/reproduction/WORKSPACE_GUIDE.md
++++ b/docs/reproduction/WORKSPACE_GUIDE.md
+@@ -1,5 +1,7 @@
+ # 工作区、兼容性和后续实验
+ 
++> 当前模型实验已统一为 [公共 v2 框架](SHARED_FRAMEWORK.md)，配置与算法均共享，切换模型通过适配器。以下整理记录中关于两套实验及模型专用评分的描述属于重构前状态；[审查表](SHARED_FRAMEWORK_AUDIT.md)说明差异，[历史索引](HISTORY.md)界定旧结果。
++
+ 本机所有项目实体均位于 `/home/aaa/CacheGen`；上传 GitHub 时以该目录为仓库根目录。项目代码根据脚本位置寻找仓库，克隆到其他目录后不需要修改活动代码中的机器绝对路径。
+ 
+ ```text
+diff --git a/experiments/README.md b/experiments/README.md
+index b2e02af..a952dc2 100644
+--- a/experiments/README.md
++++ b/experiments/README.md
+@@ -1,37 +1,18 @@
+-# 实验注册与运行
++# 公共实验框架
+ 
+-`python3 -m experiments list|run|status` 是不依赖 PyTorch 的统一调度入口。每组实验保留自己的模型、配置验证和测量实现，注册表只决定调用哪个命令、在哪里查看结果。
++TinyLlama 与 Mistral 当前共用 `config.py`、`engine.py`、`datasets.py`、`tasks.py`、`records.py`、`suite.py`、`analysis.py` 和 `artifacts.py`。模型差异只放在适配器与配置，三个核心实验组仍是六个执行任务。
+ 
+-| 名称 | 代码 | 配置 | 结果 |
+-| --- | --- | --- | --- |
+-| `mistral` | [mistral/](mistral/) | [config.json](mistral/config.json) | [results/mistral](../results/mistral/README.md) |
+-| `tinyllama` | [mini_repro](../mini_repro/README.md) | [profiles](../mini_repro/profiles/) | [results/reproduction](../results/reproduction/README.md) |
++完整说明见 [配置、后台、查询、恢复和较大规模](../docs/reproduction/SHARED_FRAMEWORK.md)、[审查表](../docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)和[历史索引](../docs/reproduction/HISTORY.md)。
+ 
+ ```bash
++python3 -m experiments list
+ python3 -m experiments run mistral --dry-run
+-python3 -m experiments run mistral -- --config experiments/mistral/config.json
++bash experiments/run.sh --model mistral --config experiments/configs/small.json --dry-run
++python3 -m experiments.background start --name mistral-small -- --model mistral --config experiments/configs/small.json
+ python3 -m experiments status mistral
+-python3 -m experiments status mistral --run-dir results/mistral/20261024T064543Z
++python3 -m experiments.background status --name mistral-small
+ ```
+ 
+-`--dry-run` 打印实际命令、工作目录和路径覆盖，不写结果、不加载 GPU。`--` 之后的参数逐项交给原实验命令，不经过 shell 拼接。若要预演 TinyLlama 内部的六个任务，使用 `bash mini_repro/run_local.sh reproduce --dry-run`。
++注册表仍支持独立的非模型工具接入，按 argv 列表转发，路径由 Workspace.discover() 解析。新增类似模型实验应扩展适配器/配置，避免另写正式测量流程。`experiments/mistral` 和 `mistral_repro` 保留薄兼容入口及历史后处理；不再有专用正式算法。
+ 
+-## 新增实验
+-
+-1. 在 `experiments/<name>/` 放置代码、配置及测试，复用现有 `mini_repro` 公共算法。
+-2. 在 [registry.json](registry.json) 增加一项，例如：
+-
+-```json
+-{
+-  "my_experiment": {
+-    "description": "简短说明",
+-    "command": ["{python}", "{repo}/experiments/my_experiment/run.py"],
+-    "results_subdir": "my_experiment"
+-  }
+-}
+-```
+-
+-3. 命令读取 `CACHEGEN_RESULTS_DIR`、`CACHEGEN_REPORTS_DIR`、`CACHEGEN_LOCAL_DIR`，在 `results/<name>/<唯一批次>/` 保存 manifest、配置快照、日志和原始记录；先提供不加载模型的预演。
+-4. Shell 入口可以 `source scripts/experiment-env.sh`，实际 GPU 测量前调用 `cachegen_lock_gpu`。Python 入口可通过 `Workspace.discover()` 读取相同路径。使用统一 `.local` 的本机测量共享一把锁。
+-
+-历史 `mini_repro` 模块仍是公共工具与 TinyLlama API，不通过改名破坏既有导入。模型专用的维度、加载方式和评分约定放在各自实验中。
++新批次为 `results/<model>/<scale>/<run-id>`。默认小规模；较大规模必须显式选择对应配置。重复 run ID 拒绝覆盖，`--resume` 严格核对全部指纹。后台任务使用服务器 tmux，同 GPU 正式测量使用共用排他锁。
+diff --git a/experiments/mistral/README.md b/experiments/mistral/README.md
+index 102be02..a481579 100644
+--- a/experiments/mistral/README.md
++++ b/experiments/mistral/README.md
+@@ -1,47 +1,16 @@
+-# Mistral-7B CacheGen 小规模实验
++# Mistral 兼容入口
+ 
+-运行采用云端 tmux 会话 `cachegen`，终端断开后仍继续。云主机/容器需要保持运行。
+-
+-## 查看运行
+-
+-在仓库根目录执行：
++当前正式算法统一使用 [公共 v2 框架](../../docs/reproduction/SHARED_FRAMEWORK.md)，覆盖体积质量、TTFT 和四个自适应配置任务，另含真实 TriviaQA。
+ 
+ ```bash
+-tmux attach -t cachegen
+-# Ctrl+B，松开后按 D：退出查看并保留后台运行。
+-
+-tail -f results/mistral/latest/run.log
+-cat results/mistral/latest/manifest.json
+-cat results/mistral/latest/exit_code
+-python3 -m experiments status mistral
++bash experiments/mistral/run.sh --config experiments/mistral/config.json
++bash mistral_repro/run.sh --config experiments/configs/small.json
++python3 -m experiments.background start --name mistral-new -- --model mistral --config experiments/configs/small.json
++python3 experiments/mistral/status.py
+ ```
+ 
+-`latest` 指向最近批次；`exit_code` 在进程结束后出现，0 表示进程成功。正式成功还需 manifest 为 completed，并通过预定数量与方法的完整性检查。
+-
+-需要停止时，先读新批次 manifest 的 `runner_pid`，使用 `kill -TERM <runner_pid>`；入口会转发信号、等待子进程并保留中断状态。历史批次仅有 `pid`，属于当时记录。不要用关闭查看窗口的方式停止实验。中断或失败的批次保留现场。
+-
+-## 固定设计
+-
+-配置见 config.json。采用缓存的 `mistral-community/Mistral-7B-v0.2` revision `80cf49b18de6354fd8a6d1e81c177dd830e05eea`，通过仓库原始 FastChat 8bit 权重加载函数加载固定快照目录，KV 为 FP16。所有方法共享同一模型权重。
+-
+-- 体积/续写：前 10 条 LongChat，各取 1024/2048/4096 token，共 30 条件；32-token 后续文本评分第 2–32 个 token。
+-- QA：按原顺序取前 10 条不超过 4096 token 的完整 TriviaQA，不截断原问题和证据。预填充除末 token 外的完整输入，重放末 token 后确定性生成最多 32 token。报告完整输出的标准化 EM/F1，取答案别名的最高分。
+-- 方法：原始 FP16、实际打包 uniform4、uniform8、作者 CacheGen 1/2/3。字节数包含序列化元数据。
+-- TTFT：前 3 条 LongChat、3 长度、0.1/1/10 Gbps、文本重算/uniform8/CacheGen 2/3，每条件预热 2 次、测量 5 次。共 540 次正式计时、216 次预热。固定种子打乱方法顺序。
+-- 每条上下文检查原始缓存与完整重算的首 token 一致性。最小验收还比较 logits 与贪心生成结果。
+-
+-## 测量边界
+-
+-作者仓库编码器没有论文 anchor/delta 阶段。本轮 TTFT 在本机限速 socket 上传送真实字节，完整接收后恢复并生成首 token，没有传输—解码重叠；离线编码耗时单独记录。
+-
+-不以某一固定压缩率或加速倍数判断成功。结果报告每个长度的配对 NLL 差值与完整短 TriviaQA 的 EM/F1；描述性门槛为平均 NLL 增量≤0.02，保留≥90% 原始 KV 的 EM 正确题。QA 是混合长度的单独样本，不构成逐长度 QA 等价性证明，也不构成统计非劣证明。
+-
+-## 文件
+-
+-每个批次保存 manifest.json、metadata.json、smoke.json、qa_selection.json、quality.json、ttft.json、summary.json、CSV、report.md、tests.log、run.log 和 exit_code。metadata 记录模型、数据、源码和扩展指纹。原始仓库和历史实验数据保持在原位置。
+-
+-新批次通过 `python3 -m experiments run mistral` 启动，或沿用 `bash mistral_repro/run.sh`。使用 `--config FILE` 传入独立配置；配置会先复制到新批次，源码也会保存快照。共享 GPU 锁避免同一工作区的测量并发。预演使用 `python3 -m experiments run mistral --dry-run`。
++config.json 继承公共 small.json。模型仍固定为 mistral-community/Mistral-7B-v0.2 的 80cf49b18de6354fd8a6d1e81c177dd830e05eea，原 FastChat groupwise 8bit 权重、FP16 KV。新结果保存到 results/mistral/<scale>/<run-id>，不使用旧批次路径。
+ 
+-## 目录迁移
++experiment.py 与 measure.sh 是兼容包装。原独立实现保存在历史批次 source/ 中；build_document.py 是固定 20261024 设计的历史中文报告器，旧 plot_results.py/finalize.py 主要服务旧批次，新批次由公共 analysis/artifacts 自动完成。
+ 
+-实验代码位于 `experiments/mistral`，原始结果位于 `results/mistral`，中文报告位于 `reports/mistral`，缓存与字体位于 `.local/mistral`。旧 `mistral_repro`、`runs`、`deliverables` 和 `latest` 使用仓库内相对链接兼容。历史批次元数据及源码快照保持原样；迁移记录位于本机 `.local/migration/20261024-workspace/`。路径覆盖、新增实验与后处理说明见 [工作区指南](../../docs/reproduction/WORKSPACE_GUIDE.md)。
++历史记录和已知限制见 [历史索引](../../docs/reproduction/HISTORY.md)。旧 NLL、完整输出 QA、缺失自适应的记录不与 v2 混合。
+diff --git a/experiments/mistral/config.json b/experiments/mistral/config.json
+index 2447051..766c213 100644
+--- a/experiments/mistral/config.json
++++ b/experiments/mistral/config.json
+@@ -1,10 +1 @@
+-{
+-  "model_id": "mistral-community/Mistral-7B-v0.2",
+-  "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+-  "weight_loading": "original FastChat load_8bit=True; FP16 KV",
+-  "seed": 0,
+-  "quality": {"samples": 10, "lengths": [1024, 2048, 4096], "continuation": 32},
+-  "qa": {"samples": 10, "max_prompt_tokens": 4096, "max_new_tokens": 32},
+-  "ttft": {"samples": 3, "lengths": [1024, 2048, 4096], "bandwidth_gbps": [0.1, 1, 10], "warmup": 2, "repeats": 5},
+-  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_raw_correct_qa_retention": 0.9}
+-}
++{"extends": "../configs/small.json", "model": "mistral"}
+diff --git a/experiments/mistral/experiment.py b/experiments/mistral/experiment.py
+index a5a61a9..7cd9471 100644
+--- a/experiments/mistral/experiment.py
++++ b/experiments/mistral/experiment.py
+@@ -1,542 +1,19 @@
+-"""Pinned, offline Mistral CacheGen experiment using the existing author codec."""
+-
+-import argparse
+-import csv
+-import gc
+-import hashlib
+-import importlib.metadata
+-import io
+-import json
+-import math
+-import os
+-import platform
+-import random
+-import re
+-import statistics
+-import string
+-import subprocess
++"""Compatibility entrypoint. All current measurements use experiments.suite."""
+ import sys
+-import time
+-import traceback
+-from collections import Counter, defaultdict
+-from datetime import datetime, timezone
+ from pathlib import Path
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+-from experiments.workspace import Workspace
+-
+-import torch
+-import torch.nn.functional as F
+-from transformers.cache_utils import DynamicCache
+-
+-from mini_repro.experiment_common import load_longchat_segments, pack_uniform, unpack_uniform
+-from mini_repro.run import blob_to_legacy, legacy_to_blob
+-from mini_repro.ttft import measurement_schedule, rate_limited_transfer
+-
+-ROOT = Path(__file__).resolve().parent
+-REPO = Workspace.discover().repo
+-MODEL_ID = 'mistral-community/Mistral-7B-v0.2'
+-REVISION = '80cf49b18de6354fd8a6d1e81c177dd830e05eea'
+-HF_CACHE = Path(os.environ.get('HF_HUB_CACHE', str(Path(os.environ.get('HF_HOME', REPO / '.venv/huggingface')) / 'hub')))
+-SNAPSHOT = HF_CACHE / 'models--mistral-community--Mistral-7B-v0.2/snapshots' / REVISION
+-METHODS = ('raw', 'uniform4', 'uniform8', 'cachegen1', 'cachegen2', 'cachegen3')
+-
+-
+-def now():
+-    return datetime.now(timezone.utc).isoformat()
+-
+-
+-def save(path, data):
+-    path = Path(path)
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    tmp = path.with_suffix(path.suffix + '.tmp')
+-    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
+-    tmp.replace(path)
+-
+-
+-def sha256(path):
+-    h = hashlib.sha256()
+-    with Path(path).open('rb') as stream:
+-        for piece in iter(lambda: stream.read(8 * 1024 * 1024), b''):
+-            h.update(piece)
+-    return h.hexdigest()
+-
+-
+-def log(event, **values):
+-    print(json.dumps({'time': now(), 'event': event, **values}, ensure_ascii=False), flush=True)
+-
+-
+-def timed(fn):
+-    torch.cuda.synchronize()
+-    start = time.perf_counter()
+-    result = fn()
+-    torch.cuda.synchronize()
+-    return result, time.perf_counter() - start
+-
+-
+-def cleanup():
+-    gc.collect()
+-    torch.cuda.empty_cache()
+-
+-
+-def validate_blob(restored, original):
+-    if restored.shape != original.shape or restored.dtype != original.dtype:
+-        raise RuntimeError('Decoded KV shape/dtype mismatch')
+-    if not bool(torch.isfinite(restored).all()):
+-        raise RuntimeError('Decoded KV contains NaN/Inf')
+-
+-
+-def codec(tokens, level):
+-    from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
+-    from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
+-    from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
+-    prior = os.environ.get('QUANT_LEVEL')
+-    os.environ['QUANT_LEVEL'] = str(level)
+-    try:
+-        cfg = LMCacheEngineConfig.from_defaults(chunk_size=tokens)
+-        meta = LMCacheEngineMetadata(MODEL_ID, 1, 0, 'huggingface')
+-        return CacheGenSerializer(cfg, meta), CacheGenDeserializer(cfg, meta)
+-    finally:
+-        if prior is None:
+-            os.environ.pop('QUANT_LEVEL', None)
+-        else:
+-            os.environ['QUANT_LEVEL'] = prior
+-
+-
+-def raw_payload(blob):
+-    stream = io.BytesIO()
+-    torch.save(blob.cpu(), stream)
+-    return stream.getvalue()
+-
+-
+-def encoded(blob, method):
+-    if method == 'raw':
+-        payload, elapsed = timed(lambda: raw_payload(blob))
+-        return payload, elapsed, lambda value: torch.load(io.BytesIO(value), map_location='cuda', weights_only=True)
+-    if method.startswith('uniform'):
+-        payload, elapsed = timed(lambda: pack_uniform(blob, int(method[7:])))
+-        return payload, elapsed, unpack_uniform
+-    encoder, decoder = codec(blob.shape[-2], int(method[-1]))
+-    payload, elapsed = timed(lambda: encoder.to_bytes(blob))
+-    return payload, elapsed, decoder.from_bytes
+-
+-
+-@torch.inference_mode()
+-def prefill(model, ids):
+-    out = model(input_ids=torch.tensor([ids], device='cuda'), use_cache=True)
+-    blob = legacy_to_blob(out.past_key_values)
+-    del out
+-    return blob
+-
+-
+-def fresh_cache(blob):
+-    # Each forward gets a fresh container; cache updates must not contaminate repeats.
+-    return DynamicCache.from_legacy_cache(blob_to_legacy(blob))
+-
+-
+-@torch.inference_mode()
+-def continuation_nll(model, blob, ids):
+-    out = model(input_ids=torch.tensor([ids], device='cuda'), past_key_values=fresh_cache(blob), use_cache=False)
+-    targets = torch.tensor(ids[1:], device='cuda')
+-    result = float(F.cross_entropy(out.logits[0, :-1].float(), targets))
+-    if not math.isfinite(result):
+-        raise RuntimeError('Nonfinite continuation NLL')
+-    return result
+-
+-
+-@torch.inference_mode()
+-def greedy_from_cache(model, blob, suffix_ids, limit, eos_id):
+-    cache = fresh_cache(blob)
+-    inputs = torch.tensor([suffix_ids], device='cuda')
+-    generated = []
+-    for _ in range(limit):
+-        out = model(input_ids=inputs, past_key_values=cache, use_cache=True)
+-        token = int(out.logits[0, -1].argmax())
+-        if token == eos_id:
+-            break
+-        generated.append(token)
+-        cache = out.past_key_values
+-        inputs = torch.tensor([[token]], device='cuda')
+-    return generated
+-
+-
+-@torch.inference_mode()
+-def first_token(model, context_ids, suffix_ids, blob=None):
+-    ids = suffix_ids if blob is not None else context_ids + suffix_ids
+-    kwargs = {} if blob is None else {'past_key_values': fresh_cache(blob)}
+-    out = model(input_ids=torch.tensor([ids], device='cuda'), use_cache=True, **kwargs)
+-    return int(out.logits[0, -1].argmax())
+-
+-
+-def normalize(text):
+-    text = text.lower()
+-    text = ''.join(c for c in text if c not in string.punctuation)
+-    return ' '.join(re.sub(r'\b(a|an|the)\b', ' ', text).split())
+-
+-
+-def score_qa(prediction, answers):
+-    def one(answer):
+-        p, a = normalize(prediction), normalize(answer)
+-        common = sum((Counter(p.split()) & Counter(a.split())).values())
+-        f1 = 2 * common / (len(p.split()) + len(a.split())) if common else float(p == a)
+-        return float(p == a), f1
+-    scores = [one(answer) for answer in answers]
+-    return {'em': max(x[0] for x in scores), 'f1': max(x[1] for x in scores)}
+-
+-
+-def qa_cases(tokenizer, cfg):
+-    cases = []
+-    # File iteration preserves Unicode line separators inside valid JSON strings.
+-    with (REPO / 'test_data/tqa.jsonl').open() as stream:
+-        for index, line in enumerate(stream):
+-            row = json.loads(line)
+-            ids = tokenizer.encode(row['prompt'], add_special_tokens=False)
+-            if len(ids) <= cfg['max_prompt_tokens']:
+-                cases.append({'source_index': index, 'ids': ids, 'answers': row['answers'],
+-                              'prompt_sha256': hashlib.sha256(row['prompt'].encode()).hexdigest()})
+-                if len(cases) == cfg['samples']:
+-                    return cases
+-    raise RuntimeError('Insufficient complete TriviaQA examples')
+-
+-
+-def metadata(config, config_path=None):
+-    import torchac_cuda
+-    log('verify_model_start')
+-    expected = json.loads(Path(os.environ.get('CACHEGEN_MODEL_CHECKSUMS', REPO / '.venv/mistral-download-verified.json')).read_text())
+-    hashes = {}
+-    for row in expected['files']:
+-        path = SNAPSHOT / row['file']
+-        digest = sha256(path)
+-        if path.stat().st_size != row['bytes'] or digest != row['sha256']:
+-            raise RuntimeError(f'Model checksum mismatch: {path.name}')
+-        hashes[path.name] = digest
+-        log('model_shard_verified', file=path.name)
+-    for path in SNAPSHOT.iterdir():
+-        if path.suffix == '.json' or path.name == 'tokenizer.model':
+-            hashes[path.name] = sha256(path)
+-    source = list(ROOT.glob('*.py')) + [Path(config_path) if config_path else ROOT / 'config.json', ROOT / 'run.sh']
+-    source += list((REPO / 'experiments').glob('*.py')) + [REPO / 'scripts/experiment-env.sh']
+-    source += list((REPO / 'LMCache/lmcache/storage_backend/serde').glob('cachegen*.py'))
+-    source += [REPO / 'src/utils.py', REPO / 'test_data/longchat.jsonl', REPO / 'test_data/tqa.jsonl']
+-    return {
+-        'time_utc': now(), 'platform': platform.platform(), 'python': platform.python_version(),
+-        'gpu': {'name': torch.cuda.get_device_name(), 'capability': list(torch.cuda.get_device_capability()),
+-                'memory_bytes': torch.cuda.get_device_properties(0).total_memory},
+-        'cuda_runtime': torch.version.cuda,
+-        'packages': {n: importlib.metadata.version(n) for n in ['torch','transformers','numpy','fschat','lmcache','torchac']},
+-        'git_head': subprocess.check_output(['git','-C',str(REPO),'rev-parse','HEAD'], text=True).strip(),
+-        'git_status': subprocess.check_output(['git','-C',str(REPO),'status','--short'], text=True).splitlines(),
+-        'model_id': MODEL_ID, 'model_revision': REVISION, 'model_snapshot': str(SNAPSHOT),
+-        'model_sha256': hashes, 'codec_binary': str(torchac_cuda.__file__),
+-        'codec_sha256': sha256(torchac_cuda.__file__),
+-        'source_and_data_sha256': {str(p): sha256(p) for p in source},
+-        'configuration_file': str(config_path or ROOT / 'config.json'),
+-        'source_and_data_relative_sha256': {str(p.relative_to(REPO)): sha256(p) for p in source if p.is_relative_to(REPO)},
+-        'cgroup_memory_limit': Path('/sys/fs/cgroup/memory.max').read_text().strip(),
+-        'cgroup_cpu_quota': Path('/sys/fs/cgroup/cpu.max').read_text().strip(),
+-        'configuration': config,
+-        'limitations': ['FastChat groupwise 8bit model weights shared by all methods; FP16 KV',
+-                        'author repository codec has no paper anchor/delta path',
+-                        'single-host paced socket, receive then decode; no transfer/decode overlap',
+-                        'continuation NLL scores tokens 2..32; first held-out token omitted',
+-                        '10 complete short TriviaQA inputs; not the full paper benchmark',
+-                        'pooled P95 is descriptive; timing repeats are not independent contexts']}
+-
+-
+-@torch.inference_mode()
+-def smoke(model, tokenizer, output):
+-    ids = tokenizer.encode('The museum is in London. Its collection includes paintings and sculptures. ' * 12,
+-                           add_special_tokens=False)[:192]
+-    suffix = tokenizer.encode('\nQuestion: Where is the museum?\nAnswer:', add_special_tokens=False)
+-    blob = prefill(model, ids)
+-    direct = model(input_ids=torch.tensor([ids + suffix], device='cuda'), use_cache=True).logits[0, -1].float()
+-    reused = model(input_ids=torch.tensor([suffix], device='cuda'), past_key_values=fresh_cache(blob), use_cache=True).logits[0, -1].float()
+-    max_error = float((direct - reused).abs().max())
+-    if int(direct.argmax()) != int(reused.argmax()) or not torch.allclose(direct, reused, atol=0.1, rtol=0.02):
+-        raise RuntimeError(f'Raw cache/full forward mismatch: {max_error}')
+-    expected_ids = model.generate(torch.tensor([ids + suffix], device='cuda'), max_new_tokens=4,
+-                                 do_sample=False, pad_token_id=tokenizer.eos_token_id)[0, len(ids + suffix):].tolist()
+-    manual_ids = greedy_from_cache(model, blob, suffix, 4, tokenizer.eos_token_id)
+-    expected_ids = expected_ids[:expected_ids.index(tokenizer.eos_token_id)] if tokenizer.eos_token_id in expected_ids else expected_ids
+-    if manual_ids != expected_ids:
+-        raise RuntimeError('Cache-based greedy generation differs from full generate')
+-    rows = []
+-    for method in METHODS:
+-        payload, encode_s, restore = encoded(blob, method)
+-        restored, decode_s = timed(lambda: restore(payload))
+-        validate_blob(restored, blob)
+-        rows.append({'method': method, 'bytes': len(payload), 'encode_seconds': encode_s,
+-                     'decode_seconds': decode_s, 'kv_mae': float((restored-blob).abs().float().mean())})
+-        del restored, payload, restore
+-    result = {'status':'passed','time_utc':now(),'context_tokens':len(ids),'raw_logits_max_error':max_error,
+-              'generation_matches_full_forward':True,'prediction':tokenizer.decode(manual_ids),
+-              'kv_shape':list(blob.shape),'methods':rows}
+-    save(output, result)
+-    log('smoke_passed', raw_logits_max_error=max_error, prediction=result['prediction'])
+-
+-
+-def quality(model, tokenizer, cfg, run_dir, manifest):
+-    data = {'status':'running','nll_definition':'teacher-forced continuation tokens 2..32 (31 targets)',
+-            'methods':list(METHODS),'continuation':[],'qa':[]}
+-    cases = load_longchat_segments(REPO/'test_data/longchat.jsonl',tokenizer,
+-                                  lengths=cfg['quality']['lengths'],sample_count=cfg['quality']['samples'],
+-                                  continuation_tokens=cfg['quality']['continuation'])
+-    for case in cases:
+-        blob = prefill(model, case['context_ids'])
+-        row = {'case_id':case['case_id'],'source_id':case['source_id'],'context_tokens':len(case['context_ids']),
+-               'continuation_tokens_scored':len(case['continuation_ids'])-1,
+-               'raw_tensor_bytes':blob.numel()*blob.element_size(),'methods':[]}
+-        for method in METHODS:
+-            payload, encode_s, restore = encoded(blob,method)
+-            restored, decode_s = timed(lambda:restore(payload))
+-            validate_blob(restored,blob)
+-            row['methods'].append({'method':method,'bytes':len(payload),
+-                'nll':continuation_nll(model,restored,case['continuation_ids']),
+-                'kv_mae':float((restored-blob).abs().float().mean()),
+-                'offline_encode_seconds':encode_s,'decode_seconds':decode_s})
+-            del payload,restored,restore
+-        data['continuation'].append(row)
+-        save(run_dir/'quality.json',data)
+-        manifest['progress']={'stage':'quality','continuation_complete':len(data['continuation']),'continuation_total':len(cases)}
+-        save(run_dir/'manifest.json',manifest)
+-        log('quality_context_complete',case_id=row['case_id'],complete=len(data['continuation']),total=len(cases))
+-        del blob
+-        cleanup()
+-    qas = qa_cases(tokenizer,cfg['qa'])
+-    save(run_dir/'qa_selection.json',[{k:v for k,v in row.items() if k!='ids'} | {'prompt_tokens':len(row['ids'])} for row in qas])
+-    for case in qas:
+-        # Keep the complete prompt: prefill all but its final token, replay that token.
+-        blob = prefill(model,case['ids'][:-1])
+-        row={'case_id':f"tqa-{case['source_index']}",'source_index':case['source_index'],
+-             'prompt_tokens':len(case['ids']),'answers':case['answers'],'methods':[]}
+-        for method in METHODS:
+-            payload,encode_s,restore=encoded(blob,method)
+-            restored,decode_s=timed(lambda:restore(payload))
+-            validate_blob(restored,blob)
+-            generated=greedy_from_cache(model,restored,case['ids'][-1:],cfg['qa']['max_new_tokens'],tokenizer.eos_token_id)
+-            prediction=tokenizer.decode(generated,skip_special_tokens=True).strip()
+-            row['methods'].append({'method':method,'bytes':len(payload),'prediction':prediction,
+-                                  **score_qa(prediction,case['answers']),
+-                                  'offline_encode_seconds':encode_s,'decode_seconds':decode_s})
+-            del payload,restored,restore
+-        data['qa'].append(row)
+-        save(run_dir/'quality.json',data)
+-        manifest['progress']={'stage':'qa','complete':len(data['qa']),'total':len(qas)}
+-        save(run_dir/'manifest.json',manifest)
+-        log('qa_complete',case_id=row['case_id'],complete=len(data['qa']),scores={r['method']:{'em':r['em'],'f1':r['f1']} for r in row['methods']})
+-        del blob
+-        cleanup()
+-    data['status']='completed'
+-    save(run_dir/'quality.json',data)
+-    return data
+-
+-
+-def ttft(model,tokenizer,cfg,run_dir,manifest):
+-    params=cfg['ttft']
+-    data={'status':'running','measurement':'paced local socket; complete receive, restore, first token; excludes offline encoding',
+-          'parameters':params,'cases':[]}
+-    suffix=tokenizer.encode('\nQuestion: What is the main topic?\nAnswer:',add_special_tokens=False)
+-    cases=load_longchat_segments(REPO/'test_data/longchat.jsonl',tokenizer,lengths=params['lengths'],
+-                                sample_count=params['samples'],continuation_tokens=2)
+-    for case_index,case in enumerate(cases):
+-        context=case['context_ids']
+-        text=tokenizer.decode(context,skip_special_tokens=False,clean_up_tokenization_spaces=False)
+-        if tokenizer.encode(text,add_special_tokens=False)!=context:
+-            raise RuntimeError('Text/token roundtrip mismatch')
+-        blob=prefill(model,context)
+-        # Raw first-token parity guards positions and cache reuse at each tested length.
+-        raw_token=first_token(model,context,suffix,blob)
+-        direct_token=first_token(model,context,suffix)
+-        if raw_token!=direct_token:
+-            raise RuntimeError(f"Raw cache first-token mismatch at {case['case_id']}")
+-        payloads={'text':(text.encode(),0.0,None)}
+-        for method in ('uniform8','cachegen2','cachegen3'):
+-            payloads[method]=encoded(blob,method)
+-        del blob
+-        cleanup()
+-        row={'case_id':case['case_id'],'source_id':case['source_id'],'context_tokens':len(context),
+-             'raw_matches_direct_first_token':True,'direct_first_token_id':direct_token,'measurements':[]}
+-        schedule=measurement_schedule(list(payloads),params['bandwidth_gbps'],warmup=params['warmup'],
+-                                      repeats=params['repeats'],seed=cfg['seed']+case_index)
+-        for step_index,step in enumerate(schedule):
+-            method=step['method']; payload,encode_s,restore=payloads[method]
+-            torch.cuda.synchronize()
+-            start=time.perf_counter()
+-            received,transfer_s=rate_limited_transfer(payload,step['bandwidth_gbps'])
+-            if method=='text':
+-                t=time.perf_counter()
+-                ids=tokenizer.encode(received.decode(),add_special_tokens=False)
+-                if ids!=context:
+-                    raise RuntimeError('Text transport changed token IDs')
+-                restore_s=time.perf_counter()-t
+-                token,first_s=timed(lambda:first_token(model,ids,suffix))
+-            else:
+-                restored,restore_s=timed(lambda:restore(received))
+-                token,first_s=timed(lambda:first_token(model,context,suffix,restored))
+-                del restored
+-            elapsed=time.perf_counter()-start
+-            if step['phase']=='measure':
+-                row['measurements'].append({**step,'bytes':len(payload),'offline_encode_seconds':encode_s,
+-                    'transfer_seconds':transfer_s,'reconstruct_seconds':restore_s,'first_token_seconds':first_s,
+-                    'ttft_wall_seconds':elapsed,'effective_bandwidth_gbps':len(payload)*8/transfer_s/1e9,
+-                    'first_token_id':token,'matches_direct_first_token':token==direct_token})
+-            del received
+-            # Persist partial timing records as well as each completed context.
+-            if (step_index+1)%len(payloads)==0:
+-                save(run_dir/'ttft.json',{**data,'current_case':row})
+-                manifest['progress']={'stage':'ttft','contexts_complete':len(data['cases']),'contexts_total':len(cases),
+-                                      'current_case':case['case_id'],'steps_complete':step_index+1,'steps_total':len(schedule)}
+-                save(run_dir/'manifest.json',manifest)
+-        data['cases'].append(row)
+-        save(run_dir/'ttft.json',data)
+-        log('ttft_context_complete',case_id=row['case_id'],complete=len(data['cases']),total=len(cases),
+-            observations=len(row['measurements']))
+-        del payloads,payload,restore
+-        cleanup()
+-    data['status']='completed'
+-    save(run_dir/'ttft.json',data)
+-    return data
+-
+-
+-def quantile(values,q):
+-    a=sorted(values); rank=(len(a)-1)*q; lo=int(rank); hi=min(lo+1,len(a)-1)
+-    return a[lo]+(a[hi]-a[lo])*(rank-lo)
+-
+-
+-def write_csv(path,rows):
+-    with Path(path).open('w',newline='') as f:
+-        writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+-
+-
+-def summarize(run_dir,cfg):
+-    quality_data=json.loads((run_dir/'quality.json').read_text())
+-    timing=json.loads((run_dir/'ttft.json').read_text())
+-    if quality_data['status']!='completed' or timing['status']!='completed':
+-        raise RuntimeError('Incomplete results cannot generate a completed report')
+-    if len(quality_data['continuation'])!=cfg['quality']['samples']*len(cfg['quality']['lengths']) or len(quality_data['qa'])!=cfg['qa']['samples']:
+-        raise RuntimeError('Quality case count mismatch')
+-    qa_summary=[]
+-    raw_correct={r['case_id'] for r in quality_data['qa'] if next(x for x in r['methods'] if x['method']=='raw')['em']==1}
+-    for method in METHODS:
+-        rows=[next(x for x in r['methods'] if x['method']==method) for r in quality_data['qa']]
+-        kept=sum(next(x for x in r['methods'] if x['method']==method)['em'] for r in quality_data['qa'] if r['case_id'] in raw_correct)
+-        qa_summary.append({'method':method,'questions':len(rows),'mean_em':statistics.mean(r['em'] for r in rows),
+-                           'mean_f1':statistics.mean(r['f1'] for r in rows),'raw_em_correct':len(raw_correct),
+-                           'retained_raw_em_correct':kept,'raw_correct_retention':kept/len(raw_correct) if raw_correct else None})
+-    qa_by_method={r['method']:r for r in qa_summary}
+-    quality_rows=[]
+-    for length in cfg['quality']['lengths']:
+-        cases=[r for r in quality_data['continuation'] if r['context_tokens']==length]
+-        for method in METHODS:
+-            pairs=[(next(x for x in r['methods'] if x['method']=='raw'),next(x for x in r['methods'] if x['method']==method)) for r in cases]
+-            delta=statistics.mean(m['nll']-r['nll'] for r,m in pairs)
+-            retention=qa_by_method[method]['raw_correct_retention']
+-            quality_rows.append({'context_tokens':length,'method':method,'contexts':len(cases),
+-                'mean_bytes':statistics.mean(m['bytes'] for _,m in pairs),
+-                'raw_serialized_over_method':sum(r['bytes'] for r,_ in pairs)/sum(m['bytes'] for _,m in pairs),
+-                'raw_tensor_over_method':sum(r['raw_tensor_bytes'] for r in cases)/sum(m['bytes'] for _,m in pairs),
+-                'mean_nll':statistics.mean(m['nll'] for _,m in pairs),'paired_nll_delta':delta,
+-                'mean_kv_mae':statistics.mean(m['kv_mae'] for _,m in pairs),
+-                'mean_offline_encode_seconds':statistics.mean(m['offline_encode_seconds'] for _,m in pairs),
+-                'mean_decode_seconds':statistics.mean(m['decode_seconds'] for _,m in pairs),
+-                'passes_descriptive_threshold':retention is not None and retention>=cfg['quality_tolerances']['minimum_raw_correct_qa_retention'] and delta<=cfg['quality_tolerances']['max_nll_delta']})
+-    groups=defaultdict(list)
+-    if len(timing['cases'])!=cfg['ttft']['samples']*len(cfg['ttft']['lengths']):
+-        raise RuntimeError('TTFT context count mismatch')
+-    expected=cfg['ttft']['repeats']*4*len(cfg['ttft']['bandwidth_gbps'])
+-    for case in timing['cases']:
+-        if len(case['measurements'])!=expected:
+-            raise RuntimeError('TTFT observation count mismatch')
+-        counts=Counter((r['method'],r['bandwidth_gbps']) for r in case['measurements'])
+-        if len(counts)!=4*len(cfg['ttft']['bandwidth_gbps']) or any(n!=cfg['ttft']['repeats'] for n in counts.values()):
+-            raise RuntimeError('Unbalanced method/bandwidth measurements')
+-        for row in case['measurements']:
+-            groups[(case['context_tokens'],row['bandwidth_gbps'],row['method'])].append(row)
+-    ttft_rows=[]
+-    for (length,bw,method),rows in sorted(groups.items()):
+-        values=[r['ttft_wall_seconds'] for r in rows]
+-        ttft_rows.append({'context_tokens':length,'bandwidth_gbps':bw,'method':method,
+-            'contexts':cfg['ttft']['samples'],'observations':len(rows),'median_seconds':statistics.median(values),
+-            'p95_seconds':quantile(values,.95),'mean_transfer_seconds':statistics.mean(r['transfer_seconds'] for r in rows),
+-            'mean_restore_seconds':statistics.mean(r['reconstruct_seconds'] for r in rows),
+-            'mean_first_token_seconds':statistics.mean(r['first_token_seconds'] for r in rows),
+-            'mean_effective_bandwidth_gbps':statistics.mean(r['effective_bandwidth_gbps'] for r in rows),
+-            'first_token_match_fraction':statistics.mean(r['matches_direct_first_token'] for r in rows)})
+-    for row in ttft_rows:
+-        base=next(r for r in ttft_rows if r['context_tokens']==row['context_tokens'] and r['bandwidth_gbps']==row['bandwidth_gbps'] and r['method']=='text')
+-        uniform=next(r for r in ttft_rows if r['context_tokens']==row['context_tokens'] and r['bandwidth_gbps']==row['bandwidth_gbps'] and r['method']=='uniform8')
+-        row['speedup_vs_text']=base['median_seconds']/row['median_seconds']
+-        row['speedup_vs_uniform8']=uniform['median_seconds']/row['median_seconds']
+-    write_csv(run_dir/'quality.csv',quality_rows);write_csv(run_dir/'qa.csv',qa_summary);write_csv(run_dir/'ttft.csv',ttft_rows)
+-    def table(rows,cols):
+-        def fmt(value):
+-            return f'{value:.5g}' if isinstance(value,float) else str(value)
+-        return '\n'.join(['| '+' | '.join(cols)+' |','| '+' | '.join(['---']*len(cols))+' |']+
+-                         ['| '+' | '.join(fmt(r.get(c)) for c in cols)+' |' for r in rows])
+-    report=['# Mistral-7B CacheGen 小规模复现',
+-        f'模型：{MODEL_ID}；revision：{REVISION}。当前批次使用 RTX 4090 D，FastChat 8bit 权重，FP16 KV。',
+-        '## 实验口径',
+-        '30 个自然文本上下文（10 条源文本×3 长度）、10 条完整短 TriviaQA、540 次正式 TTFT 计时。种子为 0。',
+-        '自然文本 NLL 对 32-token 后续文本中的第 2–32 个 token 评分。TriviaQA 按完整 32-token 生成结果计算标准化 EM/F1，取答案别名最大分。',
+-        '体积包含实际序列化元数据。uniform4 使用位打包。TTFT 通过本机限速 socket 传送实际字节，收完后恢复并生成首 token；离线编码不计入 TTFT。',
+-        '作者仓库编码路径没有论文 anchor/delta 阶段；本实验没有跨服务器传输和传输—解码流水线，不构成完整论文系统复现。',
+-        '## 配对体积与续写质量',
+-        table(quality_rows,['context_tokens','method','contexts','raw_serialized_over_method','paired_nll_delta','mean_kv_mae','passes_descriptive_threshold']),
+-        '描述性门槛：平均配对 NLL 增量≤0.02，且保留≥90% 原始 KV 的 EM 正确题。QA 来自独立的混合长度样本，不能解释为每个长度的 QA 等价性证明；小样本门槛也不构成统计非劣证明。',
+-        '## 完整 TriviaQA',table(qa_summary,['method','questions','mean_em','mean_f1','raw_em_correct','raw_correct_retention']),
+-        '逐题输入选择见 qa_selection.json，原始答案与预测见 quality.json。',
+-        '## 传输与首 token 延迟',
+-        table(ttft_rows,['context_tokens','bandwidth_gbps','method','observations','median_seconds','p95_seconds','speedup_vs_text','speedup_vs_uniform8']),
+-        '速度比>1 表示更快。中位数和 P95 汇总同条件的 3 个上下文×5 次重复；重复不增加独立上下文数量。缓存方法与文本的首 token 一致率是诊断指标。',
+-        '逐项传输、恢复、首 token 开销和有效带宽见 ttft.csv。高带宽设定不等同于实际吞吐。',
+-        '## 可追溯信息','metadata.json 保存模型校验、源码/数据指纹、CUDA 扩展和环境；manifest.json 保存进度与运行状态。run.log 保存完整日志。']
+-    (run_dir/'report.md').write_text('\n\n'.join(report)+'\n')
+-    save(run_dir/'summary.json',{'quality':quality_rows,'qa':qa_summary,'ttft':ttft_rows})
++from experiments.scoring import normalize, score_qa
++from experiments.engine import Engine, fresh_cache, timed, validate_blob
++from experiments.suite import main as suite_main
+ 
+ 
+ def main():
+-    p=argparse.ArgumentParser();p.add_argument('--run-dir',type=Path,required=True)
+-    p.add_argument('--config',type=Path,default=ROOT/'config.json');args=p.parse_args()
+-    run_dir=args.run_dir
+-    cfg=json.loads(args.config.read_text())
+-    manifest={'status':'running','started_utc':now(),'pid':os.getpid(),
+-              'runner_pid':int(os.environ.get('CACHEGEN_SUPERVISOR_PID',os.getpid())),
+-              'configuration':cfg,'stages':{},'progress':{'stage':'metadata'}}
+-    save(run_dir/'manifest.json',manifest)
+-    try:
+-        torch.set_num_threads(8);torch.manual_seed(cfg['seed']);random.seed(cfg['seed'])
+-        if not torch.cuda.is_available():raise RuntimeError('CUDA unavailable')
+-        meta=metadata(cfg,args.config.resolve());save(run_dir/'metadata.json',meta)
+-        manifest['stages']['metadata']='completed'
+-        manifest['progress']={'stage':'load_model'};save(run_dir/'manifest.json',manifest)
+-        from src.utils import define_model_and_tokenizer
+-        log('load_model_start',snapshot=str(SNAPSHOT))
+-        model,tokenizer=define_model_and_tokenizer(str(SNAPSHOT),num_gpus=1,max_gpu_memory=20)
+-        model.eval()
+-        torch.cuda.reset_peak_memory_stats()
+-        meta['attention_implementation']=model.config._attn_implementation
+-        meta['attention_class']=type(model.model.layers[0].self_attn).__name__
+-        save(run_dir/'metadata.json',meta)
+-        log('model_loaded',attention=meta['attention_class'])
+-        manifest['progress']={'stage':'smoke'};save(run_dir/'manifest.json',manifest)
+-        smoke(model,tokenizer,run_dir/'smoke.json');cleanup()
+-        manifest['stages']['smoke']='completed'
+-        manifest['progress']={'stage':'quality'};save(run_dir/'manifest.json',manifest)
+-        quality(model,tokenizer,cfg,run_dir,manifest)
+-        manifest['stages']['quality']='completed';save(run_dir/'manifest.json',manifest)
+-        ttft(model,tokenizer,cfg,run_dir,manifest)
+-        manifest['stages']['ttft']='completed';save(run_dir/'manifest.json',manifest)
+-        summarize(run_dir,cfg)
+-        manifest.update(status='completed',finished_utc=now(),progress={'stage':'completed'},
+-                        peak_gpu_allocated_bytes=torch.cuda.max_memory_allocated(),
+-                        peak_gpu_reserved_bytes=torch.cuda.max_memory_reserved())
+-        manifest['stages']['report']='completed';save(run_dir/'manifest.json',manifest)
+-        log('experiment_completed',run_dir=str(run_dir))
+-    except BaseException as error:
+-        manifest.update(status='failed',finished_utc=now(),error=repr(error),traceback=traceback.format_exc())
+-        save(run_dir/'manifest.json',manifest);traceback.print_exc();raise
++    args = sys.argv[1:]
++    if '--resume' not in args:
++        args = ['--model', 'mistral'] + args
++    return suite_main(args)
+ 
+ 
+-if __name__=='__main__':
+-    with torch.inference_mode():
+-        main()
++if __name__ == '__main__':
++    raise SystemExit(main())
+diff --git a/experiments/mistral/finalize.py b/experiments/mistral/finalize.py
+index 01f3148..68aa5c5 100644
+--- a/experiments/mistral/finalize.py
++++ b/experiments/mistral/finalize.py
+@@ -40,6 +40,13 @@ def main(argv=None):
+     p=argparse.ArgumentParser();p.add_argument('run_dir',type=Path);args=p.parse_args(argv)
+     run=args.run_dir;root=Path(__file__).resolve().parent
+     workspace=Workspace.discover()
++    manifest_path=run/'manifest.json'
++    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol')=='cachegen-shared-v2':
++        from experiments.artifacts import verify
++        if json.loads(manifest_path.read_text())['status']!='completed':
++            raise RuntimeError('Shared batch is incomplete; resume it with experiments/run.sh --resume')
++        print('SHARED_ARTIFACTS_VERIFIED', verify(run))
++        return 0
+     if (run/'artifacts.json').is_file():
+         archived=json.loads((run/'artifacts.json').read_text())
+         if archived.get('status')=='completed':
+diff --git a/experiments/mistral/measure.sh b/experiments/mistral/measure.sh
+index 37519e2..a86c4cd 100644
+--- a/experiments/mistral/measure.sh
++++ b/experiments/mistral/measure.sh
+@@ -1,31 +1,8 @@
+ #!/usr/bin/env bash
+-# Internal measurement body. Public callers use run.sh for signal supervision.
++# Compatibility for the old internal wrapper; current lifecycle lives in suite.py.
+ set -euo pipefail
+ root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+-source "$root/../../scripts/experiment-env.sh"
+-config="$1"
+-cachegen_lock_gpu
+-runs="$CACHEGEN_RESULTS_DIR/mistral"
+-mkdir -p -- "$runs"
+-run_id="$(python3 -c 'from datetime import datetime,timezone; print(datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))')"
+-run_dir="$runs/$run_id"
+-mkdir -- "$run_dir"
+-finish() {
+-  code=$?
+-  trap - EXIT INT TERM
+-  set +e
+-  python3 -m experiments.lifecycle finish "$run_dir" "$code"
+-  exit $?
+-}
+-trap finish EXIT
+-trap 'exit 130' INT
+-trap 'exit 143' TERM
+-mkdir -- "$run_dir/source"
+-cp -- "$root/"*.py "$root/"*.sh "$root/README.md" "$run_dir/source/"
+-cp -- "$config" "$run_dir/source/config.json"
+-python3 -m experiments.lifecycle initialize "$run_dir" "$run_dir/source/config.json"
+-ln -sfnT -- "$run_id" "$runs/latest"
+-printf '%s\n' "$run_dir" > "$runs/latest-run.txt"
+-printf 'Running: %s\n' "$run_dir"
+-"$CACHEGEN_PYTHON" -m unittest discover -s "$root" -p 'test_*.py' -v 2>&1 | tee "$run_dir/tests.log"
+-"$CACHEGEN_PYTHON" -u "$root/experiment.py" --run-dir "$run_dir" --config "$run_dir/source/config.json" 2>&1 | tee "$run_dir/run.log"
++if [[ $# -eq 1 && "$1" != --* ]]; then
++  exec bash "$root/run.sh" --config "$1"
++fi
++exec bash "$root/run.sh" "$@"
+diff --git a/experiments/mistral/run.sh b/experiments/mistral/run.sh
+index 9cd01bd..6521076 100644
+--- a/experiments/mistral/run.sh
++++ b/experiments/mistral/run.sh
+@@ -1,23 +1,9 @@
+ #!/usr/bin/env bash
+ set -euo pipefail
+ root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+-source "$root/../../scripts/experiment-env.sh"
+-config="$root/config.json"
+-dry_run=0
+-while [[ $# -gt 0 ]]; do
+-  case "$1" in
+-    --config) [[ $# -ge 2 ]] || { echo '--config requires a file' >&2; exit 2; }; config="$2"; shift 2 ;;
+-    --dry-run) dry_run=1; shift ;;
+-    --help|-h) echo 'Usage: bash experiments/mistral/run.sh [--config FILE] [--dry-run]'; exit 0 ;;
+-    *) printf 'Unknown argument: %s\n' "$1" >&2; exit 2 ;;
+-  esac
++for argument in "$@"; do
++  if [[ "$argument" == --resume ]]; then
++    exec bash "$root/../run.sh" "$@"
++  fi
+ done
+-[[ -f "$config" ]] || { printf 'Configuration missing: %s\n' "$config" >&2; exit 2; }
+-config="$(python3 -c 'import pathlib,sys; print(pathlib.Path(sys.argv[1]).resolve())' "$config")"
+-if [[ "$dry_run" -eq 1 ]]; then
+-  exec python3 -m experiments run mistral --dry-run --config "$config"
+-fi
+-if [[ "${CACHEGEN_SUPERVISOR_PID:-}" == "$PPID" ]]; then
+-  exec bash "$root/measure.sh" "$config"
+-fi
+-exec python3 -m experiments.process -- bash "$root/measure.sh" "$config"
++exec bash "$root/../run.sh" --model mistral "$@"
+diff --git a/experiments/registry.json b/experiments/registry.json
+index 0d3b8a8..8ebbdf7 100644
+--- a/experiments/registry.json
++++ b/experiments/registry.json
+@@ -1,12 +1,12 @@
+ {
+   "mistral": {
+-    "description": "Mistral-7B quality, packed size and socket TTFT",
++    "description": "Shared v2: Mistral quality, TTFT and four adaptive tasks",
+     "command": ["bash", "{repo}/experiments/mistral/run.sh"],
+-    "results_subdir": "mistral"
++    "results_subdir": "mistral/small"
+   },
+   "tinyllama": {
+-    "description": "TinyLlama quality, TTFT and adaptive suite",
+-    "command": ["bash", "{repo}/mini_repro/run_local.sh", "reproduce"],
+-    "results_subdir": "reproduction"
++    "description": "Shared v2: TinyLlama quality, TTFT and four adaptive tasks",
++    "command": ["bash", "{repo}/experiments/run.sh", "--model", "tinyllama"],
++    "results_subdir": "tinyllama/small"
+   }
+ }
+diff --git a/experiments/workspace.py b/experiments/workspace.py
+index 7c16140..96b3bd4 100644
+--- a/experiments/workspace.py
++++ b/experiments/workspace.py
+@@ -71,10 +71,16 @@ class Workspace:
+                   "progress": manifest.get("progress", manifest.get("stages", {}))}
+         if manifest.get("started_utc"):
+             started = datetime.fromisoformat(manifest["started_utc"])
+-            end = datetime.fromisoformat(manifest.get("finished_utc", datetime.now(timezone.utc).isoformat()))
++            terminal = manifest["status"] in ("completed", "failed", "interrupted")
++            end = datetime.fromisoformat(manifest.get("finished_utc", datetime.now(timezone.utc).isoformat())) if terminal else datetime.now(timezone.utc)
+             result.update(started_china_time=started.astimezone(timezone(timedelta(hours=8))).isoformat(),
+                           elapsed_minutes=round((end-started).total_seconds()/60, 1))
+         config = manifest.get("configuration", {})
++        if "protocol" in manifest:
++            result["jobs"] = [{"name": job["name"], "status": job.get("status", "pending"),
++                               "observations": job.get("observations", 0)} for job in manifest.get("jobs", [])]
++            result["protocol"] = manifest["protocol"]
++            result["pid"] = manifest.get("pid")
+         if (run / "quality.json").exists():
+             quality = json.loads((run / "quality.json").read_text())
+             spec = config.get("quality", {})
+@@ -94,5 +100,6 @@ class Workspace:
+         if (run / "artifacts.json").exists():
+             result["artifacts"] = json.loads((run / "artifacts.json").read_text())["status"]
+         if (run / "exit_code").exists():
+-            result["exit_code"] = int((run / "exit_code").read_text())
++            key = "previous_attempt_exit_code" if manifest["status"] in ("running", "initializing") else "exit_code"
++            result[key] = int((run / "exit_code").read_text())
+         return result
+diff --git a/mini_repro/EXPERIMENT_PROTOCOL.md b/mini_repro/EXPERIMENT_PROTOCOL.md
+index c8caa91..86788d0 100644
+--- a/mini_repro/EXPERIMENT_PROTOCOL.md
++++ b/mini_repro/EXPERIMENT_PROTOCOL.md
+@@ -1,5 +1,7 @@
+ # TinyLlama 小规模复现实验协议
+ 
++> 本文是历史 v1 协议。当前 TinyLlama 与 Mistral 共用 [v2 公共框架](../docs/reproduction/SHARED_FRAMEWORK.md)，NLL、QA、实际自适应传输和恢复规则均已版本化修正，不能与本文历史结果混合。
++
+ 目标是复现当前仓库实现的三个实验关系：缓存体积与输出质量、带宽与首 token 延迟、量化等级选择与截止时间。环境准备和执行方式见 [README.md](README.md)，机器配置与实测结果保存在各运行批次中。这不是论文原模型、原数据规模和原系统的完整复现。
+ 
+ ## 固定实验设计
+diff --git a/mini_repro/README.md b/mini_repro/README.md
+index 5236f89..963ed7f 100644
+--- a/mini_repro/README.md
++++ b/mini_repro/README.md
+@@ -1,5 +1,7 @@
+ # CacheGen 小规模复现实验
+ 
++> 当前正式实验统一使用 [公共 v2 框架](../docs/reproduction/SHARED_FRAMEWORK.md)：`bash experiments/run.sh --model tinyllama --config experiments/configs/small.json`，后台用 `python3 -m experiments.background start ...`。以下保留 v1 环境、API 和历史协议供核查；新旧 NLL/评分不能混合。
++
+ 本目录使用 TinyLlama 的真实 KV cache，执行压缩体积与质量、传输与首 token 延迟、带宽自适应三组实验。本文说明如何准备环境、执行实验和读取结果；实验条件及评价口径见 [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)，已归档批次的机器配置和实测结果见 [结果索引](../results/reproduction/README.md)。
+ 
+ 当前实验使用仓库编解码器和探索性的 TinyLlama 量化配置，尚未实现论文的差分编码、跨服务器传输及传输与解码重叠，不能作为论文完整复现。自适应实验的网络时间按带宽轨迹估算。
+diff --git a/mini_repro/adaptive.py b/mini_repro/adaptive.py
+index 36c1658..f4d888c 100644
+--- a/mini_repro/adaptive.py
++++ b/mini_repro/adaptive.py
+@@ -30,6 +30,27 @@ def representation_cost(chunk, level, bandwidth_gbps):
+     return transfer, compute
+ 
+ 
++def next_decision(chunks, index, bandwidth, slo, elapsed, strategy, first_token_reserve=0.0):
++    """Shared causal decision for estimates and actual socket execution."""
++    if strategy not in STRATEGIES or not 0 <= index < len(chunks) or bandwidth <= 0:
++        raise ValueError('invalid strategy, chunk index or bandwidth')
++    chunk = chunks[index]
++    remaining = slo - first_token_reserve - elapsed
++    forecasts = {level: sum(sum(representation_cost(item, level, bandwidth))
++                            for item in chunks[index:]) for level in (3, 2, 1, 0)}
++    if strategy == 'adaptive':
++        level = next((level for level in (3, 2, 1, 0) if forecasts[level] <= remaining + 1e-12), None)
++        if level is None:
++            level = min((3, 2, 1, 0), key=lambda candidate: sum(representation_cost(chunk, candidate, bandwidth)))
++    elif strategy == 'adaptive_static':
++        level = choose_strategy(chunk['levels'], bandwidth, slo / len(chunks))
++    else:
++        level = 0 if strategy == 'text' else int(strategy[-1])
++    return {'chunk_index': index, 'bandwidth_gbps': bandwidth, 'remaining_budget_seconds': remaining,
++            'level': level, 'forecast_seconds': forecasts[level],
++            'forecast_feasible': forecasts[level] <= remaining + 1e-12}
++
++
+ def plan_chunks(chunks, bandwidths, slo_seconds, strategy="adaptive", first_token_reserve=0.0):
+     """Plan using known chunk metadata and only the current observed bandwidth.
+ 
+@@ -51,29 +72,14 @@ def plan_chunks(chunks, bandwidths, slo_seconds, strategy="adaptive", first_toke
+     for index, (chunk, bw) in enumerate(zip(chunks, bandwidths)):
+         if not math.isfinite(bw) or bw <= 0:
+             raise ValueError("bandwidth must be positive")
+-        remaining = slo_seconds - first_token_reserve - transfer_seconds - compute_seconds
+-        forecasts = {level: sum(sum(representation_cost(item, level, bw))
+-                                for item in chunks[index:]) for level in (3, 2, 1, 0)}
+-        if strategy == "adaptive":
+-            level = next((level for level in (3, 2, 1, 0)
+-                          if forecasts[level] <= remaining + 1e-12), None)
+-            if level is None:
+-                level = min((3, 2, 1, 0), key=lambda candidate:
+-                            sum(representation_cost(chunk, candidate, bw)))
+-        elif strategy == "adaptive_static":
+-            level = choose_strategy(chunk["levels"], bw, slo_seconds / len(chunks))
+-        elif strategy == "text":
+-            level = 0
+-        else:
+-            level = int(strategy[-1])
++        decision = next_decision(chunks, index, bw, slo_seconds, transfer_seconds + compute_seconds,
++                                 strategy, first_token_reserve)
++        level = decision['level']
+         transfer, compute = representation_cost(chunk, level, bw)
+         transfer_seconds += transfer
+         compute_seconds += compute
+         levels.append(level)
+-        decisions.append({"chunk_index": index, "bandwidth_gbps": bw,
+-                          "remaining_budget_seconds": remaining, "level": level,
+-                          "forecast_seconds": forecasts[level],
+-                          "forecast_feasible": forecasts[level] <= remaining + 1e-12})
++        decisions.append(decision)
+     estimated_ttft = transfer_seconds + compute_seconds + first_token_reserve
+     return {"levels": levels, "transfer_seconds": transfer_seconds,
+             "premeasured_compute_seconds": compute_seconds,
+diff --git a/mini_repro/experiment_common.py b/mini_repro/experiment_common.py
+index 5c2bdfd..bb43cae 100644
+--- a/mini_repro/experiment_common.py
++++ b/mini_repro/experiment_common.py
+@@ -77,7 +77,7 @@ def pack_uniform(blob, bits=8):
+     maxima = groups.abs().amax(dim=-1, keepdim=True)
+     qmax = (1 << (bits - 1)) - 1
+     safe = maxima.clamp_min(torch.finfo(maxima.dtype).tiny)
+-    quantized = torch.round(groups * (qmax / safe)).clamp(-qmax, qmax).to(torch.int8).flatten()
++    quantized = torch.round(groups.float() / safe.float() * qmax).clamp(-qmax, qmax).to(torch.int8).flatten()
+     if bits == 4:
+         symbols = (quantized.to(torch.int16) + qmax).to(torch.uint8)
+         if symbols.numel() % 2:
+diff --git a/mini_repro/reproduce.py b/mini_repro/reproduce.py
+index f7ce892..c1d4396 100644
+--- a/mini_repro/reproduce.py
++++ b/mini_repro/reproduce.py
+@@ -233,7 +233,7 @@ def execute_jobs(run_dir, manifest, run_command=run_logged):
+     return 0
+ 
+ 
+-def main(argv=None):
++def legacy_main(argv=None):
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--profile", type=Path, default=DEFAULT_PROFILE)
+     parser.add_argument("--output-root", type=Path, default=ROOT / "results/reproduction")
+@@ -277,5 +277,33 @@ def main(argv=None):
+     return 0
+ 
+ 
+-if __name__ == "__main__":
++def main(argv=None):
++    """Current entrypoint; v1 is explicit and old profiles migrate to shared v2."""
++    argv = list(sys.argv[1:] if argv is None else argv)
++    if '--legacy-v1' in argv:
++        argv.remove('--legacy-v1')
++        return legacy_main(argv)
++    from experiments.suite import main as shared_main
++    from experiments.config import load_config
++    if '--profile' in argv:
++        index = argv.index('--profile')
++        profile = load_profile(argv[index + 1])
++        del argv[index:index + 2]
++        if profile['quality_tolerances'] != {'max_nll_delta': .02, 'max_qa_drop': .1}:
++            raise ValueError('v2 fixes tolerances; use --legacy-v1 for a historical protocol')
++        cfg = load_config(ROOT / 'experiments/configs/small.json', 'tinyllama')
++        cfg['quality'].update(profile['quality'])
++        cfg['ttft'].update({k: v for k, v in profile['ttft'].items() if k != 'cachegen_levels'})
++        cfg['ttft']['methods'] = ['text', 'uniform8'] + [f'cachegen{n}' for n in profile['ttft']['cachegen_levels']]
++        cfg['adaptive'].update(profile['adaptive'])
++        cfg['seed'] = profile['seed']
++        cfg['scale'] = 'minimal' if profile['purpose'] == 'pipeline-validation-only' else 'small'
++        print('Migrating v1 profile to shared v2; NLL/QA/network protocol changes. Use --legacy-v1 for historical execution.', file=sys.stderr)
++        return shared_main(argv, configuration=cfg)
++    if '--resume' not in argv:
++        argv = ['--model', 'tinyllama'] + argv
++    return shared_main(argv)
++
++
++if __name__ == '__main__':
+     sys.exit(main())
+diff --git a/mini_repro/requirements-mini.txt b/mini_repro/requirements-mini.txt
+index 4876036..6872569 100644
+--- a/mini_repro/requirements-mini.txt
++++ b/mini_repro/requirements-mini.txt
+@@ -8,3 +8,4 @@ sentencepiece==0.2.0
+ redis==5.0.7
+ torchac==0.9.3
+ wheel==0.43.0
++matplotlib==3.8.4
+diff --git a/mini_repro/run_local.sh b/mini_repro/run_local.sh
+index 0747cfc..a5d5704 100644
+--- a/mini_repro/run_local.sh
++++ b/mini_repro/run_local.sh
+@@ -11,7 +11,7 @@ case "$experiment" in
+   -*) experiment="mini" ;;
+   *) echo "Unknown experiment: $experiment" >&2; exit 2 ;;
+ esac
+-if [[ "$experiment" != test && " $* " != *' --dry-run '* && " $* " != *' --help '* ]]; then
++if [[ "$experiment" != test && "$experiment" != reproduce && " $* " != *' --dry-run '* && " $* " != *' --help '* ]]; then
+   cachegen_lock_gpu
+ fi
+ case "$experiment" in
+@@ -19,7 +19,7 @@ case "$experiment" in
+   quality) module="mini_repro.quality_size"; output="quality_size.json" ;;
+   ttft) module="mini_repro.ttft"; output="ttft.json" ;;
+   adaptive) module="mini_repro.adaptive"; output="adaptive.json" ;;
+-  reproduce) exec "$CACHEGEN_PYTHON" -u -m mini_repro.reproduce --output-root "$CACHEGEN_RESULTS_DIR/reproduction" "$@" ;;
++  reproduce) exec "$CACHEGEN_PYTHON" -u -m mini_repro.reproduce "$@" ;;
+   test) exec "$CACHEGEN_PYTHON" -m unittest discover -s "$repo_root/tests" -v "$@" ;;
+ esac
+ exec "$CACHEGEN_PYTHON" -m "$module" --results "$CACHEGEN_RESULTS_DIR/local4070/$output" "$@"
+diff --git a/mini_repro/ttft.py b/mini_repro/ttft.py
+index 14bd321..297452f 100644
+--- a/mini_repro/ttft.py
++++ b/mini_repro/ttft.py
+@@ -21,44 +21,8 @@ DEFAULT_RESULTS = ROOT / "results" / "tinyllama" / "ttft.json"
+ QUESTION = "\nQuestion: What is the main topic?\nAnswer:"
+ 
+ 
+-def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=4096):
+-    """Send exact bytes over a local socket, pacing the sender at target Gbps."""
+-    if not math.isfinite(bandwidth_gbps) or bandwidth_gbps <= 0 or chunk_bytes <= 0:
+-        raise ValueError("bandwidth and chunk size must be positive")
+-    sender, receiver = socket.socketpair()
+-    errors = []
+-    start = time.perf_counter()
+-
+-    def send():
+-        try:
+-            with sender:
+-                sent = 0
+-                for offset in range(0, len(payload), chunk_bytes):
+-                    piece = payload[offset:offset + chunk_bytes]
+-                    sender.sendall(piece)
+-                    sent += len(piece)
+-                    target = start + sent * 8 / (bandwidth_gbps * 1e9)
+-                    remaining = target - time.perf_counter()
+-                    if remaining > 0:
+-                        time.sleep(remaining)
+-        except Exception as error:
+-            errors.append(error)
+-
+-    worker = threading.Thread(target=send, daemon=True)
+-    worker.start()
+-    received = bytearray()
+-    with receiver:
+-        while True:
+-            piece = receiver.recv(65536)
+-            if not piece:
+-                break
+-            received.extend(piece)
+-    worker.join()
+-    if errors:
+-        raise errors[0]
+-    if received != payload:
+-        raise RuntimeError("local transport corrupted the payload")
+-    return bytes(received), time.perf_counter() - start
++# Historical import path; transport is shared by all v2 tasks.
++from mini_repro.transport import rate_limited_transfer
+ 
+ 
+ def timed_gpu(function):
+diff --git a/results/mistral/README.md b/results/mistral/README.md
+index bf3f73e..a380bb5 100644
+--- a/results/mistral/README.md
++++ b/results/mistral/README.md
+@@ -1,5 +1,7 @@
+ # Mistral-7B 原始实验批次
+ 
++以上目录下的 20261024T064543Z / 064353Z 现标记为历史 mistral-v1 批次，原始文件不变。新共享协议批次保存到 `minimal/`、`small/`、`larger/` 下的唯一 run ID。详见 [历史口径](../../docs/reproduction/HISTORY.md)及[当前入口](../../docs/reproduction/SHARED_FRAMEWORK.md)。
++
+ | 批次 | 北京时间与状态 | 内容 |
+ | --- | --- | --- |
+ | [20261024T064543Z](20261024T064543Z/) | 2026-10-24 14:45:47–15:20:30；completed，退出码 0 | 30 个自然文本条件、10 个完整问答、540 次正式 TTFT 计时 |
+diff --git a/results/reproduction/README.md b/results/reproduction/README.md
+index ba4fd0e..8fb0e3e 100644
+--- a/results/reproduction/README.md
++++ b/results/reproduction/README.md
+@@ -1,5 +1,7 @@
+ # 小规模实验结果索引
+ 
++本文所列成功批次现均标记为历史 v1；文件和主指标保持不变。共享 v2 批次在 `results/<model>/<scale>/<run-id>`，见 [历史索引](../../docs/reproduction/HISTORY.md)和[公共框架说明](../../docs/reproduction/SHARED_FRAMEWORK.md)。
++
+ 本索引区分已经入库的 TinyLlama 正式批次与已核验的 Mistral 批次。两次成功实验的模型、硬件和问答口径不同，分别保留原始数据，不合并统计。验收、冒烟、中断及零散调试结果保留在本机。
+ 
+ ## 最新 Mistral 实验（已核验归档）
+diff --git a/tests/test_mistral_runner.py b/tests/test_mistral_runner.py
+index 75c70fb..392384c 100644
+--- a/tests/test_mistral_runner.py
++++ b/tests/test_mistral_runner.py
+@@ -1,12 +1,9 @@
+-"""Test the real wrappers with a lightweight stand-in for the ML interpreter."""
++"""Compatibility wrappers forward to the shared runner without shell interpolation."""
+ import json
+ import os
+-import shutil
+-import signal
+ import subprocess
+ import sys
+ import tempfile
+-import time
+ import unittest
+ from pathlib import Path
+ 
+@@ -14,85 +11,25 @@ REPO = Path(__file__).resolve().parents[1]
+ 
+ 
+ class MistralRunnerTests(unittest.TestCase):
+-    def setUp(self):
+-        self.temp = tempfile.TemporaryDirectory(prefix="mistral checkout ")
+-        self.addCleanup(self.temp.cleanup)
+-        self.repo = Path(self.temp.name)
+-        (self.repo / "experiments/mistral").mkdir(parents=True)
+-        (self.repo / "scripts").mkdir()
+-        (self.repo / "mini_repro").mkdir()
+-        (self.repo / "env.yaml").write_text("name: test\n")
+-        for folder, patterns in [("experiments", ["*.py", "*.json"]),
+-                                 ("experiments/mistral", ["*.py", "*.sh", "*.json", "README.md"]),
+-                                 ("scripts", ["experiment-env.sh"])]:
+-            for pattern in patterns:
+-                for path in (REPO / folder).glob(pattern):
+-                    shutil.copy2(path, self.repo / folder / path.name)
+-        (self.repo / "mistral_repro").symlink_to("experiments/mistral", target_is_directory=True)
+-        interpreter = self.repo / "fake-python"
+-        interpreter.write_text(f"#!{sys.executable}\n" +
+-            "import os,pathlib,sys,time,signal\n"
+-            "if '-m' in sys.argv: raise SystemExit(int(os.environ.get('PREFLIGHT_EXIT','0')))\n"
+-            "if os.environ.get('IGNORE_TERM'): signal.signal(signal.SIGTERM,signal.SIG_IGN)\n"
+-            "pathlib.Path(os.environ['WORKER_PID']).write_text(str(os.getpid()))\n"
+-            "time.sleep(60)\n")
+-        interpreter.chmod(0o755)
+-        self.env = os.environ.copy()
+-        for key in list(self.env):
+-            if key.startswith("CACHEGEN_"):
+-                del self.env[key]
+-        self.env.update(CACHEGEN_PYTHON=str(interpreter), PYTHONPATH=str(self.repo),
+-                        PYTHONDONTWRITEBYTECODE="1", WORKER_PID=str(self.repo / "worker.pid"))
+-
+-    def test_failed_preflight_has_manifest_and_is_visible_in_status(self):
+-        result = subprocess.run(["bash", str(self.repo / "mistral_repro/run.sh")],
+-                                cwd="/tmp", env={**self.env, "PREFLIGHT_EXIT": "7"}, capture_output=True, text=True)
+-        self.assertEqual(result.returncode, 7, result.stdout + result.stderr)
+-        status = subprocess.run([sys.executable, "-m", "experiments", "status", "mistral"],
+-                                cwd=self.repo, env=self.env, capture_output=True, text=True)
+-        data = json.loads(status.stdout)
+-        self.assertEqual(data["status"], "failed")
+-        self.assertEqual(data["exit_code"], 7)
+-        run = Path(data["run_directory"])
+-        self.assertTrue((run / "source/config.json").is_file())
+-
+-    def test_direct_runner_termination_stops_worker_and_marks_interrupted(self):
+-        self.check_termination(["bash", str(self.repo / "mistral_repro/run.sh")])
+-
+-    def test_cli_termination_stops_worker_and_marks_interrupted(self):
+-        self.check_termination([sys.executable, "-m", "experiments", "run", "mistral"])
+-
+-    def test_hard_stop_cleans_stubborn_worker_and_records_terminal_state(self):
+-        self.env["IGNORE_TERM"] = "1"
+-        self.check_termination([sys.executable, "-m", "experiments", "run", "mistral"])
+-
+-    def check_termination(self, command):
+-        process = subprocess.Popen(command, cwd=self.repo, env=self.env,
+-                                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+-        worker = None
+-        try:
+-            marker = self.repo / "worker.pid"
+-            deadline = time.monotonic() + 5
+-            while not marker.exists() and time.monotonic() < deadline:
+-                time.sleep(.02)
+-            self.assertTrue(marker.exists(), "worker did not start")
+-            worker = int(marker.read_text())
+-            process.terminate()
+-            self.assertEqual(process.wait(timeout=15), 143)
+-            state = Path(f"/proc/{worker}/stat")
+-            deadline = time.monotonic() + 1
+-            while state.exists() and state.read_text().split()[2] != "Z" and time.monotonic() < deadline:
+-                time.sleep(.02)
+-            self.assertTrue(not state.exists() or state.read_text().split()[2] == "Z", "worker remains alive")
+-            run = (self.repo / "results/mistral/latest").resolve()
+-            self.assertEqual((run / "exit_code").read_text().strip(), "143")
+-            self.assertEqual(json.loads((run / "manifest.json").read_text())["status"], "interrupted")
+-        finally:
+-            if process.poll() is None:
+-                process.kill()
+-                process.wait()
+-            if worker is not None:
+-                try:
+-                    os.kill(worker, signal.SIGKILL)
+-                except ProcessLookupError:
+-                    pass
++    def test_wrappers_share_runner_and_preserve_arguments_and_exit_code(self):
++        with tempfile.TemporaryDirectory(prefix="shared interpreter ") as directory:
++            fake = Path(directory) / "python"
++            fake.write_text("#!" + sys.executable + "\nimport json,sys\nprint(json.dumps(sys.argv[1:]))\nraise SystemExit(7)\n")
++            fake.chmod(0o755)
++            env = {**os.environ, 'CACHEGEN_PYTHON': str(fake)}
++            for entry in ('experiments/mistral/run.sh', 'mistral_repro/run.sh'):
++                result = subprocess.run(['bash', str(REPO / entry), '--config', 'a b$(literal).json'],
++                                        cwd='/tmp', env=env, capture_output=True, text=True)
++                self.assertEqual(result.returncode, 7, result.stderr)
++                self.assertEqual(json.loads(result.stdout), ['-u', '-m', 'experiments.suite', '--model', 'mistral', '--config', 'a b$(literal).json'])
++
++    def test_resume_does_not_override_recorded_model(self):
++        with tempfile.TemporaryDirectory() as directory:
++            fake = Path(directory) / 'python'
++            fake.write_text("#!" + sys.executable + "\nimport json,sys\nprint(json.dumps(sys.argv[1:]))\n")
++            fake.chmod(0o755)
++            result = subprocess.run(['bash', str(REPO / 'experiments/mistral/run.sh'), '--resume', 'some run'],
++                env={**os.environ, 'CACHEGEN_PYTHON': str(fake)}, capture_output=True, text=True)
++            args = json.loads(result.stdout)
++            self.assertNotIn('--model', args)
++            self.assertEqual(args[-2:], ['--resume', 'some run'])
+diff --git a/tests/test_workspace.py b/tests/test_workspace.py
+index f7fd18c..3263eba 100644
+--- a/tests/test_workspace.py
++++ b/tests/test_workspace.py
+@@ -117,6 +117,18 @@ class WorkspaceTests(unittest.TestCase):
+         self.assertEqual(result.returncode, 2)
+         self.assertFalse((self.repo / "results").exists())
+ 
++    def test_resumed_run_has_live_elapsed_time_and_labels_previous_exit(self):
++        run = self.repo / 'results/toy/resumed'
++        run.mkdir(parents=True)
++        (run / 'manifest.json').write_text(json.dumps({'status': 'running', 'started_utc': '2020-01-01T00:00:00+00:00',
++            'finished_utc': '2020-01-01T00:01:00+00:00', 'protocol': 'cachegen-shared-v2', 'jobs': []}))
++        (run / 'exit_code').write_text('143\n')
++        result = self.cli('status', 'toy')
++        data = json.loads(result.stdout)
++        self.assertGreater(data['elapsed_minutes'], 60)
++        self.assertEqual(data['previous_attempt_exit_code'], 143)
++        self.assertNotIn('exit_code', data)
++
+     def test_child_failure_exit_code_is_preserved(self):
+         self.registry["toy"]["command"] = ["{python}", "-c", "raise SystemExit(7)"]
+         self.save_registry()

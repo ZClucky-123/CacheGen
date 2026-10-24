@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/experiments/run.sh",
+    "--model",
+    "tinyllama",
+    "--config",
+    "experiments/configs/minimal.json",
+    "--run-id",
+    "v2-final-check"
+  ],
+  "environment": {
+    "TORCH_EXTENSIONS_DIR": "/home/aaa/CacheGen/.local/torch_extensions",
+    "CACHEGEN_PYTHON": "/home/aaa/CacheGen/.venv/bin/python",
+    "HF_HOME": "/home/aaa/CacheGen/.venv/huggingface",
+    "OMP_NUM_THREADS": "8",
+    "CUDA_HOME": "/home/aaa/CacheGen/.cuda-12.1",
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "/home/aaa/CacheGen/results/tinyllama/minimal/v2-final-check",
+  "started_utc": "2026-10-24T13:33:50.211548+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/tiny-v2-final-check.log",
+  "pid": 21916,
+  "exit_code": 0,
+  "finished_utc": "2026-10-24T13:35:04.781585+00:00"
+}

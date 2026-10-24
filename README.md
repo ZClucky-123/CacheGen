@@ -1,3 +1,9 @@
+# 当前 TinyLlama / Mistral 公共复现入口
+
+已完成 [共享框架中文验收报告](reports/mistral/v2-small-final-20261024/验收报告.md)：Mistral 小规模 6/6 任务、552 条正式观测；TinyLlama 相同源码的最小 6/6 任务、134 条观测。原始数据、完整源码与图表均已归档，质量未通过项照实保留。
+
+共享 `cachegen-shared-v2` 框架已放入现有 `experiments/` 与 `mini_repro/`，覆盖三组实验、六个任务，支持 tmux 后台、逐观测检查点和严格恢复。请先阅读 [运行、查看、恢复及较大配置](docs/reproduction/SHARED_FRAMEWORK.md)、[对齐审查](docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)及[历史批次边界](docs/reproduction/HISTORY.md)。下文原论文入口和旧批次说明保留用于历史核查。
+
 # CacheGen：KV 缓存压缩与小规模复现
 
 本仓库基于 CacheGen（SIGCOMM 2024）的作者代码，保留原始实验脚本，并提供 **Mistral-7B** 和 **TinyLlama** 两组小规模复现实验。可以在这里阅读编解码实现、查看已归档结果，或使用统一入口开展后续实验。

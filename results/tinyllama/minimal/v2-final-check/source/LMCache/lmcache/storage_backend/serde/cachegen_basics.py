@@ -1,0 +1,175 @@
+import torch
+import io
+import pickle
+from dataclasses import dataclass
+from typing import List
+from lmcache.utils import _lmcache_nvtx_annotate
+import os
+CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK = 256
+
+@dataclass
+class CacheGenConfig:
+    # TODO: move this class to another file like "cachegen_basics.py"
+    key_first_layers: int
+    key_second_layers: int
+    key_third_layers: int
+    key_first_bins: int
+    key_second_bins: int
+    key_third_bins: int
+    value_first_layers: int
+    value_first_bins: int
+    value_second_bins: int
+
+    def __getitem__(self, key: str) -> int:
+        return getattr(self, key)
+
+    @staticmethod
+    def from_model_name(model_name: str) -> "CacheGenConfig":
+        if model_name == "TinyLlama/TinyLlama-1.1B-Chat-v1.0":
+            # Exploratory 22-layer schedule scaled from the 32-layer 7B setting.
+            # It has not been calibrated in the paper.
+            level = os.environ.get("QUANT_LEVEL", "2")
+            if level not in {"1", "2", "3"}:
+                raise ValueError(f"Unsupported TinyLlama QUANT_LEVEL: {level}")
+            key_bins = {"1": (16, 16, 12), "2": (32, 16, 16), "3": (32, 32, 32)}[level]
+            value_bins = {"1": (16, 12), "2": (32, 16), "3": (32, 32)}[level]
+            return CacheGenConfig(
+                key_first_layers=7,
+                key_second_layers=14,
+                key_third_layers=22,
+                key_first_bins=key_bins[0],
+                key_second_bins=key_bins[1],
+                key_third_bins=key_bins[2],
+                value_first_layers=2,
+                value_first_bins=value_bins[0],
+                value_second_bins=value_bins[1],
+            )
+        family_7b = ["mistralai/Mistral-7B-Instruct-v0.2",
+                     "mistral-community/Mistral-7B-v0.2",
+                      "lmsys/longchat-7b-16k"]
+        family_70b = ["Yukang/LongAlpaca-70B-16k"]
+        if "Mistral-7B" in model_name: # This is a hack for now
+            if os.environ["QUANT_LEVEL"] == "1":
+                return CacheGenConfig(
+                    key_first_layers=10,
+                    key_second_layers=20,
+                    key_third_layers=32,
+                    key_first_bins=16,
+                    key_second_bins=16,
+                    key_third_bins=12,
+                    value_first_layers=2,
+                    value_first_bins=16,
+                    value_second_bins=12
+                )
+            if os.environ["QUANT_LEVEL"] == "2":
+                return CacheGenConfig(
+                    key_first_layers=10,
+                    key_second_layers=20,
+                    key_third_layers=32,
+                    key_first_bins=32,
+                    key_second_bins=16,
+                    key_third_bins=16,
+                    value_first_layers=2,
+                    value_first_bins=32,
+                    value_second_bins=16
+                )
+            if os.environ["QUANT_LEVEL"] == "3":
+                return CacheGenConfig(
+                    key_first_layers=10,
+                    key_second_layers=20,
+                    key_third_layers=32,
+                    key_first_bins=32,
+                    key_second_bins=32,
+                    key_third_bins=32,
+                    value_first_layers=2,
+                    value_first_bins=32,
+                    value_second_bins=32
+                )
+            
+            
+        elif model_name in family_7b:
+            return CacheGenConfig(
+                key_first_layers=10,
+                key_second_layers=20,
+                key_third_layers=32,
+                key_first_bins=32,
+                key_second_bins=16,
+                key_third_bins=16,
+                value_first_layers=2,
+                value_first_bins=32,
+                value_second_bins=16
+            )
+        elif model_name in family_70b:
+            return CacheGenConfig(
+                key_first_layers=20,
+                key_second_layers=40,
+                key_third_layers=80,
+                key_first_bins=32,
+                key_second_bins=32,
+                key_third_bins=16,
+                value_first_layers=20,
+                value_first_bins=32,
+                value_second_bins=16
+            )
+        else:
+            raise ValueError(f"Model {model_name} is not supported")
+
+@dataclass
+class CacheGenEncoderOutput:
+    # TODO: maybe use numpy array so that we can directly tobytes() and frombuffer() to have a better performance
+    bytestream: bytes
+    start_indices: torch.Tensor
+    cdf: torch.Tensor
+    max_tensors_key: torch.Tensor
+    max_tensors_value: torch.Tensor
+    num_heads: int
+    head_size: int
+
+    def __getitem__(self, key: str) -> int:
+        return getattr(self, key)
+
+    def to_bytes(self) -> bytes:
+        """ Save the output to a file """
+        with io.BytesIO() as f:
+            #torch.save(self, f)
+            pickle.dump(self, f)
+            return f.getvalue()
+
+    @staticmethod
+    def from_bytes(bs: bytes) -> "CacheGenEncoderOutput":
+        with io.BytesIO(bs) as f:
+            return pickle.load(f)
+
+@dataclass
+class CacheGenGPUBytestream:
+    bytestream: torch.Tensor
+    bytestream_lengths: torch.Tensor  # [nlayers, nchannels, bytestream_length]
+    ntokens: int
+
+    def __getitem__(self, key: str) -> int:
+        return getattr(self, key)
+
+@dataclass 
+class CacheGenGPUEncoderOutput:
+    data_chunks: List[CacheGenGPUBytestream]
+    cdf: torch.Tensor
+    max_tensors_key: torch.Tensor
+    max_tensors_value: torch.Tensor
+    num_heads: int
+    head_size: int
+
+    def __getitem__(self, key: str) -> int:
+        return getattr(self, key)
+
+    @_lmcache_nvtx_annotate
+    def to_bytes(self) -> bytes:
+        """ Save the output to a file """
+        with io.BytesIO() as f:
+            pickle.dump(self, f)
+            return f.getvalue()
+
+    @staticmethod
+    @_lmcache_nvtx_annotate
+    def from_bytes(bs: bytes) -> "CacheGenGPUEncoderOutput":
+        with io.BytesIO(bs) as f:
+            return pickle.load(f)

@@ -6,6 +6,9 @@
 results/mistral/20261024T064543Z/** -text -whitespace
 results/mistral/20261024T064353Z/** -text -whitespace
 reports/mistral/20261024-mistral7b/** -text -whitespace
+results/mistral/small/v2-small-final-20261024/** -text -whitespace
+results/tinyllama/minimal/v2-final-check/** -text -whitespace
+reports/mistral/v2-small-final-20261024/** -text -whitespace
 *.zip binary
 *.png binary
 *.pdf binary

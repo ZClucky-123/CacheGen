@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "purpose": "formal-small-scale",
+  "seed": 0,
+  "quality_tolerances": {"max_nll_delta": 0.02, "max_qa_drop": 0.10},
+  "quality": {
+    "samples": 20, "lengths": [512, 1024, 1536], "continuation": 32,
+    "qa_per_position": 10, "max_new_tokens": 20
+  },
+  "ttft": {
+    "samples": 3, "lengths": [512, 1024, 1536],
+    "bandwidth_gbps": [0.1, 1, 10], "cachegen_levels": [2, 3],
+    "warmup": 2, "repeats": 10
+  },
+  "adaptive": {
+    "cases": 5, "length": 1024, "chunk_size": 256, "traces": 5,
+    "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+    "max_new_tokens": 20, "warmup": 1, "repeats": 3
+  }
+}

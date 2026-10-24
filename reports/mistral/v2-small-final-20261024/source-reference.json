@@ -1,0 +1,6 @@
+{
+  "run_directory": "../../../results/mistral/small/v2-small-final-20261024",
+  "artifacts_sha256": "14feae141b0a3ce9a7b22c963a65879b36acaa08f18a2229ec11f0b2b8477928",
+  "source_directory": "../../../results/mistral/small/v2-small-final-20261024/source",
+  "source_fingerprint_evidence": "../../../docs/reproduction/shared-helper-validation-20261024.json"
+}

@@ -77,7 +77,7 @@ def pack_uniform(blob, bits=8):
     maxima = groups.abs().amax(dim=-1, keepdim=True)
     qmax = (1 << (bits - 1)) - 1
     safe = maxima.clamp_min(torch.finfo(maxima.dtype).tiny)
-    quantized = torch.round(groups * (qmax / safe)).clamp(-qmax, qmax).to(torch.int8).flatten()
+    quantized = torch.round(groups.float() / safe.float() * qmax).clamp(-qmax, qmax).to(torch.int8).flatten()
     if bits == 4:
         symbols = (quantized.to(torch.int16) + qmax).to(torch.uint8)
         if symbols.numel() % 2:

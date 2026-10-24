@@ -1,8 +1,10 @@
 # 小规模实验结果索引
 
+本文所列成功批次现均标记为历史 v1；文件和主指标保持不变。共享 v2 批次在 `results/<model>/<scale>/<run-id>`，见 [历史索引](../../docs/reproduction/HISTORY.md)和[公共框架说明](../../docs/reproduction/SHARED_FRAMEWORK.md)。
+
 本索引区分已经入库的 TinyLlama 正式批次与已核验的 Mistral 批次。两次成功实验的模型、硬件和问答口径不同，分别保留原始数据，不合并统计。验收、冒烟、中断及零散调试结果保留在本机。
 
-## 最新 Mistral 实验（已核验归档）
+## 历史 Mistral 实验（已核验归档）
 
 | 批次 | 用途与状态 | 报告 | 原始结果 |
 | --- | --- | --- | --- |

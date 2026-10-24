@@ -21,44 +21,8 @@ DEFAULT_RESULTS = ROOT / "results" / "tinyllama" / "ttft.json"
 QUESTION = "\nQuestion: What is the main topic?\nAnswer:"
 
 
-def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=4096):
-    """Send exact bytes over a local socket, pacing the sender at target Gbps."""
-    if not math.isfinite(bandwidth_gbps) or bandwidth_gbps <= 0 or chunk_bytes <= 0:
-        raise ValueError("bandwidth and chunk size must be positive")
-    sender, receiver = socket.socketpair()
-    errors = []
-    start = time.perf_counter()
-
-    def send():
-        try:
-            with sender:
-                sent = 0
-                for offset in range(0, len(payload), chunk_bytes):
-                    piece = payload[offset:offset + chunk_bytes]
-                    sender.sendall(piece)
-                    sent += len(piece)
-                    target = start + sent * 8 / (bandwidth_gbps * 1e9)
-                    remaining = target - time.perf_counter()
-                    if remaining > 0:
-                        time.sleep(remaining)
-        except Exception as error:
-            errors.append(error)
-
-    worker = threading.Thread(target=send, daemon=True)
-    worker.start()
-    received = bytearray()
-    with receiver:
-        while True:
-            piece = receiver.recv(65536)
-            if not piece:
-                break
-            received.extend(piece)
-    worker.join()
-    if errors:
-        raise errors[0]
-    if received != payload:
-        raise RuntimeError("local transport corrupted the payload")
-    return bytes(received), time.perf_counter() - start
+# Historical import path; transport is shared by all v2 tasks.
+from mini_repro.transport import rate_limited_transfer
 
 
 def timed_gpu(function):

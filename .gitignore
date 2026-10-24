@@ -36,3 +36,22 @@ results/mistral/*
 !/reports/mistral/README.md
 !/reports/mistral/20261024-mistral7b/
 !/reports/mistral/20261024-mistral7b/evidence/*.log
+
+# Verified shared-v2 acceptance batches; future batches remain local.
+!results/mistral/small/
+results/mistral/small/*
+!results/mistral/small/v2-small-final-20261024/
+!results/mistral/small/v2-small-final-20261024/**
+!results/tinyllama/
+results/tinyllama/*
+!results/tinyllama/README.md
+!results/tinyllama/minimal/
+results/tinyllama/minimal/*
+!results/tinyllama/minimal/v2-final-check/
+!results/tinyllama/minimal/v2-final-check/**
+!/reports/mistral/v2-small-final-20261024/
+!/reports/mistral/v2-small-final-20261024/**
+
+# Canonical SQLite databases are archived after checkpoint; sidecars are transient.
+**/records.sqlite3-wal
+**/records.sqlite3-shm

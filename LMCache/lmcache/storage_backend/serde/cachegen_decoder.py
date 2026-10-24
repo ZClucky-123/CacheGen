@@ -112,8 +112,8 @@ def decode_function_gpu(
     return key, value
 
 class CacheGenDeserializer(Deserializer):
-    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata):
-        self.cachegen_config = CacheGenConfig.from_model_name(metadata.model_name)
+    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata, cachegen_config=None):
+        self.cachegen_config = cachegen_config or CacheGenConfig.from_model_name(metadata.model_name)
         self.chunk_size = config.chunk_size
         self.output_buffer = None
         self.fmt = metadata.fmt
@@ -136,8 +136,9 @@ class CacheGenDeserializer(Deserializer):
 
 
     def get_output_buffer(self, nlayers: int, nchannels: int, ntokens: int):
-        if self.output_buffer is None or self.output_buffer.shape[1] != 2 * nlayers * nchannels:
-            self.output_buffer = torch.zeros((self.chunk_size, 2 * nlayers * nchannels), dtype=torch.uint8).cuda()
+        if (self.output_buffer is None or self.output_buffer.shape[1] != 2 * nlayers * nchannels
+                or self.output_buffer.shape[0] < ntokens):
+            self.output_buffer = torch.zeros((max(self.chunk_size, ntokens), 2 * nlayers * nchannels), dtype=torch.uint8).cuda()
         return self.output_buffer[:ntokens, :]
 
     @_lmcache_nvtx_annotate

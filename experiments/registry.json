@@ -1,12 +1,12 @@
 {
   "mistral": {
-    "description": "Mistral-7B quality, packed size and socket TTFT",
+    "description": "Shared v2: Mistral quality, TTFT and four adaptive tasks",
     "command": ["bash", "{repo}/experiments/mistral/run.sh"],
-    "results_subdir": "mistral"
+    "results_subdir": "mistral/small"
   },
   "tinyllama": {
-    "description": "TinyLlama quality, TTFT and adaptive suite",
-    "command": ["bash", "{repo}/mini_repro/run_local.sh", "reproduce"],
-    "results_subdir": "reproduction"
+    "description": "Shared v2: TinyLlama quality, TTFT and four adaptive tasks",
+    "command": ["bash", "{repo}/experiments/run.sh", "--model", "tinyllama"],
+    "results_subdir": "tinyllama/small"
   }
 }

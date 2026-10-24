@@ -117,6 +117,18 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertFalse((self.repo / "results").exists())
 
+    def test_resumed_run_has_live_elapsed_time_and_labels_previous_exit(self):
+        run = self.repo / 'results/toy/resumed'
+        run.mkdir(parents=True)
+        (run / 'manifest.json').write_text(json.dumps({'status': 'running', 'started_utc': '2020-01-01T00:00:00+00:00',
+            'finished_utc': '2020-01-01T00:01:00+00:00', 'protocol': 'cachegen-shared-v2', 'jobs': []}))
+        (run / 'exit_code').write_text('143\n')
+        result = self.cli('status', 'toy')
+        data = json.loads(result.stdout)
+        self.assertGreater(data['elapsed_minutes'], 60)
+        self.assertEqual(data['previous_attempt_exit_code'], 143)
+        self.assertNotIn('exit_code', data)
+
     def test_child_failure_exit_code_is_preserved(self):
         self.registry["toy"]["command"] = ["{python}", "-c", "raise SystemExit(7)"]
         self.save_registry()

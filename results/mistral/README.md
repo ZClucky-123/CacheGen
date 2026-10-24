@@ -1,5 +1,9 @@
 # Mistral-7B 原始实验批次
 
+共享 v2 正式验收：[small/v2-small-final-20261024](small/v2-small-final-20261024/)，6/6 任务、552/552 观测、退出码 0；[中文报告](../../reports/mistral/v2-small-final-20261024/验收报告.md)。
+
+以上目录下的 20261024T064543Z / 064353Z 现标记为历史 mistral-v1 批次，原始文件不变。新共享协议批次保存到 `minimal/`、`small/`、`larger/` 下的唯一 run ID。详见 [历史口径](../../docs/reproduction/HISTORY.md)及[当前入口](../../docs/reproduction/SHARED_FRAMEWORK.md)。
+
 | 批次 | 北京时间与状态 | 内容 |
 | --- | --- | --- |
 | [20261024T064543Z](20261024T064543Z/) | 2026-10-24 14:45:47–15:20:30；completed，退出码 0 | 30 个自然文本条件、10 个完整问答、540 次正式 TTFT 计时 |

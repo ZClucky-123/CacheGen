@@ -40,6 +40,13 @@ def main(argv=None):
     p=argparse.ArgumentParser();p.add_argument('run_dir',type=Path);args=p.parse_args(argv)
     run=args.run_dir;root=Path(__file__).resolve().parent
     workspace=Workspace.discover()
+    manifest_path=run/'manifest.json'
+    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol')=='cachegen-shared-v2':
+        from experiments.artifacts import verify
+        if json.loads(manifest_path.read_text())['status']!='completed':
+            raise RuntimeError('Shared batch is incomplete; resume it with experiments/run.sh --resume')
+        print('SHARED_ARTIFACTS_VERIFIED', verify(run))
+        return 0
     if (run/'artifacts.json').is_file():
         archived=json.loads((run/'artifacts.json').read_text())
         if archived.get('status')=='completed':

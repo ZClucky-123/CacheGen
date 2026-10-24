@@ -53,7 +53,7 @@ def torch_quant_vectorized(bins: torch.Tensor, input_groups: torch.Tensor) -> Tu
     """
     MAX = (bins // 2 - 1)[:, None, None] # shape [nlayers, 1, 1]
     max1 = torch.amax(torch.abs(input_groups), dim=-1, keepdim=True) # shape [nlayers, ntokens, 1]
-    factor = MAX / max1 # shape [nlayers, ntokens, 1]
+    factor = MAX / max1.clamp_min(torch.finfo(max1.dtype).tiny) # zero groups remain zero
     xq = torch.round(input_groups * factor + MAX).to(torch.int8) # shape [nlayers, ntokens, nchannels]
     
     return xq, max1
@@ -301,8 +301,8 @@ def encode_function(
         )
 
 class CacheGenSerializer(Serializer):
-    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata):
-        self.cachegen_config = CacheGenConfig.from_model_name(metadata.model_name)
+    def __init__(self, config: LMCacheEngineConfig, metadata: LMCacheEngineMetadata, cachegen_config=None):
+        self.cachegen_config = cachegen_config or CacheGenConfig.from_model_name(metadata.model_name)
         self.chunk_size = config.chunk_size
         self.fmt = metadata.fmt
         self.key_bins = self.make_key_bins(self.cachegen_config)

@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/experiments/run.sh",
+    "--model",
+    "mistral",
+    "--config",
+    "experiments/configs/small.json",
+    "--run-id",
+    "v2-small-final-20261024"
+  ],
+  "environment": {
+    "TORCH_EXTENSIONS_DIR": "/home/aaa/CacheGen/.local/torch_extensions",
+    "CACHEGEN_PYTHON": "/home/aaa/CacheGen/.venv/bin/python",
+    "HF_HOME": "/home/aaa/CacheGen/.venv/huggingface",
+    "OMP_NUM_THREADS": "8",
+    "CUDA_HOME": "/home/aaa/CacheGen/.cuda-12.1",
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "/home/aaa/CacheGen/results/mistral/small/v2-small-final-20261024",
+  "started_utc": "2026-10-24T13:35:05.739549+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/mistral-v2-small-final.log",
+  "pid": 22492,
+  "exit_code": 0,
+  "finished_utc": "2026-10-24T14:05:11.222999+00:00"
+}

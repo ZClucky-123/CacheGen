@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "time_utc": "2026-10-24T06:46:53.552141+00:00",
+  "context_tokens": 169,
+  "raw_logits_max_error": 0.00830078125,
+  "generation_matches_full_forward": true,
+  "prediction": "The museum is in",
+  "kv_shape": [
+    32,
+    2,
+    8,
+    169,
+    128
+  ],
+  "methods": [
+    {
+      "method": "raw",
+      "bytes": 22152348,
+      "encode_seconds": 0.04504679888486862,
+      "decode_seconds": 0.01966656744480133,
+      "kv_mae": 0.0
+    },
+    {
+      "method": "uniform4",
+      "bytes": 5560920,
+      "encode_seconds": 0.016177117824554443,
+      "decode_seconds": 0.002961203455924988,
+      "kv_mae": 0.2814318537712097
+    },
+    {
+      "method": "uniform8",
+      "bytes": 11098712,
+      "encode_seconds": 0.018539980053901672,
+      "decode_seconds": 0.004036791622638702,
+      "kv_mae": 0.0156363844871521
+    },
+    {
+      "method": "cachegen1",
+      "bytes": 4396053,
+      "encode_seconds": 0.032453566789627075,
+      "decode_seconds": 0.007631905376911163,
+      "kv_mae": 0.32940950989723206
+    },
+    {
+      "method": "cachegen2",
+      "bytes": 7046316,
+      "encode_seconds": 0.007118284702301025,
+      "decode_seconds": 0.007762692868709564,
+      "kv_mae": 0.24602258205413818
+    },
+    {
+      "method": "cachegen3",
+      "bytes": 8052944,
+      "encode_seconds": 0.005666546523571014,
+      "decode_seconds": 0.006479673087596893,
+      "kv_mae": 0.1322578340768814
+    }
+  ]
+}

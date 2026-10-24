@@ -1,0 +1,7 @@
+method,questions,mean_em,mean_f1,raw_em_correct,retained_raw_em_correct,raw_correct_retention
+raw,10,0.0,0.19576423576423577,0,0,
+uniform4,10,0.0,0.1721928071928072,0,0,
+uniform8,10,0.0,0.19576423576423577,0,0,
+cachegen1,10,0.0,0.16437229437229436,0,0,
+cachegen2,10,0.0,0.18514152514152515,0,0,
+cachegen3,10,0.0,0.18037962037962038,0,0,

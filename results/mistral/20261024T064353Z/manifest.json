@@ -1,0 +1,53 @@
+{
+  "status": "failed",
+  "started_utc": "2026-10-24T06:43:57.573684+00:00",
+  "pid": 12176,
+  "configuration": {
+    "model_id": "mistral-community/Mistral-7B-v0.2",
+    "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+    "weight_loading": "original FastChat load_8bit=True; FP16 KV",
+    "seed": 0,
+    "quality": {
+      "samples": 10,
+      "lengths": [
+        1024,
+        2048,
+        4096
+      ],
+      "continuation": 32
+    },
+    "qa": {
+      "samples": 10,
+      "max_prompt_tokens": 4096,
+      "max_new_tokens": 32
+    },
+    "ttft": {
+      "samples": 3,
+      "lengths": [
+        1024,
+        2048,
+        4096
+      ],
+      "bandwidth_gbps": [
+        0.1,
+        1,
+        10
+      ],
+      "warmup": 2,
+      "repeats": 5
+    },
+    "quality_tolerances": {
+      "max_nll_delta": 0.02,
+      "minimum_raw_correct_qa_retention": 0.9
+    }
+  },
+  "stages": {
+    "metadata": "completed"
+  },
+  "progress": {
+    "stage": "load_model"
+  },
+  "finished_utc": "2026-10-24T06:44:17.186517+00:00",
+  "error": "RuntimeError(\"Error building extension 'torchac_backend'\")",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py\", line 2107, in _run_ninja_build\n    subprocess.run(\n  File \"/usr/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['ninja', '-v', '-j', '2']' returned non-zero exit status 1.\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/root/cachegen-repro/experiment.py\", line 501, in main\n    from src.utils import define_model_and_tokenizer\n  File \"/home/aaa/CacheGen/src/utils.py\", line 16, in <module>\n    from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer\n  File \"/home/aaa/CacheGen/LMCache/lmcache/storage_backend/__init__.py\", line 3, in <module>\n    from lmcache.storage_backend.remote_backend import LMCRemoteBackend\n  File \"/home/aaa/CacheGen/LMCache/lmcache/storage_backend/remote_backend.py\", line 11, in <module>\n    from lmcache.storage_backend.serde import TorchSerializer, TorchDeserializer, CacheGenSerializer, CacheGenDeserializer, CreateSerde\n  File \"/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/__init__.py\", line 4, in <module>\n    from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer\n  File \"/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py\", line 3, in <module>\n    import torchac\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/__init__.py\", line 2, in <module>\n    from torchac.torchac import encode_float_cdf\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/torchac.py\", line 13, in <module>\n    torchac_backend = load(\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py\", line 1309, in load\n    return _jit_compile(\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py\", line 1719, in _jit_compile\n    _write_ninja_file_and_build_library(\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py\", line 1832, in _write_ninja_file_and_build_library\n    _run_ninja_build(\n  File \"/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py\", line 2123, in _run_ninja_build\n    raise RuntimeError(message) from e\nRuntimeError: Error building extension 'torchac_backend'\n"
+}

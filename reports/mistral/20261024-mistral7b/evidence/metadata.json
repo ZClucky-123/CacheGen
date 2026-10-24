@@ -1,0 +1,106 @@
+{
+  "time_utc": "2026-10-24T06:46:04.277005+00:00",
+  "platform": "Linux-5.15.0-25-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4090 D",
+    "capability": [
+      8,
+      9
+    ],
+    "memory_bytes": 25250627584
+  },
+  "cuda_runtime": "12.1",
+  "packages": {
+    "torch": "2.3.1+cu121",
+    "transformers": "4.42.3",
+    "numpy": "1.26.4",
+    "fschat": "0.2.36",
+    "lmcache": "0.1",
+    "torchac": "0.9.3"
+  },
+  "git_head": "cc14424f75ed69b695e8e4e3e06e2728a083ce4f",
+  "git_status": [
+    "?? .cuda-12.1/"
+  ],
+  "model_id": "mistral-community/Mistral-7B-v0.2",
+  "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "model_snapshot": "/home/aaa/CacheGen/.venv/huggingface/hub/models--mistral-community--Mistral-7B-v0.2/snapshots/80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "model_sha256": {
+    "model-00001-of-00003.safetensors": "fbebdaa87478f5b1f9d01539963874db56958ff8cf8d801e465d78ce24328069",
+    "model-00002-of-00003.safetensors": "79a5f871a0fbb7919f263d78caff0d4d3b7a1d444552db3011ada70f48fd5ee4",
+    "model-00003-of-00003.safetensors": "3db96f068de2a5b5947692954c252a5f74a1c8ad7d87ea950b5e396a7ddeca27",
+    "config.json": "375f7c2d4c5cfcda3cb68425a1881e228a219a523beea9d4f2dbb37e2771b876",
+    "generation_config.json": "4bc98499a6f16deb3c0d388b4545f23523ea389f9773dcbbe1070670b71f249b",
+    "model.safetensors.index.json": "a84fdfb94dda41f43767e02136d30bd102ef33c2d996218628cbd906b33e7dfb",
+    "special_tokens_map.json": "6fa06efa2785e450051989a6f8fb4416b10149ded485ddd3f127a40734f5cfd0",
+    "tokenizer.json": "fc4f0bd70b3709312d9d1d9e5ba674794b6bc5abc17429897a540f93882f25fc",
+    "tokenizer.model": "dadfd56d766715c61d2ef780a525ab43b8e6da4de6865bda3d95fdef5e134055",
+    "tokenizer_config.json": "51a9fb33d4a4352c1d127a62c3ffcd9db01f6fb1a8d0e4a8e739ada14978347a"
+  },
+  "codec_binary": "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac_cuda.cpython-310-x86_64-linux-gnu.so",
+  "codec_sha256": "df0b6c1320305e5084029f8ab31fb22bfbd25acab8ee5e20b11e14a4d8b6819b",
+  "source_and_data_sha256": {
+    "/root/cachegen-repro/experiment.py": "0c885225e134720f56542cc5c87592d94e4e8b4997377e3774c539b95ae9b03a",
+    "/root/cachegen-repro/test_experiment.py": "c55e85cf3c6b0b8699963c69f26fcd794299bd4e2d3be6319d4983a675b26f64",
+    "/root/cachegen-repro/config.json": "60a0cbb642d4db2bf4807c17c1505c482281291995b045c8cc213a41cfb0bea6",
+    "/root/cachegen-repro/run.sh": "45887fbf26f464618ca5ccfa43d15aa10e612d0e94b494e2983fab191627c649",
+    "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_basics.py": "653b0b4c22900c17ba05404f81b18ff96afb3e2633be3beb3485f9587756a573",
+    "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_decoder.py": "fcd529f0c889cd69d15fe9061d2b63b864e691455d964d21896cc327a3b4fc3e",
+    "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py": "b8a0ec7b4d1c787ac885f03b86d361d2e64e88c0b12486c0ac271e1c9ec71832",
+    "/home/aaa/CacheGen/src/utils.py": "554cf0f4c5c191b7015d24f8ca1178183e8ce8ab3c1fd3c025b19388068cb780",
+    "/home/aaa/CacheGen/test_data/longchat.jsonl": "00908018c100549f71dbd45d1a7889e1ab9fb8985a3b4cf05426605e5ef89a5f",
+    "/home/aaa/CacheGen/test_data/tqa.jsonl": "76a8f8b5b9f8a45b7a02a31e9bda9bb670e15037c98ae421839499f56c923d9d"
+  },
+  "cgroup_memory_limit": "32212254720",
+  "cgroup_cpu_quota": "1000000 100000",
+  "configuration": {
+    "model_id": "mistral-community/Mistral-7B-v0.2",
+    "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+    "weight_loading": "original FastChat load_8bit=True; FP16 KV",
+    "seed": 0,
+    "quality": {
+      "samples": 10,
+      "lengths": [
+        1024,
+        2048,
+        4096
+      ],
+      "continuation": 32
+    },
+    "qa": {
+      "samples": 10,
+      "max_prompt_tokens": 4096,
+      "max_new_tokens": 32
+    },
+    "ttft": {
+      "samples": 3,
+      "lengths": [
+        1024,
+        2048,
+        4096
+      ],
+      "bandwidth_gbps": [
+        0.1,
+        1,
+        10
+      ],
+      "warmup": 2,
+      "repeats": 5
+    },
+    "quality_tolerances": {
+      "max_nll_delta": 0.02,
+      "minimum_raw_correct_qa_retention": 0.9
+    }
+  },
+  "limitations": [
+    "FastChat groupwise 8bit model weights shared by all methods; FP16 KV",
+    "author repository codec has no paper anchor/delta path",
+    "single-host paced socket, receive then decode; no transfer/decode overlap",
+    "continuation NLL scores tokens 2..32; first held-out token omitted",
+    "10 complete short TriviaQA inputs; not the full paper benchmark",
+    "pooled P95 is descriptive; timing repeats are not independent contexts"
+  ],
+  "attention_implementation": "sdpa",
+  "attention_class": "MistralSdpaAttention"
+}

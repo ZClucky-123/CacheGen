@@ -1,0 +1,7 @@
+method,questions,full_em,full_f1,first_line_em,first_line_f1,first_line_raw_correct_retention,scoring_note
+raw,10,0.0,0.19576423576423577,0.8,0.8666666666666667,1.0,full output = original; first line = post-hoc diagnostic
+uniform4,10,0.0,0.1721928071928072,0.7,0.7666666666666666,0.875,full output = original; first line = post-hoc diagnostic
+uniform8,10,0.0,0.19576423576423577,0.8,0.8666666666666667,1.0,full output = original; first line = post-hoc diagnostic
+cachegen1,10,0.0,0.16437229437229436,0.7,0.7666666666666666,0.875,full output = original; first line = post-hoc diagnostic
+cachegen2,10,0.0,0.18514152514152515,0.7,0.7666666666666666,0.875,full output = original; first line = post-hoc diagnostic
+cachegen3,10,0.0,0.18037962037962038,0.7,0.7666666666666666,0.875,full output = original; first line = post-hoc diagnostic

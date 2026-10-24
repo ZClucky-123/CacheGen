@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "finished_utc": "2026-10-24T07:20:35.421910+00:00",
+  "source_data_fingerprints_match": true,
+  "files": {
+    "quality.json": {
+      "bytes": 79909,
+      "sha256": "bcd887f1d189ab339d2109d9533d3892e0b59f26adbf5892538a4b8364ef5009"
+    },
+    "ttft.json": {
+      "bytes": 325025,
+      "sha256": "8b75dff06cce9daea52630dd7e9126cd02fac1045ae5820ad64e3676a6b6d799"
+    },
+    "smoke.json": {
+      "bytes": 1436,
+      "sha256": "c0510ba7d6034c2417cdb17329f0d96dcf43fefa17027fee2d6da01da99dba7f"
+    },
+    "summary.json": {
+      "bytes": 31020,
+      "sha256": "af1fc2772c90ecbf5260fdead59e3bce997a17ba8348d5c6f458c6b6dca91bbd"
+    },
+    "quality.csv": {
+      "bytes": 3128,
+      "sha256": "13f177c7d88e87ece9f8ac45494646b2b5bd9af952c5adbbf532a75533ca5a1f"
+    },
+    "qa.csv": {
+      "bytes": 344,
+      "sha256": "89dda6874d06d1a7e6618a7f1e3e536344c6633bd62d2c366bcda699ded7ce35"
+    },
+    "ttft.csv": {
+      "bytes": 6441,
+      "sha256": "c630f8b66bde9a0770cd5dcc66830d00a45285e320e6a4949c7175fba602cc52"
+    },
+    "report.md": {
+      "bytes": 7294,
+      "sha256": "3e492dfbc18633a4d17ab7c0247f446d3b65a7f9dcbb683c56f329008f116302"
+    },
+    "figures/compression_quality.png": {
+      "bytes": 169408,
+      "sha256": "0a54445fa5739fe15b710d0820b7ecfa7fb03334795a879b67c2be4bbbdb4068"
+    },
+    "figures/compression_quality.svg": {
+      "bytes": 35606,
+      "sha256": "6b9f6c744c3caa5bc76b8bdcd72b4fdca8b40dab9b890b1bd7bd82293bcd64ac"
+    },
+    "figures/ttft.png": {
+      "bytes": 226982,
+      "sha256": "2f01315e4e483228c4aea204e2bc4d00b48081560a3e2391d9ae759ff5448d99"
+    },
+    "figures/ttft.svg": {
+      "bytes": 95911,
+      "sha256": "bc69b6d459de823a5e4897ad9c50224b5c36b222d5e458340f2f96fc7e72fc6b"
+    },
+    "figures/qa.png": {
+      "bytes": 48476,
+      "sha256": "57f6ad43fba0991d6b947a218e56191adc9177f8383017a666090a26bfc89bec"
+    },
+    "figures/qa.svg": {
+      "bytes": 14317,
+      "sha256": "96b1e35bfa364a6294020daa11d5c5adeac0ffcb089a2f72af6aba957047ea30"
+    }
+  },
+  "plot_python": "/opt/conda/bin/python",
+  "plot_script_sha256": "11c7c76cbd45989ce1a36a73d034bb9032d9af0c9d4b75775355629f6e227919"
+}

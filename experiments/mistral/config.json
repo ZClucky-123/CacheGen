@@ -1,0 +1,10 @@
+{
+  "model_id": "mistral-community/Mistral-7B-v0.2",
+  "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "weight_loading": "original FastChat load_8bit=True; FP16 KV",
+  "seed": 0,
+  "quality": {"samples": 10, "lengths": [1024, 2048, 4096], "continuation": 32},
+  "qa": {"samples": 10, "max_prompt_tokens": 4096, "max_new_tokens": 32},
+  "ttft": {"samples": 3, "lengths": [1024, 2048, 4096], "bandwidth_gbps": [0.1, 1, 10], "warmup": 2, "repeats": 5},
+  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_raw_correct_qa_retention": 0.9}
+}

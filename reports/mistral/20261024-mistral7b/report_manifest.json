@@ -1,0 +1,285 @@
+{
+  "status": "completed",
+  "generated_china_time": "2026-10-24T15:55:06.537501+08:00",
+  "source_run": "/home/aaa/cachegen-repro/runs/20261024T064543Z",
+  "source_archive_verified": true,
+  "natural_conditions": 30,
+  "qa_questions": 10,
+  "ttft_measurements": 540,
+  "figures": [
+    {
+      "name": "01_compression",
+      "title": "压缩率与实际传输体积",
+      "files": [
+        "figures/01_compression.png",
+        "figures/01_compression.svg",
+        "figures/01_compression.pdf"
+      ]
+    },
+    {
+      "name": "02_paired_nll",
+      "title": "配对续写 NLL 与样本差异",
+      "files": [
+        "figures/02_paired_nll.png",
+        "figures/02_paired_nll.svg",
+        "figures/02_paired_nll.pdf"
+      ]
+    },
+    {
+      "name": "03_ttft",
+      "title": "带宽与首 token 延迟",
+      "files": [
+        "figures/03_ttft.png",
+        "figures/03_ttft.svg",
+        "figures/03_ttft.pdf"
+      ]
+    },
+    {
+      "name": "04_speedup_vs_text",
+      "title": "相对文本重算的速度比热力图",
+      "files": [
+        "figures/04_speedup_vs_text.png",
+        "figures/04_speedup_vs_text.svg",
+        "figures/04_speedup_vs_text.pdf"
+      ]
+    },
+    {
+      "name": "05_ttft_breakdown",
+      "title": "首 token 延迟的组成",
+      "files": [
+        "figures/05_ttft_breakdown.png",
+        "figures/05_ttft_breakdown.svg",
+        "figures/05_ttft_breakdown.pdf"
+      ]
+    },
+    {
+      "name": "06_effective_bandwidth",
+      "title": "实际有效吞吐与设定带宽",
+      "files": [
+        "figures/06_effective_bandwidth.png",
+        "figures/06_effective_bandwidth.svg",
+        "figures/06_effective_bandwidth.pdf"
+      ]
+    },
+    {
+      "name": "07_qa_scoring",
+      "title": "完整输出与首行问答评分对照",
+      "files": [
+        "figures/07_qa_scoring.png",
+        "figures/07_qa_scoring.svg",
+        "figures/07_qa_scoring.pdf"
+      ]
+    }
+  ],
+  "chinese_font": {
+    "file": "/home/aaa/cachegen-repro/report-assets/NotoSansCJKsc-Regular.otf",
+    "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  "supplemental_qa_analysis": "post-hoc first-line scoring, does not replace original full-output primary metrics",
+  "files": {
+    "图表合集.pdf": {
+      "bytes": 161956,
+      "sha256": "83cce3ecc8def9c93749f27db754feccc288961abaeb5a051aadfb0971696163"
+    },
+    "小规模复现实验报告.md": {
+      "bytes": 22408,
+      "sha256": "c27d20341726280e2f4bc455f70209e6d78fe4dbdcf9def2ca5b49de2be1624d"
+    },
+    "问答逐题对照.md": {
+      "bytes": 7520,
+      "sha256": "267bd139c24fb943063f49b9b8b519e3d755e5cda02721254bdd87be16ce86ec"
+    },
+    "figures/01_compression.png": {
+      "bytes": 332928,
+      "sha256": "88ffcc07ab959031362295b7035c569af42bd2d3358512f5b7d5472503ff84f2"
+    },
+    "figures/01_compression.svg": {
+      "bytes": 113117,
+      "sha256": "36c8791afd4ed2ecf6ee950149883a09dbba475a15071608c4791aacaebfe1a0"
+    },
+    "figures/01_compression.pdf": {
+      "bytes": 46711,
+      "sha256": "662ba8266c0e512085be9e6e423b5bd56564e7fb9bbce218a4126ad863182fb4"
+    },
+    "figures/02_paired_nll.png": {
+      "bytes": 279712,
+      "sha256": "d449f47b5708acc7db8b593cccbebea3a058855151d3af33e6818ced892aeaf3"
+    },
+    "figures/02_paired_nll.svg": {
+      "bytes": 115828,
+      "sha256": "076422d2a7f0e58ebbc1ff7e6b50f88385965e9ccc494e7a446d5443cace5390"
+    },
+    "figures/02_paired_nll.pdf": {
+      "bytes": 42927,
+      "sha256": "f2e80911372d3bf91fc905f038efdc4e540d54ebee40ad827dc09eaa9df5f08b"
+    },
+    "figures/03_ttft.png": {
+      "bytes": 341326,
+      "sha256": "1ab42cb2dbebe3a2ab268388d956cab5aa6d8ede79626d428c5f0e028d693a6c"
+    },
+    "figures/03_ttft.svg": {
+      "bytes": 115413,
+      "sha256": "b8bf0a63ac3951fe402b2cd782c6205327e2a874163d3c3ded3bb214313fc2da"
+    },
+    "figures/03_ttft.pdf": {
+      "bytes": 38160,
+      "sha256": "6fdd5c7247be066d277ce78432fde0a1eda40a12eb910518d4b9cebbc395741f"
+    },
+    "figures/04_speedup_vs_text.png": {
+      "bytes": 250692,
+      "sha256": "9b2cd5534b4df27506f010fb684748b895cd890ae6b22a425852bad7f926e3b4"
+    },
+    "figures/04_speedup_vs_text.svg": {
+      "bytes": 102146,
+      "sha256": "8df5245dfacfe1659937c359ee72d3f08a58bfbb6c103a809457885b1dbdbe11"
+    },
+    "figures/04_speedup_vs_text.pdf": {
+      "bytes": 48816,
+      "sha256": "39576c9a33c4ef994062c97ee124ef4fa17ff41974170606089a741e15c4c1c5"
+    },
+    "figures/05_ttft_breakdown.png": {
+      "bytes": 232193,
+      "sha256": "835eb9ccf3825ef032b0123bddcd8ab995cea6a385204bcc9b276f5b91964242"
+    },
+    "figures/05_ttft_breakdown.svg": {
+      "bytes": 121404,
+      "sha256": "31bf18dd360608a0603385422ce30bac042e3bbdff95aba0649462fcb7abe6e4"
+    },
+    "figures/05_ttft_breakdown.pdf": {
+      "bytes": 45575,
+      "sha256": "e07dbb9d04d0f29a66b30ae8367a63ab351c0151edafbdcd46440ec2381f0027"
+    },
+    "figures/06_effective_bandwidth.png": {
+      "bytes": 176859,
+      "sha256": "625d698d3234cd2ee32571a442ba2d5cee639290d1cb9b3a3948eebcc1b006a5"
+    },
+    "figures/06_effective_bandwidth.svg": {
+      "bytes": 74311,
+      "sha256": "dc294e79a9b908b25522154675df4091e93bb8e305f444921bfcbfb255e8bb64"
+    },
+    "figures/06_effective_bandwidth.pdf": {
+      "bytes": 35484,
+      "sha256": "37d615e105dbccf63d9438467ba7b5207a68eb0a445e2fbef6110a08673736d7"
+    },
+    "figures/07_qa_scoring.png": {
+      "bytes": 210591,
+      "sha256": "649c3e9a7aaed2deec13e445398ff456add9c5bf9f33189c20cd84d17785f190"
+    },
+    "figures/07_qa_scoring.svg": {
+      "bytes": 106878,
+      "sha256": "81fc8e235d567583edb36c01702536c67279b741cff06f0f9e20e7ffbe5ff2bb"
+    },
+    "figures/07_qa_scoring.pdf": {
+      "bytes": 44490,
+      "sha256": "7f54d1696d380ed08462e8dadc038fff6a734c6a3c69e117b347ab4045aa53dc"
+    },
+    "data/quality.csv": {
+      "bytes": 3128,
+      "sha256": "13f177c7d88e87ece9f8ac45494646b2b5bd9af952c5adbbf532a75533ca5a1f"
+    },
+    "data/qa.csv": {
+      "bytes": 344,
+      "sha256": "89dda6874d06d1a7e6618a7f1e3e536344c6633bd62d2c366bcda699ded7ce35"
+    },
+    "data/ttft.csv": {
+      "bytes": 6441,
+      "sha256": "c630f8b66bde9a0770cd5dcc66830d00a45285e320e6a4949c7175fba602cc52"
+    },
+    "data/quality.json": {
+      "bytes": 79909,
+      "sha256": "bcd887f1d189ab339d2109d9533d3892e0b59f26adbf5892538a4b8364ef5009"
+    },
+    "data/ttft.json": {
+      "bytes": 325025,
+      "sha256": "8b75dff06cce9daea52630dd7e9126cd02fac1045ae5820ad64e3676a6b6d799"
+    },
+    "data/summary.json": {
+      "bytes": 31020,
+      "sha256": "af1fc2772c90ecbf5260fdead59e3bce997a17ba8348d5c6f458c6b6dca91bbd"
+    },
+    "data/qa_selection.json": {
+      "bytes": 4889,
+      "sha256": "1a9dfe46ee6c1a8b4e2e7c74d3a3ba377a2ea0eb1df84d32e26db84625da082e"
+    },
+    "data/paired_nll.csv": {
+      "bytes": 19689,
+      "sha256": "4027678c4ce998048496882b948e58a56655ddc8e8523532354713f9d153be3e"
+    },
+    "data/qa_diagnostics.csv": {
+      "bytes": 25848,
+      "sha256": "6f5e984e4dd6894472f838ba64f00a90d249b5f184b0f2d13160c5865aacfeb6"
+    },
+    "data/qa_scoring_comparison.csv": {
+      "bytes": 839,
+      "sha256": "bce7cf23ed53e1ebf400c77e8346d6da954eabae6c0d70a4894eb7c440e41b4c"
+    },
+    "data/ttft_breakdown.csv": {
+      "bytes": 4391,
+      "sha256": "14249a044e319ae23cae0873984437b3aaeb88d8494970ee57dc0b5cd4759672"
+    },
+    "evidence/manifest.json": {
+      "bytes": 1228,
+      "sha256": "c7cb94c82ffee26a65165310a78ffdf8243488695d0c320a3cc08c6125b2a245"
+    },
+    "evidence/metadata.json": {
+      "bytes": 4750,
+      "sha256": "eb0c3892bec8fcf6a624cca1f98bbd3f18043c5c209cd90e6a0116629c4ca8c7"
+    },
+    "evidence/smoke.json": {
+      "bytes": 1436,
+      "sha256": "c0510ba7d6034c2417cdb17329f0d96dcf43fefa17027fee2d6da01da99dba7f"
+    },
+    "evidence/tests.log": {
+      "bytes": 348,
+      "sha256": "5f537906b45cbe97d24e758199d74bfbd51965ce2a93635b51327372384c4c9f"
+    },
+    "evidence/run.log": {
+      "bytes": 12937,
+      "sha256": "b61f17587180d4bb2a58cfe84483de4af99683c38e71b43cbe1965b2e87d62ef"
+    },
+    "evidence/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "evidence/artifacts.json": {
+      "bytes": 2179,
+      "sha256": "7e454aee6dd22ecb8f2945fce9b57f004e19a6b42fd99cde109dd216cf92dbf0"
+    },
+    "code/experiment.py": {
+      "bytes": 29945,
+      "sha256": "0c885225e134720f56542cc5c87592d94e4e8b4997377e3774c539b95ae9b03a"
+    },
+    "code/test_experiment.py": {
+      "bytes": 1847,
+      "sha256": "c55e85cf3c6b0b8699963c69f26fcd794299bd4e2d3be6319d4983a675b26f64"
+    },
+    "code/plot_results.py": {
+      "bytes": 4331,
+      "sha256": "11c7c76cbd45989ce1a36a73d034bb9032d9af0c9d4b75775355629f6e227919"
+    },
+    "code/finalize.py": {
+      "bytes": 5045,
+      "sha256": "83f171c99c9f120d103c3dced93df23dc346c4d2f8c9f820c7b3a8275ed6237b"
+    },
+    "code/run.sh": {
+      "bytes": 1284,
+      "sha256": "45887fbf26f464618ca5ccfa43d15aa10e612d0e94b494e2983fab191627c649"
+    },
+    "code/config.json": {
+      "bytes": 557,
+      "sha256": "60a0cbb642d4db2bf4807c17c1505c482281291995b045c8cc213a41cfb0bea6"
+    },
+    "code/README.md": {
+      "bytes": 2959,
+      "sha256": "5a3e1d103a1eacc46d11dfb04df715048188fd2c32d2073caba85546d2fe7fc7"
+    },
+    "code/status.py": {
+      "bytes": 1390,
+      "sha256": "05c9e73a1d44ada55bc999a9a6733d283e69a1db59ae77920d2ac887b39ccf83"
+    },
+    "code/build_document.py": {
+      "bytes": 44893,
+      "sha256": "5935bdda6c7f1556dc667c0fd62a9eb25a75ce0b63164bdc8b3074c94393b5c2"
+    }
+  }
+}

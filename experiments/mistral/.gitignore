@@ -1,0 +1,9 @@
+# Keep experiment sources reviewable without adding local environments or results.
+/plotdeps/
+/mplconfig/
+/torch_extensions/
+/report-assets/
+/reference/
+/migration/
+/latest-run.txt
+__pycache__/

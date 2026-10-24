@@ -1,0 +1,321 @@
+case_id,source_index,prompt_tokens,method,full_em,full_f1,first_line_em,first_line_f1,first_line,full_prediction,answers
+tqa-3,3,2010,raw,0.0,0.2,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Babylon - Ancient History - HISTORY.com
+Babylon - Ancient History -","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-3,3,2010,uniform4,0.0,0.25,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Balloon - Wikipedia
+Balloon - Wikipedia
+https://en.wikipedia.org/wiki/","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-3,3,2010,uniform8,0.0,0.2,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Babylon - Ancient History - HISTORY.com
+Babylon - Ancient History -","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-3,3,2010,cachegen1,0.0,0.13333333333333333,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Banana | Article about banana by The Free Dictionary
+Banana | Article about banana by","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-3,3,2010,cachegen2,0.0,0.2,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Babylon - Ancient History - HISTORY.com
+Babylon - Ancient History -","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-3,3,2010,cachegen3,0.0,0.2,1.0,1.0,Augustus,"Augustus
+
+
+Passage:
+Babylon - Ancient History - HISTORY.com
+Babylon - Ancient History -","[""GAIVS•IVLIVS•CAESAR•OCTAVIANVS"", ""Julius Caesar Octavianus"", ""Gaius Julius Caesar Octavianus"", ""GAIVS*IVLIVS*CAESAR*OCTAVIANVS"", ""Ceasar Augustus"", ""Gaius Octavius Thurinus"", ""Augustus Octavian Caesar"", ""Octavious"", ""Agustus"", ""Augustus"", ""Octavian Caesar"", ""Caesar Octavian"", ""IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS"", ""Avgvstvs"", ""Octavianus"", ""Octavian Augustus"", ""Augustus Ceasar"", ""Augusts Caesar"", ""Coinage reform of Augustus"", ""Augustus Caesar"", ""Emperor Augustus"", ""Emperor Augustus of Rome"", ""Gaius Julius Caesar Augustus"", ""IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS"", ""Octavius Caesar"", ""Roman Emperor Augustus"", ""Augustus, Emperor of Rome"", ""Octavius"", ""Octavian"", ""Gaius Julius Caesar Octavanius Augustus"", ""Augustan reform"", ""Caesar Octavianus"", ""Gaius Octavius Augustus"", ""Octavianus Augustus"", ""Cæsar Augustus"", ""Octavian Augustus Caesar"", ""Caesar Augustus""]"
+tqa-5,5,3396,raw,0.0,0.3076923076923077,1.0,1.0,Charlton Heston,"Charlton Heston
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (19","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-5,5,3396,uniform4,0.0,0.3076923076923077,1.0,1.0,Charlton Heston,"Charlton Heston
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (19","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-5,5,3396,uniform8,0.0,0.3076923076923077,1.0,1.0,Charlton Heston,"Charlton Heston
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (19","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-5,5,3396,cachegen1,0.0,0.3333333333333333,1.0,1.0,Charlton Heston,"Charlton Heston
+
+
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-5,5,3396,cachegen2,0.0,0.3333333333333333,1.0,1.0,Charlton Heston,"Charlton Heston
+
+
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-5,5,3396,cachegen3,0.0,0.3076923076923077,1.0,1.0,Charlton Heston,"Charlton Heston
+Passage:
+The Ten Commandments (1956) on iTunes
+The Ten Commandments (19","[""Holly Heston Rochell"", ""John Charles Carter"", ""Charleton Heston"", ""Charleston Heston"", ""Holly Rochell"", ""Chuck Heston"", ""Heston, Charlton"", ""Carlton Heston"", ""Holly Heston"", ""Charlton heston"", ""Charlton Heston""]"
+tqa-11,11,3015,raw,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-11,11,3015,uniform4,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-11,11,3015,uniform8,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-11,11,3015,cachegen1,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-11,11,3015,cachegen2,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-11,11,3015,cachegen3,0.0,0.26666666666666666,1.0,1.0,Buddy Holly,"Buddy Holly
+Passage:
+The Buddy Holly Story (1978) - Rotten Tomatoes
+Probably the best work Gary","[""Charles Hardin Holley"", ""Charles Holley"", ""Holly, Buddy"", ""Buddy Holly: A Rock and Roll Collection"", ""Buddy Holly & the Crickets"", ""Buddy holly"", ""Charles Hardin Helley"", ""Buddie Hollie"", ""Buddy Hollie"", ""Buddy Holly: A Rock & Roll Collection"", ""Holly Buddy"", ""Charles Hardin Holly"", ""Buddy Holly & The Crickets"", ""Buddy Holley"", ""Buddy holly (singer)"", ""Buddy Holly"", ""Charles Holly"", ""Charles H. Holley"", ""Charles Harden"", ""Buddie Holly"", ""Buddy Holly and the Crickets""]"
+tqa-15,15,2347,raw,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-15,15,2347,uniform4,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-15,15,2347,uniform8,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-15,15,2347,cachegen1,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-15,15,2347,cachegen2,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-15,15,2347,cachegen3,0.0,0.13333333333333333,1.0,1.0,Velocity,"Velocity
+Passage:
+The 10 Best Places to Live in the U.S.
+The 10 Best Places to Live","[""First temporal derivative of displacement"", ""Instantaneous velocity"", ""Average velocity"", ""Velocities"", ""Formula for velocity"", ""Transverse velocity"", ""Velocity vector"", ""Time-average velocity"", ""Velocity"", ""Rate of speed""]"
+tqa-21,21,1454,raw,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-21,21,1454,uniform4,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-21,21,1454,uniform8,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-21,21,1454,cachegen1,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-21,21,1454,cachegen2,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-21,21,1454,cachegen3,0.0,0.14285714285714285,0.0,0.6666666666666666,Fotheringhay Castle,"Fotheringhay Castle
+
+
+Passage:
+The 10 Best Places to Visit in the United States
+The 10 Best","[""Fotheringhay, Northamptonshire"", ""Fotheringhay""]"
+tqa-22,22,3383,raw,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1960s
+The 1960s
+The 19","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-22,22,3383,uniform4,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1960s
+The 1960s
+The 19","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-22,22,3383,uniform8,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1960s
+The 1960s
+The 19","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-22,22,3383,cachegen1,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1960s
+The 1960s
+The 19","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-22,22,3383,cachegen2,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1950s in the United Kingdom - Wikipedia
+The 1950","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-22,22,3383,cachegen3,0.0,0.0,0.0,0.0,Patricia Hayes,"Patricia Hayes
+
+
+Passage:
+The 1960s
+The 1960s
+The 19","[""Hattie jakes"", ""Hattie Jacques"", ""Josephine Edwina Jaques""]"
+tqa-28,28,3908,raw,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-28,28,3908,uniform4,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-28,28,3908,uniform8,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-28,28,3908,cachegen1,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-28,28,3908,cachegen2,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-28,28,3908,cachegen3,0.0,0.18181818181818182,1.0,1.0,Umami,"Umami
+
+
+Passage:
+The Straight Dope: What's the difference between a
+The Straight Dope: What'","[""Savory taste"", ""Umame"", ""Savouriness"", ""Xian wei"", ""Savour"", ""Umami taste"", ""Umani"", ""Savoryness"", ""Osmazome"", ""Umami"", ""Malinamnam"", ""Meaty taste"", ""Linamnam"", ""Gamchilmat""]"
+tqa-29,29,2609,raw,0.0,0.2857142857142857,1.0,1.0,Julian Fellowes,"Julian Fellowes
+Passage:
+The Great Stride Pianists on Pinterest | Jazz Age, Music ...
+1000+","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-29,29,2609,uniform4,0.0,0.0,0.0,0.0,Downton Abbey,"Downton Abbey
+Downton Abbey
+Downton Abbey
+Downton Abbey
+Downton","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-29,29,2609,uniform8,0.0,0.2857142857142857,1.0,1.0,Julian Fellowes,"Julian Fellowes
+Passage:
+The Great Stride Pianists on Pinterest | Jazz Age, Music ...
+1000+","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-29,29,2609,cachegen1,0.0,0.0,0.0,0.0,Downton Abbey,"Downton Abbey
+Downton Abbey
+Downton Abbey
+Downton Abbey
+Downton","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-29,29,2609,cachegen2,0.0,0.3076923076923077,1.0,1.0,Julian Fellowes,"Julian Fellowes
+Passage:
+The Great Stride Pianists on Pinterest | The Great Stride ...
+1000+","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-29,29,2609,cachegen3,0.0,0.2857142857142857,1.0,1.0,Julian Fellowes,"Julian Fellowes
+Passage:
+The Great Stride Pianists on Pinterest | Jazz Age, Music ...
+1000+","[""Julian Fellowes, Baron Fellowes of West Stafford"", ""JULIAN FELLOWES"", ""Julian Fellowes"", ""The Lord Fellowes of West Stafford"", ""Baron Fellowes of West Stafford""]"
+tqa-31,31,2666,raw,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-31,31,2666,uniform4,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-31,31,2666,uniform8,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-31,31,2666,cachegen1,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-31,31,2666,cachegen2,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-31,31,2666,cachegen3,0.0,0.2857142857142857,1.0,1.0,Top Gear,"Top Gear
+
+
+Passage:
+The 2010 Winter Olympics
+The 2010 Winter Olympics, officially known as the","[""Top Gear UK"", ""Top Gear (disambiguation)"", ""TopGear"", ""Top gear"", ""Top Gear"", ""Top Gear (Disambiguation)"", ""Top Gear (TV series)""]"
+tqa-32,32,1629,raw,0.0,0.15384615384615385,1.0,1.0,Train,"Train
+
+
+Passage:
+The 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"
+tqa-32,32,1629,uniform4,0.0,0.15384615384615385,1.0,1.0,Train,"Train
+
+
+Passage:
+The 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"
+tqa-32,32,1629,uniform8,0.0,0.15384615384615385,1.0,1.0,Train,"Train
+
+
+Passage:
+The 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"
+tqa-32,32,1629,cachegen1,0.0,0.16666666666666666,1.0,1.0,Train,"Train
+
+
+Passage:
+What is a cowcatcher? - Definition from WhatIs.com
+What is a cowcatcher?","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"
+tqa-32,32,1629,cachegen2,0.0,0.0,0.0,0.0,A locomotive,"A locomotive
+
+
+Passage:
+What is a cowcatcher? - Definitions.net
+What is a cowcatcher?","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"
+tqa-32,32,1629,cachegen3,0.0,0.0,0.0,0.0,A locomotive,"A locomotive
+
+
+Passage:
+The 1999 Rugby World Cup was the third Rugby World Cup, the quadren","[""A train"", ""A Train"", ""A Train (disambiguation)"", ""A-train"", ""A-Train (disambiguation)"", ""The A-Train""]"

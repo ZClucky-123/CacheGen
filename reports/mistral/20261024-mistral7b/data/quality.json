@@ -1,0 +1,2472 @@
+{
+  "status": "completed",
+  "nll_definition": "teacher-forced continuation tokens 2..32 (31 targets)",
+  "methods": [
+    "raw",
+    "uniform4",
+    "uniform8",
+    "cachegen1",
+    "cachegen2",
+    "cachegen3"
+  ],
+  "continuation": [
+    {
+      "case_id": "longchat-0-1024",
+      "source_id": 0,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.42385831475257874,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2649099975824356,
+          "decode_seconds": 0.12012780457735062
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.45606979727745056,
+          "kv_mae": 0.26064664125442505,
+          "offline_encode_seconds": 0.07008037716150284,
+          "decode_seconds": 0.03308902680873871
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.42356184124946594,
+          "kv_mae": 0.01450028270483017,
+          "offline_encode_seconds": 0.13787560909986496,
+          "decode_seconds": 0.0642191469669342
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17524105,
+          "nll": 0.4831264615058899,
+          "kv_mae": 0.30663928389549255,
+          "offline_encode_seconds": 0.04487530142068863,
+          "decode_seconds": 0.04089821130037308
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23460564,
+          "nll": 0.46133214235305786,
+          "kv_mae": 0.22637039422988892,
+          "offline_encode_seconds": 0.07922839373350143,
+          "decode_seconds": 0.05515558272600174
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30419301,
+          "nll": 0.4179755747318268,
+          "kv_mae": 0.12261652201414108,
+          "offline_encode_seconds": 0.06305916607379913,
+          "decode_seconds": 0.06966900825500488
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-1-1024",
+      "source_id": 1,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.56734299659729,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.26430922746658325,
+          "decode_seconds": 0.12271516770124435
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.5479683876037598,
+          "kv_mae": 0.26075077056884766,
+          "offline_encode_seconds": 0.06995508819818497,
+          "decode_seconds": 0.03335926681756973
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.5678809881210327,
+          "kv_mae": 0.014503734186291695,
+          "offline_encode_seconds": 0.13954730331897736,
+          "decode_seconds": 0.06454388797283173
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17537432,
+          "nll": 0.5789487957954407,
+          "kv_mae": 0.3068130612373352,
+          "offline_encode_seconds": 0.022296175360679626,
+          "decode_seconds": 0.04694696515798569
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23475309,
+          "nll": 0.5497432947158813,
+          "kv_mae": 0.22646400332450867,
+          "offline_encode_seconds": 0.03562039136886597,
+          "decode_seconds": 0.04502741992473602
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30434897,
+          "nll": 0.55914306640625,
+          "kv_mae": 0.12265054136514664,
+          "offline_encode_seconds": 0.029913991689682007,
+          "decode_seconds": 0.04815653711557388
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-2-1024",
+      "source_id": 2,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.4400762617588043,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2712152451276779,
+          "decode_seconds": 0.1254071369767189
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.4774248003959656,
+          "kv_mae": 0.25932642817497253,
+          "offline_encode_seconds": 0.07271850109100342,
+          "decode_seconds": 0.0343480259180069
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.44037893414497375,
+          "kv_mae": 0.014425331726670265,
+          "offline_encode_seconds": 0.13984575867652893,
+          "decode_seconds": 0.06410827487707138
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17551651,
+          "nll": 0.46147170662879944,
+          "kv_mae": 0.30542483925819397,
+          "offline_encode_seconds": 0.03626421093940735,
+          "decode_seconds": 0.04170699417591095
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23490079,
+          "nll": 0.4455113112926483,
+          "kv_mae": 0.22524163126945496,
+          "offline_encode_seconds": 0.031152211129665375,
+          "decode_seconds": 0.04273369908332825
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30452710,
+          "nll": 0.40421193838119507,
+          "kv_mae": 0.12197965383529663,
+          "offline_encode_seconds": 0.054197631776332855,
+          "decode_seconds": 0.04794693738222122
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-3-1024",
+      "source_id": 3,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.5537755489349365,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2140592485666275,
+          "decode_seconds": 0.10177675634622574
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.55592942237854,
+          "kv_mae": 0.2609044313430786,
+          "offline_encode_seconds": 0.059625498950481415,
+          "decode_seconds": 0.026945970952510834
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.5547571778297424,
+          "kv_mae": 0.014517933130264282,
+          "offline_encode_seconds": 0.11981671303510666,
+          "decode_seconds": 0.05772288143634796
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17522114,
+          "nll": 0.491778701543808,
+          "kv_mae": 0.3069517910480499,
+          "offline_encode_seconds": 0.030831173062324524,
+          "decode_seconds": 0.04139941930770874
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23459714,
+          "nll": 0.5783851742744446,
+          "kv_mae": 0.22663678228855133,
+          "offline_encode_seconds": 0.03471419960260391,
+          "decode_seconds": 0.04218006879091263
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30415255,
+          "nll": 0.5540130734443665,
+          "kv_mae": 0.12276749312877655,
+          "offline_encode_seconds": 0.06331232935190201,
+          "decode_seconds": 0.0474875271320343
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-4-1024",
+      "source_id": 4,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.5765969157218933,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2685144990682602,
+          "decode_seconds": 0.12341152131557465
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.5814194679260254,
+          "kv_mae": 0.25817352533340454,
+          "offline_encode_seconds": 0.07112205773591995,
+          "decode_seconds": 0.033137932419776917
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.5758768916130066,
+          "kv_mae": 0.014355817809700966,
+          "offline_encode_seconds": 0.1387915387749672,
+          "decode_seconds": 0.06355483084917068
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17647042,
+          "nll": 0.5948598384857178,
+          "kv_mae": 0.3041522800922394,
+          "offline_encode_seconds": 0.04134249687194824,
+          "decode_seconds": 0.042752839624881744
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23590073,
+          "nll": 0.5836314558982849,
+          "kv_mae": 0.22425927221775055,
+          "offline_encode_seconds": 0.02660641074180603,
+          "decode_seconds": 0.045214250683784485
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30556237,
+          "nll": 0.6012580394744873,
+          "kv_mae": 0.12140203267335892,
+          "offline_encode_seconds": 0.033645763993263245,
+          "decode_seconds": 0.04915614426136017
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-5-1024",
+      "source_id": 5,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.6045786738395691,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2683209702372551,
+          "decode_seconds": 0.1264965608716011
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.6343398690223694,
+          "kv_mae": 0.2596989870071411,
+          "offline_encode_seconds": 0.027374424040317535,
+          "decode_seconds": 0.011988930404186249
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.6047549247741699,
+          "kv_mae": 0.01444302499294281,
+          "offline_encode_seconds": 0.13788987696170807,
+          "decode_seconds": 0.06385824084281921
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17543530,
+          "nll": 0.6920992732048035,
+          "kv_mae": 0.3058473467826843,
+          "offline_encode_seconds": 0.045011915266513824,
+          "decode_seconds": 0.04167288541793823
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23479892,
+          "nll": 0.6545354127883911,
+          "kv_mae": 0.22567011415958405,
+          "offline_encode_seconds": 0.03171052783727646,
+          "decode_seconds": 0.044631488621234894
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30437614,
+          "nll": 0.6110345721244812,
+          "kv_mae": 0.1221408098936081,
+          "offline_encode_seconds": 0.07076000422239304,
+          "decode_seconds": 0.04850013554096222
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-6-1024",
+      "source_id": 6,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.4674725830554962,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.26974086463451385,
+          "decode_seconds": 0.12239482253789902
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.4814594089984894,
+          "kv_mae": 0.26125603914260864,
+          "offline_encode_seconds": 0.07131349295377731,
+          "decode_seconds": 0.03374864161014557
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.46936461329460144,
+          "kv_mae": 0.014537455514073372,
+          "offline_encode_seconds": 0.13528036326169968,
+          "decode_seconds": 0.06264372169971466
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17504491,
+          "nll": 0.5082284212112427,
+          "kv_mae": 0.3074392080307007,
+          "offline_encode_seconds": 0.026194162666797638,
+          "decode_seconds": 0.04211531579494476
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23440529,
+          "nll": 0.47330859303474426,
+          "kv_mae": 0.22701884806156158,
+          "offline_encode_seconds": 0.035719744861125946,
+          "decode_seconds": 0.04270783066749573
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30397029,
+          "nll": 0.47225281596183777,
+          "kv_mae": 0.12291529029607773,
+          "offline_encode_seconds": 0.03703851252794266,
+          "decode_seconds": 0.048567622900009155
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-7-1024",
+      "source_id": 7,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.6129550933837891,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.2823250964283943,
+          "decode_seconds": 0.1275225728750229
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.653069794178009,
+          "kv_mae": 0.2591387927532196,
+          "offline_encode_seconds": 0.055430375039577484,
+          "decode_seconds": 0.011738434433937073
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.6156067252159119,
+          "kv_mae": 0.014415914192795753,
+          "offline_encode_seconds": 0.13556256145238876,
+          "decode_seconds": 0.06217773258686066
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17598380,
+          "nll": 0.6818581223487854,
+          "kv_mae": 0.3052111864089966,
+          "offline_encode_seconds": 0.028455443680286407,
+          "decode_seconds": 0.041616290807724
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23540386,
+          "nll": 0.632240891456604,
+          "kv_mae": 0.2252073436975479,
+          "offline_encode_seconds": 0.02340833842754364,
+          "decode_seconds": 0.04516821354627609
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30505215,
+          "nll": 0.5715454816818237,
+          "kv_mae": 0.12189827114343643,
+          "offline_encode_seconds": 0.04484947770833969,
+          "decode_seconds": 0.04722016304731369
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-8-1024",
+      "source_id": 8,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.3825429677963257,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.26464904844760895,
+          "decode_seconds": 0.1210971549153328
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.3839443325996399,
+          "kv_mae": 0.2609376907348633,
+          "offline_encode_seconds": 0.069854237139225,
+          "decode_seconds": 0.032616764307022095
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.3838611841201782,
+          "kv_mae": 0.0145152872428298,
+          "offline_encode_seconds": 0.13338366895914078,
+          "decode_seconds": 0.06105975806713104
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17537370,
+          "nll": 0.4063037037849426,
+          "kv_mae": 0.30704444646835327,
+          "offline_encode_seconds": 0.03327520191669464,
+          "decode_seconds": 0.044664375483989716
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23476374,
+          "nll": 0.38532695174217224,
+          "kv_mae": 0.2265617996454239,
+          "offline_encode_seconds": 0.06667524576187134,
+          "decode_seconds": 0.04607069492340088
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30438983,
+          "nll": 0.3775287866592407,
+          "kv_mae": 0.1227220967411995,
+          "offline_encode_seconds": 0.07283158600330353,
+          "decode_seconds": 0.047579579055309296
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-9-1024",
+      "source_id": 9,
+      "context_tokens": 1024,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 134217728,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 134218908,
+          "nll": 0.6501206755638123,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.26727502048015594,
+          "decode_seconds": 0.12265142053365707
+        },
+        {
+          "method": "uniform4",
+          "bytes": 33687000,
+          "nll": 0.620010256767273,
+          "kv_mae": 0.25925686955451965,
+          "offline_encode_seconds": 0.07158108055591583,
+          "decode_seconds": 0.0338808074593544
+        },
+        {
+          "method": "uniform8",
+          "bytes": 67241432,
+          "nll": 0.6509596109390259,
+          "kv_mae": 0.014416798949241638,
+          "offline_encode_seconds": 0.13503888994455338,
+          "decode_seconds": 0.06244608014822006
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 17551588,
+          "nll": 0.550070583820343,
+          "kv_mae": 0.30525290966033936,
+          "offline_encode_seconds": 0.051030345261096954,
+          "decode_seconds": 0.04199160635471344
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 23487740,
+          "nll": 0.6242400407791138,
+          "kv_mae": 0.22528505325317383,
+          "offline_encode_seconds": 0.20422834157943726,
+          "decode_seconds": 0.045642413198947906
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 30447184,
+          "nll": 0.6252471804618835,
+          "kv_mae": 0.1219489574432373,
+          "offline_encode_seconds": 0.06976214051246643,
+          "decode_seconds": 0.04804904758930206
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-0-2048",
+      "source_id": 0,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.25016167759895325,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5320931971073151,
+          "decode_seconds": 0.2407432496547699
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.21684882044792175,
+          "kv_mae": 0.26724621653556824,
+          "offline_encode_seconds": 0.14051175117492676,
+          "decode_seconds": 0.06616532802581787
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.2513839602470398,
+          "kv_mae": 0.014885898679494858,
+          "offline_encode_seconds": 0.270038403570652,
+          "decode_seconds": 0.1353069543838501
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32799545,
+          "nll": 0.25240984559059143,
+          "kv_mae": 0.31414133310317993,
+          "offline_encode_seconds": 0.07798846065998077,
+          "decode_seconds": 0.10247063636779785
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42607788,
+          "nll": 0.22874926030635834,
+          "kv_mae": 0.23231081664562225,
+          "offline_encode_seconds": 0.0948888510465622,
+          "decode_seconds": 0.10135237872600555
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56571180,
+          "nll": 0.23477619886398315,
+          "kv_mae": 0.1258617341518402,
+          "offline_encode_seconds": 0.12228211760520935,
+          "decode_seconds": 0.09758904576301575
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-1-2048",
+      "source_id": 1,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.6606036424636841,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.4311252608895302,
+          "decode_seconds": 0.2030322030186653
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.6564450860023499,
+          "kv_mae": 0.26763391494750977,
+          "offline_encode_seconds": 0.11629804968833923,
+          "decode_seconds": 0.057377442717552185
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.6613480448722839,
+          "kv_mae": 0.014903832226991653,
+          "offline_encode_seconds": 0.21990220248699188,
+          "decode_seconds": 0.11300778388977051
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32784585,
+          "nll": 0.639305830001831,
+          "kv_mae": 0.31468498706817627,
+          "offline_encode_seconds": 0.0606892928481102,
+          "decode_seconds": 0.09016289561986923
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42590135,
+          "nll": 0.6567648649215698,
+          "kv_mae": 0.23278100788593292,
+          "offline_encode_seconds": 0.08821509778499603,
+          "decode_seconds": 0.09023430943489075
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56549618,
+          "nll": 0.6538506746292114,
+          "kv_mae": 0.12604086101055145,
+          "offline_encode_seconds": 0.08180195838212967,
+          "decode_seconds": 0.09413699060678482
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-2-2048",
+      "source_id": 2,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.47090306878089905,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5381715521216393,
+          "decode_seconds": 0.2476838380098343
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.5010282397270203,
+          "kv_mae": 0.2634456157684326,
+          "offline_encode_seconds": 0.1032712534070015,
+          "decode_seconds": 0.07001230120658875
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.4689710736274719,
+          "kv_mae": 0.014659510925412178,
+          "offline_encode_seconds": 0.27732663601636887,
+          "decode_seconds": 0.13075584918260574
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 33050522,
+          "nll": 0.43854427337646484,
+          "kv_mae": 0.31009626388549805,
+          "offline_encode_seconds": 0.08887016028165817,
+          "decode_seconds": 0.08315423876047134
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42875069,
+          "nll": 0.5090206861495972,
+          "kv_mae": 0.22897255420684814,
+          "offline_encode_seconds": 0.10470035672187805,
+          "decode_seconds": 0.08844716101884842
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56863186,
+          "nll": 0.4637729525566101,
+          "kv_mae": 0.12398641556501389,
+          "offline_encode_seconds": 0.11029109358787537,
+          "decode_seconds": 0.10227306932210922
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-3-2048",
+      "source_id": 3,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.7282006144523621,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5360259935259819,
+          "decode_seconds": 0.245624877512455
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.7406811714172363,
+          "kv_mae": 0.26613080501556396,
+          "offline_encode_seconds": 0.14129751175642014,
+          "decode_seconds": 0.06828901171684265
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.7273034453392029,
+          "kv_mae": 0.014818701893091202,
+          "offline_encode_seconds": 0.29358430951833725,
+          "decode_seconds": 0.12601599097251892
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32852835,
+          "nll": 0.7855014204978943,
+          "kv_mae": 0.31301167607307434,
+          "offline_encode_seconds": 0.0635722354054451,
+          "decode_seconds": 0.08235467225313187
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42661542,
+          "nll": 0.7462490200996399,
+          "kv_mae": 0.2313441038131714,
+          "offline_encode_seconds": 0.06493891775608063,
+          "decode_seconds": 0.08489479869604111
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56625235,
+          "nll": 0.7566240429878235,
+          "kv_mae": 0.12532085180282593,
+          "offline_encode_seconds": 0.14215432852506638,
+          "decode_seconds": 0.11053948849439621
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-4-2048",
+      "source_id": 4,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.504211962223053,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5572464168071747,
+          "decode_seconds": 0.2669265493750572
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.5072080492973328,
+          "kv_mae": 0.26428666710853577,
+          "offline_encode_seconds": 0.15459927916526794,
+          "decode_seconds": 0.07197358459234238
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.5042287111282349,
+          "kv_mae": 0.014710955321788788,
+          "offline_encode_seconds": 0.28629349172115326,
+          "decode_seconds": 0.12318798154592514
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 33038161,
+          "nll": 0.4741416573524475,
+          "kv_mae": 0.31102991104125977,
+          "offline_encode_seconds": 0.03833243250846863,
+          "decode_seconds": 0.08464378118515015
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42858502,
+          "nll": 0.4947368800640106,
+          "kv_mae": 0.22972342371940613,
+          "offline_encode_seconds": 0.11348140239715576,
+          "decode_seconds": 0.1100478246808052
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56840508,
+          "nll": 0.5083580017089844,
+          "kv_mae": 0.1244155764579773,
+          "offline_encode_seconds": 0.12083645910024643,
+          "decode_seconds": 0.12702162563800812
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-5-2048",
+      "source_id": 5,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 1.1382818222045898,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5298671871423721,
+          "decode_seconds": 0.2421066164970398
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 1.123420238494873,
+          "kv_mae": 0.26559126377105713,
+          "offline_encode_seconds": 0.14041873067617416,
+          "decode_seconds": 0.06521148979663849
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 1.1435918807983398,
+          "kv_mae": 0.014781495556235313,
+          "offline_encode_seconds": 0.2896631136536598,
+          "decode_seconds": 0.13422346860170364
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32897739,
+          "nll": 1.0735199451446533,
+          "kv_mae": 0.3124442994594574,
+          "offline_encode_seconds": 0.0419822633266449,
+          "decode_seconds": 0.08372362703084946
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42710475,
+          "nll": 1.1259257793426514,
+          "kv_mae": 0.23084300756454468,
+          "offline_encode_seconds": 0.0996457114815712,
+          "decode_seconds": 0.08859695494174957
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56682338,
+          "nll": 1.118607521057129,
+          "kv_mae": 0.12501181662082672,
+          "offline_encode_seconds": 0.11126428097486496,
+          "decode_seconds": 0.10431688278913498
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-6-2048",
+      "source_id": 6,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.4577620327472687,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5699561238288879,
+          "decode_seconds": 0.24945463240146637
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.41155582666397095,
+          "kv_mae": 0.2659619152545929,
+          "offline_encode_seconds": 0.14739760011434555,
+          "decode_seconds": 0.06916291266679764
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.4564594030380249,
+          "kv_mae": 0.014809874817728996,
+          "offline_encode_seconds": 0.2271035611629486,
+          "decode_seconds": 0.11031753569841385
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32863876,
+          "nll": 0.42333775758743286,
+          "kv_mae": 0.31278663873672485,
+          "offline_encode_seconds": 0.04285766929388046,
+          "decode_seconds": 0.0794747844338417
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42676746,
+          "nll": 0.42434924840927124,
+          "kv_mae": 0.23119798302650452,
+          "offline_encode_seconds": 0.10797367990016937,
+          "decode_seconds": 0.1123121902346611
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56646216,
+          "nll": 0.46621981263160706,
+          "kv_mae": 0.125227153301239,
+          "offline_encode_seconds": 0.13184644281864166,
+          "decode_seconds": 0.10836619138717651
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-7-2048",
+      "source_id": 7,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.29015296697616577,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.5746596679091454,
+          "decode_seconds": 0.2523907870054245
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.31940722465515137,
+          "kv_mae": 0.2651106119155884,
+          "offline_encode_seconds": 0.15726586431264877,
+          "decode_seconds": 0.06912887096405029
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.2911475598812103,
+          "kv_mae": 0.014757318422198296,
+          "offline_encode_seconds": 0.28285033255815506,
+          "decode_seconds": 0.13139314949512482
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32909487,
+          "nll": 0.37365517020225525,
+          "kv_mae": 0.3119685649871826,
+          "offline_encode_seconds": 0.10065876692533493,
+          "decode_seconds": 0.11209981888532639
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42722668,
+          "nll": 0.3285348415374756,
+          "kv_mae": 0.23059245944023132,
+          "offline_encode_seconds": 0.08536779135465622,
+          "decode_seconds": 0.09753618389368057
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56693241,
+          "nll": 0.28705817461013794,
+          "kv_mae": 0.12481044977903366,
+          "offline_encode_seconds": 0.15656765550374985,
+          "decode_seconds": 0.12285266816616058
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-8-2048",
+      "source_id": 8,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 1.0377711057662964,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.543248251080513,
+          "decode_seconds": 0.2503390237689018
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 1.008636474609375,
+          "kv_mae": 0.266933411359787,
+          "offline_encode_seconds": 0.1456563025712967,
+          "decode_seconds": 0.0696696788072586
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 1.0387946367263794,
+          "kv_mae": 0.014862324111163616,
+          "offline_encode_seconds": 0.2783372104167938,
+          "decode_seconds": 0.12878716737031937
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32870501,
+          "nll": 1.0441027879714966,
+          "kv_mae": 0.3139038681983948,
+          "offline_encode_seconds": 0.06418526917695999,
+          "decode_seconds": 0.09904372692108154
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42687957,
+          "nll": 1.0747896432876587,
+          "kv_mae": 0.2320491373538971,
+          "offline_encode_seconds": 0.09732282906770706,
+          "decode_seconds": 0.08847551792860031
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56660744,
+          "nll": 1.034232497215271,
+          "kv_mae": 0.12568020820617676,
+          "offline_encode_seconds": 0.08419099450111389,
+          "decode_seconds": 0.08689812570810318
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-9-2048",
+      "source_id": 9,
+      "context_tokens": 2048,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 268435456,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 268436636,
+          "nll": 0.23161794245243073,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.44116073846817017,
+          "decode_seconds": 0.21335690468549728
+        },
+        {
+          "method": "uniform4",
+          "bytes": 67372504,
+          "nll": 0.23687903583049774,
+          "kv_mae": 0.26388517022132874,
+          "offline_encode_seconds": 0.12190273404121399,
+          "decode_seconds": 0.059059686958789825
+        },
+        {
+          "method": "uniform8",
+          "bytes": 134481368,
+          "nll": 0.23267455399036407,
+          "kv_mae": 0.014686565846204758,
+          "offline_encode_seconds": 0.22787611186504364,
+          "decode_seconds": 0.11048942804336548
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 32966581,
+          "nll": 0.2338518351316452,
+          "kv_mae": 0.3105894923210144,
+          "offline_encode_seconds": 0.07745149731636047,
+          "decode_seconds": 0.08287131786346436
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 42778641,
+          "nll": 0.23421210050582886,
+          "kv_mae": 0.2294398546218872,
+          "offline_encode_seconds": 0.07528265565633774,
+          "decode_seconds": 0.09991644322872162
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56753864,
+          "nll": 0.23413071036338806,
+          "kv_mae": 0.1241973489522934,
+          "offline_encode_seconds": 0.10492846369743347,
+          "decode_seconds": 0.12722467631101608
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-0-4096",
+      "source_id": 0,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.3853866755962372,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.0812851190567017,
+          "decode_seconds": 0.4966786280274391
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.3875483274459839,
+          "kv_mae": 0.27009159326553345,
+          "offline_encode_seconds": 0.28945616632699966,
+          "decode_seconds": 0.13669270277023315
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.3851041793823242,
+          "kv_mae": 0.015046615153551102,
+          "offline_encode_seconds": 0.5885853543877602,
+          "decode_seconds": 0.2657509595155716
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63649825,
+          "nll": 0.39020127058029175,
+          "kv_mae": 0.3175163269042969,
+          "offline_encode_seconds": 0.13422156870365143,
+          "decode_seconds": 0.17052972316741943
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81227759,
+          "nll": 0.3783714473247528,
+          "kv_mae": 0.23481625318527222,
+          "offline_encode_seconds": 0.1318894550204277,
+          "decode_seconds": 0.17188767343759537
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109230767,
+          "nll": 0.3857925832271576,
+          "kv_mae": 0.12723173201084137,
+          "offline_encode_seconds": 0.16233572363853455,
+          "decode_seconds": 0.19014909863471985
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-1-4096",
+      "source_id": 1,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.48474937677383423,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.0810757353901863,
+          "decode_seconds": 0.4955943748354912
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.46060439944267273,
+          "kv_mae": 0.27079933881759644,
+          "offline_encode_seconds": 0.2964290827512741,
+          "decode_seconds": 0.1377866268157959
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.48280543088912964,
+          "kv_mae": 0.015087454579770565,
+          "offline_encode_seconds": 0.5608885958790779,
+          "decode_seconds": 0.25797588378190994
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63652291,
+          "nll": 0.46171101927757263,
+          "kv_mae": 0.3183594346046448,
+          "offline_encode_seconds": 0.11996714025735855,
+          "decode_seconds": 0.15705013275146484
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81237705,
+          "nll": 0.4722519516944885,
+          "kv_mae": 0.2355244755744934,
+          "offline_encode_seconds": 0.14379730820655823,
+          "decode_seconds": 0.1618095189332962
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109242682,
+          "nll": 0.48142045736312866,
+          "kv_mae": 0.12758994102478027,
+          "offline_encode_seconds": 0.1602858230471611,
+          "decode_seconds": 0.19323395192623138
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-2-4096",
+      "source_id": 2,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.8816506266593933,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.9052475243806839,
+          "decode_seconds": 0.4125104695558548
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.9379812479019165,
+          "kv_mae": 0.2701736390590668,
+          "offline_encode_seconds": 0.23076865077018738,
+          "decode_seconds": 0.11251271516084671
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.8789039850234985,
+          "kv_mae": 0.015052485279738903,
+          "offline_encode_seconds": 0.5620649829506874,
+          "decode_seconds": 0.2734834998846054
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63696705,
+          "nll": 0.8817041516304016,
+          "kv_mae": 0.31772756576538086,
+          "offline_encode_seconds": 0.11000381410121918,
+          "decode_seconds": 0.15647875517606735
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81280275,
+          "nll": 0.9561446905136108,
+          "kv_mae": 0.23499825596809387,
+          "offline_encode_seconds": 0.12997739762067795,
+          "decode_seconds": 0.17675874382257462
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109286452,
+          "nll": 0.867200493812561,
+          "kv_mae": 0.1273055076599121,
+          "offline_encode_seconds": 0.1702551245689392,
+          "decode_seconds": 0.17358346283435822
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-3-4096",
+      "source_id": 3,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.42913833260536194,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.0681260973215103,
+          "decode_seconds": 0.4855363667011261
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.5172192454338074,
+          "kv_mae": 0.27034056186676025,
+          "offline_encode_seconds": 0.28863292932510376,
+          "decode_seconds": 0.13332296907901764
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.4305095374584198,
+          "kv_mae": 0.015058891847729683,
+          "offline_encode_seconds": 0.5466773137450218,
+          "decode_seconds": 0.25016893446445465
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63580291,
+          "nll": 0.5587509870529175,
+          "kv_mae": 0.31788820028305054,
+          "offline_encode_seconds": 0.15116151422262192,
+          "decode_seconds": 0.15109940618276596
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81149110,
+          "nll": 0.4937712252140045,
+          "kv_mae": 0.2351415753364563,
+          "offline_encode_seconds": 0.15809299796819687,
+          "decode_seconds": 0.18911201506853104
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109136290,
+          "nll": 0.44146841764450073,
+          "kv_mae": 0.12735667824745178,
+          "offline_encode_seconds": 0.1549978330731392,
+          "decode_seconds": 0.20228562504053116
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-4-4096",
+      "source_id": 4,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.6361770033836365,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.8700787648558617,
+          "decode_seconds": 0.42043494433164597
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.64182448387146,
+          "kv_mae": 0.26885688304901123,
+          "offline_encode_seconds": 0.2571735978126526,
+          "decode_seconds": 0.1285504326224327
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.6370093822479248,
+          "kv_mae": 0.014973070472478867,
+          "offline_encode_seconds": 0.5600924417376518,
+          "decode_seconds": 0.2624579966068268
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63903616,
+          "nll": 0.6683661341667175,
+          "kv_mae": 0.31626465916633606,
+          "offline_encode_seconds": 0.13246692717075348,
+          "decode_seconds": 0.15706941485404968
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81498526,
+          "nll": 0.639375627040863,
+          "kv_mae": 0.2337581068277359,
+          "offline_encode_seconds": 0.13949763774871826,
+          "decode_seconds": 0.16470829397439957
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109521629,
+          "nll": 0.6344092488288879,
+          "kv_mae": 0.12662047147750854,
+          "offline_encode_seconds": 0.1763906031847,
+          "decode_seconds": 0.2570718005299568
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-5-4096",
+      "source_id": 5,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.8491619229316711,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.0689526051282883,
+          "decode_seconds": 0.49237266927957535
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.8546922206878662,
+          "kv_mae": 0.26878583431243896,
+          "offline_encode_seconds": 0.28675440698862076,
+          "decode_seconds": 0.1388806626200676
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.8486625552177429,
+          "kv_mae": 0.014970142394304276,
+          "offline_encode_seconds": 0.601673886179924,
+          "decode_seconds": 0.28141628205776215
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63763290,
+          "nll": 0.9328077435493469,
+          "kv_mae": 0.3161507844924927,
+          "offline_encode_seconds": 0.11458531767129898,
+          "decode_seconds": 0.16617123037576675
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81346150,
+          "nll": 0.8419567346572876,
+          "kv_mae": 0.2336750328540802,
+          "offline_encode_seconds": 0.12192756682634354,
+          "decode_seconds": 0.1534576490521431
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109359095,
+          "nll": 0.8823898434638977,
+          "kv_mae": 0.12659157812595367,
+          "offline_encode_seconds": 0.15163486450910568,
+          "decode_seconds": 0.20517196506261826
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-6-4096",
+      "source_id": 6,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.5041728019714355,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.0839998051524162,
+          "decode_seconds": 0.4901690259575844
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.4927959144115448,
+          "kv_mae": 0.27004706859588623,
+          "offline_encode_seconds": 0.2934534177184105,
+          "decode_seconds": 0.1385945975780487
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.5056756734848022,
+          "kv_mae": 0.015043936669826508,
+          "offline_encode_seconds": 0.5599960088729858,
+          "decode_seconds": 0.2550426125526428
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63628909,
+          "nll": 0.4965043365955353,
+          "kv_mae": 0.31748902797698975,
+          "offline_encode_seconds": 0.12222090363502502,
+          "decode_seconds": 0.15879488736391068
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81202230,
+          "nll": 0.49819234013557434,
+          "kv_mae": 0.23479729890823364,
+          "offline_encode_seconds": 0.14656034111976624,
+          "decode_seconds": 0.1654970943927765
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109198669,
+          "nll": 0.49925482273101807,
+          "kv_mae": 0.12721450626850128,
+          "offline_encode_seconds": 0.1657721996307373,
+          "decode_seconds": 0.1760440245270729
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-7-4096",
+      "source_id": 7,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.3652730882167816,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.088584378361702,
+          "decode_seconds": 0.5354147702455521
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.3400186598300934,
+          "kv_mae": 0.27036723494529724,
+          "offline_encode_seconds": 0.32006388902664185,
+          "decode_seconds": 0.1158800721168518
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.36617791652679443,
+          "kv_mae": 0.01506197638809681,
+          "offline_encode_seconds": 0.44402312487363815,
+          "decode_seconds": 0.21428682655096054
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63649852,
+          "nll": 0.31750109791755676,
+          "kv_mae": 0.3179371953010559,
+          "offline_encode_seconds": 0.09397052973508835,
+          "decode_seconds": 0.14686909317970276
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81231544,
+          "nll": 0.3383156955242157,
+          "kv_mae": 0.23518270254135132,
+          "offline_encode_seconds": 0.11319885402917862,
+          "decode_seconds": 0.1656002327799797
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109231898,
+          "nll": 0.3456668257713318,
+          "kv_mae": 0.12737491726875305,
+          "offline_encode_seconds": 0.13580888509750366,
+          "decode_seconds": 0.16323193907737732
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-8-4096",
+      "source_id": 8,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 1.1168452501296997,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 0.8608706817030907,
+          "decode_seconds": 0.4094626307487488
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 1.1398980617523193,
+          "kv_mae": 0.27039748430252075,
+          "offline_encode_seconds": 0.2386297732591629,
+          "decode_seconds": 0.11624566465616226
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 1.1188368797302246,
+          "kv_mae": 0.01506313867866993,
+          "offline_encode_seconds": 0.4433428943157196,
+          "decode_seconds": 0.2177637591958046
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63705204,
+          "nll": 1.180498719215393,
+          "kv_mae": 0.31796228885650635,
+          "offline_encode_seconds": 0.10270172357559204,
+          "decode_seconds": 0.14476405084133148
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81294069,
+          "nll": 1.1575429439544678,
+          "kv_mae": 0.23516246676445007,
+          "offline_encode_seconds": 0.11720951646566391,
+          "decode_seconds": 0.15182500332593918
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109305078,
+          "nll": 1.1156327724456787,
+          "kv_mae": 0.12738806009292603,
+          "offline_encode_seconds": 0.15268901735544205,
+          "decode_seconds": 0.17033284902572632
+        }
+      ]
+    },
+    {
+      "case_id": "longchat-9-4096",
+      "source_id": 9,
+      "context_tokens": 4096,
+      "continuation_tokens_scored": 31,
+      "raw_tensor_bytes": 536870912,
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 536872092,
+          "nll": 0.3547295331954956,
+          "kv_mae": 0.0,
+          "offline_encode_seconds": 1.096669726073742,
+          "decode_seconds": 0.4085985794663429
+        },
+        {
+          "method": "uniform4",
+          "bytes": 134743512,
+          "nll": 0.33977892994880676,
+          "kv_mae": 0.2687304615974426,
+          "offline_encode_seconds": 0.23187630623579025,
+          "decode_seconds": 0.11332627385854721
+        },
+        {
+          "method": "uniform8",
+          "bytes": 268961240,
+          "nll": 0.3545515239238739,
+          "kv_mae": 0.014967167750000954,
+          "offline_encode_seconds": 0.4394940212368965,
+          "decode_seconds": 0.21121945977210999
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63830813,
+          "nll": 0.3563256561756134,
+          "kv_mae": 0.3160959482192993,
+          "offline_encode_seconds": 0.11474977433681488,
+          "decode_seconds": 0.15903540700674057
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 81414738,
+          "nll": 0.3528144061565399,
+          "kv_mae": 0.23365412652492523,
+          "offline_encode_seconds": 0.11878257244825363,
+          "decode_seconds": 0.15279275923967361
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 109428240,
+          "nll": 0.36137208342552185,
+          "kv_mae": 0.12658002972602844,
+          "offline_encode_seconds": 0.15546969324350357,
+          "decode_seconds": 0.22326414287090302
+        }
+      ]
+    }
+  ],
+  "qa": [
+    {
+      "case_id": "tqa-3",
+      "source_index": 3,
+      "prompt_tokens": 2010,
+      "answers": [
+        "GAIVS•IVLIVS•CAESAR•OCTAVIANVS",
+        "Julius Caesar Octavianus",
+        "Gaius Julius Caesar Octavianus",
+        "GAIVS*IVLIVS*CAESAR*OCTAVIANVS",
+        "Ceasar Augustus",
+        "Gaius Octavius Thurinus",
+        "Augustus Octavian Caesar",
+        "Octavious",
+        "Agustus",
+        "Augustus",
+        "Octavian Caesar",
+        "Caesar Octavian",
+        "IMPERATOR•CAESAR•DIVI•FILIVS•AVGVSTVS",
+        "Avgvstvs",
+        "Octavianus",
+        "Octavian Augustus",
+        "Augustus Ceasar",
+        "Augusts Caesar",
+        "Coinage reform of Augustus",
+        "Augustus Caesar",
+        "Emperor Augustus",
+        "Emperor Augustus of Rome",
+        "Gaius Julius Caesar Augustus",
+        "IMPERATOR*CAESAR*DIVI*FILIVS*AVGVSTVS",
+        "Octavius Caesar",
+        "Roman Emperor Augustus",
+        "Augustus, Emperor of Rome",
+        "Octavius",
+        "Octavian",
+        "Gaius Julius Caesar Octavanius Augustus",
+        "Augustan reform",
+        "Caesar Octavianus",
+        "Gaius Octavius Augustus",
+        "Octavianus Augustus",
+        "Cæsar Augustus",
+        "Octavian Augustus Caesar",
+        "Caesar Augustus"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 263324828,
+          "prediction": "Augustus\n\n\nPassage:\nBabylon - Ancient History - HISTORY.com\nBabylon - Ancient History -",
+          "em": 0.0,
+          "f1": 0.2,
+          "offline_encode_seconds": 0.5405280813574791,
+          "decode_seconds": 0.25078054517507553
+        },
+        {
+          "method": "uniform4",
+          "bytes": 66089560,
+          "prediction": "Augustus\n\n\nPassage:\nBalloon - Wikipedia\nBalloon - Wikipedia\nhttps://en.wikipedia.org/wiki/",
+          "em": 0.0,
+          "f1": 0.25,
+          "offline_encode_seconds": 0.14418842643499374,
+          "decode_seconds": 0.06748140603303909
+        },
+        {
+          "method": "uniform8",
+          "bytes": 131920472,
+          "prediction": "Augustus\n\n\nPassage:\nBabylon - Ancient History - HISTORY.com\nBabylon - Ancient History -",
+          "em": 0.0,
+          "f1": 0.2,
+          "offline_encode_seconds": 0.2723546698689461,
+          "decode_seconds": 0.11890579760074615
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 33377290,
+          "prediction": "Augustus\n\n\nPassage:\nBanana | Article about banana by The Free Dictionary\nBanana | Article about banana by",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.057724542915821075,
+          "decode_seconds": 0.07411716133356094
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 43109563,
+          "prediction": "Augustus\n\n\nPassage:\nBabylon - Ancient History - HISTORY.com\nBabylon - Ancient History -",
+          "em": 0.0,
+          "f1": 0.2,
+          "offline_encode_seconds": 0.06330261379480362,
+          "decode_seconds": 0.0778217762708664
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 56905716,
+          "prediction": "Augustus\n\n\nPassage:\nBabylon - Ancient History - HISTORY.com\nBabylon - Ancient History -",
+          "em": 0.0,
+          "f1": 0.2,
+          "offline_encode_seconds": 0.10107100009918213,
+          "decode_seconds": 0.0864451453089714
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-5",
+      "source_index": 5,
+      "prompt_tokens": 3396,
+      "answers": [
+        "Holly Heston Rochell",
+        "John Charles Carter",
+        "Charleton Heston",
+        "Charleston Heston",
+        "Holly Rochell",
+        "Chuck Heston",
+        "Heston, Charlton",
+        "Carlton Heston",
+        "Holly Heston",
+        "Charlton heston",
+        "Charlton Heston"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 444990620,
+          "prediction": "Charlton Heston\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (19",
+          "em": 0.0,
+          "f1": 0.3076923076923077,
+          "offline_encode_seconds": 0.9027518406510353,
+          "decode_seconds": 0.40563247352838516
+        },
+        {
+          "method": "uniform4",
+          "bytes": 111683416,
+          "prediction": "Charlton Heston\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (19",
+          "em": 0.0,
+          "f1": 0.3076923076923077,
+          "offline_encode_seconds": 0.23896262049674988,
+          "decode_seconds": 0.11298761516809464
+        },
+        {
+          "method": "uniform8",
+          "bytes": 222930776,
+          "prediction": "Charlton Heston\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (19",
+          "em": 0.0,
+          "f1": 0.3076923076923077,
+          "offline_encode_seconds": 0.4573625177145004,
+          "decode_seconds": 0.2353500872850418
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 55796428,
+          "prediction": "Charlton Heston\n\n\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (",
+          "em": 0.0,
+          "f1": 0.3333333333333333,
+          "offline_encode_seconds": 0.09010452777147293,
+          "decode_seconds": 0.13234476745128632
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 70875753,
+          "prediction": "Charlton Heston\n\n\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (",
+          "em": 0.0,
+          "f1": 0.3333333333333333,
+          "offline_encode_seconds": 0.10484887659549713,
+          "decode_seconds": 0.14190565049648285
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 94289573,
+          "prediction": "Charlton Heston\nPassage:\nThe Ten Commandments (1956) on iTunes\nThe Ten Commandments (19",
+          "em": 0.0,
+          "f1": 0.3076923076923077,
+          "offline_encode_seconds": 0.14780747890472412,
+          "decode_seconds": 0.16983523964881897
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-11",
+      "source_index": 11,
+      "prompt_tokens": 3015,
+      "answers": [
+        "Charles Hardin Holley",
+        "Charles Holley",
+        "Holly, Buddy",
+        "Buddy Holly: A Rock and Roll Collection",
+        "Buddy Holly & the Crickets",
+        "Buddy holly",
+        "Charles Hardin Helley",
+        "Buddie Hollie",
+        "Buddy Hollie",
+        "Buddy Holly: A Rock & Roll Collection",
+        "Holly Buddy",
+        "Charles Hardin Holly",
+        "Buddy Holly & The Crickets",
+        "Buddy Holley",
+        "Buddy holly (singer)",
+        "Buddy Holly",
+        "Charles Holly",
+        "Charles H. Holley",
+        "Charles Harden",
+        "Buddie Holly",
+        "Buddy Holly and the Crickets"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 395052188,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.752637542784214,
+          "decode_seconds": 0.3659578561782837
+        },
+        {
+          "method": "uniform4",
+          "bytes": 99150040,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.21196378767490387,
+          "decode_seconds": 0.10035844892263412
+        },
+        {
+          "method": "uniform8",
+          "bytes": 197912792,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.4380563646554947,
+          "decode_seconds": 0.19409428536891937
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 49007356,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.0960078164935112,
+          "decode_seconds": 0.12246433645486832
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 62593263,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.09587425738573074,
+          "decode_seconds": 0.15061764419078827
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 83326946,
+          "prediction": "Buddy Holly\nPassage:\nThe Buddy Holly Story (1978) - Rotten Tomatoes\nProbably the best work Gary",
+          "em": 0.0,
+          "f1": 0.26666666666666666,
+          "offline_encode_seconds": 0.1507645845413208,
+          "decode_seconds": 0.17670432478189468
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-15",
+      "source_index": 15,
+      "prompt_tokens": 2347,
+      "answers": [
+        "First temporal derivative of displacement",
+        "Instantaneous velocity",
+        "Average velocity",
+        "Velocities",
+        "Formula for velocity",
+        "Transverse velocity",
+        "Velocity vector",
+        "Time-average velocity",
+        "Velocity",
+        "Rate of speed"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 307496092,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.6092180833220482,
+          "decode_seconds": 0.28580915182828903
+        },
+        {
+          "method": "uniform4",
+          "bytes": 77175512,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.13524755090475082,
+          "decode_seconds": 0.0656830221414566
+        },
+        {
+          "method": "uniform8",
+          "bytes": 154049240,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.25605929642915726,
+          "decode_seconds": 0.12220222502946854
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 38736870,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.09224067628383636,
+          "decode_seconds": 0.09743520617485046
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 49764470,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.09644399583339691,
+          "decode_seconds": 0.10981788486242294
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 65881515,
+          "prediction": "Velocity\nPassage:\nThe 10 Best Places to Live in the U.S.\nThe 10 Best Places to Live",
+          "em": 0.0,
+          "f1": 0.13333333333333333,
+          "offline_encode_seconds": 0.08737388998270035,
+          "decode_seconds": 0.1001664325594902
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-21",
+      "source_index": 21,
+      "prompt_tokens": 1454,
+      "answers": [
+        "Fotheringhay, Northamptonshire",
+        "Fotheringhay"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 190448796,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.3104543685913086,
+          "decode_seconds": 0.14846420288085938
+        },
+        {
+          "method": "uniform4",
+          "bytes": 47799384,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.055225156247615814,
+          "decode_seconds": 0.015013672411441803
+        },
+        {
+          "method": "uniform8",
+          "bytes": 95411288,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.15615186840295792,
+          "decode_seconds": 0.0744435042142868
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 24884557,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.02180834859609604,
+          "decode_seconds": 0.056310683488845825
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 32499584,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.04360608011484146,
+          "decode_seconds": 0.05835743993520737
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 42471604,
+          "prediction": "Fotheringhay Castle\n\n\nPassage:\nThe 10 Best Places to Visit in the United States\nThe 10 Best",
+          "em": 0.0,
+          "f1": 0.14285714285714285,
+          "offline_encode_seconds": 0.0432962030172348,
+          "decode_seconds": 0.06450767815113068
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-22",
+      "source_index": 22,
+      "prompt_tokens": 3383,
+      "answers": [
+        "Hattie jakes",
+        "Hattie Jacques",
+        "Josephine Edwina Jaques"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 443286684,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1960s\nThe 1960s\nThe 19",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.7141671031713486,
+          "decode_seconds": 0.3404795303940773
+        },
+        {
+          "method": "uniform4",
+          "bytes": 111255768,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1960s\nThe 1960s\nThe 19",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.21028493344783783,
+          "decode_seconds": 0.1030341312289238
+        },
+        {
+          "method": "uniform8",
+          "bytes": 222077144,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1960s\nThe 1960s\nThe 19",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.47087685763835907,
+          "decode_seconds": 0.23015478998422623
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 55216736,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1960s\nThe 1960s\nThe 19",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.09916248917579651,
+          "decode_seconds": 0.13599969446659088
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 70219167,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1950s in the United Kingdom - Wikipedia\nThe 1950",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.1252487152814865,
+          "decode_seconds": 0.1343468427658081
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 93524194,
+          "prediction": "Patricia Hayes\n\n\nPassage:\nThe 1960s\nThe 1960s\nThe 19",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.14970923960208893,
+          "decode_seconds": 0.2004726082086563
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-28",
+      "source_index": 28,
+      "prompt_tokens": 3908,
+      "answers": [
+        "Savory taste",
+        "Umame",
+        "Savouriness",
+        "Xian wei",
+        "Savour",
+        "Umami taste",
+        "Umani",
+        "Savoryness",
+        "Osmazome",
+        "Umami",
+        "Malinamnam",
+        "Meaty taste",
+        "Linamnam",
+        "Gamchilmat"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 512099484,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 1.0334695130586624,
+          "decode_seconds": 0.47977298498153687
+        },
+        {
+          "method": "uniform4",
+          "bytes": 128526168,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 0.27864745259284973,
+          "decode_seconds": 0.1317698433995247
+        },
+        {
+          "method": "uniform8",
+          "bytes": 256550744,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 0.5293742194771767,
+          "decode_seconds": 0.24691301584243774
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 63364253,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 0.11554846167564392,
+          "decode_seconds": 0.14239699393510818
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 80390186,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 0.11796863377094269,
+          "decode_seconds": 0.1882653757929802
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 107311130,
+          "prediction": "Umami\n\n\nPassage:\nThe Straight Dope: What's the difference between a\nThe Straight Dope: What'",
+          "em": 0.0,
+          "f1": 0.18181818181818182,
+          "offline_encode_seconds": 0.16959009319543839,
+          "decode_seconds": 0.19651217013597488
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-29",
+      "source_index": 29,
+      "prompt_tokens": 2609,
+      "answers": [
+        "Julian Fellowes, Baron Fellowes of West Stafford",
+        "JULIAN FELLOWES",
+        "Julian Fellowes",
+        "The Lord Fellowes of West Stafford",
+        "Baron Fellowes of West Stafford"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 341836956,
+          "prediction": "Julian Fellowes\nPassage:\nThe Great Stride Pianists on Pinterest | Jazz Age, Music ...\n1000+",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.5699515417218208,
+          "decode_seconds": 0.2776399701833725
+        },
+        {
+          "method": "uniform4",
+          "bytes": 85794264,
+          "prediction": "Downton Abbey\nDownton Abbey\nDownton Abbey\nDownton Abbey\nDownton",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.18432151526212692,
+          "decode_seconds": 0.0884002074599266
+        },
+        {
+          "method": "uniform8",
+          "bytes": 171253208,
+          "prediction": "Julian Fellowes\nPassage:\nThe Great Stride Pianists on Pinterest | Jazz Age, Music ...\n1000+",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.3493955656886101,
+          "decode_seconds": 0.1611783429980278
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 43185859,
+          "prediction": "Downton Abbey\nDownton Abbey\nDownton Abbey\nDownton Abbey\nDownton",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.09099885076284409,
+          "decode_seconds": 0.10423427820205688
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 55249681,
+          "prediction": "Julian Fellowes\nPassage:\nThe Great Stride Pianists on Pinterest | The Great Stride ...\n1000+",
+          "em": 0.0,
+          "f1": 0.3076923076923077,
+          "offline_encode_seconds": 0.08496589213609695,
+          "decode_seconds": 0.10978494584560394
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 73212793,
+          "prediction": "Julian Fellowes\nPassage:\nThe Great Stride Pianists on Pinterest | Jazz Age, Music ...\n1000+",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.13674918562173843,
+          "decode_seconds": 0.13944004476070404
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-31",
+      "source_index": 31,
+      "prompt_tokens": 2666,
+      "answers": [
+        "Top Gear UK",
+        "Top Gear (disambiguation)",
+        "TopGear",
+        "Top gear",
+        "Top Gear",
+        "Top Gear (Disambiguation)",
+        "Top Gear (TV series)"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 349308060,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.7137006893754005,
+          "decode_seconds": 0.32493243366479874
+        },
+        {
+          "method": "uniform4",
+          "bytes": 87669336,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.18560791015625,
+          "decode_seconds": 0.07553508877754211
+        },
+        {
+          "method": "uniform8",
+          "bytes": 174996056,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.3600628525018692,
+          "decode_seconds": 0.16607704013586044
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 43764571,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.07236568629741669,
+          "decode_seconds": 0.12808673828840256
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 56012596,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.09352153539657593,
+          "decode_seconds": 0.10365775227546692
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 74347625,
+          "prediction": "Top Gear\n\n\nPassage:\nThe 2010 Winter Olympics\nThe 2010 Winter Olympics, officially known as the",
+          "em": 0.0,
+          "f1": 0.2857142857142857,
+          "offline_encode_seconds": 0.09114059805870056,
+          "decode_seconds": 0.11577942222356796
+        }
+      ]
+    },
+    {
+      "case_id": "tqa-32",
+      "source_index": 32,
+      "prompt_tokens": 1629,
+      "answers": [
+        "A train",
+        "A Train",
+        "A Train (disambiguation)",
+        "A-train",
+        "A-Train (disambiguation)",
+        "The A-Train"
+      ],
+      "methods": [
+        {
+          "method": "raw",
+          "bytes": 213386396,
+          "prediction": "Train\n\n\nPassage:\nThe 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial",
+          "em": 0.0,
+          "f1": 0.15384615384615385,
+          "offline_encode_seconds": 0.4320434406399727,
+          "decode_seconds": 0.19627827405929565
+        },
+        {
+          "method": "uniform4",
+          "bytes": 53556184,
+          "prediction": "Train\n\n\nPassage:\nThe 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial",
+          "em": 0.0,
+          "f1": 0.15384615384615385,
+          "offline_encode_seconds": 0.08108776062726974,
+          "decode_seconds": 0.05464663356542587
+        },
+        {
+          "method": "uniform8",
+          "bytes": 106902488,
+          "prediction": "Train\n\n\nPassage:\nThe 1995 Rugby World Cup was the third Rugby World Cup, the quadrennial",
+          "em": 0.0,
+          "f1": 0.15384615384615385,
+          "offline_encode_seconds": 0.2470284402370453,
+          "decode_seconds": 0.1130276471376419
+        },
+        {
+          "method": "cachegen1",
+          "bytes": 27405929,
+          "prediction": "Train\n\n\nPassage:\nWhat is a cowcatcher? - Definition from WhatIs.com\nWhat is a cowcatcher?",
+          "em": 0.0,
+          "f1": 0.16666666666666666,
+          "offline_encode_seconds": 0.05725232511758804,
+          "decode_seconds": 0.0744938850402832
+        },
+        {
+          "method": "cachegen2",
+          "bytes": 35674304,
+          "prediction": "A locomotive\n\n\nPassage:\nWhat is a cowcatcher? - Definitions.net\nWhat is a cowcatcher?",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.071469746530056,
+          "decode_seconds": 0.07505059987306595
+        },
+        {
+          "method": "cachegen3",
+          "bytes": 46830093,
+          "prediction": "A locomotive\n\n\nPassage:\nThe 1999 Rugby World Cup was the third Rugby World Cup, the quadren",
+          "em": 0.0,
+          "f1": 0.0,
+          "offline_encode_seconds": 0.12021879851818085,
+          "decode_seconds": 0.09849317371845245
+        }
+      ]
+    }
+  ]
+}

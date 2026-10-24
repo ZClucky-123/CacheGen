@@ -2,10 +2,13 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+/.cuda-12.1/
+/.local/
 *.pt
 *.safetensors
 *.bin
 *.log
+*.zip
 
 # Keep generated runs local; explicitly archive complete formal batches.
 results/*
@@ -13,3 +16,23 @@ results/*
 results/reproduction/*
 !results/reproduction/README.md
 !results/reproduction/20261013T060232923276Z/
+
+# Explicitly publish verified Mistral batches, keeping future runs local.
+!results/mistral/
+results/mistral/*
+!results/mistral/README.md
+!results/mistral/latest
+!results/mistral/20261024T064543Z/
+!results/mistral/20261024T064543Z/*.log
+!results/mistral/20261024T064353Z/
+!results/mistral/20261024T064353Z/*.log
+!results/latest-mistral
+
+# Publish this report bundle; new generated bundles need an explicit archive decision.
+/reports/*
+!/reports/README.md
+!/reports/mistral/
+/reports/mistral/*
+!/reports/mistral/README.md
+!/reports/mistral/20261024-mistral7b/
+!/reports/mistral/20261024-mistral7b/evidence/*.log

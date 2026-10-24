@@ -1,0 +1,93 @@
+{"time": "2026-10-24T06:43:57.796438+00:00", "event": "verify_model_start"}
+{"time": "2026-10-24T06:44:03.834321+00:00", "event": "model_shard_verified", "file": "model-00001-of-00003.safetensors"}
+{"time": "2026-10-24T06:44:08.995568+00:00", "event": "model_shard_verified", "file": "model-00002-of-00003.safetensors"}
+{"time": "2026-10-24T06:44:14.632804+00:00", "event": "model_shard_verified", "file": "model-00003-of-00003.safetensors"}
+Using /root/cachegen-repro/torch_extensions as PyTorch extensions root...
+Creating extension directory /root/cachegen-repro/torch_extensions/torchac_backend...
+Emitting ninja build file /root/cachegen-repro/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+[1/2] c++ -MMD -MF torchac_backend.o.d -DTORCH_EXTENSION_NAME=torchac_backend -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/TH -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/THC -isystem /usr/include/python3.10 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -c /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/backend/torchac_backend.cpp -o torchac_backend.o 
+FAILED: torchac_backend.o 
+c++ -MMD -MF torchac_backend.o.d -DTORCH_EXTENSION_NAME=torchac_backend -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/TH -isystem /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/THC -isystem /usr/include/python3.10 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -c /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/backend/torchac_backend.cpp -o torchac_backend.o 
+In file included from /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/csrc/Device.h:4,
+                 from /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/csrc/api/include/torch/python.h:8,
+                 from /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/extension.h:9,
+                 from /home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/backend/torchac_backend.cpp:20:
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/include/torch/csrc/python_headers.h:12:10: fatal error: Python.h: No such file or directory
+   12 | #include <Python.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+ninja: build stopped: subcommand failed.
+Traceback (most recent call last):
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2107, in _run_ninja_build
+    subprocess.run(
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '2']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/cachegen-repro/experiment.py", line 501, in main
+    from src.utils import define_model_and_tokenizer
+  File "/home/aaa/CacheGen/src/utils.py", line 16, in <module>
+    from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/__init__.py", line 3, in <module>
+    from lmcache.storage_backend.remote_backend import LMCRemoteBackend
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/remote_backend.py", line 11, in <module>
+    from lmcache.storage_backend.serde import TorchSerializer, TorchDeserializer, CacheGenSerializer, CacheGenDeserializer, CreateSerde
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/__init__.py", line 4, in <module>
+    from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py", line 3, in <module>
+    import torchac
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/__init__.py", line 2, in <module>
+    from torchac.torchac import encode_float_cdf
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/torchac.py", line 13, in <module>
+    torchac_backend = load(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1309, in load
+    return _jit_compile(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1719, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1832, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2123, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'torchac_backend'
+Traceback (most recent call last):
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2107, in _run_ninja_build
+    subprocess.run(
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '2']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/cachegen-repro/experiment.py", line 531, in <module>
+    main()
+  File "/root/cachegen-repro/experiment.py", line 501, in main
+    from src.utils import define_model_and_tokenizer
+  File "/home/aaa/CacheGen/src/utils.py", line 16, in <module>
+    from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/__init__.py", line 3, in <module>
+    from lmcache.storage_backend.remote_backend import LMCRemoteBackend
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/remote_backend.py", line 11, in <module>
+    from lmcache.storage_backend.serde import TorchSerializer, TorchDeserializer, CacheGenSerializer, CacheGenDeserializer, CreateSerde
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/__init__.py", line 4, in <module>
+    from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
+  File "/home/aaa/CacheGen/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py", line 3, in <module>
+    import torchac
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/__init__.py", line 2, in <module>
+    from torchac.torchac import encode_float_cdf
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torchac/torchac.py", line 13, in <module>
+    torchac_backend = load(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1309, in load
+    return _jit_compile(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1719, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1832, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2123, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'torchac_backend'

@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "validated_utc": "2026-10-25T05:17:10.377143+00:00",
+  "formal_validation_observations": 469,
+  "task_counts": {
+    "quality": 102,
+    "ttft": 315,
+    "adaptive-scale-1-slo-0.2": 7,
+    "adaptive-scale-1-slo-0.5": 7,
+    "adaptive-scale-0.01-slo-0.2": 7,
+    "adaptive-scale-0.01-slo-0.5": 7,
+    "ablation": 24
+  },
+  "unit_tests": 111,
+  "compatibility_tests": 3,
+  "strict_text_kv_exact_cases": 15,
+  "full_continuation_nll_checks": 6,
+  "transport_correctness_checks_including_resumed_recheck": 224,
+  "unchanged_observations_after_resume": 315,
+  "persisted_representation_count": 14,
+  "formal_rows_matching_persisted_representation": 21,
+  "serial_pipeline_pairs": 105,
+  "cross_attempt_identical_payload_pairs": 1,
+  "attempt_exit_codes": [
+    143,
+    null,
+    0
+  ],
+  "hard_restart_preserved_rows": 441,
+  "unknown_exit_note": "Attempt 2 lost its process environment, so no exit code was written; not classified as a clean exit.",
+  "base_archive_verified_files": 183,
+  "peak_gpu_allocated_bytes": 14446948352,
+  "peak_gpu_reserved_bytes": 23381147648,
+  "peak_host_rss_bytes": 6154776576,
+  "source_files": 113,
+  "verified_archive_files": 190
+}

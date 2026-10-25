@@ -1,15 +1,17 @@
-"""The same three experiment implementations run against every model adapter."""
+"""Shared quality/adaptive tasks and TTFT/ablation exports for every adapter."""
 import json
-import random
 import statistics
 import time
 import torch
 from experiments.engine import timed, validate_blob
-from experiments.records import save
+from experiments.records import save, adaptive_key
 from experiments.scoring import extract_answer, score_qa, phrase_match
-from mini_repro.adaptive import next_decision, representation_cost
+from mini_repro.adaptive import next_decision
 from mini_repro.ttft import measurement_schedule
-from mini_repro.transport import rate_limited_transfer
+from mini_repro.transport import transfer_chunks
+from experiments.chunks import prepare_chunk, unframe, restore_chunk
+from experiments.feedback import CompletedTransfer, history_decision
+from experiments.numerics import compare_logits, compare_kv, audit_generation, cached_reference, MAX_TIE_ULPS
 
 
 def case_fields(case):
@@ -26,31 +28,44 @@ def calibrate(cfg, run):
     for size in cfg['calibration']['payload_bytes']:
         payload = bytes(range(256)) * (size // 256) + bytes(range(size % 256))
         for bw in [None] + cfg['ttft']['bandwidth_gbps']:
-            rate_limited_transfer(payload, bw, validate=True)
+            transfer_chunks([payload], bw, lambda _, data: data, mode='whole',
+                            chunk_bytes=cfg['transport']['pacing_quantum_bytes'])
             for repeat in range(cfg['calibration']['repeats']):
-                received, seconds = rate_limited_transfer(payload, bw, validate=True)
-                if received != payload:
+                result = transfer_chunks([payload], bw, lambda _, data: data, mode='whole',
+                                         chunk_bytes=cfg['transport']['pacing_quantum_bytes'])
+                if result['value'] != payload:
                     raise RuntimeError('Calibration transport mismatch')
+                network = result['chunks'][0]
+                seconds = network['effective_transfer_seconds']
                 realized = size * 8 / seconds / 1e9
                 rows.append({'payload_bytes': size, 'target_gbps': bw, 'repeat': repeat,
                              'seconds': seconds, 'actual_gbps': realized,
+                             'transport_wall_seconds': result['transport_wall_seconds'],
+                             'receiver_data_available': network['data_available'],
+                             'timeline': network, 'pacing_quantum_bytes': result['pacing_quantum_bytes'],
                              'actual_to_target': realized / bw if bw else None,
                              'target_reached_90pct': realized >= bw * .9 if bw else None})
-                save(run / 'calibration.json', {'mode': 'local_socket_serial',
-                    'boundary': 'socket setup + sender/receiver + pacing + bytes materialization; debug equality outside transfer clock',
+                save(run / 'calibration.json', {'mode': 'local_socket_pre_send_budget',
+                    'boundary': 'receiver buffer ready to complete bytes available; includes pre-send pacing and socket/materialization, excludes setup and capacity wait; wall/setup separately recorded',
                     'rows': rows})
 
 
-def cache_checks(engine, cfg, selected, run):
+def cache_checks(engine, cfg, selected, run, progress=None):
     rows = []
     def full_generate(ids, limit):
-        expected = engine.model.generate(torch.tensor([ids], device='cuda'),
+        output = engine.model.generate(torch.tensor([ids], device='cuda'),
             attention_mask=torch.ones((1, len(ids)), dtype=torch.long, device='cuda'),
-            max_new_tokens=limit, do_sample=False, pad_token_id=engine.tokenizer.eos_token_id)[0, len(ids):].tolist()
-        return expected[:expected.index(engine.tokenizer.eos_token_id)] if engine.tokenizer.eos_token_id in expected else expected
+            max_new_tokens=limit, do_sample=False, pad_token_id=engine.tokenizer.eos_token_id,
+            return_dict_in_generate=True, output_scores=True)
+        expected = output.sequences[0, len(ids):].tolist()
+        if engine.tokenizer.eos_token_id in expected:
+            expected = expected[:expected.index(engine.tokenizer.eos_token_id)]
+        return expected, [s[0] for s in output.scores]
     # Multiple independent real documents at all configured lengths, multistep generation.
     candidates = selected['ttft']
     for case in candidates:
+        if progress:
+            progress('cache_checks', case['case_id'])
         context, suffix = case['context_ids'], case['suffix_ids']
         blob = engine.prefill(context)
         before = blob.clone()
@@ -60,44 +75,65 @@ def cache_checks(engine, cfg, selected, run):
         reused, _ = engine.forward(suffix, blob)
         error = float((direct - reused[0, -1]).abs().max())
         optimized_error = float((direct - optimized[0, -1]).abs().max())
-        if not torch.allclose(direct, optimized[0, -1], atol=.1, rtol=.02) or int(direct.argmax()) != int(optimized[0, -1].argmax()):
+        optimized_audit = compare_logits(direct, optimized[0, -1])
+        raw_audit = compare_logits(direct, reused[0, -1])
+        if not optimized_audit['passed']:
             raise RuntimeError(f'Optimized text logits differ: {case["case_id"]}')
-        if not torch.allclose(direct, reused[0, -1], atol=.1, rtol=.02) or int(direct.argmax()) != int(reused[0, -1].argmax()):
+        if not raw_audit['passed']:
             raise RuntimeError(f'Raw cache logits differ: {case["case_id"]}')
         del full, direct, reused, optimized
         limit = cfg['checks']['generation_tokens']
-        expected = full_generate(context + suffix, limit)
+        expected, expected_scores = full_generate(context + suffix, limit)
         generated = engine.generate(suffix, blob, limit)
         repeated = engine.generate(suffix, blob, limit)
-        if expected != generated['generated_ids'] or expected != repeated['generated_ids'] or not torch.equal(blob, before):
+        if generated['generated_ids'] != repeated['generated_ids'] or not torch.equal(blob, before):
             raise RuntimeError(f'Multitoken cache generation or mutation check failed: {case["case_id"]}')
+        question_audit = audit_generation(engine, suffix, blob, limit, expected, expected_scores, generated['generated_ids'])
         natural_suffix = case['continuation_ids']
-        natural_expected = full_generate(context + natural_suffix, limit)
+        natural_expected, natural_scores = full_generate(context + natural_suffix, limit)
         natural_reused = engine.generate(natural_suffix, blob, limit)['generated_ids']
-        if natural_expected != natural_reused:
-            raise RuntimeError(f'Natural multistep cache generation differs: {case["case_id"]}')
+        natural_audit = audit_generation(engine, natural_suffix, blob, limit, natural_expected, natural_scores, natural_reused)
         # Full-context cache sliced into raw chunks must reproduce all tokens, including a tail.
         chunk_size = cfg['adaptive']['chunk_size']
         slices = [blob[:, :, :, start:start + chunk_size, :] for start in range(0, len(context), chunk_size)]
         merged = torch.cat(slices, dim=3)
-        if not torch.equal(merged, blob) or engine.generate(suffix, merged, limit)['generated_ids'] != expected:
+        if not torch.equal(merged, blob) or engine.generate(suffix, merged, limit)['generated_ids'] != generated['generated_ids']:
             raise RuntimeError('Chunk assembly lost positions or tail')
         # Text recomputation must depend on prior chunks, rather than independent chunk prefills.
         text_merged = None
         for start in range(0, len(context), chunk_size):
             text_merged = engine.prefill(context[start:start + chunk_size], text_merged)
-        if engine.generate(suffix, text_merged, limit)['generated_ids'] != expected:
-            raise RuntimeError('Sequential text chunk cache differs from full prefill')
+        text_kv_audit = compare_kv(blob, text_merged)
+        if not text_kv_audit['elementwise_allclose']:
+            save(run / 'cache_check_failure.json', {'case_id': case['case_id'],
+                'stage': 'text_chunk_kv', 'audit': text_kv_audit})
+            raise RuntimeError('Sequential text chunk cache exceeds numerical bounds')
+        reference_ids, reference_scores = cached_reference(engine, suffix, blob, limit)
+        if reference_ids != generated['generated_ids']:
+            raise RuntimeError('Repeated same-cache reference generation changed')
+        text_audit = audit_generation(engine, suffix, text_merged, limit, reference_ids, reference_scores)
         rows.append({'case_id': case['case_id'], 'context_tokens': len(context), 'suffix_tokens': len(suffix),
             'kv_shape': list(blob.shape), 'raw_logits_max_error': error, 'optimized_logits_max_error': optimized_error,
             'generated_ids': expected, 'natural_suffix_ids': natural_suffix, 'natural_generated_ids': natural_expected,
-            'repeat_cache_unchanged': True, 'raw_chunks_and_text_chunks_match': True})
+            'raw_reused_generated_ids': generated['generated_ids'],
+            'optimized_first_token_numeric_audit': optimized_audit, 'raw_first_token_numeric_audit': raw_audit,
+            'question_generation_audit': question_audit, 'natural_generation_audit': natural_audit,
+            'text_chunk_generation_audit': text_audit,
+            'text_chunk_kv_audit': text_kv_audit,
+            'text_chunk_kv_exact': torch.equal(blob, text_merged),
+            'repeat_cache_unchanged': True, 'raw_chunks_tensor_identical': True,
+            'text_chunks_numerically_close': True,
+            'raw_chunks_and_text_chunks_match': text_audit['generated_ids_identical']})
         save(run / 'cache_checks.json', {'status': 'running', 'tolerances': {'atol': .1, 'rtol': .02}, 'cases': rows})
-        del before, blob, merged, text_merged, slices
+        del before, blob, merged, text_merged, slices, expected_scores, natural_scores, reference_scores
         torch.cuda.empty_cache()
     # Check complete continuation scoring against the unmodified model's teacher forcing.
     nll_rows = []
-    for case in selected['quality'][:2]:
+    nll_cases = [case for length in cfg['quality']['lengths']
+                 for case in [r for r in selected['quality'] if r['context_tokens'] == length][:2]]
+    for case in nll_cases:
+        if progress:
+            progress('cache_checks', f'nll/{case["case_id"]}')
         ids, continuation = case['context_ids'], case['continuation_ids']
         blob = engine.prefill(ids)
         result = engine.nll(blob, ids, continuation)
@@ -109,7 +145,8 @@ def cache_checks(engine, cfg, selected, run):
         nll_rows.append({'case_id': case['case_id'], 'tokens_scored': len(continuation),
                          'full_nll': float(losses.mean()), 'reuse_nll': result['nll'], 'absolute_error': delta})
         del blob, logits, losses
-    save(run / 'cache_checks.json', {'status': 'passed', 'tolerances': {'atol': .1, 'rtol': .02, 'nll_abs': .01},
+    save(run / 'cache_checks.json', {'status': 'passed', 'tolerances': {'atol': .1, 'rtol': .02, 'nll_abs': .01, 'fp16_near_tie_ulps': MAX_TIE_ULPS},
+                                    'generation_policy': 'record exact matches or bounded FP16 near-tie divergence; unchanged actual IDs and QA/NLL scoring',
                                     'cases': rows, 'complete_nll_checks': nll_rows})
 
 
@@ -150,104 +187,45 @@ def quality(engine, cfg, selected, run, journal, job, progress):
             torch.cuda.empty_cache()
 
 
-def ttft(engine, cfg, selected, run, journal, job, progress):
-    task, p = job['name'], cfg['ttft']
-    for index, case in enumerate(selected['ttft']):
-        prefix = f'{task}/{case["case_id"]}/'
-        expected = len(p['methods']) * len(p['bandwidth_gbps']) * p['repeats']
-        if sum(k.startswith(prefix) for k in journal.keys) == expected:
-            continue
-        context, suffix = case['context_ids'], case['suffix_ids']
-        progress(task, f'{prefix}offline-prefill')
-        blob, prefill_s = timed(lambda: engine.prefill(context))
-        direct = engine.first(context, suffix)
-        if engine.first(context, suffix, blob) != direct:
-            raise RuntimeError('TTFT raw cache parity failed')
-        payloads = {}
-        for method in p['methods']:
-            if method == 'text':
-                payloads[method] = (engine.text_payload(context), 0.0, engine.restore_text)
-            else:
-                payloads[method] = engine.encode(blob, method)
-                restored = payloads[method][2](payloads[method][0])
-                validate_blob(restored, blob)
-                del restored
-        del blob
-        schedule = measurement_schedule(p['methods'], p['bandwidth_gbps'], warmup=p['warmup'],
-                                         repeats=p['repeats'], seed=cfg['seed'] + index)
-        event(run, event='ttft_schedule', task=task, case_id=case['case_id'], schedule=schedule)
-        for step_index, step in enumerate(schedule):
-            key = f'{prefix}{step["bandwidth_gbps"]}/{step["repetition"]}/{step["method"]}'
-            if step['phase'] == 'measure' and key in journal.keys:
-                continue
-            progress(task, key)
-            payload, encode_s, restore = payloads[step['method']]
-            torch.cuda.synchronize()
-            start = time.perf_counter()
-            received, transfer_s = rate_limited_transfer(payload, step['bandwidth_gbps'])
-            restored, decode_s = timed(lambda: restore(received))
-            if step['method'] == 'text':
-                token, first_s = timed(lambda: engine.first(restored, suffix))
-            else:
-                token, first_s = timed(lambda: engine.first(context, suffix, restored))
-            wall = time.perf_counter() - start
-            # Debug checks outside the measured window.
-            if received != payload or (step['method'] == 'text' and restored != context):
-                raise RuntimeError('TTFT transport/token identity failed')
-            row = {**case_fields(case), 'kind': 'ttft', **step, 'schedule_position': step_index,
-                'bytes': len(payload), 'offline_encode_seconds': encode_s, 'transfer_seconds': transfer_s,
-                'offline_prefill_seconds': prefill_s, 'offline_prefill_scope': 'once_per_context_annotation',
-                'reconstruct_seconds': decode_s, 'remaining_input_seconds': first_s, 'ttft_wall_seconds': wall,
-                'actual_bandwidth_gbps': len(payload) * 8 / transfer_s / 1e9,
-                'actual_to_target': len(payload) * 8 / transfer_s / 1e9 / step['bandwidth_gbps'],
-                'first_token_id': token, 'matches_raw': token == direct, 'mode': 'socket_receive_then_restore'}
-            if step['method'] == 'text':
-                row.update(engine.text_metadata(payload))
-            if step['phase'] == 'measure':
-                journal.add(key, task, row)
-            else:
-                event(run, event='warmup', task=task, observation=row)
-            del received, restored
-        del payloads, payload, restore
-        torch.cuda.empty_cache()
+# Same TTFT implementation for every adapter.
+from experiments.ttft import ttft
 
 
 def prepare_chunks(engine, cfg, case, blob):
     p = cfg['adaptive']
     chunks = []
     ids = case['input_ids']
-    for start in range(0, len(ids), p['chunk_size']):
+    for index, start in enumerate(range(0, len(ids), p['chunk_size'])):
         end = min(start + p['chunk_size'], len(ids))
         previous = blob[:, :, :, :start, :] if start else None
-        text = engine.text_payload(ids[start:end])
-        def text_work():
-            decoded = engine.restore_text(text)
-            return engine.prefill(decoded, previous)
-        for _ in range(p['warmup']):
-            text_work()
-        text_times = []
-        for _ in range(p['repeats']):
-            restored, elapsed = timed(text_work)
-            text_times.append(elapsed)
-            del restored
-        row = {'start': start, 'end': end, 'ids': ids[start:end], 'text_payload': text,
-               'text': {'bytes': len(text), 'prefill_seconds': statistics.median(text_times),
-                        'calibration_seconds': text_times, **engine.text_metadata(text)},
-               'levels': {}, 'payloads': {}, 'restores': {}}
-        chunk_blob = blob[:, :, :, start:end, :]
-        for level in (1, 2, 3):
-            payload, encode_s, restore = engine.encode(chunk_blob, f'cachegen{level}')
+        prepared = {}
+        row = {'start': start, 'end': end, 'levels': {}, 'prepared': prepared}
+        for level in (0, 1, 2, 3):
+            packet = prepare_chunk(engine, ids, blob, 'text' if level == 0 else f'cachegen{level}', index, start, end)
+            prepared[level] = packet
+            def work():
+                return restore_chunk(engine, packet, packet.wire, previous)
             for _ in range(p['warmup']):
-                restore(payload)
-            times = []
+                work()
+            timings = []
             for _ in range(p['repeats']):
-                restored, elapsed = timed(lambda: restore(payload))
-                validate_blob(restored, chunk_blob)
-                times.append(elapsed)
+                restored, elapsed = timed(work)
+                timings.append(elapsed)
+                if restored.shape[3] != end or not bool(torch.isfinite(restored).all()):
+                    raise RuntimeError('Adaptive preparation shape or finite check failed')
                 del restored
-            row['levels'][level] = {'bytes': len(payload), 'decode_seconds': statistics.median(times),
-                                     'calibration_seconds': times, 'offline_encode_seconds': encode_s}
-            row['payloads'][level], row['restores'][level] = payload, restore
+            cost = {'bytes': len(packet.wire), 'calibration_seconds': timings,
+                    'offline_encode_seconds': packet.encode_seconds,
+                    'message_sha256': packet.sha256, **packet.metadata}
+            # Wire byte count includes frame; payload_bytes remains separately named.
+            cost['bytes'] = len(packet.wire)
+            if level == 0:
+                cost.update(prefill_seconds=statistics.median(timings),
+                            **engine.text_metadata(unframe(packet.wire)[1]))
+                row['text'] = cost
+            else:
+                cost['decode_seconds'] = statistics.median(timings)
+                row['levels'][level] = cost
         chunks.append(row)
     return chunks
 
@@ -255,59 +233,63 @@ def prepare_chunks(engine, cfg, case, blob):
 def execute_adaptive(engine, cfg, case, chunks, trace, strategy, slo, reserve):
     merged = None
     decisions = []
-    estimated_transfer = 0.0
+    completed = []
     torch.cuda.synchronize()
     start = time.perf_counter()
     for index, chunk in enumerate(chunks):
-        elapsed = time.perf_counter() - start + estimated_transfer
-        decision = next_decision(chunks, index, trace[index], slo, elapsed, strategy, reserve)
-        level = decision['level']
-        payload = chunk['payloads'][level] if level else chunk['text_payload']
-        if cfg['adaptive']['mode'] == 'socket_serial':
-            received, transfer_s = rate_limited_transfer(payload, trace[index])
+        decision_start = time.perf_counter()
+        elapsed = decision_start - start
+        if strategy == 'adaptive_history':
+            decision = history_decision(chunks, index, tuple(completed),
+                cfg['adaptive']['initial_bandwidth_gbps'], slo, elapsed, reserve)
         else:
-            received = payload
-            transfer_s, _ = representation_cost(chunk, level, trace[index])
-            estimated_transfer += transfer_s
-        def reconstruct():
-            if level == 0:
-                ids = engine.restore_text(received)
-                return engine.prefill(ids, merged)
-            decoded = chunk['restores'][level](received)
-            return decoded if merged is None else torch.cat((merged, decoded), dim=3)
-        merged, reconstruct_s = timed(reconstruct)
+            decision = next_decision(chunks, index, trace[index], slo, elapsed, strategy, reserve)
+            decision.update(estimate_gbps=trace[index], estimate_source='current_trace', source_chunk_index=None)
+        decision.update(decision_start=decision_start - start,
+                        decision_seconds=time.perf_counter() - decision_start)
+        level = decision['level']
+        packet = chunk['prepared'][level]
+        def reconstruct(_, received):
+            nonlocal merged
+            merged = restore_chunk(engine, packet, received, merged)
+            torch.cuda.synchronize()
+            return merged
+        # Only the executor reads the current trace for the history variant.
+        result = transfer_chunks([packet.wire], trace[index], reconstruct, mode='whole',
+            queue_capacity=1, chunk_bytes=cfg['transport']['pacing_quantum_bytes'], origin=start)
+        network = result['chunks'][0]
+        transfer_s = network['effective_transfer_seconds']
+        completed.append(CompletedTransfer(index, len(packet.wire), transfer_s))
         decision.update(start=chunk['start'], end=chunk['end'], cache_tokens_after=merged.shape[3],
-                        bytes=len(payload), transfer_seconds=transfer_s, reconstruct_seconds=reconstruct_s,
-                        fallback_to_text=level == 0)
+                        bytes=len(packet.wire), message_sha256=packet.sha256,
+                        transfer_seconds=transfer_s, effective_transfer_seconds=transfer_s,
+                        reconstruct_seconds=network['restore_seconds'], network_timeline=network,
+                        configured_bandwidth_gbps=trace[index], actual_bandwidth_gbps=network['actual_bandwidth_gbps'],
+                        fallback_to_text=level == 0, byte_identity_checked=result['received'] == [packet.wire])
+        if not decision['byte_identity_checked']:
+            raise RuntimeError('Adaptive received bytes differ')
         if level == 0:
-            decision.update(engine.text_metadata(payload))
-        if merged.shape[3] != chunk['end']:
-            raise RuntimeError('Adaptive cache position or tail was lost')
+            decision.update(engine.text_metadata(unframe(packet.wire)[1]))
         decisions.append(decision)
     initial, first_s = timed(lambda: engine.first_state([], case['suffix_ids'], merged))
     wall = time.perf_counter() - start
-    # Generation reuses the actual measured first token and resulting cache.
     generated = engine.generate(case['suffix_ids'], merged, cfg['adaptive']['max_new_tokens'], initial=initial)
     torch.cuda.synchronize()
     answer_wall = time.perf_counter() - start
-    total = wall + estimated_transfer
     if not bool(torch.isfinite(merged).all()):
         raise RuntimeError('Adaptive merged cache contains nonfinite values')
-    row = {**generated, **score_qa(generated['prediction'], case['answers']),
+    return {**generated, **score_qa(generated['prediction'], case['answers']),
            'scored_answer': extract_answer(generated['prediction']), 'decisions': decisions,
            'levels': [d['level'] for d in decisions], 'text_fallback_chunks': sum(d['level'] == 0 for d in decisions),
-           'mode': cfg['adaptive']['mode'], 'transfer_seconds': sum(d['transfer_seconds'] for d in decisions),
+           'mode': 'socket_serial', 'throughput_estimator': cfg['adaptive']['throughput_estimator'] if strategy == 'adaptive_history' else 'current_trace',
+           'initial_bandwidth_gbps': cfg['adaptive']['initial_bandwidth_gbps'], 'chunk_size': cfg['adaptive']['chunk_size'],
+           'transfer_seconds': sum(d['transfer_seconds'] for d in decisions),
            'reconstruct_seconds': sum(d['reconstruct_seconds'] for d in decisions),
-           'remaining_input_seconds': first_s, 'local_wall_seconds': wall, 'ttft_seconds': total,
-           'answer_latency_seconds': answer_wall + estimated_transfer,
-           'slo_seconds': slo, 'slo_violation': total > slo, 'first_token_reserve_seconds': reserve,
-           'estimated_network_seconds': estimated_transfer,
+           'remaining_input_seconds': first_s, 'local_wall_seconds': wall, 'ttft_seconds': wall,
+           'measured_ttft_seconds': wall, 'answer_latency_seconds': answer_wall,
+           'slo_seconds': slo, 'slo_violation': wall > slo, 'first_token_reserve_seconds': reserve,
+           'estimated_network_seconds': 0.,
            'historical_phrase_match': phrase_match(generated['prediction'], case['answer'])}
-    if cfg['adaptive']['mode'] == 'socket_serial':
-        row['measured_ttft_seconds'] = wall
-    else:
-        row['estimated_ttft_seconds'] = total
-    return row
 
 
 def adaptive(engine, cfg, selected, run, journal, job, progress):
@@ -342,7 +324,7 @@ def adaptive(engine, cfg, selected, run, journal, job, progress):
             event(run, event='adaptive_schedule', task=task, case_id=case['case_id'], trace_id=trace_id, schedule=schedule)
             for step_index, step in enumerate(schedule):
                 strategy = step['method']
-                key = f'{prefix}{trace_id}/{step["repetition"]}/{strategy}'
+                key = adaptive_key(task, case['case_id'], trace_id, step['repetition'], strategy, cfg)
                 if step['phase'] == 'measure' and key in journal.keys:
                     continue
                 progress(task, key)
@@ -359,3 +341,6 @@ def adaptive(engine, cfg, selected, run, journal, job, progress):
                     event(run, event='warmup', task=task, observation=row)
         del chunks
         torch.cuda.empty_cache()
+
+
+from experiments.ablation import ablation

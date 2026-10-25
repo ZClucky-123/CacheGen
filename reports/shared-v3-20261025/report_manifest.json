@@ -1,0 +1,164 @@
+{
+  "files": {
+    "code/package_delivery.py": {
+      "bytes": 10119,
+      "sha256": "18fc0fc8629ecc83c8b5222d98a6a469fcdf666e430356736aeb8118972e6f02"
+    },
+    "figures/mistral/ablation.pdf": {
+      "bytes": 18373,
+      "sha256": "1522dcd0fbc1d9b9c256742b271fc32a49c60033c0fc726c1bde40f4b02b6730"
+    },
+    "figures/mistral/ablation.png": {
+      "bytes": 59444,
+      "sha256": "3e23e6fbdcffe59fbc6a6514c1772cd13792c62fa05c6a47d1cb78a75ce6fe54"
+    },
+    "figures/mistral/ablation.svg": {
+      "bytes": 47101,
+      "sha256": "f841100ea78c67ec604e14603839caeb837fd332b261039b28f68eef8a6e0dbb"
+    },
+    "figures/mistral/adaptive.pdf": {
+      "bytes": 21259,
+      "sha256": "7bba40ec1f221730f16edd904e258627510d0da0059ab644f63e79ec3240d467"
+    },
+    "figures/mistral/adaptive.png": {
+      "bytes": 126146,
+      "sha256": "974e0c29c79f20d03fdeb5b3c691233f94037b7ed0fcad523635aa0b5e162f11"
+    },
+    "figures/mistral/adaptive.svg": {
+      "bytes": 57762,
+      "sha256": "cb992c84e995fa03753c0a1901fb7a960c15dcb5a7379fe698779137a1f35baa"
+    },
+    "figures/mistral/pipeline_speedup.pdf": {
+      "bytes": 15798,
+      "sha256": "15aa8d7d9e91013f2e2fbfc5fc47fd2c15e213f680d70e0d85774e5031921ef1"
+    },
+    "figures/mistral/pipeline_speedup.png": {
+      "bytes": 45308,
+      "sha256": "f7663460cc0ac9b7db334178ff18cd338825ba52be3b30e2865c7e71f6458327"
+    },
+    "figures/mistral/pipeline_speedup.svg": {
+      "bytes": 73003,
+      "sha256": "4656e1aafdf39de0a41ad051139143d60f9b4a0c6acd71c73400901b1bdcc2fd"
+    },
+    "figures/mistral/quality.pdf": {
+      "bytes": 21264,
+      "sha256": "dd39595366ab32925001a5790bd3a353267fdc80bea379d30b911e781b3fd33f"
+    },
+    "figures/mistral/quality.png": {
+      "bytes": 119427,
+      "sha256": "7b9a62c82c723aa2aaf7fa6a26967f50fac41bf81cd34a2604beab9a83f98cf6"
+    },
+    "figures/mistral/quality.svg": {
+      "bytes": 52339,
+      "sha256": "71716fba57ddb374912c447c85661206e8aa3b6471d6745531fd340663a2d7b7"
+    },
+    "figures/mistral/receive_restore_timeline.pdf": {
+      "bytes": 17811,
+      "sha256": "ddbd8b5fc523053f809920defd0da8a6b99e6daae8795ae3d9987d5c5ec6baeb"
+    },
+    "figures/mistral/receive_restore_timeline.png": {
+      "bytes": 84230,
+      "sha256": "8b605e6c44d12f442674540540c568ebad5056f98b8cb70f48e0505302229964"
+    },
+    "figures/mistral/receive_restore_timeline.svg": {
+      "bytes": 56494,
+      "sha256": "2c60abbf8c53f2ba5934f67ad21aa151bb4d1cb8ff1386f82a7d1748624b7e84"
+    },
+    "figures/mistral/ttft.pdf": {
+      "bytes": 36541,
+      "sha256": "985ca85caf837ba13470a248893af42e2955a59fad0640eff77d5094e6bb944f"
+    },
+    "figures/mistral/ttft.png": {
+      "bytes": 263413,
+      "sha256": "f41ee11f0f3f83a0636ad03e2cdd0e2f391a0082284e19248c9dfa9f89792a44"
+    },
+    "figures/mistral/ttft.svg": {
+      "bytes": 145224,
+      "sha256": "c1a95b1049e800d00b1b8ba0dfcc049597567c422c419efd2e9b496049694ec8"
+    },
+    "figures/tinyllama/ablation.pdf": {
+      "bytes": 18309,
+      "sha256": "222d9a315e61e6eadfc73ebdba2e6eb5c1c045f1ae6187f019cf72e9c3b1a38a"
+    },
+    "figures/tinyllama/ablation.png": {
+      "bytes": 57759,
+      "sha256": "f5d26227dcf707b5f8868f2c9a5d1d93d99bb81cd9afaa913f25e5adf7d0c146"
+    },
+    "figures/tinyllama/ablation.svg": {
+      "bytes": 45659,
+      "sha256": "c11a7e372031248255e558f6706a1d87e285c2bf8913163d414ee605298d2b8d"
+    },
+    "figures/tinyllama/adaptive.pdf": {
+      "bytes": 21223,
+      "sha256": "1232799dc5e417bc669c64aa393a659a23473a151314d12fc70a389652237ca3"
+    },
+    "figures/tinyllama/adaptive.png": {
+      "bytes": 111395,
+      "sha256": "ef7542d06de8a28fd111c69156f16ba580295a2defc684f103013b40470facc4"
+    },
+    "figures/tinyllama/adaptive.svg": {
+      "bytes": 57386,
+      "sha256": "012bfdf10129b0ac04ca81d217f4c0d9411d4a576edcd803abdbba1ffb039432"
+    },
+    "figures/tinyllama/pipeline_speedup.pdf": {
+      "bytes": 15828,
+      "sha256": "e66cae56febbeced8b067bf2a8aadcfd470152ba16e22aec3d168723839f9e7e"
+    },
+    "figures/tinyllama/pipeline_speedup.png": {
+      "bytes": 45739,
+      "sha256": "f2320616b6b319e8da2cb26b7b670f443763112b332969e387f46d8950db7d8b"
+    },
+    "figures/tinyllama/pipeline_speedup.svg": {
+      "bytes": 73484,
+      "sha256": "fd953b2058ff6b3cd3380cab14bfcf9a6000684a1a3000ed1cba0eb8f02c6134"
+    },
+    "figures/tinyllama/quality.pdf": {
+      "bytes": 21608,
+      "sha256": "a7a1b5a4c640fd36d7732f834b5051179f9829fe703c68651821d63e8359e280"
+    },
+    "figures/tinyllama/quality.png": {
+      "bytes": 106445,
+      "sha256": "b96dac9b8e6bee81d6e5b6a3753f5f19770cb46d498e456cf49c4619bab39ea9"
+    },
+    "figures/tinyllama/quality.svg": {
+      "bytes": 56624,
+      "sha256": "1661e8ae14171a11d0d9191433eb1284b32b4d880a337e2cd54e7c5278e6b4ac"
+    },
+    "figures/tinyllama/receive_restore_timeline.pdf": {
+      "bytes": 17113,
+      "sha256": "36fce4a4cf24a405f84547e4875b2d0d1c9440a1f673762b70fcc3dacec688f2"
+    },
+    "figures/tinyllama/receive_restore_timeline.png": {
+      "bytes": 84134,
+      "sha256": "c29be1885c71c3c13215f82c8c242e0942e935769479058010f106eacde0c315"
+    },
+    "figures/tinyllama/receive_restore_timeline.svg": {
+      "bytes": 55251,
+      "sha256": "d52fd8b126898a509503e0770ffdcb0f86ff0ae11e79bbc2c981c4bc91b1845c"
+    },
+    "figures/tinyllama/ttft.pdf": {
+      "bytes": 36478,
+      "sha256": "7448077c90eed8f1b4ebeefa4affb27f22422785e1d9011c2bf1a5ac79756024"
+    },
+    "figures/tinyllama/ttft.png": {
+      "bytes": 291328,
+      "sha256": "97c50e638df1ac8e906e754189f1fa3bac22e4b08088851e76aa64b138b151d2"
+    },
+    "figures/tinyllama/ttft.svg": {
+      "bytes": 143031,
+      "sha256": "5fc067ff98ec40ed4aa4ba0ab8cc207330f4dfa38ec81e71ab56da420f25bcfa"
+    },
+    "source-reference.json": {
+      "bytes": 581,
+      "sha256": "ec171e1fe7f86b7bc47d56aadcf5cd72c17ff4cc785665415c93bca8d1fc7a5d"
+    },
+    "validation.json": {
+      "bytes": 15219,
+      "sha256": "3d6e5cd0ace3fc067ce4cd549ab1074c1744c067e4f349c3f7e8a024f15ef40d"
+    },
+    "验收报告.md": {
+      "bytes": 8842,
+      "sha256": "88fa995fff035700577e5f7531c32a389deac4b68698a5ad0c02e15983fc76b1"
+    }
+  }
+}

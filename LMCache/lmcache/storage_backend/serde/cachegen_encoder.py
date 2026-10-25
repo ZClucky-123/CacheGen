@@ -232,6 +232,10 @@ def encode_ntokens(cdf_int, encode_input, output_buffer, output_lengths) -> torc
     Returns:
         byte_tensor: the byte tensor
     """
+    if encode_input.shape[1] > CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS:
+        raise ValueError('Split arithmetic symbols into safe segments before CUDA encoding')
+    if output_buffer.shape[-1] < CGBasics.CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL:
+        raise ValueError('Arithmetic output buffer is too small')
     torchac_cuda.encode_fast_new(
             cdf_int,
             encode_input,
@@ -267,7 +271,7 @@ def encode_function(
     cdf_int = torch.cat([new_cdf_key, new_cdf_value])
 
     output_buffer = torch.zeros(
-            (nlayers, nchannels, CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK), 
+            (nlayers, nchannels, CGBasics.CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL),
             dtype=torch.uint8, 
             device=encode_input.device)
     output_lengths = torch.zeros(
@@ -276,9 +280,9 @@ def encode_function(
             device=encode_input.device)
 
     data_chunks = []
-    for i in range(0, chunk_size, CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK):
+    for i in range(0, chunk_size, CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS):
         start = i
-        end = min(i + CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK, chunk_size)
+        end = min(i + CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS, chunk_size)
         bytestream = encode_ntokens(
             cdf_int,
             encode_input[:, start:end, :],

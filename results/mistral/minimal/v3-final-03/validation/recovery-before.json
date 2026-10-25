@@ -1,0 +1,355 @@
+{
+  "run": "results/mistral/minimal/v3-final-03",
+  "runner_pid": 11893,
+  "prior_observations": {
+    "quality/quality/longchat-0-128/raw": "0a7fafd13fa81077ab02e65bc9e38613b7d6eedaceec3cf969ce2afcdb7b87fd",
+    "quality/quality/longchat-0-128/uniform4": "06bfd709ceecf42e9985824dc2cdff8886649e90e6968b6542f124c40e6605ef",
+    "quality/quality/longchat-0-128/uniform8": "607a669fb147c7eaab77307e65a8b1fd575b64240e090117ef7e0decb1492c22",
+    "quality/quality/longchat-0-128/cachegen1": "1e24639325601cd5581199c6b3af99dcfa2c412e4e3d792ac043c5d7a3d614e0",
+    "quality/quality/longchat-0-128/cachegen2": "547fbb3d7156abfe33298ae872b30e6d8eca8b5eb6e1352093dda13ba6a894fe",
+    "quality/quality/longchat-0-128/cachegen3": "7efb8e7a23ce064edcdcc6c0bb5e571fac3d2f52a742687cabf5681170f9afd9",
+    "quality/quality/longchat-0-257/raw": "873c448f3f608338f4712345f49b26dbb22f35ac990d0ca0efda3b1b9606b9be",
+    "quality/quality/longchat-0-257/uniform4": "c5ef662fac5ddee60e9c8ffae095e73339e09058a01838c4a5bdc0c714bd25d7",
+    "quality/quality/longchat-0-257/uniform8": "299bb48351e3b9cbe240f6b64b3df5b602abdb6c02c2e26ffa74f5617cca776c",
+    "quality/quality/longchat-0-257/cachegen1": "f3b05d542ae6ede708371d8fbcd446964677c4ab13a3a3c03455934d0ddf1237",
+    "quality/quality/longchat-0-257/cachegen2": "1fc48b3b026d31d2c7ea6382077e671c34a275a9a3869608ff9b72287000549d",
+    "quality/quality/longchat-0-257/cachegen3": "745bc0c1ea8049044f66fdbfd894186b5b722832d74dce5a7ad09abdd4921787",
+    "quality/controlled/fact-0-128-start/raw": "74ea30a95e8a1e0e56bcb9a95d853dc20f69b5db85793af688a54af5279fde51",
+    "quality/controlled/fact-0-128-start/uniform4": "a13f34c78c5e6de9246b2e94bebcd78b3036baff5d132caf7b1644a8556fa9c5",
+    "quality/controlled/fact-0-128-start/uniform8": "625a33e75acfe1ee894792ee96d45a0554fb67119bb4b24d30a25a0f07a6e526",
+    "quality/controlled/fact-0-128-start/cachegen1": "86e03f50c0300b2f933622047b07e5c22254b1c199b0fee08e77f305361bcd1e",
+    "quality/controlled/fact-0-128-start/cachegen2": "902c6e4ec2cf49838da19646b4abb8adab5dfbe129f5803d8783fc0ce7a41178",
+    "quality/controlled/fact-0-128-start/cachegen3": "da3ba31545265c05372e1b992fa54c8dd12c97eb25f5557ebebe2f00cf808f0f",
+    "quality/controlled/fact-0-128-middle/raw": "f4d007ea5a034836f9be68c923f05bf2cc34e12e0350f4bdf8fcbbdb3293e6d3",
+    "quality/controlled/fact-0-128-middle/uniform4": "4c7c70e32bd588e3889d5c719c7fa9698c940813aa4dcadef68c8649e88a19e1",
+    "quality/controlled/fact-0-128-middle/uniform8": "4f17dfdf8167a9cde7589db1a3c91d0a22581fc1a6cb14faacd38ee2835a0ca5",
+    "quality/controlled/fact-0-128-middle/cachegen1": "e3282726b284b3bdcbfd3402424271d1f35d44c86e133b986ef78c9cd1e91f29",
+    "quality/controlled/fact-0-128-middle/cachegen2": "d4202902d0846e5379db8a6474fd4ddb462bf0cbe5f13ad23269463ed336d1f2",
+    "quality/controlled/fact-0-128-middle/cachegen3": "730e216b7fdba45c334cffc0d12609bc106cfbb02b3575df17bdf62ee549b27e",
+    "quality/controlled/fact-0-128-end/raw": "25327fa0e95d4db3912f67256811dfdc073175c765582b89c9054f3b8b00711a",
+    "quality/controlled/fact-0-128-end/uniform4": "c7f6a54de0e1d3392caeac3e09f4c60c6dda35ff1c0e29ec0e36f520a042001b",
+    "quality/controlled/fact-0-128-end/uniform8": "df72f7683c9846c248c227dd1949e1372c15fd24e1f9010644f74d13c779ff54",
+    "quality/controlled/fact-0-128-end/cachegen1": "192c9c145b8c415ce7dfcc4a60588acc9d14cb9ab0531fa6cd9f79114c9a8ceb",
+    "quality/controlled/fact-0-128-end/cachegen2": "f55616230382661022dda330f86dbac6a861e53c4518bc1fcafa461785fd3c75",
+    "quality/controlled/fact-0-128-end/cachegen3": "7729cf0129a8b5629034ac8efe7be8a6c085419a25e3527ccfd7b3d4b13783ca",
+    "quality/controlled/fact-0-257-start/raw": "745c4c99f3a1628fc943fe5c615ddc277f116ef8c7aeff8929aa7312e4a56c5e",
+    "quality/controlled/fact-0-257-start/uniform4": "c817664136fe13d0cf071b9a070090bfb4eeb171c071e80ab34e5eede5f416ed",
+    "quality/controlled/fact-0-257-start/uniform8": "8a8a8774405c0a0a357dc1246354d4b9387b7d2ed2e4518c47443e4efea1dc83",
+    "quality/controlled/fact-0-257-start/cachegen1": "6d85808d69d77e34479951b5028d57635657a834e2c0685bf95052a0a8da4343",
+    "quality/controlled/fact-0-257-start/cachegen2": "87c304c13e66caee5a0bbccd9ed51518e69e45c8f29d3b32823bda14ca02fff4",
+    "quality/controlled/fact-0-257-start/cachegen3": "da78a47c79b3b87bdd9f80d8a65a510c3a55660179d129bcb90a9b6f7bb2b386",
+    "quality/controlled/fact-0-257-middle/raw": "1736d3d70cd4e06048b825947575598232bc31e1b01e7259f5510a6a54383bde",
+    "quality/controlled/fact-0-257-middle/uniform4": "e05358137b540f66385b07717b0a70ebc266102afc04cef4916dcacb112b2122",
+    "quality/controlled/fact-0-257-middle/uniform8": "c99035c57ade5cb06d1a9d08b3c198fa46604ccab39e4fe6836a674bcc9f78aa",
+    "quality/controlled/fact-0-257-middle/cachegen1": "61edcea1d4637c3fbd2d79d8f0984458b50f835b2ecb0ba30fd3ba7d51348497",
+    "quality/controlled/fact-0-257-middle/cachegen2": "7498d2cb5397dcd3dc883e4dbc51b4a763e96384f5e96e2a6a34e879178cf603",
+    "quality/controlled/fact-0-257-middle/cachegen3": "12eae822e40200b57c74633f1dedf5fa642a321da1fe6b7e0e0d893caa51191d",
+    "quality/controlled/fact-0-257-end/raw": "96e8f72ccaa39fb01ea8aa9ffda8d72ae2300b4bc0a1a0e9df9d77c47d7b49fe",
+    "quality/controlled/fact-0-257-end/uniform4": "deb6268c6af9175d19bb53923a4a63545ba765b45dfe38177e95f222722754a1",
+    "quality/controlled/fact-0-257-end/uniform8": "3d0376020a02d18deab529937ec0fe970f2b1d009c38725527d109cc2417f125",
+    "quality/controlled/fact-0-257-end/cachegen1": "cbbfcc49b2b5281d8b9aee0acc472ec68d2efbfcfe54db91f225d6f2ae6a7467",
+    "quality/controlled/fact-0-257-end/cachegen2": "00640e0920136201096d84289cc1713a82b1c77b4fdf73419eb7a901ac22ddba",
+    "quality/controlled/fact-0-257-end/cachegen3": "e033d1a19561663785d57526bc7b7c8ca7e3733daef6f4a739581ce2a68aa2f4",
+    "quality/triviaqa/tqa-21/raw": "f24ddff875dfe3f357db8558fe0f5d6637b4d60cafda9d84baf32f2c7717d68f",
+    "quality/triviaqa/tqa-21/uniform4": "e840e4cbf91210157759b2ab1a2ef523d8d4b7a6b2485ad94004e02b8f24b669",
+    "quality/triviaqa/tqa-21/uniform8": "529f07ca5db53e4bbc48b0481cd062000f2a6d67002477b718cafbaec07bcc4f",
+    "quality/triviaqa/tqa-21/cachegen1": "22c15b159ffbe814b41e8f912cb3914e395263a7a3947d1a1ef74108de8d3ed4",
+    "quality/triviaqa/tqa-21/cachegen2": "9fa7dce185eb329a100f65e9e603fe29b82f961e8b27ffd7a9f090871b1c0913",
+    "quality/triviaqa/tqa-21/cachegen3": "48105c16ce959d2b717392d0072fb99cf4a5cdc8adefac1f991095ccc5df670b",
+    "ttft/longchat-0-128/0.1/1/text/chunk_serial/chunk-128/queue-1": "c35218f799f4df96558586d4ea41d0c87f9d1ee565eb4d7324a7e2e85a969ef4",
+    "ttft/longchat-0-128/0.1/1/cachegen1/chunk_serial/chunk-128/queue-1": "ee2b26f6d79e9b5d936da4644dc2721e124bdf04926db5e77896cd6c85c19f7c",
+    "ttft/longchat-0-128/0.1/1/cachegen1/whole/chunk-128/queue-1": "467c36eb95381ddfbe508643dc2aa8ee13ff7159169df23c89d349803fc61a90",
+    "ttft/longchat-0-128/0.1/1/text/whole/chunk-128/queue-1": "82f3c113a74a58c825599186c8252c60ea568e7c616d2945cc4f4f14caf7e131",
+    "ttft/longchat-0-128/0.1/1/cachegen3/whole/chunk-128/queue-1": "63af051292f6b0055ab5409a88f0bddb78ae805b55ed0f18389f0f1bac8f81d7",
+    "ttft/longchat-0-128/0.1/1/raw/chunk_serial/chunk-128/queue-1": "16f5d96d23ec5934787e561e10c45d3204e7c8752b21cf84d7da888e29917e76",
+    "ttft/longchat-0-128/0.1/1/uniform8/chunk_pipeline/chunk-128/queue-1": "71dc362ace08ef5f5a50784cc41a911387e10d300bb366a360556e891c3a5676",
+    "ttft/longchat-0-128/0.1/1/uniform4/chunk_serial/chunk-128/queue-1": "079c39f219c0b34686c041b1bdeef8199e31f1e65050c14278e6d6595e453608",
+    "ttft/longchat-0-128/0.1/1/uniform4/chunk_pipeline/chunk-128/queue-1": "7e4cff00fb7b0b4bb0b73c6f7310c44096a001b89de07add551cdf313fa79ccc",
+    "ttft/longchat-0-128/0.1/1/cachegen2/chunk_serial/chunk-128/queue-1": "a2a9e6ba8c8f98fa69379d738aca6b8cf2ffc2072be33bfd4fdfc0da58c97ebb",
+    "ttft/longchat-0-128/0.1/1/cachegen2/chunk_pipeline/chunk-128/queue-1": "fde0425c03ece80a5c4fc8446b27995eaea81bc1d661c21ed949767f45c28118",
+    "ttft/longchat-0-128/0.1/1/cachegen3/chunk_pipeline/chunk-128/queue-1": "91e5e01f0f64b480aba47753fe7d872159625c285664e596d9825cc557e77f01",
+    "ttft/longchat-0-128/0.1/1/cachegen1/chunk_pipeline/chunk-128/queue-1": "ce400686df478e54177444f67cc5caacb9843b8fb53e469a59160d03caf6375f",
+    "ttft/longchat-0-128/0.1/1/uniform4/whole/chunk-128/queue-1": "1bf2a5bf087278b87d21602d31d6417683ebe10679f1eaa2e943fc0f60fb3c61",
+    "ttft/longchat-0-128/0.1/1/raw/chunk_pipeline/chunk-128/queue-1": "ca375d501ef006ca2e977b3dc2a5cbcab044d620666003d72d970c8fe0e5ffe4",
+    "ttft/longchat-0-128/0.1/1/cachegen3/chunk_serial/chunk-128/queue-1": "4d46368d1602211c669d18f1170b36208283518805d72b5d4347db568b5c9b9f",
+    "ttft/longchat-0-128/0.1/1/cachegen2/whole/chunk-128/queue-1": "4eeb411040674dc58dd1ecb7a6aa95c74e7df0f7d713bf2a04e6cb7e05428e65",
+    "ttft/longchat-0-128/0.1/1/uniform8/chunk_serial/chunk-128/queue-1": "8de0c696c69f0b1692c520cae057ca7d214266fddffd839f1bc00338a63d78fb",
+    "ttft/longchat-0-128/0.1/1/text/chunk_pipeline/chunk-128/queue-1": "8758bfe146b0380932cef7bd7ab39673b02a34d857775c8b2397566cdfd08f5a",
+    "ttft/longchat-0-128/0.1/1/raw/whole/chunk-128/queue-1": "848636ec4af3d4dd82c380460d9dd3d51506abf096836409ed9285ef3ef99443",
+    "ttft/longchat-0-128/0.1/1/uniform8/whole/chunk-128/queue-1": "8a4be24007893a5fb0be6d853f230e6403220b0cfc64102f8b0f3d47465fb96f",
+    "ttft/longchat-0-128/10/1/text/chunk_pipeline/chunk-128/queue-1": "9d9260e27ae7055198ed1fcdb5c0e14143cade2977f7e7877559556dbe416743",
+    "ttft/longchat-0-128/10/1/cachegen1/chunk_pipeline/chunk-128/queue-1": "f119bef357f3032b208ebb531f486c706d58defeb3a935ed49d853a618b06d57",
+    "ttft/longchat-0-128/10/1/cachegen1/chunk_serial/chunk-128/queue-1": "8b47d8f8cf8e2ab4a557de864cf76617a3d70df1defedc65fc8a31c41ee9533a",
+    "ttft/longchat-0-128/10/1/uniform4/whole/chunk-128/queue-1": "17ff3286f3fcb6eeee662061922cb5c50cbef887a5663222621f3fabfad09111",
+    "ttft/longchat-0-128/10/1/uniform4/chunk_serial/chunk-128/queue-1": "0356fbd85c774e53a5540d5dd0838cf3fbeb9359fba69d91dfd00415b1845cb0",
+    "ttft/longchat-0-128/10/1/text/whole/chunk-128/queue-1": "226322c0a6e03b207d654d2a8993935b17a4c6aacf2b6aca7d28619eb92501d4"
+  },
+  "prepared": {
+    "pending-prepared/ttft/longchat-0-128/128/text/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "text",
+          "encode_seconds": 0.002469971776008606,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 586
+          },
+          "file": "0.bin",
+          "sha256": "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/raw/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "raw",
+          "encode_seconds": 0.01899345964193344,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16778396
+          },
+          "file": "0.bin",
+          "sha256": "0db96c545ea9782a6cd9deb872103cbc45d77f1f3ee71cc8a4ba522e2695e49a"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/uniform4/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "uniform4",
+          "encode_seconds": 0.005472920835018158,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 4212184
+          },
+          "file": "0.bin",
+          "sha256": "fd044d4ac6686ed8a489a984f683d52f919b2f5fe9cada941df3ad321dabca0f"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/uniform8/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "uniform8",
+          "encode_seconds": 0.007939331233501434,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8406488
+          },
+          "file": "0.bin",
+          "sha256": "5c9e402c7a7cd844f2bc1befb05d1af36169de919b2a0f155819ba822d1ed2fd"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/cachegen1/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "cachegen1",
+          "encode_seconds": 0.00500362366437912,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_tokens": [
+              128
+            ],
+            "payload_bytes": 4276985
+          },
+          "file": "0.bin",
+          "sha256": "a73ef6159388e105f6928087bea140ff4705083f3dc88203f7730c6786d93561"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/cachegen2/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "cachegen2",
+          "encode_seconds": 0.006619952619075775,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_tokens": [
+              128
+            ],
+            "payload_bytes": 6838232
+          },
+          "file": "0.bin",
+          "sha256": "8ce672c2c1b60aac82ae07860624029abb175f1a9bfb108e9f8d51c9e2cefed5"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    },
+    "pending-prepared/ttft/longchat-0-128/128/cachegen3/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 128,
+          "method": "cachegen3",
+          "encode_seconds": 0.015074014663696289,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 128,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              128,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_tokens": [
+              128
+            ],
+            "payload_bytes": 7672736
+          },
+          "file": "0.bin",
+          "sha256": "5ef38d0a52b2f3a537b29a9c3653e3d470e21c22298758ef8b8b53c39c635af4"
+        }
+      ],
+      "offline_prefill_seconds": 0.06131579726934433
+    }
+  },
+  "progress": {
+    "stage": "ttft",
+    "current_observation": "ttft/longchat-0-128/10/1/cachegen3/whole/chunk-128/queue-1",
+    "completed": 81,
+    "expected": 274
+  }
+}

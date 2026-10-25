@@ -1,0 +1,25 @@
+{
+  "status": "interrupted",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/experiments/run.sh",
+    "--model",
+    "mistral",
+    "--config",
+    "experiments/configs/minimal.json",
+    "--run-id",
+    "v3-final-03"
+  ],
+  "environment": {
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "/home/aaa/CacheGen/results/mistral/minimal/v3-final-03",
+  "started_utc": "2026-10-25T02:32:53.044370+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/mistral-v3-final-03.log",
+  "pid": 11890,
+  "exit_code": 143,
+  "finished_utc": "2026-10-25T02:34:53.112908+00:00"
+}

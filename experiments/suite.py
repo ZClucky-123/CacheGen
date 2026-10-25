@@ -1,10 +1,11 @@
-"""Run/resume the shared six-task protocol in an immutable, unique batch."""
+"""Run/resume the shared versioned protocol in an immutable, unique batch."""
 import argparse
 import fcntl
 import json
 import os
 import random
 import re
+import resource
 import signal
 import shutil
 import sys
@@ -12,8 +13,8 @@ import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
-from experiments.config import jobs, load_config
-from experiments.records import Journal, expected_keys, save, fingerprint, validate_task_records
+from experiments.config import jobs, load_config, validate_config, TASK_KINDS
+from experiments.records import Journal, expected_keys, save, fingerprint, validate_task_records, record_memory_peak
 from experiments.workspace import Workspace
 
 
@@ -36,7 +37,7 @@ class Tee:
 
 
 def run(args, workspace, cfg):
-    from experiments.artifacts import (code_data_identity, runtime_identity, preflight,
+    from experiments.artifacts import (code_data_identity, runtime_identity, preflight, InputGuard,
                                         collect_metadata, sha256, seal, verify)
     import torch
     from experiments.engine import Engine
@@ -58,11 +59,16 @@ def run(args, workspace, cfg):
     # A resume mismatch must not mutate a prior batch's manifest or exit code.
     initialized = False
     manifest = None
+    def capture_memory():
+        if manifest and manifest['attempts'] and manifest['attempts'][-1].get('memory_scope') == 'after_model_load':
+            host_peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == 'darwin' else 1024)
+            record_memory_peak(manifest, torch.cuda.max_memory_allocated(), torch.cuda.max_memory_reserved(), host_peak)
     try:
         torch.set_num_threads(cfg.get('cpu_threads', 8))
         torch.manual_seed(cfg['seed'])
         random.seed(cfg['seed'])
         current = code_data_identity(workspace.repo, cfg)
+        input_guard = InputGuard(workspace.repo, cfg, current)
         if args.resume:
             manifest = json.loads((run_dir / 'manifest.json').read_text())
             if manifest['identity']['inputs'] != current:
@@ -95,7 +101,7 @@ def run(args, workspace, cfg):
             save(Path(state_file), {'run_directory': str(run_dir)})
         if not torch.cuda.is_available():
             raise RuntimeError('CUDA is required for real measurements')
-        engine = Engine(cfg['model'], load=False)
+        engine = Engine(cfg['model'], load=False, execution=cfg['execution'])
         selected = selection(workspace.repo, cfg, engine.tokenizer)
         preflight(engine, cfg, selected, run_dir)
         attempt_dir = run_dir / 'attempts' / f'{len(manifest["attempts"]):03d}'
@@ -133,17 +139,20 @@ def run(args, workspace, cfg):
                     attention_class=type(engine.model.model.layers[0].self_attn).__name__)
         save(run_dir / 'metadata.json', meta)
         torch.cuda.reset_peak_memory_stats()
+        manifest['attempts'][-1]['memory_scope'] = 'after_model_load'
+        def progress(task, key):
+            input_guard.check()
+            manifest['progress'] = {'stage': task, 'current_observation': key,
+                                    'completed': len(journal.keys), 'expected': manifest['expected_observations']}
+            save(run_dir / 'manifest.json', manifest)
         if not (run_dir / 'cache_checks.json').is_file() or json.loads((run_dir / 'cache_checks.json').read_text())['status'] != 'passed':
             manifest['progress']['stage'] = 'cache_checks'
             save(run_dir / 'manifest.json', manifest)
             with torch.inference_mode():
-                tasks.cache_checks(engine, cfg, selected, run_dir)
-        def progress(task, key):
-            manifest['progress'] = {'stage': task, 'current_observation': key,
-                                    'completed': len(journal.keys), 'expected': manifest['expected_observations']}
-            save(run_dir / 'manifest.json', manifest)
+                tasks.cache_checks(engine, cfg, selected, run_dir, progress=progress)
         with torch.inference_mode():
             for job in manifest['jobs']:
+                input_guard.check(force=True)
                 if set(expected[job['name']]).issubset(journal.keys):
                     validate_task_records(journal, job, expected[job['name']])
                     job['status'] = 'completed'
@@ -151,6 +160,8 @@ def run(args, workspace, cfg):
                 job.update(status='running', started_utc=now())
                 job.pop('exit_code', None)
                 save(run_dir / 'manifest.json', manifest)
+                if job['kind'] not in TASK_KINDS:
+                    raise ValueError(f'Unknown task kind: {job["kind"]}')
                 getattr(tasks, job['kind'])(engine, cfg, selected, run_dir, journal, job, progress)
                 count = validate_task_records(journal, job, expected[job['name']])
                 job.update(status='completed', observations=count, finished_utc=now(), exit_code=0)
@@ -166,8 +177,8 @@ def run(args, workspace, cfg):
         report(run_dir, cfg, journal, expected)
         journal.close()
         journal = None
+        capture_memory()
         manifest.update(status='completed', finished_utc=now(), exit_code=0,
-            peak_gpu_allocated_bytes=torch.cuda.max_memory_allocated(), peak_gpu_reserved_bytes=torch.cuda.max_memory_reserved(),
             progress={'stage': 'completed', 'completed': manifest['expected_observations'], 'expected': manifest['expected_observations']})
         manifest['attempts'][-1].update(finished_utc=now(), exit_code=0)
         save(run_dir / 'manifest.json', manifest)
@@ -177,6 +188,7 @@ def run(args, workspace, cfg):
     except BaseException as error:
         if not initialized:
             raise
+        capture_memory()
         code = (128 + (error.args[0] if error.args and type(error.args[0]) is int else 2)) if isinstance(error, KeyboardInterrupt) else 1
         manifest.update(status='interrupted' if isinstance(error, KeyboardInterrupt) else 'failed', error=repr(error),
                         finished_utc=now(), exit_code=code)
@@ -238,7 +250,7 @@ def main(argv=None, configuration=None):
     if args.resume and (args.config or args.model or args.output_root):
         parser.error('Resume uses the recorded configuration; do not override config/model/output-root')
     path = args.resume / 'config.json' if args.resume else args.config or workspace.repo / 'experiments/configs/small.json'
-    cfg = configuration if configuration is not None else load_config(path, args.model)
+    cfg = validate_config(configuration, args.model) if configuration is not None else load_config(path, args.model)
     if args.dry_run:
         print(json.dumps({'configuration': cfg, 'jobs': jobs(cfg),
                           'run_directory': str(args.resume or (args.output_root or workspace.results / cfg['model']['name'] / cfg['scale']) / args.run_id),
@@ -263,7 +275,7 @@ def check_configuration(workspace, cfg):
             return 75
         if not torch.cuda.is_available():
             raise RuntimeError('CUDA resource inspection requires the target GPU')
-        engine = Engine(cfg['model'], load=False)
+        engine = Engine(cfg['model'], load=False, execution=cfg['execution'])
         selected = selection(workspace.repo, cfg, engine.tokenizer)
         target = workspace.local / 'checked-configs' / fingerprint(cfg)[:16]
         target.mkdir(parents=True, exist_ok=True)

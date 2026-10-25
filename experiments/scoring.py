@@ -1,4 +1,4 @@
-"""Frozen QA scoring for protocol cachegen-shared-v2."""
+"""Frozen QA scoring shared by protocols v2 and v3."""
 import re
 import string
 from collections import Counter

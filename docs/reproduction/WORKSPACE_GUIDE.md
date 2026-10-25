@@ -1,79 +1,62 @@
-# 工作区、兼容性和后续实验
+# 工作区与公共框架
 
-> 当前模型实验已统一为 [公共 v2 框架](SHARED_FRAMEWORK.md)，配置与算法均共享，切换模型通过适配器。以下整理记录中关于两套实验及模型专用评分的描述属于重构前状态；[审查表](SHARED_FRAMEWORK_AUDIT.md)说明差异，[历史索引](HISTORY.md)界定旧结果。
+当前协议为 `cachegen-shared-v3`。配置、实验设计和执行命令以 [公共框架指南](SHARED_FRAMEWORK.md)为准；本页说明模块、目录和扩展。历史整理记录见 [2026-10-24 记录](WORKSPACE_ORGANIZATION_20261024.md)。
 
-本机所有项目实体均位于 `/home/aaa/CacheGen`；上传 GitHub 时以该目录为仓库根目录。项目代码根据脚本位置寻找仓库，克隆到其他目录后不需要修改活动代码中的机器绝对路径。
+## 目录职责
 
-```text
-CacheGen/
-├── experiments/                 标准库调度器、注册表与各组实验
-│   └── mistral/                 Mistral 代码、默认配置和原始三项测试
-├── mini_repro/                  原 TinyLlama API 与公共算法
-├── mistral_repro -> experiments/mistral
-├── results/                     按实验和批次保存原始测量
-│   ├── mistral/                 本次成功与首次失败批次
-│   └── reproduction/            已归档 TinyLlama 正式批次
-├── reports/mistral/             中文报告、图表与数据
-├── tools/server_setup/          相对路径的安装与环境校验工具
-├── scripts/experiment-env.sh    共用环境变量与 GPU 锁
-├── tests/                       全套回归与工作区兼容性测试
-├── .local/                      本机依赖、字体、下载工具与迁移记录
-├── .venv/                       本机 Python、模型与历史环境日志
-└── .cuda-12.1/                  本机 CUDA 工具链
-```
+本机仓库根目录为 `/home/aaa/CacheGen`。代码按脚本位置发现根目录，迁移后需准备目标机器的模型和工具链。
 
-## 查看本次结果
+- `experiments/` 是两模型正式框架，包含配置/适配器、Engine、数据评分、TTFT/反馈/消融、检查点、分析和归档。
+- `mini_repro/` 提供复用工具并保留 TinyLlama v1；其历史轨迹估算口径不代表 v3。
+- `LMCache/`、`src/`、根目录 `run_*.py` 保留作者代码和原始入口。
+- `test_data/` 保存固定数据；`tests/` 保存 CPU/GPU 和兼容回归。
+- `results/<model>/<scale>/<run-id>/` 保存批次，`reports/` 保存中文验收及可分享报告。
+- `docs/reproduction/` 保存指南、环境、论文对照和历史索引。
+- `mistral_repro -> experiments/mistral` 为相对兼容链接。
 
-- [完整中文报告](../../reports/mistral/20261024-mistral7b/小规模复现实验报告.md)
-- [图表 PDF](../../reports/mistral/20261024-mistral7b/图表合集.pdf)
-- [原始结果与失败诊断](../../results/mistral/README.md)
+本机 `.venv/`、`.cuda-12.1/`、`.local/` 和 `releases/` 不上传。固定服务器副本重用父项目环境、模型和 GPU 锁，见 [稳定版本记录](LARGER_READINESS_20261025.md)；新机器不能依赖这些本地目录。
 
-## 位置与环境覆盖
+## 路径和环境覆盖
 
-以下变量均可选，默认路径相对仓库根目录；相对路径覆盖也按仓库根目录解析。
+相对路径覆盖均相对仓库根目录解析。
 
 | 变量 | 默认值或作用 |
 | --- | --- |
-| `CACHEGEN_REPO_ROOT` | 根据代码位置发现；一般无需设置 |
-| `CACHEGEN_RESULTS_DIR` | `results`，每个实验再分子目录 |
+| `CACHEGEN_REPO_ROOT` | 代码所在仓库，通常无需设置 |
+| `CACHEGEN_RESULTS_DIR` | `results`，再按模型/规模/批次分层 |
 | `CACHEGEN_REPORTS_DIR` | `reports` |
-| `CACHEGEN_LOCAL_DIR` | `.local`；同一 GPU 的测量请共享此目录以共用锁 |
+| `CACHEGEN_LOCAL_DIR` | `.local`；同 GPU 的所有入口必须共用锁目录 |
 | `CACHEGEN_PYTHON` | 优先 `.venv/bin/python`，否则当前 Python |
-| `CUDA_HOME` | 优先仓库 `.cuda-12.1`、`.venv/cuda-12.1`，再用 `/usr/local/cuda-12.1` |
-| `HF_HOME` / `HF_HUB_CACHE` | 模型缓存；默认 `.venv/huggingface` |
-| `CACHEGEN_MODEL_CHECKSUMS` | Mistral 权重校验清单；默认 `.venv/mistral-download-verified.json` |
+| `CUDA_HOME` | 优先 `.cuda-12.1`、`.venv/cuda-12.1`，最后 `/usr/local/cuda-12.1` |
+| `HF_HOME` / `HF_HUB_CACHE` | 默认 `.venv/huggingface` |
 | `TORCH_EXTENSIONS_DIR` | 默认 `.local/torch_extensions` |
-| `TORCH_CUDA_ARCH_LIST` | 默认 `8.9`，换 GPU 时按实际架构设置 |
-| `CACHEGEN_PLOT_PYTHON` | 后处理解释器，默认运行后处理脚本的 Python |
+| `TORCH_CUDA_ARCH_LIST` | 本机 `8.9`，迁移时按目标 GPU 设置 |
+| `OMP_NUM_THREADS` | 默认 8，实际线程数记入指纹 |
 
 ```bash
-# 在另一结果位置复跑；配置文件内容会保存到新批次 source/config.json。
 CACHEGEN_RESULTS_DIR=results/new-study \
-  python3 -m experiments run mistral -- --config experiments/mistral/config.json
+  bash experiments/run.sh --model mistral --config experiments/configs/minimal.json --run-id new-study
 ```
 
-Mistral 默认固定模型和 revision。修改样本数、长度、重复次数等测量参数时使用单独配置，保留默认配置以供比较；切换模型架构应建立新的实验条目。TinyLlama 使用已有 `--profile` 接口。启动后结果目录不复用旧批次；GPU 测量冲突返回 75。可对 manifest 的 `runner_pid` 发送 TERM 停止新批次，监督入口会转发信号并保留 interrupted 状态和退出码 143；预检失败也有可见的 manifest。
+使用 `extends` 扩展配置；新增模型差异放入适配器，复用公共流程。运行中修改源码、配置或数据会被 InputGuard 检出并停止，恢复也拒绝不同指纹。
 
-## 后处理和报告
+## 后台、检查点和状态
 
-原始实验自动输出参数化的 `report.md`、JSON 和 CSV。需要图表时，后处理 Python 应已安装 `matplotlib` 与 `numpy`：
+`experiments.background` 使用独立 tmux socket `cachegen`，SSH/IDE 关闭后继续运行。GPU 锁冲突返回 75。服务器重启或进程环境重建后，用新会话名从原批次 `--resume`；tmux 本身不能跨重启存活。
+
+SQLite WAL/FULL 按观测提交，JSON 检查点同步写入。TTFT 未完成案例的原编码字节保存在 `pending-prepared/`，恢复核验哈希，完成后删除。不要手工删除未完成批次暂存。
+
+默认状态覆盖该模型全部规模，精确查询使用 `--run-dir`。同时查看 `runner_alive`、后台 `tmux_alive` 和日志：manifest 的 running 是最后记录状态，强制终止后可能残留。对确认属于当前批次的 runner PID 发送 TERM，可保留检查点并返回 143。
+
+## 分析和归档
+
+任务完成后自动生成逐观测 JSONL、分组 CSV、配对/时间线、PNG/SVG/PDF 和 report，再核验精确矩阵并封存哈希。
 
 ```bash
-python3 experiments/mistral/finalize.py results/mistral/<批次>
+source scripts/experiment-env.sh
+"$CACHEGEN_PYTHON" -m experiments.suite --verify results/mistral/minimal/v3-final-03
 ```
 
-已有完整 `artifacts.json` 时，后处理先核验归档并直接返回，保持结果和源码快照不变；校验失败另写 `artifact-verification-error.json`，不覆盖原校验清单。历史源码优先与批次快照核对；新批次额外记录相对仓库的指纹，用于迁移后追踪。
+历史 `build_document.py`、`plot_results.py`、`finalize.py` 保留旧设计口径。历史报告、原始记录、源码快照及清单保持原字节；后续修复建立新批次，不用当前源码补写旧证据。
 
-`build_document.py` 是 **2026-10-24 固定实验设计的中文交付报告生成器**，保留当时的统计口径和说明；后续改变实验设计时使用通用 `report.md` / `plot_results.py`，或为新设计单独扩展报告模板，不将旧模板的样本叙述直接用于新设计。本机现有绘图依赖在 `.local/mistral/plotdeps`，字体在 `.local/mistral/report-assets`，未作为模型或环境依赖上传。
-
-## 兼容与归档
-
-`mistral_repro` 是仓库内相对链接，旧 `bash mistral_repro/run.sh` 和 `python3 mistral_repro/status.py` 继续有效；`mini_repro` 导入和原有脚本参数保持兼容。Mistral 的旧 `runs`、`deliverables`、`latest` 链接指向新的结果和报告目录。
-
-历史批次的绝对路径代表执行时现场，原始 JSON、报告包和源码快照保持字节不变。本机已有 `/root/cachegen-repro` 链接改指仓库内入口；不再需要 `/home/aaa` 下的兼容文件。
-
-新结果默认留在本机。归档前核对完成状态、退出码、样本/方法/重复数量及 SHA-256，再为具体批次添加 `.gitignore` 白名单并更新结果索引。已验证的 Mistral 原始记录、诊断失败批次与交付包已列入本次上传；`.local`、Python 环境、模型、wheel、编译缓存及 CUDA 均被忽略。
-
-目录与暂存区原始备份在 `.local/migration/20261024-workspace/`。迁移过程不删除唯一数据副本；详细记录见 [整理说明](WORKSPACE_ORGANIZATION_20261024.md)。
-
-按用户要求，本地报告 ZIP 已删除，所有 `.zip` 默认忽略，上传使用展开后的报告、图表和原始数据。
+新结果默认不提交。确认用途、完成状态、退出码、精确观测集合和哈希后，再为特定目录添加 Git 白名单并更新索引。环境、模型、wheel、编译缓存、运行中批次和 ZIP 不加入提交。

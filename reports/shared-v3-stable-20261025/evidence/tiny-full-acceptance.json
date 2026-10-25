@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "observations": 274,
+  "jobs": {
+    "quality": 54,
+    "ttft": 168,
+    "adaptive-scale-1-slo-0.2": 7,
+    "adaptive-scale-1-slo-0.5": 7,
+    "adaptive-scale-0.01-slo-0.2": 7,
+    "adaptive-scale-0.01-slo-0.5": 7,
+    "ablation": 24
+  },
+  "exit_code": 0,
+  "verified_archive_files": 175,
+  "source_files": 113,
+  "source_matches_current_working_tree": true
+}

@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 /.cuda-12.1/
 /.local/
+/releases/
 *.pt
 *.safetensors
 *.bin
@@ -51,6 +52,24 @@ results/tinyllama/minimal/*
 !results/tinyllama/minimal/v2-final-check/**
 !/reports/mistral/v2-small-final-20261024/
 !/reports/mistral/v2-small-final-20261024/**
+
+# Verified shared-v3 mechanism acceptance batches, distinct from v2.
+!results/tinyllama/minimal/v3-final-03/
+!results/tinyllama/minimal/v3-final-03/**
+!results/mistral/minimal/
+results/mistral/minimal/*
+!results/mistral/minimal/v3-final-03/
+!results/mistral/minimal/v3-final-03/**
+!/reports/shared-v3-20261025/
+!/reports/shared-v3-20261025/**
+
+# Stable large-context readiness and fixed-source acceptance evidence.
+!results/mistral/small/v3-larger-validation-03/
+!results/mistral/small/v3-larger-validation-03/**
+!results/tinyllama/minimal/v3-stable-acceptance-20261025/
+!results/tinyllama/minimal/v3-stable-acceptance-20261025/**
+!/reports/shared-v3-stable-20261025/
+!/reports/shared-v3-stable-20261025/**
 
 # Canonical SQLite databases are archived after checkpoint; sidecars are transient.
 **/records.sqlite3-wal

@@ -1,0 +1,38 @@
+{"event": "start", "time_utc": "2026-10-25T04:08:42.720007+00:00", "run_directory": "/home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03", "resume": false}
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|###3      | 1/3 [00:13<00:27, 13.94s/it] 67%|######6   | 2/3 [00:29<00:14, 14.68s/it]100%|##########| 3/3 [00:41<00:00, 13.84s/it]100%|##########| 3/3 [00:41<00:00, 13.99s/it]
+{"event": "task_completed", "task": "quality", "observations": 102, "time_utc": "2026-10-25T04:15:23.823335+00:00"}
+Traceback (most recent call last):
+  File "/home/aaa/CacheGen/experiments/suite.py", line 165, in run
+    getattr(tasks, job['kind'])(engine, cfg, selected, run_dir, journal, job, progress)
+  File "/home/aaa/CacheGen/experiments/ttft.py", line 171, in ttft
+    merged, row = replay(engine, cfg, packets, step['bandwidth_gbps'], mode, context, suffix)
+  File "/home/aaa/CacheGen/experiments/ttft.py", line 36, in replay
+    result = transfer_chunks([c.wire for c in packets], bandwidth, restore, mode=mode,
+  File "/home/aaa/CacheGen/mini_repro/transport.py", line 157, in transfer_chunks
+    index, received = _get(completed, cancelled)
+  File "/home/aaa/CacheGen/mini_repro/transport.py", line 29, in _get
+    return items.get(timeout=.02)
+  File "/usr/lib/python3.10/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/usr/lib/python3.10/threading.py", line 324, in wait
+    gotit = waiter.acquire(True, timeout)
+  File "/home/aaa/CacheGen/experiments/suite.py", line 91, in interrupted
+    raise KeyboardInterrupt(signum)
+KeyboardInterrupt: 15
+{"event": "start", "time_utc": "2026-10-25T04:25:14.015338+00:00", "run_directory": "/home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03", "resume": true}
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|###3      | 1/3 [00:13<00:27, 13.58s/it] 67%|######6   | 2/3 [00:28<00:14, 14.21s/it]100%|##########| 3/3 [00:40<00:00, 13.25s/it]100%|##########| 3/3 [00:40<00:00, 13.45s/it]
+{"event": "task_completed", "task": "ttft", "observations": 315, "time_utc": "2026-10-25T04:34:10.359287+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.2", "observations": 7, "time_utc": "2026-10-25T04:34:38.116916+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.5", "observations": 7, "time_utc": "2026-10-25T04:35:06.516011+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.2", "observations": 7, "time_utc": "2026-10-25T04:38:31.809120+00:00"}
+{"event": "start", "time_utc": "2026-10-25T05:07:51.326663+00:00", "run_directory": "/home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03", "resume": true}
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|###3      | 1/3 [00:13<00:26, 13.06s/it] 67%|######6   | 2/3 [00:26<00:13, 13.39s/it]100%|##########| 3/3 [00:38<00:00, 12.59s/it]100%|##########| 3/3 [00:38<00:00, 12.78s/it]
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.5", "observations": 7, "time_utc": "2026-10-25T05:11:38.895538+00:00"}
+{"event": "task_completed", "task": "ablation", "observations": 24, "time_utc": "2026-10-25T05:16:48.168553+00:00"}
+Measurements and report complete; finalizing archive: /home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03

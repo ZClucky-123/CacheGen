@@ -1,18 +1,27 @@
-# 公共实验框架
+# 公共实验框架 v3
 
-TinyLlama 与 Mistral 当前共用 `config.py`、`engine.py`、`datasets.py`、`tasks.py`、`records.py`、`suite.py`、`analysis.py` 和 `artifacts.py`。模型差异只放在适配器与配置，三个核心实验组仍是六个执行任务。
+TinyLlama 与 Mistral 共用配置校验、Engine、数据选择、任务、检查点、分析和归档。四组实验默认展开为七任务：`quality`、`ttft`、四组倍率/SLO 的 `adaptive` 和 `ablation`。
 
-完整说明见 [配置、后台、查询、恢复和较大规模](../docs/reproduction/SHARED_FRAMEWORK.md)、[审查表](../docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)和[历史索引](../docs/reproduction/HISTORY.md)。
+| 模块 | 职责 |
+| --- | --- |
+| `config.py`、`configs/` | 适配器、精确矩阵和参数校验 |
+| `engine.py`、`stable.py`、`numerics.py` | 模型/KV 接口、执行配置及正确性 |
+| `datasets.py`、`scoring.py` | 数据选择、完整续写 NLL 和 QA |
+| `chunks.py`、`ttft.py`、`feedback.py` | 分块、三模式传输与历史反馈 |
+| `mechanisms.py`、`ablation.py` | 共用量化中间结果及机制消融 |
+| `suite.py`、`records.py`、`artifacts.py` | 调度、SQLite 检查点、指纹和归档 |
+| `analysis.py`、`analysis_v3.py` | 分组、配对、时间线和图表 |
+| `background.py`、`workspace.py` | tmux 后台、路径、注册与状态 |
 
 ```bash
 python3 -m experiments list
-python3 -m experiments run mistral --dry-run
-bash experiments/run.sh --model mistral --config experiments/configs/small.json --dry-run
-python3 -m experiments.background start --name mistral-small -- --model mistral --config experiments/configs/small.json
+bash experiments/run.sh --model mistral --config experiments/configs/minimal.json --dry-run
+python3 -m experiments.background start --name mistral-v3-new -- \
+  --model mistral --config experiments/configs/minimal.json --run-id v3-new
 python3 -m experiments status mistral
-python3 -m experiments.background status --name mistral-small
+python3 -m experiments.background status --name mistral-v3-new
 ```
 
-注册表仍支持独立的非模型工具接入，按 argv 列表转发，路径由 Workspace.discover() 解析。新增类似模型实验应扩展适配器/配置，避免另写正式测量流程。`experiments/mistral` 和 `mistral_repro` 保留薄兼容入口及历史后处理；不再有专用正式算法。
+结果为 `results/<model>/<scale>/<run-id>/`。注册入口默认 small，状态查询覆盖该模型全部规模。重复 run ID 拒绝覆盖，`--resume` 读取原配置并核对指纹；同 GPU 入口共用锁。
 
-新批次为 `results/<model>/<scale>/<run-id>`。默认小规模；较大规模必须显式选择对应配置。重复 run ID 拒绝覆盖，`--resume` 严格核对全部指纹。后台任务使用服务器 tmux，同 GPU 正式测量使用共用排他锁。
+完整协议和命令见 [框架指南](../docs/reproduction/SHARED_FRAMEWORK.md)，模块和路径见 [工作区指南](../docs/reproduction/WORKSPACE_GUIDE.md)，实现边界见 [论文对照](../docs/reproduction/PAPER_ALIGNMENT.md)。新增模型复用适配器；`mistral/`、`mistral_repro` 和 `mini_repro` 保留兼容与历史入口，不另写正式算法。

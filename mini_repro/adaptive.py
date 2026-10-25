@@ -48,6 +48,8 @@ def next_decision(chunks, index, bandwidth, slo, elapsed, strategy, first_token_
         level = 0 if strategy == 'text' else int(strategy[-1])
     return {'chunk_index': index, 'bandwidth_gbps': bandwidth, 'remaining_budget_seconds': remaining,
             'level': level, 'forecast_seconds': forecasts[level],
+            'candidate_forecasts_seconds': forecasts,
+            'candidate_current_costs_seconds': {candidate: sum(representation_cost(chunk, candidate, bandwidth)) for candidate in (3, 2, 1, 0)},
             'forecast_feasible': forecasts[level] <= remaining + 1e-12}
 
 

@@ -1,0 +1,30 @@
+{"event": "start", "time_utc": "2026-10-25T02:32:55.232230+00:00", "run_directory": "/home/aaa/CacheGen/results/mistral/minimal/v3-final-03", "resume": false}
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|###3      | 1/3 [00:10<00:20, 10.29s/it] 67%|######6   | 2/3 [00:21<00:10, 10.82s/it]100%|##########| 3/3 [00:30<00:00, 10.21s/it]100%|##########| 3/3 [00:30<00:00, 10.33s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+{"event": "task_completed", "task": "quality", "observations": 54, "time_utc": "2026-10-25T02:34:18.898543+00:00"}
+Traceback (most recent call last):
+  File "/home/aaa/CacheGen/experiments/suite.py", line 156, in run
+    getattr(tasks, job['kind'])(engine, cfg, selected, run_dir, journal, job, progress)
+  File "/home/aaa/CacheGen/experiments/ttft.py", line 160, in ttft
+    merged, row = replay(engine, cfg, packets, step['bandwidth_gbps'], mode, context, suffix)
+  File "/home/aaa/CacheGen/experiments/ttft.py", line 38, in replay
+    token, first_s = timed(lambda: engine.first(merged, suffix) if whole_text else engine.first(context, suffix, merged))
+  File "/home/aaa/CacheGen/experiments/engine.py", line 18, in timed
+    value = fn()
+  File "/home/aaa/CacheGen/experiments/ttft.py", line 38, in <lambda>
+    token, first_s = timed(lambda: engine.first(merged, suffix) if whole_text else engine.first(context, suffix, merged))
+  File "/home/aaa/CacheGen/experiments/engine.py", line 93, in first
+    return self.first_state(context, suffix, blob)[0]
+  File "/home/aaa/CacheGen/experiments/engine.py", line 97, in first_state
+    return int(logits[0, -1].argmax()), cache
+  File "/home/aaa/CacheGen/experiments/suite.py", line 85, in interrupted
+    raise KeyboardInterrupt(signum)
+KeyboardInterrupt: 15

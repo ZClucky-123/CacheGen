@@ -1,0 +1,153 @@
+{
+  "protocol": "cachegen-shared-v3",
+  "scale": "minimal",
+  "model": {
+    "id": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "revision": "fe8a4ea1ffedaf415f4da2f062534de366a451e6",
+    "weight_loading": "fp16",
+    "layers": 22,
+    "kv_heads": 4,
+    "head_dim": 64,
+    "context_limit": 2048,
+    "key_boundaries": [
+      7,
+      14,
+      22
+    ],
+    "value_boundary": 2,
+    "name": "tinyllama"
+  },
+  "seed": 0,
+  "cpu_threads": 8,
+  "data": {
+    "longchat": "test_data/longchat.jsonl",
+    "triviaqa": "test_data/tqa.jsonl",
+    "bandwidth": "test_data/bw.jsonl"
+  },
+  "scoring": {
+    "answer": "author_first_lf_line",
+    "normalization": "standard_em_f1",
+    "aliases": "dataset_only",
+    "stop": "eos_or_token_limit"
+  },
+  "quality_tolerances": {
+    "max_nll_delta": 0.02,
+    "minimum_retention": 0.9
+  },
+  "quality": {
+    "samples": 1,
+    "lengths": [
+      128,
+      257
+    ],
+    "continuation": 4,
+    "qa_per_position": 1,
+    "max_new_tokens": 8,
+    "methods": [
+      "raw",
+      "uniform4",
+      "uniform8",
+      "cachegen1",
+      "cachegen2",
+      "cachegen3"
+    ]
+  },
+  "triviaqa": {
+    "samples": 1,
+    "max_prompt_tokens": 1792,
+    "max_new_tokens": 8
+  },
+  "ttft": {
+    "samples": 2,
+    "lengths": [
+      128,
+      257
+    ],
+    "bandwidth_gbps": [
+      0.1,
+      10
+    ],
+    "warmup": 1,
+    "repeats": 1,
+    "methods": [
+      "text",
+      "raw",
+      "uniform4",
+      "uniform8",
+      "cachegen1",
+      "cachegen2",
+      "cachegen3"
+    ],
+    "modes": [
+      "whole",
+      "chunk_serial",
+      "chunk_pipeline"
+    ],
+    "chunk_sizes": [
+      128
+    ]
+  },
+  "adaptive": {
+    "cases": 1,
+    "length": 257,
+    "chunk_size": 128,
+    "traces": 1,
+    "bandwidth_scales": [
+      1,
+      0.01
+    ],
+    "slos": [
+      0.2,
+      0.5
+    ],
+    "max_new_tokens": 8,
+    "warmup": 1,
+    "repeats": 1,
+    "mode": "socket_serial",
+    "strategies": [
+      "adaptive",
+      "adaptive_history",
+      "adaptive_static",
+      "fixed1",
+      "fixed2",
+      "fixed3",
+      "text"
+    ],
+    "throughput_estimator": "previous_completed_message",
+    "initial_bandwidth_gbps": 1.0
+  },
+  "calibration": {
+    "payload_bytes": [
+      65536,
+      1048576,
+      8388608
+    ],
+    "repeats": 2
+  },
+  "checks": {
+    "generation_tokens": 4
+  },
+  "transport": {
+    "queue_capacity": 1,
+    "pacing_quantum_bytes": null
+  },
+  "ablation": {
+    "enabled": true,
+    "samples": 1,
+    "qa_per_position": 1,
+    "lengths": [
+      257
+    ],
+    "precisions": [
+      "uniform16",
+      "uniform32",
+      "layered2"
+    ],
+    "entropy": [
+      "packed",
+      "arithmetic"
+    ],
+    "warmup": 1,
+    "repeats": 3
+  }
+}

@@ -1,0 +1,105 @@
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+test_adaptive_switches_precision_and_falls_back_to_text (test_adaptive.AdaptiveTests) ... ok
+test_current_selection_does_not_read_future_bandwidth (test_adaptive.AdaptiveTests) ... ok
+test_first_token_reserve_changes_selected_precision (test_adaptive.AdaptiveTests) ... ok
+test_remaining_budget_reuses_time_saved_by_small_chunk (test_adaptive.AdaptiveTests) ... ok
+test_summary_counts_violations_and_answer_matches (test_adaptive.AdaptiveTests) ... ok
+test_summary_distinguishes_unique_facts_from_trace_conditions (test_adaptive.AdaptiveTests) ... ok
+test_summary_does_not_count_timing_repeats_as_qa_samples (test_adaptive.AdaptiveTests) ... ok
+test_unavoidable_deadline_miss_is_explicit (test_adaptive.AdaptiveTests) ... ok
+test_all_levels_roundtrip_grouped_query_kv (test_codec_levels_gpu.CodecLevelsGPUTests) ... ok
+test_deadline_selector_prefers_highest_precision_that_fits (test_experiment_common.ExperimentCommonTests) ... ok
+test_longchat_segments_include_unseen_continuation (test_experiment_common.ExperimentCommonTests) ... ok
+test_packed_four_bit_roundtrip_and_size (test_experiment_common.ExperimentCommonTests) ... ok
+test_positioned_fact_changes_location_without_leaking_answer_to_filler (test_experiment_common.ExperimentCommonTests) ... ok
+test_blob_to_legacy_keeps_layer_order (test_mini_codec_helpers.CodecHelperTests) ... ok
+test_serialized_size_uses_torch_container (test_mini_codec_helpers.CodecHelperTests) ... ok
+test_uniform8_keeps_shape_and_counts_metadata (test_mini_codec_helpers.CodecHelperTests) ... ok
+test_answer_match_respects_word_boundaries (test_mini_data.MiniDataTests) ... ok
+test_longchat_selection_has_requested_lengths_and_source_ids (test_mini_data.MiniDataTests) ... ok
+test_qa_context_keeps_fact_at_end_with_exact_token_length (test_mini_data.MiniDataTests) ... ok
+test_completed_archive_is_idempotent_and_preserves_source_snapshots (test_mistral_finalize.FinalizeTests) ... ok
+test_failed_integrity_check_preserves_original_checksum_manifest (test_mistral_finalize.FinalizeTests) ... ok
+test_historical_snapshot_can_verify_changed_active_source (test_mistral_finalize.FinalizeTests) ... ok
+test_repository_relative_fingerprints_survive_checkout_move (test_mistral_finalize.FinalizeTests) ... ok
+test_resume_does_not_override_recorded_model (test_mistral_runner.MistralRunnerTests) ... ok
+test_wrappers_share_runner_and_preserve_arguments_and_exit_code (test_mistral_runner.MistralRunnerTests) ... ok
+test_nll_scores_next_tokens_and_excludes_first_suffix_token (test_quality_size.QualitySizeTests) ... ok
+test_no_raw_correct_questions_or_natural_contexts_cannot_pass_gate (test_report.ReportTests) ... ok
+test_quality_compares_paired_contexts_and_does_not_reward_lossy_size (test_report.ReportTests) ... ok
+test_quality_threshold_is_per_length_and_missing_qa_counts_as_failure (test_report.ReportTests) ... ok
+test_report_separates_timing_repeats_and_quality_matched_speedups (test_report.ReportTests) ... ok
+test_distinct_close_bandwidth_scales_cannot_overwrite_artifacts (test_reproduce.ReproduceTests) ... ok
+test_dry_run_never_collects_gpu_metadata_or_creates_results (test_reproduce.ReproduceTests) ... Migrating v1 profile to shared v3; NLL/QA/network protocol changes and controlled mechanism tasks are added. Use --legacy-v1 for historical execution.
+ok
+test_existing_run_is_preserved (test_reproduce.ReproduceTests) ... ok
+test_failed_job_preserves_completed_result_and_marks_pending (test_reproduce.ReproduceTests) ... ARTIFACTS_ALREADY_COMPLETED /tmp/tmpgj4v5mnz/run
+[1/3] quality
+[2/3] ttft
+ok
+test_formal_design_has_four_adaptive_conditions_and_repeated_timings (test_reproduce.ReproduceTests) ... ok
+test_interruption_is_recorded_and_does_not_start_remaining_jobs (test_reproduce.ReproduceTests) ... [1/6] quality
+ok
+test_rejects_nonfinite_bandwidth_and_duplicated_fact_expansion (test_reproduce.ReproduceTests) ... ok
+test_successful_exit_with_partial_results_is_a_failed_experiment (test_reproduce.ReproduceTests) ... [1/1] quality
+ok
+test_configured_codec_zero_groups_and_arithmetic_tail (test_shared_framework.SharedEngineGPUTests) ... ok
+test_positions_multitoken_nll_and_cache_mutation (test_shared_framework.SharedEngineGPUTests) ... We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token.As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+ok
+test_text_projection_uses_only_last_hidden_position (test_shared_framework.SharedEngineGPUTests) ... ok
+test_all_presets_parse_and_close_scales_have_distinct_names (test_shared_framework.SharedProtocolTests) ... ok
+test_both_adapters_use_seven_jobs_and_fixed_scoring (test_shared_framework.SharedProtocolTests) ... ok
+test_checkpoint_resume_skips_completed_and_rejects_changed_identity (test_shared_framework.SharedProtocolTests) ... ok
+test_cluster_intervals_keep_shared_conditions_together (test_shared_framework.SharedProtocolTests) ... ok
+test_complete_matrix_without_offline_prefill_is_rejected (test_shared_framework.SharedProtocolTests) ... ok
+test_corrupted_checkpoint_is_rejected (test_shared_framework.SharedProtocolTests) ... ok
+test_first_line_aliases_and_raw_prediction_are_not_rewritten (test_shared_framework.SharedProtocolTests) ... ok
+test_four_bit_odd_nibble_tail_and_subnormal_groups (test_shared_framework.SharedProtocolTests) ... ok
+test_jsonl_preserves_embedded_unicode_separators (test_shared_framework.SharedProtocolTests) ... ok
+test_matrix_covers_real_qa_and_all_methods_and_repetitions (test_shared_framework.SharedProtocolTests) ... ok
+test_sealed_archive_includes_logs_and_detects_tampering (test_shared_framework.SharedProtocolTests) ... ok
+test_text_wire_retokenizes_and_repairs_multiple_subword_edges (test_shared_framework.SharedProtocolTests) ... ok
+test_transport_paces_tail_and_unlimited_payloads_exactly (test_shared_framework.SharedProtocolTests) ... ok
+test_zero_raw_correct_is_unassessable_and_length_qa_is_separate (test_shared_framework.SharedProtocolTests) ... ok
+test_three_tinyllama_levels_have_ordered_precision (test_tinyllama_config.TinyLlamaConfigTests) ... ok
+test_tinyllama_has_22_layer_codec_schedule (test_tinyllama_config.TinyLlamaConfigTests) ... ok
+test_rate_limited_socket_roundtrips_bytes (test_ttft.TTFTTests) ... ok
+test_schedule_keeps_warmups_out_of_measured_repetitions (test_ttft.TTFTTests) ... ok
+test_schedule_order_is_randomized_and_reproducible (test_ttft.TTFTTests) ... ok
+test_schedule_rejects_invalid_repetition_counts_and_bandwidth (test_ttft.TTFTTests) ... ok
+test_summary_distinguishes_independent_contexts_from_repeated_timings (test_ttft.TTFTTests) ... ok
+test_summary_reports_median_and_p95_by_method_and_bandwidth (test_ttft.TTFTTests) ... ok
+test_text_and_restored_kv_build_cache_for_continued_generation (test_ttft.TTFTTests) ... ok
+test_bitpacking_4_and_5_bit_symbols_and_non_byte_aligned_tail (test_v3_mechanisms.FeedbackAndMatrixTests) ... ok
+test_history_initialization_and_boundary_exclude_gpu_wait (test_v3_mechanisms.FeedbackAndMatrixTests) ... ok
+test_history_policy_cannot_access_current_or_future_trace_and_rules_match (test_v3_mechanisms.FeedbackAndMatrixTests) ... ok
+test_mode_size_estimator_and_ablation_have_distinct_observation_ids (test_v3_mechanisms.FeedbackAndMatrixTests) ... ok
+test_entropy_paths_use_same_symbols_scales_and_dequantization_with_257_tail (test_v3_mechanisms.MechanismGPUTests) ... ok
+test_real_gpu_chunked_modes_and_original_whole_text_reference (test_v3_mechanisms.MechanismGPUTests) ... ok
+test_frame_counts_headers_metadata_and_detects_tail_corruption (test_v3_mechanisms.StreamingTests) ... ok
+test_receiver_availability_waits_for_full_budget_including_short_tail (test_v3_mechanisms.StreamingTests) ... ok
+test_restore_exception_cancels_threads_including_blocked_receiver (test_v3_mechanisms.StreamingTests) ... ok
+test_serial_ack_and_pipeline_capacity_waits_are_real (test_v3_mechanisms.StreamingTests) ... ok
+test_child_failure_exit_code_is_preserved (test_workspace.WorkspaceTests) ... ok
+test_fresh_checkout_status_explains_no_run (test_workspace.WorkspaceTests) ... ok
+test_gpu_lock_rejects_second_measurement_process (test_workspace.WorkspaceTests) ... ok
+test_new_registered_experiment_runs_with_literal_arguments (test_workspace.WorkspaceTests) ... ok
+test_overrides_are_resolved_relative_to_checkout_without_side_effects (test_workspace.WorkspaceTests) ... ok
+test_relocated_checkout_with_spaces_needs_no_absolute_root_setting (test_workspace.WorkspaceTests) ... ok
+test_resumed_run_has_live_elapsed_time_and_labels_previous_exit (test_workspace.WorkspaceTests) ... ok
+test_shared_shell_environment_preserves_paths_with_spaces_and_overrides (test_workspace.WorkspaceTests) ... ok
+test_status_uses_configuration_counts_and_excludes_warmups (test_workspace.WorkspaceTests) ... ok
+test_terminating_dispatcher_stops_worker_and_preserves_nonzero_exit (test_workspace.WorkspaceTests) ... ok
+test_termination_cleans_descendant_that_ignores_term_after_leader_exits (test_workspace.WorkspaceTests) ... ok
+test_unknown_family_and_escaping_result_directory_are_rejected (test_workspace.WorkspaceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 86 tests in 3.912s
+
+OK

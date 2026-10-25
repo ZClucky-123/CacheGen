@@ -1,4 +1,6 @@
-# Mistral-7B：如何进行复现
+# Mistral-7B：作者原始脚本与历史复现说明
+
+> 本文保留重构前的原始脚本和实验对应关系。当前 TinyLlama/Mistral 已统一为 [公共 v3 框架](SHARED_FRAMEWORK.md)，无需再为 Mistral 另行适配 `mini_repro`；当前运行方式见 [工作区指南](WORKSPACE_GUIDE.md)，与用户指定 PDF 的准确边界见 [论文对照](PAPER_ALIGNMENT.md)。下文“未实现流水线/仅估算网络”等描述针对当时入口。
 
 先完成[环境验证](MISTRAL_ENVIRONMENT.md)。仓库包含作者原始脚本和我们补充的 `mini_repro` 实验框架。本文分别说明它们的功能、命令和论文实验对应关系，避免把原始脚本的限制当成整个仓库的限制。
 

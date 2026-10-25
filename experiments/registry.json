@@ -1,12 +1,12 @@
 {
   "mistral": {
-    "description": "Shared v2: Mistral quality, TTFT and four adaptive tasks",
+    "description": "Shared v3: Mistral quality, TTFT, four adaptive tasks and mechanism ablations",
     "command": ["bash", "{repo}/experiments/mistral/run.sh"],
-    "results_subdir": "mistral/small"
+    "results_subdir": "mistral"
   },
   "tinyllama": {
-    "description": "Shared v2: TinyLlama quality, TTFT and four adaptive tasks",
+    "description": "Shared v3: TinyLlama quality, TTFT, four adaptive tasks and mechanism ablations",
     "command": ["bash", "{repo}/experiments/run.sh", "--model", "tinyllama"],
-    "results_subdir": "tinyllama/small"
+    "results_subdir": "tinyllama"
   }
 }

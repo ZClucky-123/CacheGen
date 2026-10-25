@@ -1,0 +1,14 @@
+{
+  "tinyllama": {
+    "run": "results/tinyllama/minimal/v3-final-03",
+    "artifacts_manifest_sha256": "5b2c546e4d1f930d1f35137635ab1e0b68601715a1438b13d70e886c633adb76",
+    "verified_files": 174,
+    "summary_sha256": "c50651b39eb703a246ec3cc2ded728dfcaaefd01c259c4fe5b4a8d2a9cc5eff5"
+  },
+  "mistral": {
+    "run": "results/mistral/minimal/v3-final-03",
+    "artifacts_manifest_sha256": "b3c401ed46ecf50eb265c0f33e5fc29b702fba256b2e50b3a1baa84b52849f4d",
+    "verified_files": 183,
+    "summary_sha256": "db6cdb8a07e40bb5662949821835fbcfdf16a838820b4d317067e2cc0666f931"
+  }
+}

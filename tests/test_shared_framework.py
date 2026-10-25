@@ -19,10 +19,10 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 class SharedProtocolTests(unittest.TestCase):
-    def test_both_adapters_use_six_jobs_and_fixed_scoring(self):
+    def test_both_adapters_use_seven_jobs_and_fixed_scoring(self):
         for name in ('tinyllama', 'mistral'):
             cfg = load_config(REPO / 'experiments/configs/small.json', name)
-            self.assertEqual(len(jobs(cfg)), 6)
+            self.assertEqual(len(jobs(cfg)), 7)
             self.assertEqual(cfg['model']['name'], name)
             self.assertEqual(set(cfg['quality']['methods']), set(METHODS))
 
@@ -31,7 +31,7 @@ class SharedProtocolTests(unittest.TestCase):
             load_config(path)
         cfg = load_config(REPO / 'experiments/configs/small.json')
         cfg['adaptive']['bandwidth_scales'] = [.01, .010000001]
-        self.assertEqual(len({j['name'] for j in jobs(cfg)}), 6)
+        self.assertEqual(len({j['name'] for j in jobs(cfg)}), 7)
 
     def test_first_line_aliases_and_raw_prediction_are_not_rewritten(self):
         raw = '\n\nThe Fruit!\nAdditional words'
@@ -135,11 +135,12 @@ class SharedProtocolTests(unittest.TestCase):
 
     def test_matrix_covers_real_qa_and_all_methods_and_repetitions(self):
         cfg = load_config(REPO / 'experiments/configs/small.json')
-        selected = {k: [{'case_id': k}] for k in ('quality', 'controlled', 'triviaqa', 'ttft', 'adaptive')}
+        selected = {k: [{'case_id': k, 'source_id': 0, 'context_tokens': 256}] for k in ('quality', 'controlled', 'triviaqa', 'ttft', 'adaptive')}
         expected = expected_keys(cfg, selected, jobs(cfg))
         self.assertEqual(len(expected['quality']), 18)
-        self.assertEqual(len(expected['ttft']), 36)
-        self.assertEqual(len(expected[jobs(cfg)[2]['name']]), 24)
+        self.assertEqual(len(expected['ttft']), 108)
+        self.assertEqual(len(expected[jobs(cfg)[2]['name']]), 28)
+        self.assertEqual(len(expected['ablation']), 12)
 
     def test_zero_raw_correct_is_unassessable_and_length_qa_is_separate(self):
         cfg = load_config(REPO / 'experiments/configs/small.json')

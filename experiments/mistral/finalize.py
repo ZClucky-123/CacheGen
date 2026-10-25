@@ -41,7 +41,7 @@ def main(argv=None):
     run=args.run_dir;root=Path(__file__).resolve().parent
     workspace=Workspace.discover()
     manifest_path=run/'manifest.json'
-    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol')=='cachegen-shared-v2':
+    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol') in ('cachegen-shared-v2', 'cachegen-shared-v3'):
         from experiments.artifacts import verify
         if json.loads(manifest_path.read_text())['status']!='completed':
             raise RuntimeError('Shared batch is incomplete; resume it with experiments/run.sh --resume')

@@ -129,6 +129,38 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(data['previous_attempt_exit_code'], 143)
         self.assertNotIn('exit_code', data)
 
+    def test_nested_active_batch_is_found_before_legacy_latest_link(self):
+        legacy = self.repo / 'results/toy/old'
+        current = self.repo / 'results/toy/larger/current'
+        legacy.mkdir(parents=True)
+        current.mkdir(parents=True)
+        (legacy / 'manifest.json').write_text(json.dumps({'status': 'completed'}))
+        (legacy.parent / 'latest').symlink_to('old')
+        (current / 'manifest.json').write_text(json.dumps({'status': 'running', 'protocol': 'cachegen-shared-v3',
+            'jobs': [], 'progress': {'completed': 9, 'expected': 100}}))
+        result = self.cli('status', 'toy')
+        data = json.loads(result.stdout)
+        self.assertEqual(data['run_directory'], str(current.resolve()))
+        self.assertEqual(data['progress']['completed'], 9)
+
+    def test_shipped_registry_status_finds_larger_runs_for_both_models(self):
+        self.registry = json.loads((REPO / 'experiments/registry.json').read_text())
+        self.save_registry()
+        for model in ('mistral', 'tinyllama'):
+            with self.subTest(model=model):
+                small = self.repo / 'results' / model / 'small' / 'old'
+                large = self.repo / 'results' / model / 'larger' / 'current'
+                small.mkdir(parents=True)
+                large.mkdir(parents=True)
+                (small / 'manifest.json').write_text(json.dumps({'status': 'completed'}))
+                (large / 'manifest.json').write_text(json.dumps({'status': 'running',
+                    'progress': {'completed': 17, 'expected': 100}}))
+                result = self.cli('status', model)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                data = json.loads(result.stdout)
+                self.assertEqual(data['run_directory'], str(large.resolve()))
+                self.assertEqual(data['progress']['completed'], 17)
+
     def test_child_failure_exit_code_is_preserved(self):
         self.registry["toy"]["command"] = ["{python}", "-c", "raise SystemExit(7)"]
         self.save_registry()

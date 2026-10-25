@@ -1,0 +1,17 @@
+{"event": "start", "time_utc": "2026-10-25T02:30:35.444216+00:00", "run_directory": "/home/aaa/CacheGen/results/tinyllama/minimal/v3-final-03", "resume": false}
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+{"event": "task_completed", "task": "quality", "observations": 54, "time_utc": "2026-10-25T02:30:55.260581+00:00"}
+{"event": "task_completed", "task": "ttft", "observations": 168, "time_utc": "2026-10-25T02:31:42.589459+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.2", "observations": 7, "time_utc": "2026-10-25T02:31:45.719339+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.5", "observations": 7, "time_utc": "2026-10-25T02:31:49.186627+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.2", "observations": 7, "time_utc": "2026-10-25T02:32:07.845901+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.5", "observations": 7, "time_utc": "2026-10-25T02:32:27.933261+00:00"}
+{"event": "task_completed", "task": "ablation", "observations": 24, "time_utc": "2026-10-25T02:32:42.413536+00:00"}
+Measurements and report complete; finalizing archive: /home/aaa/CacheGen/results/tinyllama/minimal/v3-final-03
+COMPLETED /home/aaa/CacheGen/results/tinyllama/minimal/v3-final-03; 167 artifacts verified

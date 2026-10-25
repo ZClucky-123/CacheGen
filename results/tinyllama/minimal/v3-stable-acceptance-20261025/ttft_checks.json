@@ -1,0 +1,3642 @@
+[
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "118f65449cebd9fb8e49385521806d2b0cbba15dc5b2c5f7b4a1726bc6a35ce1"
+    ],
+    "bytes": 845,
+    "offline_encode_seconds": 0.001782827079296112,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 565,
+        "message_bytes": 845,
+        "envelope_bytes": 280
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.027872085571289,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.375884532928467,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.4912519454956055,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.17119836807251,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 22528,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.0,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "06f9fedd22c81eb46bf5cefcb796f78b437d436c93222f35cec5eea2265e2826"
+    ],
+    "bytes": 2885047,
+    "offline_encode_seconds": 0.00323563814163208,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885047,
+        "envelope_bytes": 283
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "091be2087e8ae0c013153c97d720c1a6f6c4f797413d64dc3fde98b2c4e1628f"
+    ],
+    "bytes": 733943,
+    "offline_encode_seconds": 0.002407640218734741,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733943,
+        "envelope_bytes": 287
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "62e0a910af966a97c2b2f033e089dd5e0a32b4b255961750c2185664a532b323"
+    ],
+    "bytes": 1454840,
+    "offline_encode_seconds": 0.002158813178539276,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454840,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "1dedf1587501d6925a484b036940e227380e4e9371dcde5bd468651b0548fc10"
+    ],
+    "bytes": 831018,
+    "offline_encode_seconds": 0.005186676979064941,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 830536,
+        "message_bytes": 831018,
+        "envelope_bytes": 482
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "cf81ec69b1f982372598734edf0dbc2608f42745f67e5c58fcf71217ba0b2c70"
+    ],
+    "bytes": 1274604,
+    "offline_encode_seconds": 0.002442382276058197,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1274121,
+        "message_bytes": 1274604,
+        "envelope_bytes": 483
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "6a9276ec1a3b277bc3ca4ec9422d97055d680700ac1d3dffad2538bb344cd01e"
+    ],
+    "bytes": 1415381,
+    "offline_encode_seconds": 0.002953663468360901,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1414898,
+        "message_bytes": 1415381,
+        "envelope_bytes": 483
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "118f65449cebd9fb8e49385521806d2b0cbba15dc5b2c5f7b4a1726bc6a35ce1"
+    ],
+    "bytes": 845,
+    "offline_encode_seconds": 0.0020688995718955994,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 565,
+        "message_bytes": 845,
+        "envelope_bytes": 280
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.027872085571289,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.375884532928467,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.4912519454956055,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.17119836807251,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 22528,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.0,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "06f9fedd22c81eb46bf5cefcb796f78b437d436c93222f35cec5eea2265e2826"
+    ],
+    "bytes": 2885047,
+    "offline_encode_seconds": 0.003437034785747528,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885047,
+        "envelope_bytes": 283
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "091be2087e8ae0c013153c97d720c1a6f6c4f797413d64dc3fde98b2c4e1628f"
+    ],
+    "bytes": 733943,
+    "offline_encode_seconds": 0.0031600743532180786,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733943,
+        "envelope_bytes": 287
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "62e0a910af966a97c2b2f033e089dd5e0a32b4b255961750c2185664a532b323"
+    ],
+    "bytes": 1454840,
+    "offline_encode_seconds": 0.0037576183676719666,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454840,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "7f8595964cea80abbaee24920914125170a858cbb87d171904b0b1814ad6c417"
+    ],
+    "bytes": 831018,
+    "offline_encode_seconds": 0.003167286515235901,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 830536,
+        "message_bytes": 831018,
+        "envelope_bytes": 482
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "4c51fc5fe4e997634a3e7ae2a9f51d0bdb220d3ea3bcf014bdfd0f671ee56b4a"
+    ],
+    "bytes": 1274604,
+    "offline_encode_seconds": 0.003518931567668915,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1274121,
+        "message_bytes": 1274604,
+        "envelope_bytes": 483
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "3d748ae9e4a0e006ea7103bf70168901645d20e38904d4f8de67ae7c25c4f1f1"
+    ],
+    "bytes": 1415381,
+    "offline_encode_seconds": 0.003150537610054016,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1414898,
+        "message_bytes": 1415381,
+        "envelope_bytes": 483
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "118f65449cebd9fb8e49385521806d2b0cbba15dc5b2c5f7b4a1726bc6a35ce1",
+      "06c01fec9a8d18562b50c671a1e1a43f87b59faabc277faf8bbce326068069d1",
+      "2baaa7163dcd7d90bd624c64220f41b6a0e352ce97ebd8ff3a4f6219e58d63dc"
+    ],
+    "bytes": 2067,
+    "offline_encode_seconds": 0.0032303929328918457,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 565,
+        "message_bytes": 845,
+        "envelope_bytes": 280
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 592,
+        "message_bytes": 874,
+        "envelope_bytes": 282
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 69,
+        "message_bytes": 348,
+        "envelope_bytes": 279
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.03125,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.004612514283508062,
+          "reference_rms_logit": 4.971208095550537,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.017578125,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.00539404759183526,
+          "reference_rms_logit": 5.082443714141846,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0234375,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0038670438807457685,
+          "reference_rms_logit": 5.532525062561035,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.015625,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.004883168265223503,
+          "reference_rms_logit": 5.25767183303833,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0234375,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.03125,
+      "mean_abs_error": 0.0006592023419216275,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 45232,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.04304124787449837,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "7c6b94287e0558ae7ac0908fb1203e685eb2526f1356586a590da344558d811d",
+      "2a4c6f52023816d273b44ec4070b194056127887af544d5338b348b0d5bfd6f3",
+      "f259c077267d8e10985f57bc4fc5c5cf51c282db2035c99922f78363ccfb76e4"
+    ],
+    "bytes": 5794085,
+    "offline_encode_seconds": 0.008662723004817963,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885047,
+        "envelope_bytes": 283
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885049,
+        "envelope_bytes": 285
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 23708,
+        "message_bytes": 23989,
+        "envelope_bytes": 281
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "a97ac0890fd71ff59afcc844e00999a88c2d29799b70caa14378a8b9a4e8ecdb",
+      "5a234fae332b05e149d44a1c36b49f5adfa2221882558de6d37c70f59b86eaaf",
+      "a69782f0bee46141bf7399b7b2e13dc46dc3c1cd2ef9374af4c888d8e77eef0e"
+    ],
+    "bytes": 1475365,
+    "offline_encode_seconds": 0.010991252958774567,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733943,
+        "envelope_bytes": 287
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733945,
+        "envelope_bytes": 289
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 7192,
+        "message_bytes": 7477,
+        "envelope_bytes": 285
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      6297,
+      310,
+      1616
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "d39949c0f7e35079fcb324ad5ac18ff89938544441419173e62b552afc871502",
+      "5a1df467e2a348b130e1ec1f17be2ff56a267d29f405a0d2a6bf5d87615de891",
+      "b5618fba830e1e0e732aaf995e15b8050672c265d9d03258e76374c919957f8d"
+    ],
+    "bytes": 2922792,
+    "offline_encode_seconds": 0.006453610956668854,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454840,
+        "envelope_bytes": 288
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454842,
+        "envelope_bytes": 290
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 12824,
+        "message_bytes": 13110,
+        "envelope_bytes": 286
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "9111cb3d0e06b7008611e478ab40e1e9dd33245cba10f3abf916e074929263a4",
+      "e91be392ab8e841b630db42637e6fea18dacfa8246ecf2b1baaed8d876cafa92",
+      "2b601728963e7d57525be0c414e88dbea8eb7fac01f3fd87bef67cbe669cbb4b"
+    ],
+    "bytes": 2104475,
+    "offline_encode_seconds": 0.008033595979213715,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 830532,
+        "message_bytes": 831014,
+        "envelope_bytes": 482
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 831261,
+        "message_bytes": 831745,
+        "envelope_bytes": 484
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 441238,
+        "message_bytes": 441716,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "df5f5ff62a636c267e08a68d66bde9b0588f410fe7d005fc57b940a7299f5e9a",
+      "ed8d247a18e6ad6a585236e1b539fbc8173b21a701ed275e99ab623c111f28a5",
+      "4c0b589b9a4bf27241f02708c52bcf2862f55a3385f7470e4f2a8d41c3dd8659"
+    ],
+    "bytes": 3352015,
+    "offline_encode_seconds": 0.010866835713386536,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1274141,
+        "message_bytes": 1274624,
+        "envelope_bytes": 483
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1274742,
+        "message_bytes": 1275227,
+        "envelope_bytes": 485
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 801686,
+        "message_bytes": 802164,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      6297,
+      310,
+      1616
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "4446b65d9b372f8e07cd90132ecb223f081b03e68bb1913260b8e4be2318eaf0",
+      "0cc0303a055db8c2c65a9fbdae7f6d7b0c13a8ff085642e5b91abee4b0742ebe",
+      "9f521578a2f56e6078a3b36d137ce9a22a4a0b50ad71ab3096d1cb593ae4f411"
+    ],
+    "bytes": 3634072,
+    "offline_encode_seconds": 0.009542807936668396,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1414898,
+        "message_bytes": 1415381,
+        "envelope_bytes": 483
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1416042,
+        "message_bytes": 1416527,
+        "envelope_bytes": 485
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 801686,
+        "message_bytes": 802164,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "3160cef7f7988daa8f487788a493b10b60e832eb5e6906b5c1bda2b95b33c8b2"
+    ],
+    "bytes": 1385,
+    "offline_encode_seconds": 0.003446623682975769,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1104,
+        "message_bytes": 1385,
+        "envelope_bytes": 281
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 4.971208095550537,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.082443714141846,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.532525062561035,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.25767183303833,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 45232,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.0,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "d8b643db140780773ed0c502044cae41dc664c1902a0e81da8973b5e3906729d"
+    ],
+    "bytes": 5791159,
+    "offline_encode_seconds": 0.009485431015491486,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 5790876,
+        "message_bytes": 5791159,
+        "envelope_bytes": 283
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "8e98bf2fb3f32d83649a33484ec482418f06ba1761a83e7d001bdcad697ff784"
+    ],
+    "bytes": 1471800,
+    "offline_encode_seconds": 0.002058573067188263,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1471512,
+        "message_bytes": 1471800,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      6297,
+      310,
+      1616
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "948f7c42ce46870a3dff0b9f2c8e310e2b223e7fc52dc78cf49f97ffeb19e8b0"
+    ],
+    "bytes": 2919224,
+    "offline_encode_seconds": 0.004571892321109772,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2918936,
+        "message_bytes": 2919224,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "5950dbb6057e725ff915544e16c6f8d631f0c3d6e0da7cb65552c4f88878cddc"
+    ],
+    "bytes": 1249809,
+    "offline_encode_seconds": 0.0058639273047447205,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 1249323,
+        "message_bytes": 1249809,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "04247326e34e0e096fe8a9b4156ecb8bc1cef579389c0bd69b0b98efb72152d6"
+    ],
+    "bytes": 1781590,
+    "offline_encode_seconds": 0.008408203721046448,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 1781104,
+        "message_bytes": 1781590,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      6297,
+      310,
+      1616
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "7c503b99d61e59c79257b93043a3122b89be7eb2a79b48131e78a5f7ddf48e0e"
+    ],
+    "bytes": 2073441,
+    "offline_encode_seconds": 0.004859447479248047,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 2072955,
+        "message_bytes": 2073441,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "118f65449cebd9fb8e49385521806d2b0cbba15dc5b2c5f7b4a1726bc6a35ce1",
+      "df7dd856f2c3a79b96a70b427049233bcb2c3282f3c7046af3e3dd574f0a0ff9",
+      "2fe1dd6b30dd012ec506b1eb1f20bb92d435bd48e434b9656fe4bcc7f5b71a18"
+    ],
+    "bytes": 2079,
+    "offline_encode_seconds": 0.003775551915168762,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 565,
+        "message_bytes": 845,
+        "envelope_bytes": 280
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 612,
+        "message_bytes": 894,
+        "envelope_bytes": 282
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 61,
+        "message_bytes": 340,
+        "envelope_bytes": 279
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.03125,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.004890463314950466,
+          "reference_rms_logit": 5.061901569366455,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0234375,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.006872481666505337,
+          "reference_rms_logit": 5.130749702453613,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0390625,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0036951438523828983,
+          "reference_rms_logit": 5.6412763595581055,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.015625,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0038068301510065794,
+          "reference_rms_logit": 5.25520133972168,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.015625,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.03125,
+      "mean_abs_error": 0.0006616345490328968,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 45232,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.03196351230144501,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "7c6b94287e0558ae7ac0908fb1203e685eb2526f1356586a590da344558d811d",
+      "65835b427ae357329766fe9f9db89f1903aac2b29552eeac4c644415edee7e34",
+      "93716d254648a9b86fe5585ef3caa5efd064741d20ca9b0d350555b005c0bdfb"
+    ],
+    "bytes": 5794085,
+    "offline_encode_seconds": 0.009874925017356873,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885047,
+        "envelope_bytes": 283
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2884764,
+        "message_bytes": 2885049,
+        "envelope_bytes": 285
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 23708,
+        "message_bytes": 23989,
+        "envelope_bytes": 281
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "a97ac0890fd71ff59afcc844e00999a88c2d29799b70caa14378a8b9a4e8ecdb",
+      "c7f3b5e01658ed8cecba2b6b52177d1b96e83ea2cdd04ec010e233d2a928a742",
+      "d6e5676a7f48d058e8c7388ba277330a15ebef0bf016ebfb1e6804b6645ec5c7"
+    ],
+    "bytes": 1475365,
+    "offline_encode_seconds": 0.010025888681411743,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733943,
+        "envelope_bytes": 287
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 733656,
+        "message_bytes": 733945,
+        "envelope_bytes": 289
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 7192,
+        "message_bytes": 7477,
+        "envelope_bytes": 285
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "d39949c0f7e35079fcb324ad5ac18ff89938544441419173e62b552afc871502",
+      "0b23fff5cc44cefe637ba22b8312b530524be290395fafd96b0a1a8be518210c",
+      "2c8fc05110b8aa1cff6dae60c5476bb362fdda33c35f3b3f0d1030dc174d1024"
+    ],
+    "bytes": 2922792,
+    "offline_encode_seconds": 0.010328441858291626,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454840,
+        "envelope_bytes": 288
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1454552,
+        "message_bytes": 1454842,
+        "envelope_bytes": 290
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 12824,
+        "message_bytes": 13110,
+        "envelope_bytes": 286
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "aae65c3e29f0705703fb080fcbd2d2a141d0fe64acab98de40eafb07c014710b",
+      "71942fc3a9605cbe7f7c6aebb2add486f0b38c2e9db0097e560fedb47400fcc3",
+      "64c1f5cb613209633a3ca2f40f55dd8c29f6842e853be598d0dd2d28faed363c"
+    ],
+    "bytes": 2106461,
+    "offline_encode_seconds": 0.010512173175811768,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 830532,
+        "message_bytes": 831014,
+        "envelope_bytes": 482
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 833247,
+        "message_bytes": 833731,
+        "envelope_bytes": 484
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 441238,
+        "message_bytes": 441716,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "0c3ac1d2572d9e534f97cda408e164e45dc584975c1bca688f77f05973f327c1",
+      "be6c17b3c5776fa3b04c42d339eeefba5cd48ee022cd283808ad9f8f31c10ead",
+      "d82b02fe40a1607448c6120f1c42a7311fae6ba86ab9ff66b4acdf52a26b2d21"
+    ],
+    "bytes": 3354122,
+    "offline_encode_seconds": 0.008445113897323608,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1274141,
+        "message_bytes": 1274624,
+        "envelope_bytes": 483
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1276849,
+        "message_bytes": 1277334,
+        "envelope_bytes": 485
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 801686,
+        "message_bytes": 802164,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "709fe38ad2aba1b1144dcb707fb6fc4f9ddf0ecea8eb6dd798217160b1f0955c",
+      "0ed30788db389b0f0845edecfb24fc919391791def48cc324bf8dfbe2c260d3f",
+      "0039d2681599ef97e379f46bc7436b0d9ee2a7af991bfbca35d3ce74f5fb8df5"
+    ],
+    "bytes": 3635934,
+    "offline_encode_seconds": 0.00731312483549118,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1414898,
+        "message_bytes": 1415381,
+        "envelope_bytes": 483
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          128,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          32
+        ],
+        "payload_bytes": 1417904,
+        "message_bytes": 1418389,
+        "envelope_bytes": 485
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          1,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 801686,
+        "message_bytes": 802164,
+        "envelope_bytes": 478
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "ef5cad65930fa7ed052047029d94fe94fbcf4b49ededff6a3a189b3f8d5b92d3"
+    ],
+    "bytes": 1411,
+    "offline_encode_seconds": 0.00691627711057663,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1130,
+        "message_bytes": 1411,
+        "envelope_bytes": 281
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "text_vs_whole_generation_audit": {
+      "generated_ids_identical": true,
+      "reference_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "candidate_generated_ids": [
+        450,
+        1667,
+        11261,
+        338
+      ],
+      "teacher_forced_logit_steps": [
+        {
+          "step": 0,
+          "reference_token_id": 450,
+          "candidate_token_id": 450,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.061901569366455,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 1,
+          "reference_token_id": 1667,
+          "candidate_token_id": 1667,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.130749702453613,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.0078125,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 2,
+          "reference_token_id": 11261,
+          "candidate_token_id": 11261,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.6412763595581055,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        },
+        {
+          "step": 3,
+          "reference_token_id": 338,
+          "candidate_token_id": 338,
+          "argmax_identical": true,
+          "numerically_close": true,
+          "fp16_near_tie": false,
+          "logit_policy": "pointwise_v1",
+          "elementwise_allclose": true,
+          "competitive_logits_close": true,
+          "rms_logit_error": 0.0,
+          "reference_rms_logit": 5.25520133972168,
+          "reference_choice_gap": 0.0,
+          "candidate_choice_gap": 0.0,
+          "fp16_ulp": 0.015625,
+          "max_tie_ulps": 2,
+          "max_abs_logit_error": 0.0,
+          "passed": true
+        }
+      ],
+      "first_divergence_step": null,
+      "classification": "identical",
+      "status": "numerically_valid",
+      "actual_outputs_unmodified": true
+    },
+    "text_vs_whole_kv_audit": {
+      "policy": "pointwise_with_head_rms_diagnostics_v1",
+      "atol": 0.1,
+      "rtol": 0.02,
+      "absolute_tolerance_units": "per_component_rms",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "elementwise_outlier_count": 0,
+      "elementwise_allclose": true,
+      "head_vector_count": 45232,
+      "failed_head_vectors": 0,
+      "max_head_vector_error_over_bound": 0.0,
+      "rms_within_bound": true,
+      "passed": true
+    },
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "38c9ce98db4f66b5560eaacd82e44ea02ce8e4c3c32743ac2e3d9182e905c825"
+    ],
+    "bytes": 5791159,
+    "offline_encode_seconds": 0.009524188935756683,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 5790876,
+        "message_bytes": 5791159,
+        "envelope_bytes": 283
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "d69773c76bc53ee77e1e215cf9e60dbef6572175c8b15286c4424615df3742f2"
+    ],
+    "bytes": 1471800,
+    "offline_encode_seconds": 0.0024538934230804443,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1471512,
+        "message_bytes": 1471800,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "75a18349a12eaa52583beaaad35d05383fd0cbe4ff697b3513f5263292fc43f6"
+    ],
+    "bytes": 2919224,
+    "offline_encode_seconds": 0.0032520517706871033,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_target_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 2918936,
+        "message_bytes": 2919224,
+        "envelope_bytes": 288
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "ad1892a7f80e49efbb95040896de7ccb7c8e7c013508658612735e5c518a799b"
+    ],
+    "bytes": 1252264,
+    "offline_encode_seconds": 0.006094984710216522,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 1251778,
+        "message_bytes": 1252264,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "afea1fd25016db5903519e1ad694567bdd7d54e509d90bf7816baf0fe1303f0a"
+    ],
+    "bytes": 1784313,
+    "offline_encode_seconds": 0.004339598119258881,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 1783827,
+        "message_bytes": 1784313,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "991fe80ca9ae5131d1f2336ea7d874cd7422a8b525e04ee5717a1d9ccdc6fc0b"
+    ],
+    "bytes": 2076049,
+    "offline_encode_seconds": 0.009098775684833527,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          22,
+          2,
+          4,
+          257,
+          64
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 7,
+          "key_second_layers": 14,
+          "key_third_layers": 22,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_target_tokens": 96,
+        "internal_segment_tokens": [
+          96,
+          96,
+          65
+        ],
+        "payload_bytes": 2075563,
+        "message_bytes": 2076049,
+        "envelope_bytes": 486
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      450,
+      1667,
+      11261,
+      338
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "text_vs_whole_generation_audit": null,
+    "text_vs_whole_kv_audit": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  }
+]

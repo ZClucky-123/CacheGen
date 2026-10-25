@@ -278,7 +278,7 @@ def legacy_main(argv=None):
 
 
 def main(argv=None):
-    """Current entrypoint; v1 is explicit and old profiles migrate to shared v2."""
+    """Current entrypoint; v1 is explicit and old profiles migrate to shared v3."""
     argv = list(sys.argv[1:] if argv is None else argv)
     if '--legacy-v1' in argv:
         argv.remove('--legacy-v1')
@@ -290,15 +290,18 @@ def main(argv=None):
         profile = load_profile(argv[index + 1])
         del argv[index:index + 2]
         if profile['quality_tolerances'] != {'max_nll_delta': .02, 'max_qa_drop': .1}:
-            raise ValueError('v2 fixes tolerances; use --legacy-v1 for a historical protocol')
+            raise ValueError('v3 preserves fixed tolerances; use --legacy-v1 for a historical protocol')
         cfg = load_config(ROOT / 'experiments/configs/small.json', 'tinyllama')
         cfg['quality'].update(profile['quality'])
         cfg['ttft'].update({k: v for k, v in profile['ttft'].items() if k != 'cachegen_levels'})
         cfg['ttft']['methods'] = ['text', 'uniform8'] + [f'cachegen{n}' for n in profile['ttft']['cachegen_levels']]
         cfg['adaptive'].update(profile['adaptive'])
+        cfg['ablation'].update(lengths=[cfg['quality']['lengths'][0]],
+                               samples=min(1, cfg['quality']['samples']),
+                               qa_per_position=min(1, cfg['quality']['qa_per_position']))
         cfg['seed'] = profile['seed']
         cfg['scale'] = 'minimal' if profile['purpose'] == 'pipeline-validation-only' else 'small'
-        print('Migrating v1 profile to shared v2; NLL/QA/network protocol changes. Use --legacy-v1 for historical execution.', file=sys.stderr)
+        print('Migrating v1 profile to shared v3; NLL/QA/network protocol changes and controlled mechanism tasks are added. Use --legacy-v1 for historical execution.', file=sys.stderr)
         return shared_main(argv, configuration=cfg)
     if '--resume' not in argv:
         argv = ['--model', 'tinyllama'] + argv

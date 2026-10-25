@@ -1,0 +1,54 @@
+{
+  "protocol": "cachegen-shared-v3",
+  "batches": [
+    {
+      "run": "results/tinyllama/minimal/v3-integration-01",
+      "role": "development_diagnostic_not_pooled",
+      "status": "completed",
+      "exit_code": 0,
+      "observations": 274,
+      "source_identity_sha256": "065f72cdf6efec1e3e567fb96be24dabc41d376b867da602669fc951f0130527"
+    },
+    {
+      "run": "results/tinyllama/minimal/v3-final-20261025",
+      "role": "development_diagnostic_not_pooled",
+      "status": "interrupted",
+      "exit_code": 143,
+      "observations": 138,
+      "source_identity_sha256": "88744688e7ca76c324fd0f6eb34e8eab4e8461098004e75c2f54bccd30e239b9"
+    },
+    {
+      "run": "results/tinyllama/minimal/v3-final-02",
+      "role": "development_diagnostic_not_pooled",
+      "status": "completed",
+      "exit_code": 0,
+      "observations": 274,
+      "source_identity_sha256": "ba036a5377e006be1bc746a4f90519c07ec20d239f0b26048ee524e756db3cd4"
+    },
+    {
+      "run": "results/mistral/minimal/v3-final-02",
+      "role": "development_diagnostic_not_pooled",
+      "status": "interrupted",
+      "exit_code": 143,
+      "observations": 238,
+      "source_identity_sha256": "ba036a5377e006be1bc746a4f90519c07ec20d239f0b26048ee524e756db3cd4"
+    },
+    {
+      "run": "results/tinyllama/minimal/v3-final-03",
+      "role": "accepted_functional_validation",
+      "status": "completed",
+      "exit_code": 0,
+      "observations": 274,
+      "source_identity_sha256": "eb826fd9f49ef704538ad9eb59496689b115eb73dde2a8632b344aa85ed30933"
+    },
+    {
+      "run": "results/mistral/minimal/v3-final-03",
+      "role": "accepted_functional_validation",
+      "status": "completed",
+      "exit_code": 0,
+      "observations": 274,
+      "source_identity_sha256": "eb826fd9f49ef704538ad9eb59496689b115eb73dde2a8632b344aa85ed30933"
+    }
+  ],
+  "note": "Only final-03 batches are accepted and compared. Earlier development runs remain local with their own code snapshots and no pooled observations."
+}

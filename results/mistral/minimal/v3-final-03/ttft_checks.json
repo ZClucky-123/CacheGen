@@ -1,0 +1,3148 @@
+[
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2"
+    ],
+    "bytes": 829,
+    "offline_encode_seconds": 0.002469971776008606,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 586,
+        "message_bytes": 829,
+        "envelope_bytes": 243
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "0db96c545ea9782a6cd9deb872103cbc45d77f1f3ee71cc8a4ba522e2695e49a"
+    ],
+    "bytes": 16778643,
+    "offline_encode_seconds": 0.01899345964193344,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778643,
+        "envelope_bytes": 247
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "fd044d4ac6686ed8a489a984f683d52f919b2f5fe9cada941df3ad321dabca0f"
+    ],
+    "bytes": 4212435,
+    "offline_encode_seconds": 0.005472920835018158,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212435,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "5c9e402c7a7cd844f2bc1befb05d1af36169de919b2a0f155819ba822d1ed2fd"
+    ],
+    "bytes": 8406739,
+    "offline_encode_seconds": 0.007939331233501434,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406739,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "a73ef6159388e105f6928087bea140ff4705083f3dc88203f7730c6786d93561"
+    ],
+    "bytes": 4277432,
+    "offline_encode_seconds": 0.00500362366437912,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4276985,
+        "message_bytes": 4277432,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "8ce672c2c1b60aac82ae07860624029abb175f1a9bfb108e9f8d51c9e2cefed5"
+    ],
+    "bytes": 6838679,
+    "offline_encode_seconds": 0.006619952619075775,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6838232,
+        "message_bytes": 6838679,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "5ef38d0a52b2f3a537b29a9c3653e3d470e21c22298758ef8b8b53c39c635af4"
+    ],
+    "bytes": 7673183,
+    "offline_encode_seconds": 0.015074014663696289,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7672736,
+        "message_bytes": 7673183,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2"
+    ],
+    "bytes": 829,
+    "offline_encode_seconds": 0.002469971776008606,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 586,
+        "message_bytes": 829,
+        "envelope_bytes": 243
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "0db96c545ea9782a6cd9deb872103cbc45d77f1f3ee71cc8a4ba522e2695e49a"
+    ],
+    "bytes": 16778643,
+    "offline_encode_seconds": 0.01899345964193344,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778643,
+        "envelope_bytes": 247
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "fd044d4ac6686ed8a489a984f683d52f919b2f5fe9cada941df3ad321dabca0f"
+    ],
+    "bytes": 4212435,
+    "offline_encode_seconds": 0.005472920835018158,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212435,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "5c9e402c7a7cd844f2bc1befb05d1af36169de919b2a0f155819ba822d1ed2fd"
+    ],
+    "bytes": 8406739,
+    "offline_encode_seconds": 0.007939331233501434,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406739,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "a73ef6159388e105f6928087bea140ff4705083f3dc88203f7730c6786d93561"
+    ],
+    "bytes": 4277432,
+    "offline_encode_seconds": 0.00500362366437912,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4276985,
+        "message_bytes": 4277432,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "8ce672c2c1b60aac82ae07860624029abb175f1a9bfb108e9f8d51c9e2cefed5"
+    ],
+    "bytes": 6838679,
+    "offline_encode_seconds": 0.006619952619075775,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6838232,
+        "message_bytes": 6838679,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-128",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "5ef38d0a52b2f3a537b29a9c3653e3d470e21c22298758ef8b8b53c39c635af4"
+    ],
+    "bytes": 7673183,
+    "offline_encode_seconds": 0.015074014663696289,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7672736,
+        "message_bytes": 7673183,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2"
+    ],
+    "bytes": 829,
+    "offline_encode_seconds": 0.0018386021256446838,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 586,
+        "message_bytes": 829,
+        "envelope_bytes": 243
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "0db96c545ea9782a6cd9deb872103cbc45d77f1f3ee71cc8a4ba522e2695e49a"
+    ],
+    "bytes": 16778643,
+    "offline_encode_seconds": 0.030074983835220337,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778643,
+        "envelope_bytes": 247
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "fd044d4ac6686ed8a489a984f683d52f919b2f5fe9cada941df3ad321dabca0f"
+    ],
+    "bytes": 4212435,
+    "offline_encode_seconds": 0.008745439350605011,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212435,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "5c9e402c7a7cd844f2bc1befb05d1af36169de919b2a0f155819ba822d1ed2fd"
+    ],
+    "bytes": 8406739,
+    "offline_encode_seconds": 0.010126642882823944,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406739,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "721892ecd993a9c0fa46e30959849e5da6b3736d2a8cd7bd7b735f67b0a448a0"
+    ],
+    "bytes": 4277432,
+    "offline_encode_seconds": 0.024898864328861237,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4276985,
+        "message_bytes": 4277432,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "757592b35d97ab49cce0c1620bdab7be6fec96c9d58867ad458121061aa7f144"
+    ],
+    "bytes": 6838679,
+    "offline_encode_seconds": 0.006866253912448883,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6838232,
+        "message_bytes": 6838679,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-1-128",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "c06e3b5fb06093fb975df382caeb633809694a86995c8ddade33404a6fe66e0a"
+    ],
+    "bytes": 7673183,
+    "offline_encode_seconds": 0.011258989572525024,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7672736,
+        "message_bytes": 7673183,
+        "envelope_bytes": 447
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 128
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2",
+      "155a3583a174a04cba2641f04a350ac0af38fd7cb8ba13cfe54aea9f90aacaf4",
+      "1cd3e540fc750754c3393d858d2eeb976f226fde2d476f0a7172c5d58c306ced"
+    ],
+    "bytes": 1996,
+    "offline_encode_seconds": 0.008710667490959167,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 586,
+        "message_bytes": 829,
+        "envelope_bytes": 243
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 620,
+        "message_bytes": 865,
+        "envelope_bytes": 245
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 60,
+        "message_bytes": 302,
+        "envelope_bytes": 242
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.033203125,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "c6bb46b344f4bdb1f9e6bdd5484dde737459aae402a1e974e5ea0e47982a79c6",
+      "4061c3eceba71ca3fe5c7e95da461ba6267d205f998fec7eb3003bc3ab429a84",
+      "d4e60737b12e3d2db05cf26dbf2aafc95fe3a869dc6238b8b4d5a33c77900fa2"
+    ],
+    "bytes": 33689785,
+    "offline_encode_seconds": 0.11297779530286789,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778643,
+        "envelope_bytes": 247
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778645,
+        "envelope_bytes": 249
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 132252,
+        "message_bytes": 132497,
+        "envelope_bytes": 245
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "335baf68b7b9d5728532d3e29e69063555c9b96f3e229928cf74e9ce8bbf6b50",
+      "e8e84760c700165f0b96cc9034552d8607c7b2512da2ed6faee6cbc7e015ffd3",
+      "c7c57949ddf60d19716a9d66a5d43c496767f4304893395ad37df0c26e6a08fb"
+    ],
+    "bytes": 8459513,
+    "offline_encode_seconds": 0.015688687562942505,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212435,
+        "envelope_bytes": 251
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212437,
+        "envelope_bytes": 253
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 34392,
+        "message_bytes": 34641,
+        "envelope_bytes": 249
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "c7412f658e17d08abb3ca8f162a0f6a7fec59dc9d4f898474375b26a739b31e6",
+      "8cb51207cef88d1e63e161021548407878a51f99c3079ae8834f56ff86b084f9",
+      "ca3aec6aee1400cb0db21a7f2a64c22701c59fd7807dd93cbbcfaa30dc001183"
+    ],
+    "bytes": 16880889,
+    "offline_encode_seconds": 0.03201255202293396,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406739,
+        "envelope_bytes": 251
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406741,
+        "envelope_bytes": 253
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 67160,
+        "message_bytes": 67409,
+        "envelope_bytes": 249
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "257901ef3618e34ed37611282e81ed5a25e9f06ce8edafff0800d5e1599f1e84",
+      "fb6da73f7d07206b8709003d7da3b449bfb87dbbfb139b63f33fc4e1cb5344f3",
+      "f41bb7997d05206905840a0ea071582fbdf800e8e1d3f909fbf507ff19876eae"
+    ],
+    "bytes": 11025239,
+    "offline_encode_seconds": 0.014996372163295746,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4277165,
+        "message_bytes": 4277612,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4188823,
+        "message_bytes": 4189272,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 2557910,
+        "message_bytes": 2558355,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "78e897fcee5e84ccc4da95048ccb3447a17315e86196cae7a3780e8b9f0f0d43",
+      "708b1779584490be424881acaca5b1284c1c365b5c166ad4f7d58c32a958bee8",
+      "6b86b543112acb317888cc0a5ecaa7a6a06994d9590a8609eeec95f769487fae"
+    ],
+    "bytes": 18238565,
+    "offline_encode_seconds": 0.028553031384944916,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6838338,
+        "message_bytes": 6838785,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6743824,
+        "message_bytes": 6744273,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 4655062,
+        "message_bytes": 4655507,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "e9f26b3dc48c11f3385978f214c4a535865779cc4fad63d9454d51f6efaf65c8",
+      "ee672ccab32bde1fecdc473034acc39d53bb62a4f1216a37c8aed64c1939f21f",
+      "57d11049c56984226ffbd61ef04679374786e26de9822ae837ef0867127605ae"
+    ],
+    "bytes": 19900066,
+    "offline_encode_seconds": 0.023787498474121094,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7672870,
+        "message_bytes": 7673317,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7570793,
+        "message_bytes": 7571242,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 4655062,
+        "message_bytes": 4655507,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "8816eb12704713eeec42a60b81c85dab4390884c7e8650cb165f6df6624f3a7c"
+    ],
+    "bytes": 1402,
+    "offline_encode_seconds": 0.0034495368599891663,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1158,
+        "message_bytes": 1402,
+        "envelope_bytes": 244
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "60b0b5492a4ad3c40e3846d76ed9c2d384cc1fbe1f737db694c2c6c00156200e"
+    ],
+    "bytes": 33686931,
+    "offline_encode_seconds": 0.1038605198264122,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 33686684,
+        "message_bytes": 33686931,
+        "envelope_bytes": 247
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "5da2d9833a45e247123492d76aef77f2df87dff6c8ee1cc30224538b8865b6c2"
+    ],
+    "bytes": 8456019,
+    "offline_encode_seconds": 0.01825425773859024,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8455768,
+        "message_bytes": 8456019,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "c45db643251c14b108c929efb7db50a8e2424a3076934d5531df7185f2971cb5"
+    ],
+    "bytes": 16877396,
+    "offline_encode_seconds": 0.03391158580780029,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16877144,
+        "message_bytes": 16877396,
+        "envelope_bytes": 252
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "60367715bd49179fb99d2515c84d9323568ba56362ea985200c0ba6a61d68361"
+    ],
+    "bytes": 6390259,
+    "offline_encode_seconds": 0.010992161929607391,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 6389810,
+        "message_bytes": 6390259,
+        "envelope_bytes": 449
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "08ce911d9f3790221ef74e693d395fe0d690b40f094c748162656a0dd0036f08"
+    ],
+    "bytes": 9433673,
+    "offline_encode_seconds": 0.007902801036834717,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 9433224,
+        "message_bytes": 9433673,
+        "envelope_bytes": 449
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-0-257",
+    "chunk_size": 257,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "71fc7e0d884067a19c750d3a7f1954b42bac56de511d398265b7a37c954200ec"
+    ],
+    "bytes": 11143038,
+    "offline_encode_seconds": 0.009084515273571014,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 11142588,
+        "message_bytes": 11143038,
+        "envelope_bytes": 450
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "07a4f0a5997f866237dda2984b35cb3c1a39f6df1f3f035c64870d4e21c004c2",
+      "e7810023a56bbf4264169b469f3232a3392b660722cff6b4c2979453445d4337",
+      "131cd8f46e067aced1c3e58f742e17a5edcd9ecc4bb633ed9c734f1a38474609"
+    ],
+    "bytes": 2033,
+    "offline_encode_seconds": 0.0036496520042419434,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 586,
+        "message_bytes": 829,
+        "envelope_bytes": 243
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 646,
+        "message_bytes": 891,
+        "envelope_bytes": 245
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 71,
+        "message_bytes": 313,
+        "envelope_bytes": 242
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0322265625,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "c6bb46b344f4bdb1f9e6bdd5484dde737459aae402a1e974e5ea0e47982a79c6",
+      "6022fb793fbe2a677cc2ca9d3e34c6625b6d087dafd0482bf2b84de893657b21",
+      "f9995a8ba0551929f4db3ecc0500037b09f66f6094b256a999d94abb628dfff1"
+    ],
+    "bytes": 33689785,
+    "offline_encode_seconds": 0.07939831167459488,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778643,
+        "envelope_bytes": 247
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16778396,
+        "message_bytes": 16778645,
+        "envelope_bytes": 249
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 132252,
+        "message_bytes": 132497,
+        "envelope_bytes": 245
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "335baf68b7b9d5728532d3e29e69063555c9b96f3e229928cf74e9ce8bbf6b50",
+      "9648855ec3b53017c79a11a58cf12bdcc1f423ea0afac5bebc6746d93cce4059",
+      "edfde3eb975ee87a255359ba1b64f9a7da486ce95ef9900deb64b30b86e897d9"
+    ],
+    "bytes": 8459513,
+    "offline_encode_seconds": 0.013916388154029846,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212435,
+        "envelope_bytes": 251
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 4212184,
+        "message_bytes": 4212437,
+        "envelope_bytes": 253
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 34392,
+        "message_bytes": 34641,
+        "envelope_bytes": 249
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "c7412f658e17d08abb3ca8f162a0f6a7fec59dc9d4f898474375b26a739b31e6",
+      "1ed359f293a95f7991caf9aa781e37b91aaba01b0fe7ca6ddfd6f0336973326d",
+      "7b825c9c01a8a4408b9bb21f9a618317cb40bb032ad99fc897585e44851cf8ef"
+    ],
+    "bytes": 16880889,
+    "offline_encode_seconds": 0.03168698400259018,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406739,
+        "envelope_bytes": 251
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8406488,
+        "message_bytes": 8406741,
+        "envelope_bytes": 253
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 67160,
+        "message_bytes": 67409,
+        "envelope_bytes": 249
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "4852fc6527d1231def822c7b30ad9d45538a3416e9e94b3bcef7edd5485c8691",
+      "67cb891ea5120b0587dd0eca6586e1de9969d9a85e88b7294774e6aadee5559b",
+      "c022a077ecf2a00f6d2ba313192f2998d21ff2b63403fc33ccabfcbd83c03425"
+    ],
+    "bytes": 11034211,
+    "offline_encode_seconds": 0.01610065996646881,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4277165,
+        "message_bytes": 4277612,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 4197795,
+        "message_bytes": 4198244,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 2557910,
+        "message_bytes": 2558355,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "05346064eb5d076a913245b5e82465bccdaccaa657f74434c01fe977bcc234d1",
+      "cfd90f2d3475a5b044b75aeb6fa72feeac2ebadb90ea489afe7311ceaf5bf035",
+      "a413b764e01a789459a4e82fc16a160872770ba00db40596e25e14a460cdc713"
+    ],
+    "bytes": 18248432,
+    "offline_encode_seconds": 0.027390137314796448,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6838338,
+        "message_bytes": 6838785,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 6753691,
+        "message_bytes": 6754140,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 4655062,
+        "message_bytes": 4655507,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 128,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "28c0f5baef962872e9358d8c8c8f573cd2c5b34d8ff2367d19df9b291dec24dd",
+      "6737fcadbddf09f5ed299411c12f1d7245d1c22e6b76d471d1ad5e17a6a59979",
+      "e3874d6dfcdcea4f99983cd22551d5f11d5f63868ddbdf163d3b603f36cd5a40"
+    ],
+    "bytes": 19911462,
+    "offline_encode_seconds": 0.02664494514465332,
+    "application_chunk_count": 3,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 128,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7672870,
+        "message_bytes": 7673317,
+        "envelope_bytes": 447
+      },
+      {
+        "chunk_index": 1,
+        "token_start": 128,
+        "token_end": 256,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          128,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          128
+        ],
+        "payload_bytes": 7582189,
+        "message_bytes": 7582638,
+        "envelope_bytes": 449
+      },
+      {
+        "chunk_index": 2,
+        "token_start": 256,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          1,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          1
+        ],
+        "payload_bytes": 4655062,
+        "message_bytes": 4655507,
+        "envelope_bytes": 445
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "text",
+    "prepared_payload_sha256": [
+      "c3f29ad02170bdd6ebef9e6ce6cec43662b128d8dac4c008865dfda1b9c628b6"
+    ],
+    "bytes": 1425,
+    "offline_encode_seconds": 0.005041152238845825,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "text",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 1181,
+        "message_bytes": 1425,
+        "envelope_bytes": 244
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": 0.0,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "raw",
+    "prepared_payload_sha256": [
+      "31091e3e461b87e9d0ca17eec1cc349fdbed41fc81cee81e0ea833047ca8136b"
+    ],
+    "bytes": 33686931,
+    "offline_encode_seconds": 0.08509471267461777,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "raw",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 33686684,
+        "message_bytes": 33686931,
+        "envelope_bytes": 247
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": true,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "uniform4",
+    "prepared_payload_sha256": [
+      "0ee6cac6a95163d2060021d6e5c8fd1a51c665ff205c8b1d634df22a4d01f4fc"
+    ],
+    "bytes": 8456019,
+    "offline_encode_seconds": 0.017541654407978058,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform4",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 8455768,
+        "message_bytes": 8456019,
+        "envelope_bytes": 251
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "uniform8",
+    "prepared_payload_sha256": [
+      "8136d6131e06070df70eeac241e316b6e895fa9bf0f1a3d43a85be063123300a"
+    ],
+    "bytes": 16877396,
+    "offline_encode_seconds": 0.03499305248260498,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "uniform8",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": null,
+        "internal_segment_max_tokens": null,
+        "internal_segment_tokens": [],
+        "payload_bytes": 16877144,
+        "message_bytes": 16877396,
+        "envelope_bytes": 252
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen1",
+    "prepared_payload_sha256": [
+      "43489a9f525cfedc7f26c4b2a24d115975a43d68b51e67cefad565147074953a"
+    ],
+    "bytes": 6401124,
+    "offline_encode_seconds": 0.01179012656211853,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen1",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 16,
+          "key_second_bins": 16,
+          "key_third_bins": 12,
+          "value_first_layers": 2,
+          "value_first_bins": 16,
+          "value_second_bins": 12
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 6400675,
+        "message_bytes": 6401124,
+        "envelope_bytes": 449
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen2",
+    "prepared_payload_sha256": [
+      "d0245a15c3186151eeb85df2f591b199ad1e449293e340ec09bd20910f2aaed0"
+    ],
+    "bytes": 9445531,
+    "offline_encode_seconds": 0.008610360324382782,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen2",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 16,
+          "key_third_bins": 16,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 16
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 9445082,
+        "message_bytes": 9445531,
+        "envelope_bytes": 449
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  },
+  {
+    "case_id": "longchat-1-257",
+    "chunk_size": 257,
+    "method": "cachegen3",
+    "prepared_payload_sha256": [
+      "8a21aeccf40139f8273279e1554a56f90c1a6573c0d2461dba304c6b5ca0b4bf"
+    ],
+    "bytes": 11156533,
+    "offline_encode_seconds": 0.022418312728405,
+    "application_chunk_count": 1,
+    "application_chunks": [
+      {
+        "chunk_index": 0,
+        "token_start": 0,
+        "token_end": 257,
+        "method": "cachegen3",
+        "shape": [
+          32,
+          2,
+          8,
+          257,
+          128
+        ],
+        "dtype": "torch.float16",
+        "quantization_schedule": {
+          "key_first_layers": 10,
+          "key_second_layers": 20,
+          "key_third_layers": 32,
+          "key_first_bins": 32,
+          "key_second_bins": 32,
+          "key_third_bins": 32,
+          "value_first_layers": 2,
+          "value_first_bins": 32,
+          "value_second_bins": 32
+        },
+        "internal_segment_max_tokens": 256,
+        "internal_segment_tokens": [
+          256,
+          1
+        ],
+        "payload_bytes": 11156083,
+        "message_bytes": 11156533,
+        "envelope_bytes": 450
+      }
+    ],
+    "byte_identity": true,
+    "mode_kv_identity": true,
+    "mode_generated_ids": [
+      415,
+      2191,
+      9067,
+      349
+    ],
+    "text_vs_whole_prefill_max_abs": null,
+    "raw_reassembly_identical": false,
+    "cache_tokens": 257
+  }
+]

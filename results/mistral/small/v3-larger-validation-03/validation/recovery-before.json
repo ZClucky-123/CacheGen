@@ -1,0 +1,4988 @@
+{
+  "status": "interrupted_verified",
+  "case_id": "longchat-0-4096",
+  "target_tokens": 4096,
+  "rows_before_resume": {
+    "quality/quality/longchat-0-1024/raw": "0999dfc8162f172254d44459d894766dfb8c1ee5c2b68be4d220da3d84ca5b77",
+    "quality/quality/longchat-0-1024/uniform4": "a7748470a7618de2572e3322ea6cd3bee86aadfab11ad9939b7e77c0d70d34b2",
+    "quality/quality/longchat-0-1024/uniform8": "9108c9efdcc10f7e3d12757f6e73a32d7e30298535f80ac8f94c67d778aa171f",
+    "quality/quality/longchat-0-1024/cachegen1": "6f92f31cffad99f5b7c659058022e2749e99b16e106e21ce4edc25b00d6027cb",
+    "quality/quality/longchat-0-1024/cachegen2": "030cf2319d4f8171ecf8d129a039167e6799d404d7240b94c3943cea92b2e07a",
+    "quality/quality/longchat-0-1024/cachegen3": "7a821412d3aa4681cecdad19e17b6a429e0b33948c42681ad0953c6702662a1a",
+    "quality/quality/longchat-1-1024/raw": "32b4b4c064767479cdb4ae7033663631a3adc41fa2af91c3d55bce377922ef75",
+    "quality/quality/longchat-1-1024/uniform4": "852b7fe45273b43c10bd81896a42e6c1ba972b7545aeaa5a151d0db9ccc4e116",
+    "quality/quality/longchat-1-1024/uniform8": "8b42b8a72bd4dda977ebc9e9d0efb1d627ec763bb4168c9d27d6b42f722a1d8f",
+    "quality/quality/longchat-1-1024/cachegen1": "837f76f6b72d70e89ce181043bddcf5acdef2d8c416768683088ad0fd46d4494",
+    "quality/quality/longchat-1-1024/cachegen2": "8458ac408e6c392fc8283f205318f049fbc933dc5e219de4cd19f54298033631",
+    "quality/quality/longchat-1-1024/cachegen3": "bb0bc9fbca40367020bfb53a568deb9d0cc83803089fb6fa6da765d77e481117",
+    "quality/quality/longchat-0-2048/raw": "b79c5da3b92fe01469e1baebe9802b852ec03df4f4b522626e5aa2d18abe351c",
+    "quality/quality/longchat-0-2048/uniform4": "76d0a84d04cb52fd87568ce9da960bc4b3fff79577d6a30c1b5446b1529d781c",
+    "quality/quality/longchat-0-2048/uniform8": "33cca30a02f6867e7f0626ffe55b8b8ce33bcd05e5820018e915f1501fe95da4",
+    "quality/quality/longchat-0-2048/cachegen1": "02a48c547d586c0ca1fe0cef7c38f669a0fbf4e9876cd10e9fc272e4939cf46a",
+    "quality/quality/longchat-0-2048/cachegen2": "f0bf44a93988f550270c8b24b81204b36a0b552c91de7861165c6f2095d59fdb",
+    "quality/quality/longchat-0-2048/cachegen3": "94c8a007f55fbea34e384b997b6c6384c50ba0667bf2148fe9a51e637d9cd0fc",
+    "quality/quality/longchat-1-2048/raw": "f4cb61297b98a8166710c08f46fa45ddd5d6d17d531cb702ccba6e5d23f6abb4",
+    "quality/quality/longchat-1-2048/uniform4": "48149199ce49a0e2a575034f16dec6fb2f497827618f33205da31d72be4c5ebc",
+    "quality/quality/longchat-1-2048/uniform8": "c1ff71e34a19dab423cc0622ab80dfaf1d9128e693028f9cc34068224149bf07",
+    "quality/quality/longchat-1-2048/cachegen1": "fb19b5366ac392aa0c2c01aeb8307bc2c3d80efa0095909af232002292d1f429",
+    "quality/quality/longchat-1-2048/cachegen2": "142f226eccffdcb5b2629e7d9e7fd590140dc6f8ecd8edba7ad419e4fe17dbf7",
+    "quality/quality/longchat-1-2048/cachegen3": "2e707237ddaad6f3bd7cf619bd2ad5524a56b4656a5b3dcc7a64a0dfbec0b7ba",
+    "quality/quality/longchat-0-4096/raw": "6c436ea41e0a5dc59fea94894a5536798cdf1ace55d96588ee0a05d5f465974c",
+    "quality/quality/longchat-0-4096/uniform4": "0bff368080c158425703b909db0e0a1cc156a1329464c34e31a916096e747773",
+    "quality/quality/longchat-0-4096/uniform8": "c530c0432fe6644ff8342b837634ca4559a30e3dda665137ec90d84d0a17dccd",
+    "quality/quality/longchat-0-4096/cachegen1": "4a24665e6941e8cf1a4891ffc34ddf1a2ce8aa17c6a302230fd129008a3f3b20",
+    "quality/quality/longchat-0-4096/cachegen2": "550521b16001488b5aa316dd41a3084264d7a2556db22015c55e516bffbcc323",
+    "quality/quality/longchat-0-4096/cachegen3": "6b84242060e3b60b9d1c2cedb815be016c33e6ce404df076550e1ea51e87d6ad",
+    "quality/quality/longchat-1-4096/raw": "8f83c08f3eb91df48ac6bfa9e33b02f7964c5cdb6c675dc92024e554ec27c8ff",
+    "quality/quality/longchat-1-4096/uniform4": "c1bffd7765c4d94961ce34bd8cea1929e9791c17d610a87ef5942109a9956a6c",
+    "quality/quality/longchat-1-4096/uniform8": "da6b203d493711dd8dd2a7c9553edc2100d9f75d11abe2b1120fe8f901798028",
+    "quality/quality/longchat-1-4096/cachegen1": "2beb1050641b602a89f4a932dee20076673ea38026e07575de94caeef997605a",
+    "quality/quality/longchat-1-4096/cachegen2": "9aa6ab121a6b18de0c024c0dfcee84b3fc27e1c99351efaa246bbfff9fda853e",
+    "quality/quality/longchat-1-4096/cachegen3": "5029c926902c67b4960f966b712f8b091bf7988e4ee96b14269a5542d8dc18df",
+    "quality/controlled/fact-0-1024-start/raw": "71821a5a3cff7a114904c6f35471b447d7154663a23961c72e45d4dcefce2005",
+    "quality/controlled/fact-0-1024-start/uniform4": "46de8c8c12aa73c6d385f41a0ebb7f06fad3e04e6dff1581f4e64399e48caefb",
+    "quality/controlled/fact-0-1024-start/uniform8": "9044a3105fea106ba283846fbeb476cd8fa7160f1d78ec181cc832a7e09ef24b",
+    "quality/controlled/fact-0-1024-start/cachegen1": "74e445a38ae9338a1def1e88d8ba0a70a03669996d316306194bbb8fb37a017b",
+    "quality/controlled/fact-0-1024-start/cachegen2": "c81f73527218651d811dd8538ac17c032419398bf24afd4b3a9098a043147af6",
+    "quality/controlled/fact-0-1024-start/cachegen3": "150612d9a35f3c259693da088b7720e859017a292d74cacb6da6a662fe530981",
+    "quality/controlled/fact-0-1024-middle/raw": "c3fa76ee713e6c8b6dcd217fe7ce1a7083bb288a82e69ddf2e54dc6ffd69b688",
+    "quality/controlled/fact-0-1024-middle/uniform4": "a8b6173aa4aadedf43497738bcb8dc2d93cc57191dcd5fee69810d507583feb4",
+    "quality/controlled/fact-0-1024-middle/uniform8": "ff5dc5496fb617aaaa0b6ba9083e9f16c7c192a8b7ced4cf800903e306e5261b",
+    "quality/controlled/fact-0-1024-middle/cachegen1": "6bd7606674f394b0845709b0d528cb58ad6f5e23b92c7e126311f0079e712b50",
+    "quality/controlled/fact-0-1024-middle/cachegen2": "8c0f8e138c312c359b9c22c921fe1c5a9c951347f20dfd9d38850a0d9b8e6f37",
+    "quality/controlled/fact-0-1024-middle/cachegen3": "b2ad6722b4ce19630a8c53f50a541c33a2cc657b72620e0106ccc9a60728c248",
+    "quality/controlled/fact-0-1024-end/raw": "51b2d7fbb47b1d8bceeacf7f44ea1ae98486374e51e9444d47664761a7ce3f12",
+    "quality/controlled/fact-0-1024-end/uniform4": "e14246f8c2a0dd380190171e16abc6fde42e84c18b241549de39475e6febdecc",
+    "quality/controlled/fact-0-1024-end/uniform8": "6b778a2bdb9217e0d38e6ec6c266e1428c5bf13a1275f1ea6b33e059a2aa94f3",
+    "quality/controlled/fact-0-1024-end/cachegen1": "2312a8b55e38538a8b620c81732003ccc0ae1a58046dc9d04ae267f068ff665f",
+    "quality/controlled/fact-0-1024-end/cachegen2": "364154dbd4ae6b07d442e4025f054316b00cff055a234fdfcd6ec7af22f268cf",
+    "quality/controlled/fact-0-1024-end/cachegen3": "be9c20de7cc1dd1940cacddf6c68c7f2ab0ab321c1cceb847359758225e6a270",
+    "quality/controlled/fact-0-2048-start/raw": "d04bc864219d57b34903f52d93bee1cf41de4f3fdb5cc767ca1335d9f2c990c4",
+    "quality/controlled/fact-0-2048-start/uniform4": "23436f5ee8c40328a50890589f7e2870ee1c84c5a09e2d940dda95933285d1f1",
+    "quality/controlled/fact-0-2048-start/uniform8": "5bb5d683dae07b35bbf5ba284e504593136b31f3bdaf1c31f05759cb78fbd39d",
+    "quality/controlled/fact-0-2048-start/cachegen1": "eaba118a78ab141b6d3e25a59e6637376f5755ccf0d8d3600ccb331582c1e205",
+    "quality/controlled/fact-0-2048-start/cachegen2": "ea169b2988f6c8fcba9084a8396030a53942ed0b4f2a2100120d398c538bfe33",
+    "quality/controlled/fact-0-2048-start/cachegen3": "dc25e3d5f8b1a8f382bbf9715b9b246c5f1f27b312a3bc317a061c166d8aa7bc",
+    "quality/controlled/fact-0-2048-middle/raw": "31f42a563dfc8fc29465d248cba6c46570696d00ea4724821e5d8ee7f6c43859",
+    "quality/controlled/fact-0-2048-middle/uniform4": "4ae646cdf5f638f94c958b5db1041e152b843b063387c5f7a6ef913d7d6d6e62",
+    "quality/controlled/fact-0-2048-middle/uniform8": "3b1f165cbfbb059b35b5635a69109c91d6e12021f3a3e1b3e0df89e9a9f278c2",
+    "quality/controlled/fact-0-2048-middle/cachegen1": "379b598aad261525fbccc64e5458141301b9a1411c8b8993b85511635044b08e",
+    "quality/controlled/fact-0-2048-middle/cachegen2": "320dabfbf6e6b34d037671e2880bced79bc6e2cdbbb2eb2462a991f9c73df329",
+    "quality/controlled/fact-0-2048-middle/cachegen3": "2d4c0121d474db8626f30c0545bb92110b275c29cffd8d3192089fa10e7030fe",
+    "quality/controlled/fact-0-2048-end/raw": "e2ff28d5c9d51709c98b196919e5eef4a98ec8b317844841353d334cf7b215f6",
+    "quality/controlled/fact-0-2048-end/uniform4": "6003bedffe526f5570caa7a71dad8768670b727cfd0805c5f093870f2c3d804c",
+    "quality/controlled/fact-0-2048-end/uniform8": "ea2732b8359a3d806df3250fdf90b4c0d2ecb6c5fdb75695982f1fcaefd84ebb",
+    "quality/controlled/fact-0-2048-end/cachegen1": "4d5874bfc4a07af2a13063269bb4f73b01d2fb40deb51567ddcc0b37bad4c2ab",
+    "quality/controlled/fact-0-2048-end/cachegen2": "b9d479d1a0ef08e5c2e6eedbdd50ef66b832797c6a928906b5aab171ba3b604d",
+    "quality/controlled/fact-0-2048-end/cachegen3": "700a0ac568fc210c889075cfe8d37c4e6cc17106149db74a7766304dc1e0caf6",
+    "quality/controlled/fact-0-4096-start/raw": "0bb32286b48eedb8a652790c6f19f43ca147addb2c64941af1b6f07cd5e57dfd",
+    "quality/controlled/fact-0-4096-start/uniform4": "19e78ce761f0f7f74b9d42a4e863e919e13969c828de8d4b6080154d94e72ada",
+    "quality/controlled/fact-0-4096-start/uniform8": "dfc2eb3d122897ef84b640a8582cdf045e28f0a6f94d9a9e00a71c2f50baba51",
+    "quality/controlled/fact-0-4096-start/cachegen1": "227de45e9a0b4c69c6116f9ddc4ba97cf3bde11ba77b872b3a9c57550579d13a",
+    "quality/controlled/fact-0-4096-start/cachegen2": "6cabee6ad7e8a0d0bf1c36f67b69083b03ec8a644eeb5ab4e7b1959c8d057fbd",
+    "quality/controlled/fact-0-4096-start/cachegen3": "037e5bd44abc4792680e46c6301fb6578819a697488ecfaf7f8e2223aa0ef9f5",
+    "quality/controlled/fact-0-4096-middle/raw": "5f2a43dfbc4d5633c15d9ef2772df353b871ce18a0c1825c943067bb9eb1350d",
+    "quality/controlled/fact-0-4096-middle/uniform4": "abc2f9f9637fb7621f730d3802961d8b770b830d835149e5d29d99403b86fb85",
+    "quality/controlled/fact-0-4096-middle/uniform8": "39ccbe10f1887c0a79c78f390ccb97efad77b3ab8e4e88fd0578298be4d04f9f",
+    "quality/controlled/fact-0-4096-middle/cachegen1": "05661d5753349edec5dccd499f30a1276a6eabc315062f3e0b02082111d1e062",
+    "quality/controlled/fact-0-4096-middle/cachegen2": "7cc906223b1e2044d7b5be8cb70297ddb6f17d14291013e9e1ea9e35cb72d2a9",
+    "quality/controlled/fact-0-4096-middle/cachegen3": "c079978cff041c3b3bdea45bdf70615b528b0deb058444850ddc2d00587b8cf4",
+    "quality/controlled/fact-0-4096-end/raw": "b65c2e0b9f215c906bb7c812e7534937c96826fe705a8fc2c11246cf5b990919",
+    "quality/controlled/fact-0-4096-end/uniform4": "87f7b8c1c69b6df429292f390857fc842a76e0058eda5ed542e81e30774417d9",
+    "quality/controlled/fact-0-4096-end/uniform8": "dc7b6e790054bbe8925ad1e36eeb97f50cf0152fe9d345c4239d8d0968139b59",
+    "quality/controlled/fact-0-4096-end/cachegen1": "72dc176b3cbdc440ce1aff56c382b86f1190cfcba8730d648afbd8980146e892",
+    "quality/controlled/fact-0-4096-end/cachegen2": "23fd40ea3006410ee22df220bf1d2adc956dc00e628bb13b70d5dbe12153a69f",
+    "quality/controlled/fact-0-4096-end/cachegen3": "819a4a3717a954f9579e00d7f8ff9dc36ca5e772cc7d069856e33738e311f008",
+    "quality/triviaqa/tqa-3/raw": "79efebcb83fb61ac107064f32b65e477aceaa80b5be53c9914b8d70c49faec48",
+    "quality/triviaqa/tqa-3/uniform4": "0c782ae8da1575ad970f946bb2ff4eec41dc214ddaa771405f8b03bb0856aeb8",
+    "quality/triviaqa/tqa-3/uniform8": "824e3fbe28e2bdccfdda2c11cc51882ad18c4338550d27ad7de1e8e7be5294c9",
+    "quality/triviaqa/tqa-3/cachegen1": "e2cc8f7fde55f45e79690c34c4812c5e356b88e516f35e9d58edf8fec820da15",
+    "quality/triviaqa/tqa-3/cachegen2": "646abd4d172c4471943bd57334be96dac4fba176c3e07c0ade7094a1478b0d9e",
+    "quality/triviaqa/tqa-3/cachegen3": "d8443262c4c1626d7953a9a61e6429201d9e6a164fed70b7a53209f1ce6f6852",
+    "quality/triviaqa/tqa-5/raw": "90f77dc93d20ae7208f4a131aea3c7610d560a6b9180c23da26825fcd03ddf77",
+    "quality/triviaqa/tqa-5/uniform4": "c48a311a2b4ed1240ca7bbc621012771b516896275ed02aa952888c7d9aecfeb",
+    "quality/triviaqa/tqa-5/uniform8": "0b902a33ec26cc82cfff809b4b8ea8f1cb982af01a62c44db869fbc7d12a5a94",
+    "quality/triviaqa/tqa-5/cachegen1": "7a718c4dafe1df255d3767c4145f7e361f2b496e7ad647a835763c177873fb8c",
+    "quality/triviaqa/tqa-5/cachegen2": "027aa8c9a3445d56279e19c0e2ba4f42e2859cd36729e5b6ecf466e04efa13e5",
+    "quality/triviaqa/tqa-5/cachegen3": "c0e92778c076a0ec322291db4ce69fda79daff3b19bec011cde93228012c613f",
+    "ttft/longchat-0-1024/10/1/text/chunk_serial/chunk-256/queue-1": "b76d82a44e83ed86c730c22923f9e37087a568519546458a4009e0eb5c104060",
+    "ttft/longchat-0-1024/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "4d2e76d8a179edeb8d0c0e6b0335edd518277899dc9732d97022e858a232cf07",
+    "ttft/longchat-0-1024/10/1/cachegen1/whole/chunk-1024/queue-1": "a6335bb503400a34fc5fb4de40c6c3b065ef344a7f2e5a1c5764f9021e2aab21",
+    "ttft/longchat-0-1024/10/1/text/whole/chunk-1024/queue-1": "da254820285deacd0689bd766a254411e48467dde33b65d68aaf3a8467d3a871",
+    "ttft/longchat-0-1024/10/1/cachegen3/whole/chunk-1024/queue-1": "b78aba4a0d94b8f6c8d75602f8d5546fee5f0088a7ccee5068d05dd347d2403b",
+    "ttft/longchat-0-1024/10/1/raw/chunk_serial/chunk-256/queue-1": "3f4ef426d887ea749e4fcc6cabb3f27b1d888077234adb6f1e6a1b1bc2356146",
+    "ttft/longchat-0-1024/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "46e289c44336447beab734d1d2b2b3d60d164643dfaeacc2257c3b410f2ca827",
+    "ttft/longchat-0-1024/10/1/uniform4/chunk_serial/chunk-256/queue-1": "8ec9887ea764a05994499cd216a92e38cdb9274c223974580948c8ca07f1ad1b",
+    "ttft/longchat-0-1024/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "4609cf090fc96919531081654239f5dff89df424d4581f75b9edc94b2cf53244",
+    "ttft/longchat-0-1024/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "3c4628b229eef48d83e230e67c160fcc457a50b3168bf3bb4f82fecadee0a703",
+    "ttft/longchat-0-1024/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "7ea2e81f821e557b931a7a72d4b791cc352cdfb924590a173ea467a39e229f59",
+    "ttft/longchat-0-1024/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "0245c289acddb674e856ea060c80251f99b659f669af45cc0e9653cb2f18790a",
+    "ttft/longchat-0-1024/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "49320dfaeabc7cc0de4e5fc005c016eef228fc47d32cd86a4c65bc2705e67836",
+    "ttft/longchat-0-1024/10/1/uniform4/whole/chunk-1024/queue-1": "70d923612a3e2dc74d64bf873d4ba38e4a2dd7b553a34edd0654fe2537bebbe6",
+    "ttft/longchat-0-1024/10/1/raw/chunk_pipeline/chunk-256/queue-1": "10a451f55c9e3f32130fbcffda6e8dacf49f899945626200d0fc94fbf5dbc07c",
+    "ttft/longchat-0-1024/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "dcfe05981e4dcb40e1877c30fe87a5829b5918d42583075eeeb4c9fd8bb16876",
+    "ttft/longchat-0-1024/10/1/cachegen2/whole/chunk-1024/queue-1": "9d29c20f1c45aad50f37faa019d3eb0cbb1a6ab9805e7816120fdf7839c1f2f8",
+    "ttft/longchat-0-1024/10/1/uniform8/chunk_serial/chunk-256/queue-1": "2c58431667c6f0d4da8042a14bcfe4133267f80de81e3d481182571661c4d8d1",
+    "ttft/longchat-0-1024/10/1/text/chunk_pipeline/chunk-256/queue-1": "9ec009973c7a545df58fb0a878983c1751ca3e5806df5e70874a9112acf341cb",
+    "ttft/longchat-0-1024/10/1/raw/whole/chunk-1024/queue-1": "1e1e4c1a45b34ead65a35978232bc79aedf6fb0935ef940d2d5fde62a3ed30fe",
+    "ttft/longchat-0-1024/10/1/uniform8/whole/chunk-1024/queue-1": "cd46649534f856254447d8ccabfc318c6ff79bbe67c79f893f6dc92224b4b6ca",
+    "ttft/longchat-1-1024/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "f4e0f461940e28765004b7d93dd283f75c1a4b371c1ed0d9c701e842cbacaa0c",
+    "ttft/longchat-1-1024/10/1/text/chunk_pipeline/chunk-256/queue-1": "39551681b6e919fc46d9d958afae7b6a3317da6361f1e086bdc1eb9990f1d1d8",
+    "ttft/longchat-1-1024/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "261b8723ef10b79a7a6c36d318e08992256b03576c7607d5b494eb554f8f4490",
+    "ttft/longchat-1-1024/10/1/text/chunk_serial/chunk-256/queue-1": "16f933700602700e0b285a46a750ea912a8bc26dfdc6e42f133a044409f1140b",
+    "ttft/longchat-1-1024/10/1/raw/chunk_serial/chunk-256/queue-1": "e82516868cf7f60e8f39c086e11cd50161a1809656107ffa9992c631b14ef6d9",
+    "ttft/longchat-1-1024/10/1/cachegen1/whole/chunk-1024/queue-1": "c2ec43851204db63b28c87a5255a596862d2c352d4a9d232e7fbc0f8882d485d",
+    "ttft/longchat-1-1024/10/1/raw/chunk_pipeline/chunk-256/queue-1": "6986529fda134ac5fe446f7f73131b51e9a06bf3cdcaf63262d5fe49736ec32c",
+    "ttft/longchat-1-1024/10/1/uniform8/whole/chunk-1024/queue-1": "1a5c091a4471bc31852aa6a72fd9a7308b18a7688a375aee5bcea1a689c15808",
+    "ttft/longchat-1-1024/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "8bb619708343b6da5817cd91dae4c70eec784fb94271aa5e51127140a749f3ad",
+    "ttft/longchat-1-1024/10/1/uniform4/whole/chunk-1024/queue-1": "64e8b86c1a9b8620e36fc5a74bf015d2b86fde9ef4f6d03b0945ee8b7f9f09a2",
+    "ttft/longchat-1-1024/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "f3426cb8082bb0869a6e35e1ae260334b19a6e4e6de7b75040db4a574cc5e328",
+    "ttft/longchat-1-1024/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "8af937ef1f188f3e9ccddce9e9c5d9d022d4418987cc20d52dc9c8011bc7ae2f",
+    "ttft/longchat-1-1024/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "24fc04d02e6653a342866c5225653dd9a7b950ccd8ac08294baaf386fa3f490d",
+    "ttft/longchat-1-1024/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "4f1ca7a7d857fcf4e622e3d511fc810bdee0d71941244064348e0a72cdd46a72",
+    "ttft/longchat-1-1024/10/1/cachegen2/whole/chunk-1024/queue-1": "7c0868d32bd43d8a4eee6e17944aa955d573d099558ab4ecdc535ebe41028176",
+    "ttft/longchat-1-1024/10/1/text/whole/chunk-1024/queue-1": "7d3db398deef496aac42f49fca16a23f803d25ecc71c11b53aabab35cf2f0e5f",
+    "ttft/longchat-1-1024/10/1/uniform8/chunk_serial/chunk-256/queue-1": "c30b66b341f00b29356e77431082978042c8a24c9679a3af48d2cf55e6a2ae87",
+    "ttft/longchat-1-1024/10/1/raw/whole/chunk-1024/queue-1": "c0cf23dd982aa8cee7f6ffd21fa68e520f36a474f654fcd8626abac7a116744b",
+    "ttft/longchat-1-1024/10/1/cachegen3/whole/chunk-1024/queue-1": "399118e2c051a5d3576f2a701d919c29db4c87112adee3d9c5f3f3f2579cf1f3",
+    "ttft/longchat-1-1024/10/1/uniform4/chunk_serial/chunk-256/queue-1": "f24abfc9c06e3b2dce9bcc9fc16a16eb08e270f06217b54074513fce31982ef3",
+    "ttft/longchat-1-1024/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "cf76ab9b376d2f75a3ef9fbf3810d5d4e59d08f9c2a0ae1bdab884fa5ccafa0c",
+    "ttft/longchat-2-1024/10/1/uniform4/chunk_serial/chunk-256/queue-1": "9939c362c95bd3489c971215e0a4441d7665970e7b38ee02ffc9dfbb466b09db",
+    "ttft/longchat-2-1024/10/1/raw/chunk_serial/chunk-256/queue-1": "0a1d66e14664cc5872173c1bc23cc65f8c9a65ee4740353c09bc8828418c1d7f",
+    "ttft/longchat-2-1024/10/1/raw/whole/chunk-1024/queue-1": "737d2818be21dfc14cdc416679d56f3f17c2e7d89f44af45788f56cae785d969",
+    "ttft/longchat-2-1024/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "f23e6711ca896bcfeeb78b4b46773ad5c0b27269cd570bf9b29e4c8a1beff3ec",
+    "ttft/longchat-2-1024/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "2cf11c3617a94240a331647fa7312cb7a2ca7ca01fc4b025d6f9baff18240547",
+    "ttft/longchat-2-1024/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "61f4232ff5ca0b2478085cbcb2d56fbc667146105203a436e070f64579bcce55",
+    "ttft/longchat-2-1024/10/1/cachegen3/whole/chunk-1024/queue-1": "d23cc2e63bb1cd2232f5fe18074d0de727d075795baab7560eccc5a93ddfde77",
+    "ttft/longchat-2-1024/10/1/uniform8/whole/chunk-1024/queue-1": "a235f14109ad04c9d313a5ea4b5011270a825f3cadb7aa67a5e568eac74007b1",
+    "ttft/longchat-2-1024/10/1/uniform8/chunk_serial/chunk-256/queue-1": "816e5cff8f407f225a6457359dd92dc5b44598c61f5216d2b25b2f808a601d2b",
+    "ttft/longchat-2-1024/10/1/text/chunk_pipeline/chunk-256/queue-1": "94457040883e949567ed6af08b674a23d8bd7a0965c61c2965dd331632f53cd9",
+    "ttft/longchat-2-1024/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "cdfc0d2d7f34ae72c9eed5e0733acb5c5c8c446a79cb5f47531fe9164fb5a580",
+    "ttft/longchat-2-1024/10/1/cachegen1/whole/chunk-1024/queue-1": "60bec43baae407adf4c8a96b2bd12e54d9cbd896bc679e67da0b8118af27281e",
+    "ttft/longchat-2-1024/10/1/uniform4/whole/chunk-1024/queue-1": "f24c718bc2bf9343a19d7a9608be2822ab1a3ef6252c50cd5a43e9283a092425",
+    "ttft/longchat-2-1024/10/1/raw/chunk_pipeline/chunk-256/queue-1": "2150a04f0817f3a6c15b2fdfda6a1fec5665a27a5769538580094a861295a545",
+    "ttft/longchat-2-1024/10/1/cachegen2/whole/chunk-1024/queue-1": "59a457e33acac1d94d8b3af5ef22aa022ad03fd1048a65613e78dfa1cbed51a7",
+    "ttft/longchat-2-1024/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "e4f86a6ef081537d21c6df953e5d7378af7083250ff1894fe98b53ae4cac2adf",
+    "ttft/longchat-2-1024/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "449936a41724a0190884b9719d26b8d8d732230a4033bba0a2bb8fbac8338abf",
+    "ttft/longchat-2-1024/10/1/text/whole/chunk-1024/queue-1": "ac0a5ff2df0b695d010b61ce798cec8bf8b0fe71cc0ccd2d74c5c4762bcf4170",
+    "ttft/longchat-2-1024/10/1/text/chunk_serial/chunk-256/queue-1": "f293a2e8fee80e78861a1ad6ddcd40b590f6c6ffc5b637948ab4d25c0703f4cc",
+    "ttft/longchat-2-1024/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "16bdffafad9466d3c23ff3930df3ca94107d310fc81804521e95b6151fd2ad17",
+    "ttft/longchat-2-1024/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "ef4f61c30c5b7b4ae6f70e518748a99d5fac324483bd804e785b265a47c4dab8",
+    "ttft/longchat-3-1024/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "c9433faaeaf66b9f923b41d871acc6623be529fa6ecf7bedac29ff251679f882",
+    "ttft/longchat-3-1024/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "cb7cd9fbea4c5428302dc4cb4323571f8e72af8cf3725d63d236c1ce6b1c7f18",
+    "ttft/longchat-3-1024/10/1/text/chunk_serial/chunk-256/queue-1": "395ca5594fe44414ea1c0f98bbb69d1984a65189ab514d7aa26e5b00d677715c",
+    "ttft/longchat-3-1024/10/1/uniform4/whole/chunk-1024/queue-1": "bf92da757b6e1a9ff83f934692ff462962b4fc6d9b9553db4b522a3eb1201825",
+    "ttft/longchat-3-1024/10/1/raw/whole/chunk-1024/queue-1": "2054cdbb4fab7ba4f2d9ecd71070f99cea410b323a44614fca72e29bc330a9a1",
+    "ttft/longchat-3-1024/10/1/raw/chunk_pipeline/chunk-256/queue-1": "a5c09ae30d823dfde8910cbcaf598b8d60422f7b8a0db5253b66ac012af0c903",
+    "ttft/longchat-3-1024/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "f3b55b6008e651d0d78876fe40ea5ccca1db6d748a92be012194a11d414aaf3a",
+    "ttft/longchat-3-1024/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "5747a9ad8a3c74f7ae9bda673565a2832ede78de7a31375a3d7117ac6e46a83b",
+    "ttft/longchat-3-1024/10/1/uniform8/chunk_serial/chunk-256/queue-1": "02f2d8638a0ca262db4e7a345c6d8e97d1960404ac45023be498da45d908adc8",
+    "ttft/longchat-3-1024/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "4a4a72775a54a37127b78fc52c4fa9bfdbea6f7dcff91b2f85d6a48baacd4086",
+    "ttft/longchat-3-1024/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "f942f66695025e41c9de2abfdcadabe3527ea1c809f7d3fe6daad988e83fb80a",
+    "ttft/longchat-3-1024/10/1/cachegen3/whole/chunk-1024/queue-1": "b67f08cf64cf56fb904ff950d9be1702a0ca1fe0c79e1dadf7db7c4f095c70ac",
+    "ttft/longchat-3-1024/10/1/uniform8/whole/chunk-1024/queue-1": "da4b2e03dbe595dd4caf7f0d0a0389bf21f29109a2599f10cb6d3fad0c6bf6eb",
+    "ttft/longchat-3-1024/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "799c78e0cf718017e3e0d1ae632177743a0f28a436c2b8a7adb26d7811917750",
+    "ttft/longchat-3-1024/10/1/cachegen2/whole/chunk-1024/queue-1": "6263a16ee16c8f0093f99027751da06b00b7ba8ecd489a0fca84274b693f9886",
+    "ttft/longchat-3-1024/10/1/text/chunk_pipeline/chunk-256/queue-1": "09f102281c9112b4dc8e9dcf0256b169b0740275dfc0377497bd1f92e80d890b",
+    "ttft/longchat-3-1024/10/1/text/whole/chunk-1024/queue-1": "551a9bace7a51a6821e70dfc337bdb39b399ccf4cf989ae1a6e0cf81a25b8151",
+    "ttft/longchat-3-1024/10/1/cachegen1/whole/chunk-1024/queue-1": "0af66bad0b3e1861848e305144ad604d4128a004b61a4d13cdca25b75e6e5aac",
+    "ttft/longchat-3-1024/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "285fd35ecb980a2e39355c20c21d2db076551c5ea519ec7998ff1cea8f5a620b",
+    "ttft/longchat-3-1024/10/1/raw/chunk_serial/chunk-256/queue-1": "ac3f23041609d4fd0911b4b6bd65c3620a9ba64c6e4f21454efe8c8060f8fdc8",
+    "ttft/longchat-3-1024/10/1/uniform4/chunk_serial/chunk-256/queue-1": "94cde12293a426dded96e45f1ef627c93f188289601f6623b0ff05b9fbc9cd04",
+    "ttft/longchat-4-1024/10/1/cachegen3/whole/chunk-1024/queue-1": "7ba03e95a1a6914b4d3233dd6adef9219247c41a7683ae6c297112e550460568",
+    "ttft/longchat-4-1024/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "ee44574d9d476194d67f10d2d611778ec70cd00fdf0e6903959ff161127a25b2",
+    "ttft/longchat-4-1024/10/1/raw/whole/chunk-1024/queue-1": "152314811771682b9520676c485de84765d7d4d635e70f85da8187841686bb2a",
+    "ttft/longchat-4-1024/10/1/uniform4/chunk_serial/chunk-256/queue-1": "e59cd76cec89a183e61d62d8d0e1bf23b1616b0de4d06c2e42e522da93836419",
+    "ttft/longchat-4-1024/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "d8b95537225a4d280dd8d177c8d2ce03495760a1e0390557debb19a537ef86fa",
+    "ttft/longchat-4-1024/10/1/uniform8/whole/chunk-1024/queue-1": "a47d2d649c7878c753003db9753c931b074e855b75fab01db95097c4577fd637",
+    "ttft/longchat-4-1024/10/1/cachegen1/whole/chunk-1024/queue-1": "39b8df1670fa6671358446c71265d82e5cab0c4644e222cd9cc2a85ec2575df5",
+    "ttft/longchat-4-1024/10/1/cachegen2/whole/chunk-1024/queue-1": "87a6e80968574883fd7e34f45fb1ab52e1e0b405d204cf772afd94a07f6e7dd8",
+    "ttft/longchat-4-1024/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "e8d2fab912145a7e45a7234b9de698b8d36422d259590f43d789c229e2a5fccc",
+    "ttft/longchat-4-1024/10/1/text/chunk_serial/chunk-256/queue-1": "a1ea8651cc5787c7eb13331c64375bb628d4309953217404551858560e993b89",
+    "ttft/longchat-4-1024/10/1/raw/chunk_pipeline/chunk-256/queue-1": "253a544f7f80e831c71c8661dc9aa8150e3979ec5743bd6635b8f7d3eb7c8de2",
+    "ttft/longchat-4-1024/10/1/uniform8/chunk_serial/chunk-256/queue-1": "e319ad78fbc43a0cb72e8bedae1b31f6c0ad11dd2f57b13d08cea1b5be1e3801",
+    "ttft/longchat-4-1024/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "6099a9f497ef240818659602b6eff88d5fb781e1f4ed472743cf9c66221b042a",
+    "ttft/longchat-4-1024/10/1/raw/chunk_serial/chunk-256/queue-1": "cf02bbe6acf06d5623311d23812e74a1103c9b05d61572ac015c224546ec3133",
+    "ttft/longchat-4-1024/10/1/text/chunk_pipeline/chunk-256/queue-1": "c40d260aa0c9106709799d02cceac7c2d00075174761bd39afdcefae823b8e69",
+    "ttft/longchat-4-1024/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "dfcf978bd05a163f68759507fe6f3647bca83e35a498cc9a93ca819f4c9c292f",
+    "ttft/longchat-4-1024/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "d8ed1572564ace872a1870f89acac12d31de0536c706a9f7b440c37256261807",
+    "ttft/longchat-4-1024/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "b8637fdffc1a370b378c658269965106f6700d69b5b7c708652610162cd2a0b1",
+    "ttft/longchat-4-1024/10/1/text/whole/chunk-1024/queue-1": "e6b2d52ec5539b2a9353ff5152763166aebb7c8c1fb392fdb72b6c9ce0211e79",
+    "ttft/longchat-4-1024/10/1/uniform4/whole/chunk-1024/queue-1": "9ecea496eed9445ef4ae8e01b6db6ad8b4584f52d8ae0c5d8f9ad60ce32b31f9",
+    "ttft/longchat-4-1024/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "df16881c6289cb0f9dbf38778840c20cda4a08341a524e453d0e3df2244d1b6a",
+    "ttft/longchat-0-2048/10/1/raw/whole/chunk-2048/queue-1": "bbeefcaf58f9dffabd4ab54d557a0fc7cfc49540e1284264696358284aad4a0f",
+    "ttft/longchat-0-2048/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "d0cb2923e5285799dceeeada8b013eb5f7f0ebf0a853a7cfc9de972e3e8803cf",
+    "ttft/longchat-0-2048/10/1/raw/chunk_serial/chunk-256/queue-1": "4670aeedde4997f9d93659ecbf182d95fb2ad2ae4abd4a2a9fe1c4e47e0b2b22",
+    "ttft/longchat-0-2048/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "af3acd74662572983bf6da6e845243989737409adc2e9d1ef93a002ea6c57c28",
+    "ttft/longchat-0-2048/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "c2e83475f5ffb77b66092b4834472012ea93586657154409a812b8a229fc0ca5",
+    "ttft/longchat-0-2048/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "7229f18927658dada98830818560cc7951dce94f06b0852f3ca3bcef51b98e61",
+    "ttft/longchat-0-2048/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "5a9dc7a3451337d22077f3aa32b32f0c95c3637f3351bdcca17cfe02cf11ecf1",
+    "ttft/longchat-0-2048/10/1/uniform8/chunk_serial/chunk-256/queue-1": "8d3905fa60041abde9ce5f7255e8321d8e1683db87e5a0bbf5779314af3666ce",
+    "ttft/longchat-0-2048/10/1/uniform4/chunk_serial/chunk-256/queue-1": "6072e8dc1278675529a3d9b43f0fc08f37f7f4e0cdd9b95ecac8498d300d9506",
+    "ttft/longchat-0-2048/10/1/uniform8/whole/chunk-2048/queue-1": "22cf94dda636abf133f7cfc9b66a50ad4fa00c4d8e41a2d698dfc8d31a5824bd",
+    "ttft/longchat-0-2048/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "448e09c784cf7dc947014f146f17c299dc5866c72bbd01b44980d57b091c4d17",
+    "ttft/longchat-0-2048/10/1/text/chunk_serial/chunk-256/queue-1": "2802096632718849de842596c45d9619dae79f3ecd453ab1355deb126e72da64",
+    "ttft/longchat-0-2048/10/1/cachegen3/whole/chunk-2048/queue-1": "aa901726cef20f9b01637858cdf2e87f1a353c9a692bc98156b1d2a0b70d2241",
+    "ttft/longchat-0-2048/10/1/cachegen2/whole/chunk-2048/queue-1": "b79e33d880eb3af0295e56b892116009624280bf24740eb4a2ffe240043b2c27",
+    "ttft/longchat-0-2048/10/1/text/chunk_pipeline/chunk-256/queue-1": "46766d84f5d493d023edfcfcb7b84c460810e425f13a763668dc744c482d9df7",
+    "ttft/longchat-0-2048/10/1/cachegen1/whole/chunk-2048/queue-1": "97e14098e3d6170c21ff9a8d8cd70ff5eb3363d313fee513fff8631325133a87",
+    "ttft/longchat-0-2048/10/1/raw/chunk_pipeline/chunk-256/queue-1": "6730913fd926fee25b18800e2fe18951dfe4c38976d46575ea6153cf59c59bb4",
+    "ttft/longchat-0-2048/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "3e9d9dcb980f4ac224341a76e831e1d4386bea5b269da38e13dfc8dddd556203",
+    "ttft/longchat-0-2048/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "231baa0ed377f23ee333bab44912b206443231dd341cd5b36008a7b6a14356d6",
+    "ttft/longchat-0-2048/10/1/uniform4/whole/chunk-2048/queue-1": "2788d86739665d4e186440a0c356ee8e8919619c9f5cd197c33d68df19725569",
+    "ttft/longchat-0-2048/10/1/text/whole/chunk-2048/queue-1": "0b3d98723b2bfd637a841bf678a20fdf35eb4762858074cbddc7a93892161e09",
+    "ttft/longchat-1-2048/10/1/raw/chunk_pipeline/chunk-256/queue-1": "25b09771a20308d88a7040082bf70aceeae26acc047fd25890f9124233845926",
+    "ttft/longchat-1-2048/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "44d69615000017e343d5c12cbac667263f2b345384c6902a25da3b18616bdc28",
+    "ttft/longchat-1-2048/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "3cc620d9e5a9835a962472c133becb904c777f382fbb2dd93c06a77fafb78d23",
+    "ttft/longchat-1-2048/10/1/uniform8/whole/chunk-2048/queue-1": "f44276fb067a169a4f004051f0c260b9d7eaf226df7b2925b64a91409fcdb7c0",
+    "ttft/longchat-1-2048/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "8a5679a5fcc30dce06357fbdb944dee7c73e3c7f4ab29d89239f3f8b011c83b7",
+    "ttft/longchat-1-2048/10/1/cachegen3/whole/chunk-2048/queue-1": "c47991f8c48d0853a1fcee447b8e753a357f7782527bab3ec78396f3d4285fe4",
+    "ttft/longchat-1-2048/10/1/text/whole/chunk-2048/queue-1": "88d579362ad477e0323b5eaeefa2ce76cebe14f61cbcf876c46de69da1a69dce",
+    "ttft/longchat-1-2048/10/1/cachegen2/whole/chunk-2048/queue-1": "b9996ff0a7862abcf117388ea69e372e18bca89a58ce6505d8ff83f63ce1da5c",
+    "ttft/longchat-1-2048/10/1/raw/whole/chunk-2048/queue-1": "5e373de0e9cd955f95390d7449440f7215eb28e8742dd5de448728230de39c78",
+    "ttft/longchat-1-2048/10/1/text/chunk_serial/chunk-256/queue-1": "592d4128c4698e78a3d883bd49d110ac03f3362671c1cabee7297fc2ad463f22",
+    "ttft/longchat-1-2048/10/1/uniform4/chunk_serial/chunk-256/queue-1": "a21129924bb41c63d94435ccc64494227efd2f25b3207dd1c4b33a1dfe959c73",
+    "ttft/longchat-1-2048/10/1/raw/chunk_serial/chunk-256/queue-1": "344f6accdf52b040e0004f7fdc6e2e46bb101222863d527af956988c4df57eea",
+    "ttft/longchat-1-2048/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "d6b00baa29f5116887cd24715505f0d223fc0080f81c163f99884f573396e8a6",
+    "ttft/longchat-1-2048/10/1/uniform4/whole/chunk-2048/queue-1": "ea42c1e84595fd35882da49223cd00f1a3b8eb218c4945a73c03580762332bd2",
+    "ttft/longchat-1-2048/10/1/cachegen1/whole/chunk-2048/queue-1": "0b7a101a26f2e0c9bc9aeea1779aa80d2d69f99637db553518e8856ef929b9d2",
+    "ttft/longchat-1-2048/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "6a21444fe8b68e0fae1ff20bab955233fb55b8af7f6c2dcaab630feae3760211",
+    "ttft/longchat-1-2048/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "13594744f1ac5db69f87efa2d73c2e09ca182244f65c3d1bb097563dec80a093",
+    "ttft/longchat-1-2048/10/1/uniform8/chunk_serial/chunk-256/queue-1": "0dbc9c09a365514a6b6931d69bba2a616dac991e6cc559ccb46dbb27cb18f6e3",
+    "ttft/longchat-1-2048/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "353041ade39446f1a57cc6c5a9955b925c35821837efca940927c20ee9e44a66",
+    "ttft/longchat-1-2048/10/1/text/chunk_pipeline/chunk-256/queue-1": "dba59e2c81969a18316a8a899dbca78dbecedb18505feb4c57f961342044bf25",
+    "ttft/longchat-1-2048/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "232e402db2a0f7e13cec8fae3f3b02d24fad956d2a292368253e7cde21270b56",
+    "ttft/longchat-2-2048/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "009661ddacc86b054c0d9d33ff65ef0bb6c0ab2fab6a0313b29f48910be2166f",
+    "ttft/longchat-2-2048/10/1/raw/chunk_pipeline/chunk-256/queue-1": "cf3ca036211ba16ab4904c01f4083f0ad45986239aba4af71461e7be5da21bf7",
+    "ttft/longchat-2-2048/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "e300c739f37beeabd5af1a08a6f50720d3cbba0624afabc46f1421a9eeafe4be",
+    "ttft/longchat-2-2048/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "89fc67ef22e8b6eff2711f31a77e4eb8a5743c450f737880de5921b3a63ce757",
+    "ttft/longchat-2-2048/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "3909f80569351f83c97125a34f8dfd9a558c64168bd2d4ceaef2a32b0fbdc915",
+    "ttft/longchat-2-2048/10/1/cachegen2/whole/chunk-2048/queue-1": "dcc4959bedfb5436391af4510871b0c7a3c6316da15f2338c58aa6f498f1e6b7",
+    "ttft/longchat-2-2048/10/1/uniform8/whole/chunk-2048/queue-1": "9979a125d4f6f92a4c9915842ec4841e55111eb67d3468169dd66960dfc1bf36",
+    "ttft/longchat-2-2048/10/1/uniform8/chunk_serial/chunk-256/queue-1": "d3958be1d67bdb8205553cba39eac039c77063469f64bc5a4a0d69cd4438aeb4",
+    "ttft/longchat-2-2048/10/1/uniform4/whole/chunk-2048/queue-1": "745b648da393a495ab350eec19e65980b908735b931ce6da4b5ccbd12562e0b0",
+    "ttft/longchat-2-2048/10/1/raw/chunk_serial/chunk-256/queue-1": "2cee9f6797c49c9e2b560b78b7792ea25cc4958a1ef1de5b610eb1ed7d621c5c",
+    "ttft/longchat-2-2048/10/1/text/chunk_pipeline/chunk-256/queue-1": "c175953862417ffe9f7071caaa4986ae42546ea70e772f1962c08f5f4757f981",
+    "ttft/longchat-2-2048/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "cf2828a6ddfe63de72a7b4f4b3f0fe8b7667e5704160385d1d7c2dfc5f8a3097",
+    "ttft/longchat-2-2048/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "94f7ddfbd3297a8ced52bbba278a0405abf658572ec2aca5089ca5283144753a",
+    "ttft/longchat-2-2048/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "a1cc35725983847f2642a25110624c43af56bb3e0e85053053a474be498c7865",
+    "ttft/longchat-2-2048/10/1/text/whole/chunk-2048/queue-1": "0c7d493d610af01f6c52049a906bfc2e600a1ba4e0f5bfbf23c8d048f3abc1c7",
+    "ttft/longchat-2-2048/10/1/cachegen1/whole/chunk-2048/queue-1": "22693c88b2ad2f629f0cc0f761750504f4a265fab3de0babc570a0d7694da0bc",
+    "ttft/longchat-2-2048/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "9e8644526b87ee6ed83b6184b9cb70b6b1b7282f762b38d0390ee5db9ea17567",
+    "ttft/longchat-2-2048/10/1/uniform4/chunk_serial/chunk-256/queue-1": "8f033430273f625cb844f350095fc52c2f671a56c04645e4ac58212d513be284",
+    "ttft/longchat-2-2048/10/1/raw/whole/chunk-2048/queue-1": "27e292e4431933ecdd10ab58f88e86f0cfa834383755635b60a973dd8f299646",
+    "ttft/longchat-2-2048/10/1/cachegen3/whole/chunk-2048/queue-1": "c66a141c2e4d242fbe5adf5d87c357343417f2506e9c974f55dd5e54d5120a4a",
+    "ttft/longchat-2-2048/10/1/text/chunk_serial/chunk-256/queue-1": "8d38469ef432a0fa03e8d2c3209cb22f25f5976b8a44eb3dc7ca4d3dfb264fbb",
+    "ttft/longchat-3-2048/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "29e88763f3b6ecc6192a73535e4c895599b779e1617268010e9ec49a03f6dc8f",
+    "ttft/longchat-3-2048/10/1/raw/chunk_pipeline/chunk-256/queue-1": "15ec0a8b52f9766f521b657ff211ee96ef27e992f6d69e8d6bb7ccafeb532bcd",
+    "ttft/longchat-3-2048/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "88119ea1505b85980b8469afc23ca6a4ff989d9ed0d65d2cd2df7fc06ecafd3f",
+    "ttft/longchat-3-2048/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "28dbff5a68dd6c653cb90e2a02dc801735cb9836e000d349a8f8d34e0072ceff",
+    "ttft/longchat-3-2048/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "816334595f5d590695b4e4a9677a4c73fef2b26f3a184c93872765cca4e98bfc",
+    "ttft/longchat-3-2048/10/1/uniform8/whole/chunk-2048/queue-1": "d73494cf815112496e00a8c6a4a680ef1002338fdf3523665bc071b200c0e324",
+    "ttft/longchat-3-2048/10/1/raw/whole/chunk-2048/queue-1": "2a4ed8e3bbadcac3274c177ca80c4c27df81bbb812708f2e082b26818305a619",
+    "ttft/longchat-3-2048/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "05b372a6346a88305abe86af6472138907bd85f24dbad4421a76b73140bf285a",
+    "ttft/longchat-3-2048/10/1/uniform8/chunk_serial/chunk-256/queue-1": "5287acfc795c5d263669c2770982963f9e21a35aa9b54eb4e33f9b2207ebda5d",
+    "ttft/longchat-3-2048/10/1/raw/chunk_serial/chunk-256/queue-1": "beec846dfb307f57980026a5ae519c3e71f72dd905e24ad635d383ccf4f035c7",
+    "ttft/longchat-3-2048/10/1/text/chunk_serial/chunk-256/queue-1": "bff4f7af057079c0ae6eec2fd23a5376bc3032919cdeba0fd5b2e049c8286491",
+    "ttft/longchat-3-2048/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "a153f061b13776b4adb7eb76354f857ed0b3df7ba120193e3f9875e1d6b3e537",
+    "ttft/longchat-3-2048/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "d5ffd4e37d7ac8468fba80bf924683cdb17a96a8008b75b4a0d0fcc452afbfca",
+    "ttft/longchat-3-2048/10/1/uniform4/whole/chunk-2048/queue-1": "18874aa01a9992267694deb6ee3f4c98b8633efa5a0f80aa44b2807a8e19686c",
+    "ttft/longchat-3-2048/10/1/cachegen3/whole/chunk-2048/queue-1": "3b04d4789ba3640346476a1414df6d3f48bb79860dee7145f6ce3132cf7467b6",
+    "ttft/longchat-3-2048/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "fb968d8692a2f6a7338bcede80838c9f082a1903534614e214f3b0df94e5b18a",
+    "ttft/longchat-3-2048/10/1/text/whole/chunk-2048/queue-1": "2f597906f38ae36c862de7a17d386ca43b3edbe01d98b5617438266fddf82fab",
+    "ttft/longchat-3-2048/10/1/uniform4/chunk_serial/chunk-256/queue-1": "a72a4f4f44aff9aa32b8dbe603e2333bdb266a06ab716b2e8ecd505689965fb3",
+    "ttft/longchat-3-2048/10/1/cachegen2/whole/chunk-2048/queue-1": "909ffb941f12e4a9299ff58c58cd06043b06cb9eb9dabedcc1e6bf525490ee37",
+    "ttft/longchat-3-2048/10/1/text/chunk_pipeline/chunk-256/queue-1": "4a3e8f58077d9818701e70a53f01ede84c477c71bdb1d02202d25f57ad5f8297",
+    "ttft/longchat-3-2048/10/1/cachegen1/whole/chunk-2048/queue-1": "85b85d5895ce776f5916fd8e655c80fb47c313a3f2e258c0b44e75765ab20043",
+    "ttft/longchat-4-2048/10/1/cachegen1/chunk_pipeline/chunk-256/queue-1": "c2a675bacd574870a0a1fd42cfd0685548c3196c3ffd9b54809503f4680b453e",
+    "ttft/longchat-4-2048/10/1/cachegen3/chunk_pipeline/chunk-256/queue-1": "0f1692e7844c634ccceec125139a04a4b8fade6f5f7ec17bd14549c7a195cd65",
+    "ttft/longchat-4-2048/10/1/uniform8/chunk_serial/chunk-256/queue-1": "33ea00ed7e4f6428a75db7190168b3c26bda7ef0e67bc69a3f165adc9126cf16",
+    "ttft/longchat-4-2048/10/1/text/whole/chunk-2048/queue-1": "aca8b2453174a7b47f11756631a9e87df956b398d44750c97317eb143f847b7a",
+    "ttft/longchat-4-2048/10/1/cachegen2/chunk_pipeline/chunk-256/queue-1": "bb5c3bbaa5986d618746daba410c398a7166128c5755d045a24bc0ea6761483c",
+    "ttft/longchat-4-2048/10/1/cachegen1/whole/chunk-2048/queue-1": "15eb4570b44cd5b36a564e722e5253a52c8cc25058a831421b13de7329b9c211",
+    "ttft/longchat-4-2048/10/1/cachegen3/whole/chunk-2048/queue-1": "7c0b63b657c839d5cb597decd27c20ae5040a0c98fde9bdef3b211d936e3b916",
+    "ttft/longchat-4-2048/10/1/cachegen2/whole/chunk-2048/queue-1": "0e881ed59d1aad99561e305b17523967bae97e5a735c2533ad2ad0c950afd06f",
+    "ttft/longchat-4-2048/10/1/raw/chunk_serial/chunk-256/queue-1": "57ee4ed17e9da8489c8f18fa0cdc42a858c8fcc7431c1b0cb9b6f15254f974d3",
+    "ttft/longchat-4-2048/10/1/uniform8/chunk_pipeline/chunk-256/queue-1": "1e61c778bc83292508e0f106084ee813aac1ba2a4fd543322f5d17757f106cdf",
+    "ttft/longchat-4-2048/10/1/uniform4/whole/chunk-2048/queue-1": "ad6f0193f5327e2e135317f7e05dc7a06f324ecd0210c72f407a710ce5aba6d3",
+    "ttft/longchat-4-2048/10/1/cachegen2/chunk_serial/chunk-256/queue-1": "b81c294af0a76fc0e798cf03f7e1b7cdb7bf72dbe1906128a31451d37b8cd4eb",
+    "ttft/longchat-4-2048/10/1/uniform8/whole/chunk-2048/queue-1": "d87eac18e6e36b8d0aac3e6239597ddfa3d9d156e2a60f1bbb43fbab6d8068fd",
+    "ttft/longchat-4-2048/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "8a03557f448372c714037a26ed97ce8e0cb706dc9db81c3a408d1441278927fe",
+    "ttft/longchat-4-2048/10/1/text/chunk_pipeline/chunk-256/queue-1": "9efc72b5bc231e4121e732d0796ad64897e7b91663961afd9cbb4ea0f2eb1bba",
+    "ttft/longchat-4-2048/10/1/raw/whole/chunk-2048/queue-1": "8037d3cb7e9a6f80bfd3a16308842a7d1c7836741287a38a2db0786b656a8466",
+    "ttft/longchat-4-2048/10/1/text/chunk_serial/chunk-256/queue-1": "9cd33d2718b6891dae9629af8dff0e772d404ba505487e2651330a48f2b2d5f1",
+    "ttft/longchat-4-2048/10/1/uniform4/chunk_serial/chunk-256/queue-1": "6f0791d9a9faf307544d29677a6d705195660df54844fff20d50b618c4a50542",
+    "ttft/longchat-4-2048/10/1/cachegen3/chunk_serial/chunk-256/queue-1": "b5fedda7817dd02bbd76163ad9d316a46257aa23da031614d91b06cb653244ed",
+    "ttft/longchat-4-2048/10/1/raw/chunk_pipeline/chunk-256/queue-1": "bcc1eb67873ac4f31b346c39bab5f994407ef0f24bec0689e1141181d4c07df1",
+    "ttft/longchat-4-2048/10/1/cachegen1/chunk_serial/chunk-256/queue-1": "d67b0993fab0498ee9be0a9ddae9e8777a4ed474462d64df11827d95577b64cb",
+    "ttft/longchat-0-4096/10/1/uniform4/chunk_pipeline/chunk-256/queue-1": "27e6e38363549eb5ef715552b041421daca75e3d9a43aa63bdee3482077a91a2",
+    "ttft/longchat-0-4096/10/1/cachegen3/whole/chunk-4096/queue-1": "4ad462d475e0fae86f3da7e56eae17841365ee36dac062062888374092da929d",
+    "ttft/longchat-0-4096/10/1/text/whole/chunk-4096/queue-1": "f760add7f07de4efd64309de6f40d7736299c5b6ed58a812ee31f7e804bb8703"
+  },
+  "prepared_before_resume": {
+    "pending-prepared/ttft/longchat-0-4096/256/text/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "text",
+          "encode_seconds": 0.0034456849098205566,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1152
+          },
+          "file": "0.bin",
+          "sha256": "116f6b505a1ec6a1570bca461c07fe73ccf813025610c415546eb58e4376c1d8"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "text",
+          "encode_seconds": 0.002625897526741028,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1370
+          },
+          "file": "1.bin",
+          "sha256": "9de580f633ceb314836af9e162d7f6a3bfe6e495d53146628b3c5124a841749e"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "text",
+          "encode_seconds": 0.0024799704551696777,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1277
+          },
+          "file": "2.bin",
+          "sha256": "6c4827e4c78823e28b863547a17a000e327b4c5b210286ad669fa8c64f7c6777"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "text",
+          "encode_seconds": 0.0024367570877075195,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1225
+          },
+          "file": "3.bin",
+          "sha256": "62d05a2bb53bf656fa1185420c7587f157fd30038cdeb6d913ed0b38959f1628"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "text",
+          "encode_seconds": 0.0024188756942749023,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1274
+          },
+          "file": "4.bin",
+          "sha256": "2af6f44052260940977e988e1dd3e257ddeaf99ec90701370617f678d6963737"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "text",
+          "encode_seconds": 0.0024968907237052917,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1420
+          },
+          "file": "5.bin",
+          "sha256": "a29b8a63eda3d65cd852ecde0f097101b2a6286b697f3a7dfe060bf9705a03ad"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "text",
+          "encode_seconds": 0.0024156346917152405,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1320
+          },
+          "file": "6.bin",
+          "sha256": "718ebcadb53f19c7a982e841fcfdb2d1c0651e6c0e1d7be523b1e8b39d6d6706"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "text",
+          "encode_seconds": 0.0024300366640090942,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1340
+          },
+          "file": "7.bin",
+          "sha256": "d56bfdff34ef3e346b672d2f1bb16b750687e3d02a1d2b69b587817d6d9cd9f9"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "text",
+          "encode_seconds": 0.002567887306213379,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1347
+          },
+          "file": "8.bin",
+          "sha256": "46a492c061179510298d1aea7f9946932f130eed593137d9aaaec2d607c8418a"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "text",
+          "encode_seconds": 0.0028926506638526917,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1310
+          },
+          "file": "9.bin",
+          "sha256": "14f7099336d922f9ede90b175ecdbfb883000698bf1312fc75bd798037abcbb0"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "text",
+          "encode_seconds": 0.002982504665851593,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1350
+          },
+          "file": "10.bin",
+          "sha256": "17642ed89dc9cd182a4bcbf3bcbbdf600d958771435094bd05a3a4f5da217a60"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "text",
+          "encode_seconds": 0.002843230962753296,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1282
+          },
+          "file": "11.bin",
+          "sha256": "25929a3fc02fa08d85a6b50552369f169f923f4edf595b10ae230dc198a504ec"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "text",
+          "encode_seconds": 0.0028744712471961975,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1392
+          },
+          "file": "12.bin",
+          "sha256": "bf2f89eacbefc72f439872b64b1cdcd873ee69c8e9b02386414e50b80eda07d7"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "text",
+          "encode_seconds": 0.0028190240263938904,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1277
+          },
+          "file": "13.bin",
+          "sha256": "af1805385a95f111273b920bb5f9f3e886db6294d3857643f1e79f59450f7807"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "text",
+          "encode_seconds": 0.002877049148082733,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1394
+          },
+          "file": "14.bin",
+          "sha256": "ceaa896edaa31fedbceb078f70073381820f07e453ca635247704bfe8ee053df"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "text",
+          "encode_seconds": 0.0030095651745796204,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 1340
+          },
+          "file": "15.bin",
+          "sha256": "8533ad68c481ccd55b16fdfa986aee36267f5350bff6f4fb7c7c843cb5faf829"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/raw/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "raw",
+          "encode_seconds": 0.03835868835449219,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "0.bin",
+          "sha256": "2f3f5a665a3b91f9defff29c18adbed48dcbaaab6679ba3a1ce7e343fb7179a2"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "raw",
+          "encode_seconds": 0.03489311784505844,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "1.bin",
+          "sha256": "aa86d5b158bcd91d87787bea7024dce96d27b75155c45837e251c5e001f1ec57"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "raw",
+          "encode_seconds": 0.03415948897600174,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "2.bin",
+          "sha256": "500b4b9d8b980edb9ce4abda748b04ce00017d2acb0a77fc64eb11984cd43e2d"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "raw",
+          "encode_seconds": 0.030344344675540924,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "3.bin",
+          "sha256": "6e99be7f32d66c3f64dbab4ae74e640a4a119e016feb279785ed099271f9a432"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "raw",
+          "encode_seconds": 0.03472180664539337,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "4.bin",
+          "sha256": "a27cf3de3c5bad8921fa38f38f80d82ca0f7a59753671b964b3e1f738ebea5ed"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "raw",
+          "encode_seconds": 0.035286396741867065,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "5.bin",
+          "sha256": "a8f3d90e335249fe809e306e8b5b01061c4ab9d34d5dea4161c7ed7204a252cb"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "raw",
+          "encode_seconds": 0.038550086319446564,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "6.bin",
+          "sha256": "571783570bb918663ac83a774b86b683ae15e3814ff3bbabfcbb58c6f7b97968"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "raw",
+          "encode_seconds": 0.041153281927108765,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "7.bin",
+          "sha256": "96b67d56b90dcef4c0d5b132bbc07016cbb6279cbf66573f9d041561ae2b5051"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "raw",
+          "encode_seconds": 0.041449256241321564,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "8.bin",
+          "sha256": "77b29c0e491d77d958569061ef692f4bd0c688e5e08827f980e59e31e8c67bf7"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "raw",
+          "encode_seconds": 0.0484294667840004,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "9.bin",
+          "sha256": "cf8dfed27384f717a684e3c7d3734ccd1997c94f561dc9191e36879d4162c595"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "raw",
+          "encode_seconds": 0.0894148200750351,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "10.bin",
+          "sha256": "66cbf997b3bb69d053f4972a6886c8527a7f6a6f60ce261bcb4ceb9244d5bdb4"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "raw",
+          "encode_seconds": 0.08864156156778336,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "11.bin",
+          "sha256": "013e8c2c8d9c2367396a9a8c9c77b55487bda7962f0f761476c183b089a3df07"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "raw",
+          "encode_seconds": 0.08608125150203705,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "12.bin",
+          "sha256": "f3baa4cb7d76e03f5689ab5d31c9c5bcf2a94f618bd3d09e5e05dfa4b7e3dc02"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "raw",
+          "encode_seconds": 0.08525078743696213,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "13.bin",
+          "sha256": "6f34c9d8d6d08fb1a31c6278e427238b41c1927df4d7073094e5995344b78b0f"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "raw",
+          "encode_seconds": 0.08701317757368088,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "14.bin",
+          "sha256": "1ec1deb6150ffcb73cab5bff6ea06628446b344f36235bcc9e3aa138c6847eff"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "raw",
+          "encode_seconds": 0.0910830944776535,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 33555612
+          },
+          "file": "15.bin",
+          "sha256": "502eb20abcc899fd865f73b3fe8f1f0eaad6a9dba72bfb436e0656be5b1777fa"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/uniform4/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "uniform4",
+          "encode_seconds": 0.011324726045131683,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "0.bin",
+          "sha256": "2b47571e18468a7740580575acb4ba5c2cd9243304590fb40eea5f0bf8826481"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "uniform4",
+          "encode_seconds": 0.008869215846061707,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "1.bin",
+          "sha256": "2b5b29179659c5d536afa50ae16c4bcc4d93dd4961f9d5abe31b1b7daca92e74"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "uniform4",
+          "encode_seconds": 0.008939228951931,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "2.bin",
+          "sha256": "1fe36b2a0460939c1536d1704e1f29f6abcadfa6cbd4725e6a23f3a04771304d"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "uniform4",
+          "encode_seconds": 0.0103440061211586,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "3.bin",
+          "sha256": "68b655c80b316694e08f88c96ed6b5771985d3fdcd40dcd1ae112dbfe375fac5"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "uniform4",
+          "encode_seconds": 0.010024428367614746,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "4.bin",
+          "sha256": "57dc417a4652a681b5ac9aa8393ddeca9025c0e59ac4684578ef2cccdb8e4f55"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "uniform4",
+          "encode_seconds": 0.010842040181159973,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "5.bin",
+          "sha256": "d346b2eed8cd3567fcc837d4fd820c05d7dc2cde076c0282ffdac73b91df6837"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "uniform4",
+          "encode_seconds": 0.01170235127210617,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "6.bin",
+          "sha256": "932d243dfbc06d1a0233f281fe3c8b4a1cfb2dbcddb3333dd73d7fdc1e825936"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "uniform4",
+          "encode_seconds": 0.011190995573997498,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "7.bin",
+          "sha256": "975cde21878376ebc9eae451d785344a5b53b0c2092c2418dc406bf117926cb3"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "uniform4",
+          "encode_seconds": 0.010781385004520416,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "8.bin",
+          "sha256": "ea9ffaec271f1f9456e0fedba92844cea0df595a7498bc0d66e654370aa01e02"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "uniform4",
+          "encode_seconds": 0.010352283716201782,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "9.bin",
+          "sha256": "c359f39b189681034ffe86802ebcbedf41224e8de3e655da75c69d83be826ce6"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "uniform4",
+          "encode_seconds": 0.010160475969314575,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "10.bin",
+          "sha256": "67091e4a0942792f3eacf247fee1ba2dd9651084d62456e6b36381e468c1a371"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "uniform4",
+          "encode_seconds": 0.011621221899986267,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "11.bin",
+          "sha256": "83a7280b2ad5e0cd630f6aa4c6ab09e2b6d979a53a17eeba02907b33578729b4"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "uniform4",
+          "encode_seconds": 0.01027899980545044,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "12.bin",
+          "sha256": "ea2ef6d54d2b9189c227d13a71d945da4e3cb38eff63968a9c245b2ba682f2c1"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "uniform4",
+          "encode_seconds": 0.010256454348564148,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "13.bin",
+          "sha256": "6b6d4ec4616b35a008a73238fafaaf63356648750f576c76597338f2279a33c8"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "uniform4",
+          "encode_seconds": 0.012558795511722565,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "14.bin",
+          "sha256": "452a4fb15ccdf237b7590b0d10ebe8bd696bb09a15cb71b900574e06ca313c79"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "uniform4",
+          "encode_seconds": 0.01300310343503952,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 8422872
+          },
+          "file": "15.bin",
+          "sha256": "9d2d8bcf414f398e33ff79dcaf754d8575c3e5e7582ef8208737f6d70e7e6fbc"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/uniform8/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "uniform8",
+          "encode_seconds": 0.019640974700450897,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "0.bin",
+          "sha256": "6cd6336e41dc08b278072edcf8fb6e330d72229826e531a05f95ed742dd05051"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "uniform8",
+          "encode_seconds": 0.01992204785346985,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "1.bin",
+          "sha256": "c4fd75e498156ef64f580e0776a96650a11ffea2a15c96204be6361c2d6bae3a"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "uniform8",
+          "encode_seconds": 0.01762576401233673,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "2.bin",
+          "sha256": "033463ebdbc12f7b5c2af1359610b3a556cdea70596f5b83119891aa29e6639f"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "uniform8",
+          "encode_seconds": 0.01661357283592224,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "3.bin",
+          "sha256": "145aab087b5599654a6686fba85bb999168ee5b39f0d06613f7f54eaa6b83bae"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "uniform8",
+          "encode_seconds": 0.019729919731616974,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "4.bin",
+          "sha256": "bde6b0dcd88717e5b0d3f36139ff41c0a0c5e7a7cbb4eae2d40596138374d084"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "uniform8",
+          "encode_seconds": 0.026677124202251434,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "5.bin",
+          "sha256": "e948bd9e5e7feba2d918669be63f768731fb6bb8377d087fcb6f4150c5d81acf"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "uniform8",
+          "encode_seconds": 0.03495755046606064,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "6.bin",
+          "sha256": "ef2d538d61408e1da931fe7bccf357763c73847c20ef36fecbd88b7947bbf61f"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "uniform8",
+          "encode_seconds": 0.02334515005350113,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "7.bin",
+          "sha256": "b8e183b7c601f0116e3a1d09f37ffd5871a8392f475e5d4dfe7e930cc5615839"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "uniform8",
+          "encode_seconds": 0.02612859010696411,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "8.bin",
+          "sha256": "f97260d80c708125db2cbb022f10f5b30ff252c6c7f61fe84d2eb6d1d1094ad8"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "uniform8",
+          "encode_seconds": 0.04000156372785568,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "9.bin",
+          "sha256": "98227f28f177ce1ef03c61202481a7d914ef868f01a9d7917eaac7a782e0bf97"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "uniform8",
+          "encode_seconds": 0.02241475135087967,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "10.bin",
+          "sha256": "af47778037f5b2ecbc96ce4243f38bffbb5043ffc836991f4982c4abe8c3a948"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "uniform8",
+          "encode_seconds": 0.02653854340314865,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "11.bin",
+          "sha256": "1b7e7b85bafab0f5a57a78ded194bc34548d07692410c0927ce2d5163cf64a37"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "uniform8",
+          "encode_seconds": 0.02769465744495392,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "12.bin",
+          "sha256": "c9573307d81398423fb1fb463c6322be10c875b16db70c24d2f0ca0ab6b725b6"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "uniform8",
+          "encode_seconds": 0.028242327272892,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "13.bin",
+          "sha256": "8ee8d2e2652b0d4a25c30df08571b21d1ae380f275a360a5b532e73be3cac6a3"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "uniform8",
+          "encode_seconds": 0.027229629456996918,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "14.bin",
+          "sha256": "b328d7a0be1bc2868595c0370e03ee73323cb79b105463d69ef1b98747cd22d9"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "uniform8",
+          "encode_seconds": 0.02686932682991028,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 16811480
+          },
+          "file": "15.bin",
+          "sha256": "c2f86190286a533afa28180b5812af0e9500204251adf6316f2b9fdde840af9b"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/cachegen1/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "cachegen1",
+          "encode_seconds": 0.022812992334365845,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6661310
+          },
+          "file": "0.bin",
+          "sha256": "0de7c72720b06a7365b344741c704da51fc6dbccfed04b4a9b69a36428ed356d"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "cachegen1",
+          "encode_seconds": 0.01367536187171936,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6462777
+          },
+          "file": "1.bin",
+          "sha256": "5860f1bfa2a768e7137d6e7eeef5c2a95c14c5f1d142a3bd7f5f04ff7cff2e4e"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "cachegen1",
+          "encode_seconds": 0.009239636361598969,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6506411
+          },
+          "file": "2.bin",
+          "sha256": "39c70a29cf950c6e2711ee486bc16d86c103737a98ef722dbbebd2e386fb8a59"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "cachegen1",
+          "encode_seconds": 0.010224737226963043,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6459586
+          },
+          "file": "3.bin",
+          "sha256": "85b6e1b6ebac42983ec87a56debd36a64d68c4ed7416bf8c2894856a591303de"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "cachegen1",
+          "encode_seconds": 0.010814666748046875,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6484630
+          },
+          "file": "4.bin",
+          "sha256": "ea1224116396b78da123329a4e0e7f611df90941c3dabe59f48eaf2799dbf149"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "cachegen1",
+          "encode_seconds": 0.01144951581954956,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6415523
+          },
+          "file": "5.bin",
+          "sha256": "2d86fa7f369f9910840175962380e7c96c79f35357a3aa802f0f112cd7cb9427"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "cachegen1",
+          "encode_seconds": 0.008683010935783386,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6460541
+          },
+          "file": "6.bin",
+          "sha256": "9a5c0538ba27a451b9b1a809f8e3e5e17153af892236d70d789605d0dc489b85"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "cachegen1",
+          "encode_seconds": 0.010260321199893951,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6382750
+          },
+          "file": "7.bin",
+          "sha256": "321c853365cf1fe8bc01755623b1c7e5cd6dce26c12ac252556892296831f690"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "cachegen1",
+          "encode_seconds": 0.010365530848503113,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6411699
+          },
+          "file": "8.bin",
+          "sha256": "2dbc706aa6035de89d59e855c79033e9b3498448afd1b0e3e33866b8c4f00f8a"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "cachegen1",
+          "encode_seconds": 0.010231778025627136,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6435829
+          },
+          "file": "9.bin",
+          "sha256": "d418c6db5d7f4a3a8cddff79f36a9795011b8d47475b8321b06505634a753300"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "cachegen1",
+          "encode_seconds": 0.009657509624958038,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6468691
+          },
+          "file": "10.bin",
+          "sha256": "ff80f87fb67a3ae138dfd8e0c5c5dc102f666e92be8eb32483abff90358229d3"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "cachegen1",
+          "encode_seconds": 0.008584335446357727,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6438621
+          },
+          "file": "11.bin",
+          "sha256": "c7dca75f6a90595167e7b1e7d2d7a7c5e60629a099e445abcad02eb1af368705"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "cachegen1",
+          "encode_seconds": 0.008913271129131317,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6407674
+          },
+          "file": "12.bin",
+          "sha256": "46e6bb9e3e6e1e479c82a80bfd4e159a0277331223272b6fe0e937a96fdd1d05"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "cachegen1",
+          "encode_seconds": 0.010799899697303772,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6458043
+          },
+          "file": "13.bin",
+          "sha256": "643bf33eb03a7e56cedbb3449acaf15ad789e77f9f713359648275a2afb63607"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "cachegen1",
+          "encode_seconds": 0.010543979704380035,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6442223
+          },
+          "file": "14.bin",
+          "sha256": "6ea2730288e57e79fa1a321decd6c0114a4c7d9af62c7dca0f3fd4f194086262"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "cachegen1",
+          "encode_seconds": 0.01151343435049057,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 6503223
+          },
+          "file": "15.bin",
+          "sha256": "53057b2e0523ff1e55c8fc3ad6cd41c312b7a8d298784d4091ab04ff222b1a35"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/cachegen2/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "cachegen2",
+          "encode_seconds": 0.024239830672740936,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9704196
+          },
+          "file": "0.bin",
+          "sha256": "2304dc2f0346ce79e613feab09bc9907620a95fd2a04741688f31257ad77e00a"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "cachegen2",
+          "encode_seconds": 0.010797366499900818,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9490259
+          },
+          "file": "1.bin",
+          "sha256": "bee9718e835fc68eef62fdbfd7eaf6cf90f1fae3aa3eefc4bffb05e7299c7741"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "cachegen2",
+          "encode_seconds": 0.009919822216033936,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9536202
+          },
+          "file": "2.bin",
+          "sha256": "83517430cb9631e1e8c9275df87c957c28c22e0a4f9cae931be348e9b1034b15"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "cachegen2",
+          "encode_seconds": 0.009867534041404724,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9485862
+          },
+          "file": "3.bin",
+          "sha256": "d4ea927b45925afb34e90e755057da137dffbc9c228fd5786083838663c09c47"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "cachegen2",
+          "encode_seconds": 0.012435711920261383,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9514868
+          },
+          "file": "4.bin",
+          "sha256": "324568f77544a6de9e98afd6ac7d1cea064d1798353553b1b21fa0c6f7107e88"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "cachegen2",
+          "encode_seconds": 0.012769006192684174,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9436092
+          },
+          "file": "5.bin",
+          "sha256": "6548cdb1fc58a2c9308cf7e44ea0bcf5fda71ac414d38e9107727318d42cb888"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "cachegen2",
+          "encode_seconds": 0.01719140261411667,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9487592
+          },
+          "file": "6.bin",
+          "sha256": "7640ae9a274adcd9230a8625a83efda0c3b3c0ea5627aceb3c69594a2cec902e"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "cachegen2",
+          "encode_seconds": 0.014262959361076355,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9402902
+          },
+          "file": "7.bin",
+          "sha256": "b5711b5856002acaf019a1d5ec7a8371a104ad24754288bc1d5d89f94b9641bb"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "cachegen2",
+          "encode_seconds": 0.01596371829509735,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9435557
+          },
+          "file": "8.bin",
+          "sha256": "dead756ceebff8ffe0c6d825f2a3898fdf54857e06cba062f9340e5acbc7c2c3"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "cachegen2",
+          "encode_seconds": 0.014107100665569305,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9458271
+          },
+          "file": "9.bin",
+          "sha256": "e522f5fa3a134c775ffcacebbb433d1d11cb155575dbe3f9184b604762705066"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "cachegen2",
+          "encode_seconds": 0.014028914272785187,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9492296
+          },
+          "file": "10.bin",
+          "sha256": "bd58c5ffaff08fa194eb71d2f66e2783d71049596a3d5b470d38b11dc9642c4f"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "cachegen2",
+          "encode_seconds": 0.015582039952278137,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9465543
+          },
+          "file": "11.bin",
+          "sha256": "9a96cfb902fb585163498ab1b095343b06579e93e7c1a1c6395d1f74d5787ec5"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "cachegen2",
+          "encode_seconds": 0.016349926590919495,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9428479
+          },
+          "file": "12.bin",
+          "sha256": "c456cf1c4d57ced11c9a1bf6f2707366042239e4dbf17350683f200ddc998841"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "cachegen2",
+          "encode_seconds": 0.01740473508834839,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9486314
+          },
+          "file": "13.bin",
+          "sha256": "6a66ac989603c502f923077501ea16d0b4db99b15f5996a3143ba7dc687f6f62"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "cachegen2",
+          "encode_seconds": 0.01671701669692993,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9464911
+          },
+          "file": "14.bin",
+          "sha256": "9275efba8b049726bb1bfdad5525be7e880f26ae598b673d4cf89aa4cb5b3976"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "cachegen2",
+          "encode_seconds": 0.014762260019779205,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 9531976
+          },
+          "file": "15.bin",
+          "sha256": "05acdf946c7c19cd1ebed8ed4baa64f2615f9037c83a98d3ea8f4c89d7aea132"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/256/cachegen3/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 256,
+          "method": "cachegen3",
+          "encode_seconds": 0.024573110044002533,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 256,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11412984
+          },
+          "file": "0.bin",
+          "sha256": "605c28f816bcd1d84d53ef2ea365853f0baed348db0644c9255c00c73eca8867"
+        },
+        {
+          "index": 1,
+          "start": 256,
+          "end": 512,
+          "method": "cachegen3",
+          "encode_seconds": 0.014910101890563965,
+          "metadata": {
+            "chunk_index": 1,
+            "token_start": 256,
+            "token_end": 512,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11180422
+          },
+          "file": "1.bin",
+          "sha256": "be4c98f563d0ace5292a44e5db9de4709cc58e1e360cc9b96af762641a8e034e"
+        },
+        {
+          "index": 2,
+          "start": 512,
+          "end": 768,
+          "method": "cachegen3",
+          "encode_seconds": 0.013499252498149872,
+          "metadata": {
+            "chunk_index": 2,
+            "token_start": 512,
+            "token_end": 768,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11231036
+          },
+          "file": "2.bin",
+          "sha256": "e6346bc36d11c772c2fb446f921314ef34903eb696875288a8fff8975a15d423"
+        },
+        {
+          "index": 3,
+          "start": 768,
+          "end": 1024,
+          "method": "cachegen3",
+          "encode_seconds": 0.011799067258834839,
+          "metadata": {
+            "chunk_index": 3,
+            "token_start": 768,
+            "token_end": 1024,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11173893
+          },
+          "file": "3.bin",
+          "sha256": "d64749de481d7cfae6ec34407d4588596b06331c8abd5b074a77f468637b2793"
+        },
+        {
+          "index": 4,
+          "start": 1024,
+          "end": 1280,
+          "method": "cachegen3",
+          "encode_seconds": 0.01397695392370224,
+          "metadata": {
+            "chunk_index": 4,
+            "token_start": 1024,
+            "token_end": 1280,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11206806
+          },
+          "file": "4.bin",
+          "sha256": "408d5cc4caefbf9228d3c6a242890118aa04d41b280f99f2fdc607b54b3a498a"
+        },
+        {
+          "index": 5,
+          "start": 1280,
+          "end": 1536,
+          "method": "cachegen3",
+          "encode_seconds": 0.01830124855041504,
+          "metadata": {
+            "chunk_index": 5,
+            "token_start": 1280,
+            "token_end": 1536,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11119338
+          },
+          "file": "5.bin",
+          "sha256": "285928e4bfd90a45891f43eb0a08d732e33c65de27abebb4e7d1e1232c4c6afa"
+        },
+        {
+          "index": 6,
+          "start": 1536,
+          "end": 1792,
+          "method": "cachegen3",
+          "encode_seconds": 0.01723741739988327,
+          "metadata": {
+            "chunk_index": 6,
+            "token_start": 1536,
+            "token_end": 1792,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11177475
+          },
+          "file": "6.bin",
+          "sha256": "427cc426a538908bf5c43e5d555446786c841ad4d1951339dbdece2df1a7df69"
+        },
+        {
+          "index": 7,
+          "start": 1792,
+          "end": 2048,
+          "method": "cachegen3",
+          "encode_seconds": 0.018279142677783966,
+          "metadata": {
+            "chunk_index": 7,
+            "token_start": 1792,
+            "token_end": 2048,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11084098
+          },
+          "file": "7.bin",
+          "sha256": "c668c446ad7c97c4f5d72bfcef1bfc4eb3cb46038d950772f8bf366467e48bef"
+        },
+        {
+          "index": 8,
+          "start": 2048,
+          "end": 2304,
+          "method": "cachegen3",
+          "encode_seconds": 0.018082410097122192,
+          "metadata": {
+            "chunk_index": 8,
+            "token_start": 2048,
+            "token_end": 2304,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11120032
+          },
+          "file": "8.bin",
+          "sha256": "be401fba00b96125a56c6b66b920bde19e0d56ab08acc0914209542da3537dc7"
+        },
+        {
+          "index": 9,
+          "start": 2304,
+          "end": 2560,
+          "method": "cachegen3",
+          "encode_seconds": 0.01722676306962967,
+          "metadata": {
+            "chunk_index": 9,
+            "token_start": 2304,
+            "token_end": 2560,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11144850
+          },
+          "file": "9.bin",
+          "sha256": "a26d69dc6964f35ca25e583b80c0481790ff96899a3e737518d11ff630ab24a2"
+        },
+        {
+          "index": 10,
+          "start": 2560,
+          "end": 2816,
+          "method": "cachegen3",
+          "encode_seconds": 0.01519765704870224,
+          "metadata": {
+            "chunk_index": 10,
+            "token_start": 2560,
+            "token_end": 2816,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11180472
+          },
+          "file": "10.bin",
+          "sha256": "df409015331379219ef10b6a3b37e8c136f01705acb865d50897379dbda18408"
+        },
+        {
+          "index": 11,
+          "start": 2816,
+          "end": 3072,
+          "method": "cachegen3",
+          "encode_seconds": 0.015554964542388916,
+          "metadata": {
+            "chunk_index": 11,
+            "token_start": 2816,
+            "token_end": 3072,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11153494
+          },
+          "file": "11.bin",
+          "sha256": "0ec18c8f25c0ac0a6a9bdc490d81848cf30fa1e935957b8b0ea8d40fa1853ab0"
+        },
+        {
+          "index": 12,
+          "start": 3072,
+          "end": 3328,
+          "method": "cachegen3",
+          "encode_seconds": 0.0189194455742836,
+          "metadata": {
+            "chunk_index": 12,
+            "token_start": 3072,
+            "token_end": 3328,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11109913
+          },
+          "file": "12.bin",
+          "sha256": "8f9ce6d09935df3cb644fca7ca973f0b7598c00d6cc3dd5756ef51e7e85aa0e6"
+        },
+        {
+          "index": 13,
+          "start": 3328,
+          "end": 3584,
+          "method": "cachegen3",
+          "encode_seconds": 0.018069222569465637,
+          "metadata": {
+            "chunk_index": 13,
+            "token_start": 3328,
+            "token_end": 3584,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11175966
+          },
+          "file": "13.bin",
+          "sha256": "c8c0f8dba5d930bffea3d139b4788c516c74e9be44b33f0cfa1d310a449e4d2f"
+        },
+        {
+          "index": 14,
+          "start": 3584,
+          "end": 3840,
+          "method": "cachegen3",
+          "encode_seconds": 0.018169239163398743,
+          "metadata": {
+            "chunk_index": 14,
+            "token_start": 3584,
+            "token_end": 3840,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11152272
+          },
+          "file": "14.bin",
+          "sha256": "ad663ddc252f57aba4b70f8a1ed3f1ddd49f7844f4e75123f6b113dcd1293365"
+        },
+        {
+          "index": 15,
+          "start": 3840,
+          "end": 4096,
+          "method": "cachegen3",
+          "encode_seconds": 0.016317270696163177,
+          "metadata": {
+            "chunk_index": 15,
+            "token_start": 3840,
+            "token_end": 4096,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              256,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 11225324
+          },
+          "file": "15.bin",
+          "sha256": "a7565638e86d1f9c1a5b7e1bafd5ed69a2263001da2671cc36617d728ff0fe20"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/text/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "text",
+          "encode_seconds": 0.05837351828813553,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "text",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 20260
+          },
+          "file": "0.bin",
+          "sha256": "b0695ed07c8f4eecbd8cd18167a18e903da64b0f5d4a12b1adf1f09e69b8cf12"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/raw/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "raw",
+          "encode_seconds": 1.4549021646380424,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "raw",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 536872092
+          },
+          "file": "0.bin",
+          "sha256": "7cb2c95731420ad3d37c3872f6920c69f785764c7fe1770518db1254f2804f0d"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/uniform4/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "uniform4",
+          "encode_seconds": 0.3718854933977127,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "uniform4",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 134743512
+          },
+          "file": "0.bin",
+          "sha256": "cb9d7273e23e62f8e0f81b2731910bdf96836e03949d35d16eec8be7ab771345"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/uniform8/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "uniform8",
+          "encode_seconds": 0.7120723724365234,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "uniform8",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": null,
+            "internal_segment_max_tokens": null,
+            "internal_segment_target_tokens": null,
+            "internal_segment_tokens": [],
+            "payload_bytes": 268961240
+          },
+          "file": "0.bin",
+          "sha256": "8462cc1b8507d5b1a293dac5b697b66a0f5481384f774c3037de7945afac747e"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/cachegen1/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "cachegen1",
+          "encode_seconds": 0.22044096887111664,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "cachegen1",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 16,
+              "key_second_bins": 16,
+              "key_third_bins": 12,
+              "value_first_layers": 2,
+              "value_first_bins": 16,
+              "value_second_bins": 12
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 71764953
+          },
+          "file": "0.bin",
+          "sha256": "1b051e8ed2b964a4b24b5868217240d31efca18a5ef7932fa34dd19642d43ec2"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/cachegen2/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "cachegen2",
+          "encode_seconds": 0.1982985958456993,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "cachegen2",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 16,
+              "key_third_bins": 16,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 16
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 89333131
+          },
+          "file": "0.bin",
+          "sha256": "83efda2f2b2d1e9aea6a7976848c08224f12fb7125be4d40a23a903533b778a5"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    },
+    "pending-prepared/ttft/longchat-0-4096/4096/cachegen3/prepared.json": {
+      "packets": [
+        {
+          "index": 0,
+          "start": 0,
+          "end": 4096,
+          "method": "cachegen3",
+          "encode_seconds": 0.261257067322731,
+          "metadata": {
+            "chunk_index": 0,
+            "token_start": 0,
+            "token_end": 4096,
+            "method": "cachegen3",
+            "shape": [
+              32,
+              2,
+              8,
+              4096,
+              128
+            ],
+            "dtype": "torch.float16",
+            "quantization_schedule": {
+              "key_first_layers": 10,
+              "key_second_layers": 20,
+              "key_third_layers": 32,
+              "key_first_bins": 32,
+              "key_second_bins": 32,
+              "key_third_bins": 32,
+              "value_first_layers": 2,
+              "value_first_bins": 32,
+              "value_second_bins": 32
+            },
+            "internal_segment_max_tokens": 256,
+            "internal_segment_target_tokens": 96,
+            "internal_segment_tokens": [
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              96,
+              64
+            ],
+            "payload_bytes": 117333747
+          },
+          "file": "0.bin",
+          "sha256": "a68f112612233a8fecfc55ef667789ecbfb7a4c280ac9f67fd67f4b71d75bada"
+        }
+      ],
+      "offline_prefill_seconds": 0.7702723145484924
+    }
+  },
+  "manifest_before_resume": {
+    "protocol": "cachegen-shared-v3",
+    "status": "interrupted",
+    "started_utc": "2026-10-25T04:08:42.717606+00:00",
+    "configuration": {
+      "protocol": "cachegen-shared-v3",
+      "scale": "small",
+      "model": {
+        "id": "mistral-community/Mistral-7B-v0.2",
+        "revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+        "weight_loading": "fastchat8",
+        "layers": 32,
+        "kv_heads": 8,
+        "head_dim": 128,
+        "context_limit": 32768,
+        "key_boundaries": [
+          10,
+          20,
+          32
+        ],
+        "value_boundary": 2,
+        "name": "mistral"
+      },
+      "seed": 0,
+      "cpu_threads": 8,
+      "data": {
+        "longchat": "test_data/longchat.jsonl",
+        "triviaqa": "test_data/tqa.jsonl",
+        "bandwidth": "test_data/bw.jsonl"
+      },
+      "scoring": {
+        "answer": "author_first_lf_line",
+        "normalization": "standard_em_f1",
+        "aliases": "dataset_only",
+        "stop": "eos_or_token_limit"
+      },
+      "quality_tolerances": {
+        "max_nll_delta": 0.02,
+        "minimum_retention": 0.9
+      },
+      "quality": {
+        "samples": 2,
+        "lengths": [
+          1024,
+          2048,
+          4096
+        ],
+        "continuation": 32,
+        "qa_per_position": 1,
+        "max_new_tokens": 24,
+        "methods": [
+          "raw",
+          "uniform4",
+          "uniform8",
+          "cachegen1",
+          "cachegen2",
+          "cachegen3"
+        ]
+      },
+      "triviaqa": {
+        "samples": 2,
+        "max_prompt_tokens": 4096,
+        "max_new_tokens": 32
+      },
+      "ttft": {
+        "samples": 5,
+        "lengths": [
+          1024,
+          2048,
+          4096
+        ],
+        "bandwidth_gbps": [
+          10
+        ],
+        "warmup": 1,
+        "repeats": 1,
+        "methods": [
+          "text",
+          "raw",
+          "uniform4",
+          "uniform8",
+          "cachegen1",
+          "cachegen2",
+          "cachegen3"
+        ],
+        "modes": [
+          "whole",
+          "chunk_serial",
+          "chunk_pipeline"
+        ],
+        "chunk_sizes": [
+          256
+        ]
+      },
+      "adaptive": {
+        "cases": 1,
+        "length": 1024,
+        "chunk_size": 256,
+        "traces": 1,
+        "bandwidth_scales": [
+          1,
+          0.01
+        ],
+        "slos": [
+          0.2,
+          0.5
+        ],
+        "max_new_tokens": 20,
+        "warmup": 1,
+        "repeats": 1,
+        "mode": "socket_serial",
+        "strategies": [
+          "adaptive",
+          "adaptive_history",
+          "adaptive_static",
+          "fixed1",
+          "fixed2",
+          "fixed3",
+          "text"
+        ],
+        "throughput_estimator": "previous_completed_message",
+        "initial_bandwidth_gbps": 1.0
+      },
+      "calibration": {
+        "payload_bytes": [
+          65536,
+          1048576,
+          8388608,
+          67108864
+        ],
+        "repeats": 2
+      },
+      "checks": {
+        "generation_tokens": 8
+      },
+      "transport": {
+        "queue_capacity": 1,
+        "pacing_quantum_bytes": null
+      },
+      "ablation": {
+        "enabled": true,
+        "samples": 1,
+        "qa_per_position": 1,
+        "lengths": [
+          1024
+        ],
+        "precisions": [
+          "uniform16",
+          "uniform32",
+          "layered2"
+        ],
+        "entropy": [
+          "packed",
+          "arithmetic"
+        ],
+        "warmup": 1,
+        "repeats": 3
+      },
+      "execution": {
+        "linear_tile_tokens": 256,
+        "explicit_causal_mask": true,
+        "sdpa_backend": "efficient",
+        "fp16_reduced_precision_reduction": false
+      }
+    },
+    "jobs": [
+      {
+        "name": "quality",
+        "kind": "quality",
+        "status": "completed",
+        "started_utc": "2026-10-25T04:12:21.696750+00:00",
+        "observations": 102,
+        "finished_utc": "2026-10-25T04:15:23.821588+00:00",
+        "exit_code": 0
+      },
+      {
+        "name": "ttft",
+        "kind": "ttft",
+        "status": "interrupted",
+        "started_utc": "2026-10-25T04:15:23.855763+00:00",
+        "exit_code": 143
+      },
+      {
+        "name": "adaptive-scale-1-slo-0.2",
+        "kind": "adaptive",
+        "scale": 1,
+        "slo": 0.2
+      },
+      {
+        "name": "adaptive-scale-1-slo-0.5",
+        "kind": "adaptive",
+        "scale": 1,
+        "slo": 0.5
+      },
+      {
+        "name": "adaptive-scale-0.01-slo-0.2",
+        "kind": "adaptive",
+        "scale": 0.01,
+        "slo": 0.2
+      },
+      {
+        "name": "adaptive-scale-0.01-slo-0.5",
+        "kind": "adaptive",
+        "scale": 0.01,
+        "slo": 0.5
+      },
+      {
+        "name": "ablation",
+        "kind": "ablation"
+      }
+    ],
+    "identity": {
+      "inputs": {
+        "config": "0f692c9be078ca0a19b15d9890c4575a19eff65dc932864896bc043196fb3d8c",
+        "code": {
+          "LMCache/lmcache/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "LMCache/lmcache/cache_engine.py": "01901fb6ebe741d8a317396b6c68ffc0716cae10f87d86d056ed117c6713352d",
+          "LMCache/lmcache/config.py": "b5c7b5732f74d2c9e0f222f438d45b38c296d589fdb949088ac641574d2c0156",
+          "LMCache/lmcache/logging.py": "c54748b7456b369e71ea781ae0947f769cec7729ebdaf24d28f7fe03df0e61e9",
+          "LMCache/lmcache/protocol.py": "b80c1e9007ddfabe20fd6ab16532c378936f0f39a483a6197d7708602e5562d0",
+          "LMCache/lmcache/storage_backend/__init__.py": "4a998473903c2dac620546e0f232a4a0bde096822aaf5d8e5efba94b846c1696",
+          "LMCache/lmcache/storage_backend/abstract_backend.py": "a00af2d59350ea2efc980267354ee2db7cd124e34e6e5b19cc1a0da99127aaa3",
+          "LMCache/lmcache/storage_backend/connector/__init__.py": "86881d43495e3272e8858adcdec38999ea63db02a9815dc695f09700d066f12e",
+          "LMCache/lmcache/storage_backend/connector/base_connector.py": "31a44aa9c8f2cafec5a6433d0e50cc88c777d49f32972472af724c9c833c2404",
+          "LMCache/lmcache/storage_backend/connector/lm_connector.py": "7ca995662445e1d1cab6ee56afe6ee59897829326808dab76ada24ca1aef3039",
+          "LMCache/lmcache/storage_backend/connector/redis_connector.py": "643d31630d8762fd603bcaed334c7610b9455a8c9ba0ef3b9d5634f69efbee2c",
+          "LMCache/lmcache/storage_backend/hybrid_backend.py": "04e84465064a5cf2231ad28660fed666f6d3896005b087c53e4aa53c69a4ea73",
+          "LMCache/lmcache/storage_backend/local_backend.py": "6b4711d26d1fab525691f07a5460c4017ccdf0bbd0d8cd0ea37fa8aa4006ca65",
+          "LMCache/lmcache/storage_backend/remote_backend.py": "016f20d243e503877142864063f46189b68e5d05c795498b3911880124ec5fe4",
+          "LMCache/lmcache/storage_backend/serde/__init__.py": "92922b7ca0ba2ddcaad4628cc7ac84e0c81520dcd6f830839521422fcfb071bb",
+          "LMCache/lmcache/storage_backend/serde/cachegen_basics.py": "7d7419e32f448dcfb44f61b0725aecc8f1e3f9cd5c0058a4de23442d6e1e7210",
+          "LMCache/lmcache/storage_backend/serde/cachegen_decoder.py": "02969544c0f7167572bf4be4de81724815d96442cacdaa01d38e637f1aead8b2",
+          "LMCache/lmcache/storage_backend/serde/cachegen_encoder.py": "f851b046976aa3342d46e7984a09392a1d0aeef11d34be1ccb4be8c419a71e55",
+          "LMCache/lmcache/storage_backend/serde/serde.py": "580f6c0196927cb90644731577671528bcf509f339ab8de963cc1485e512be41",
+          "LMCache/lmcache/storage_backend/serde/torch_serde.py": "29b7e677bc8cd26eb03742c938a1c9cb44c27de1f4bb8e277c34ce43b05735da",
+          "LMCache/lmcache/utils.py": "c5d8179c5c52ce250757d72735c60dec67211a53572c7e5e330d958279cd3865",
+          "LMCache/third_party/torchac_cuda/cal_cdf.cu": "41186d8c79f20abf9fb22887f26942a59a1e62f7be3d5c6e98595cc779cc6339",
+          "LMCache/third_party/torchac_cuda/include/torchac_kernel_layer.cu": "0e4db96fb8caae54e50514eb871f39e338748915a46727401bed74f28c6cf756",
+          "LMCache/third_party/torchac_cuda/main.cpp": "0fbb7827efbe7904669264a56304b3c01d5f44cb24b06d8a8c02b40437086767",
+          "LMCache/third_party/torchac_cuda/real.py": "90fc6d8989dc8fe64894952f05a33a67ce1ea939480ab0e308f8915125977f88",
+          "LMCache/third_party/torchac_cuda/setup.py": "4bb325ff94fc38e5fec36751c5ce831426b83aaf6bf28709cb7eab80f8e022b0",
+          "LMCache/third_party/torchac_cuda/torchac_kernel.cuh": "d1b1c6401c14562295b42e2ebd662429dd1740ab1ea69e9810a2f60ad0c3e80f",
+          "LMCache/third_party/torchac_cuda/torchac_kernel_dec.cu": "551670c1c49f24b73e3376635cd95697b8008a97fac69168b9e1b7893fe5d647",
+          "LMCache/third_party/torchac_cuda/torchac_kernel_dec_new.cu": "a78b1320d3838f6f2028c6401d79b4eef8301ec90025913cc07a41268ca7d9d1",
+          "LMCache/third_party/torchac_cuda/torchac_kernel_enc.cu": "c0c46b159085210bb37913cde991031b85b8a71e9dcae04d716eb741b0f2a6c6",
+          "LMCache/third_party/torchac_cuda/torchac_kernel_enc_new.cu": "724e59dba0f1921792f7ab60205886a35cac8c369185ebf769c63826c8e39bcd",
+          "env.yaml": "889b4aecea9676cb92e44a6ff0781091c7700713a64cb28c32c68cb3b0cbf6e5",
+          "experiments/__init__.py": "3674e410fc6f6366e9c3f4a6dbdeffa8ec30c6bad5baa43d0f379ba3ecd9c9ac",
+          "experiments/__main__.py": "5de099f110058ec66f296ed2bbbeeee647fcce99370fb477df85502b1dd3cf57",
+          "experiments/ablation.py": "f801ceb89beb1a4c4ed5be4c531aaf7a61a6f2ab832ced06fa9991f590088981",
+          "experiments/analysis.py": "63b29f24b6c60dde376a63e4058f2006e4bf9af9856621cbdbffad05f9e39ac4",
+          "experiments/analysis_v3.py": "0c9199156d0c165325529171cc671b8d19d929b0cc47484396f51e6cc8f3a02a",
+          "experiments/artifacts.py": "67009d7c310bcf34626b6613c1acbdb5e1fce555b1e9e4116ed9ae8f89811f69",
+          "experiments/background.py": "d7f35ea9316866da30b359e960011712d36ea455700bc7925b87c43c0addac45",
+          "experiments/chunks.py": "863970a227a67e4e1f90125c5bdee93213588791ac25024380df748b35dba65e",
+          "experiments/config.py": "949875146db18e6cea91f56fb441b562c12912fdbbb2121f62eb7475f20fc315",
+          "experiments/configs/larger-mistral.json": "74b4b2706189b4bcf0f26e5015fa808b216630491a81ef12d97d104713ed6f5f",
+          "experiments/configs/larger-tinyllama.json": "3e1cd67ea33ddb7ab0949bc664f7dc2a5106ae694167fbb366f30f2a46acc3f6",
+          "experiments/configs/larger-validation.json": "d490b59fe572b2f61feb203f33a72c58e8d5928feed7689a5cd1339111a81a77",
+          "experiments/configs/minimal.json": "80a5237b2134caaabc9e43c2920f76627a78f5bca90ef255081d3f305150c786",
+          "experiments/configs/small.json": "97458be679f061271c90a778922fe20f3e13985839b4b513ad5b86af60fbee71",
+          "experiments/datasets.py": "b26cc89fddbb4697c2a005490b07632432e79345c9573e0797be301dd360ff64",
+          "experiments/engine.py": "ec834065f10602ecf6a10ecf2ad4ce990e9a382dd3388b07f35d4bf0d8b15243",
+          "experiments/feedback.py": "c5257250c626a6cf5e9d6bd9e031a78599748a0f6967bfd3c018a0157be50871",
+          "experiments/lifecycle.py": "b9938afbac99bef0445304b80173f0f8d1dbe574a33a800a295afb16738837ed",
+          "experiments/mechanisms.py": "cd2bb1c0329f7641c756be10c9e804a8184f3b9cfa1e9a01c4904806ac0d0b49",
+          "experiments/mistral/build_document.py": "8f79874b7a1650ba9f763d2f75ebdbe03d53009b00e6b59bcbea686790e57505",
+          "experiments/mistral/config.json": "690685322b0bd59dd83108f925788bad6e085b42d46c6fdf52c36a2f2ad9cd7c",
+          "experiments/mistral/experiment.py": "68c9d62de0f214dfa6934b9e53c7355f86debc92e456b3970c4c754ba82c730d",
+          "experiments/mistral/finalize.py": "7324e80ccb5e969ec4429d31671017b60d2b11f2f2bcb42d26f811160de8f685",
+          "experiments/mistral/measure.sh": "550fe51af185f37a99abda8549ba47dfbbf9363af03b42aa1e316f1b7a5980cb",
+          "experiments/mistral/plot_results.py": "11c7c76cbd45989ce1a36a73d034bb9032d9af0c9d4b75775355629f6e227919",
+          "experiments/mistral/run.sh": "ab6fd1b84e2f762a878f77f95a756ed4a52182536c79985b034c017d2be702dd",
+          "experiments/mistral/status.py": "8172c9387cf0ba42a57df045e5c4d0bf3d6cec444087b9127eb6ba98d03c3a3c",
+          "experiments/mistral/test_experiment.py": "c55e85cf3c6b0b8699963c69f26fcd794299bd4e2d3be6319d4983a675b26f64",
+          "experiments/numerics.py": "73d65036eea4fb7489d3fb579e2f81dfcee42d26b415beacd374afc1f2457f28",
+          "experiments/process.py": "e9f26db8764cf9ed7b0d9afc9c017024a9d202d475a1569c7a976c380a0ef23a",
+          "experiments/records.py": "0105d8adebfb061ff2fcd24565cce01f1c70ab6a57055fd90f67e3e480362802",
+          "experiments/registry.json": "4d939632e67baba1854244666fd68232f049ff5e15815e2357e8e8dbb86def75",
+          "experiments/run.sh": "b5fd3402a0f5880e6087900bce7210d99169a6dc7abb54b92309f5892d6f9fb6",
+          "experiments/scoring.py": "03bf07b602d319e2c0ca06b47f78162d4585f84cf08ec0b0a57f90faf0527b34",
+          "experiments/stable.py": "6901291777317f37be42e065e181b0a682021da1c39fc710053c4ae4638dacb7",
+          "experiments/suite.py": "fa9ea31fc929198b61c64de312ec10f6262c2f5ef0b5ca3823372618be01e591",
+          "experiments/tasks.py": "be13a394f0c6fdd56e6e039b5494db37ce209decd0c73be3de6d1ea1915df918",
+          "experiments/ttft.py": "796f14188ce72fd08c70e98f931e1491c4cb2198d323479e0a1dab04f2d525d9",
+          "experiments/workspace.py": "c23b78f6bc7b4216b2f9d1da9212e76299f382ed3cf7a400dde06048fa3b369d",
+          "mini_repro/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mini_repro/adaptive.py": "699b2fe77f7475dd1fbd43b1a6f042361a8e14aa249be414b969d99258273153",
+          "mini_repro/data.py": "8037732ebd55528c77dd3b6f4905d82dbcdc845bc233747f0a76cd76afb00770",
+          "mini_repro/experiment_common.py": "575f135e1653627d1f603eab297c583c73310a80bca4cfe0a1115ce55732718a",
+          "mini_repro/profiles/formal4070.json": "d94f5704652a3ba96e70e47832a340b9fa36f88e4dfd4bfec8457aa68b2d0418",
+          "mini_repro/profiles/validation4070.json": "173516b56fbaba29ec357c524b4c263320de862f7b218215b0e56432c8e7e415",
+          "mini_repro/quality_size.py": "2116470194b459f0243ec8868278e9e81345312c0aee61a64948f475b6ac9753",
+          "mini_repro/report.py": "4a66f05dd84c47e7ef1232937784ec8305b1eb79756f5f2942884ff07f1f516a",
+          "mini_repro/reproduce.py": "ef39c32955d4de1e61d3edb77ad206cd62df08048a045a666be6170ea19fded3",
+          "mini_repro/requirements-mini.txt": "8eeb3b84b91b446be626491cd9fdfbd874a48a900eaaa5c5148f59a1de249066",
+          "mini_repro/run.py": "04e2e29b497079d651f139583bd2dcdfc5075434590bfbac2c6523a83d55da6c",
+          "mini_repro/run_local.sh": "ab22bcf090de19f870241f25558adc9a1aaec2e44d0fbd33ff47e91990dce588",
+          "mini_repro/run_wsl.sh": "78ed8be38f1f34b0fae52a1d5110b8f21176498e0f67458016e14a5dd928ac00",
+          "mini_repro/transport.py": "18de8b3f55c067d14c320be2202c6658682d32b758973faa318cb47023fce612",
+          "mini_repro/ttft.py": "6c71d2627fc1444aabbc7e08aac453373254b03a9b658590bff3487dd58e0636",
+          "scripts/70b.sh": "5708c0a558db58b8725fa6614c8c17d7e7ae00dbcfb5ed68ae1e7f2b4081ba02",
+          "scripts/70b_baseline.sh": "9f7895164e95f534af09b60bdedef405e7ed29688c7317a29372cde7dc3d28e6",
+          "scripts/7b.sh": "653121fc3fe64801af6d15b86c5e5de4d5989e3e7faaf7bfe39cfe9a98490f41",
+          "scripts/7b_baseline.sh": "ac81a76acaf3e525c31bb62f800e1cc850af6356ab21a277598bc338020af801",
+          "scripts/adapt.sh": "ffde989f4a0c3545182b2bb329cb40d1ce7b709ad71e1a558607178e2a93b2b5",
+          "scripts/experiment-env.sh": "978df84a79a5a5f52c3a1eb518dd4d89dbfb0096c27a6a41964f009c8d817a11",
+          "src/attention_monkey_patch.py": "e3efc58ba758f1bd8ba729fe5012c43f940c843836b49ca95882a7656e1c57e1",
+          "src/cachegen_interface.py": "18204d54c653c21670a9df442ac2523ab31f1c5bbba910af9a5e8a37646c39b1",
+          "src/utils.py": "554cf0f4c5c191b7015d24f8ca1178183e8ce8ab3c1fd3c025b19388068cb780",
+          "tests/test_adaptive.py": "03e3998a76ffe16108459d390539b6d802e3eaad4f39609bbe74fe1beecad8d5",
+          "tests/test_codec_levels_gpu.py": "dc0b4b0160a9f28872e521e80768b14599c843d15c74964dfa3cb59b70b3944f",
+          "tests/test_experiment_common.py": "67e4ada93a6edd79ab2397f9a1eba48be7e3f5c3d32ccc1202766373ce54a46a",
+          "tests/test_larger_readiness.py": "332ad4edca718ee9ea25ecc916f8c3415e77964a8978740bf5d8bac2769a6daa",
+          "tests/test_mini_codec_helpers.py": "c7f7f8f694bce6f45b53edb6d06e93bbe0ecef192b3e4d99f62a51b3cd8abbba",
+          "tests/test_mini_data.py": "6f9f3179e0762378310de4446eac49d79ca50602dae38e6fcb397301892fda7d",
+          "tests/test_mistral_finalize.py": "686a8a747e61da265f2703fa8963cc7cffe4fcea7375ad9b0b7454a2b0254d8b",
+          "tests/test_mistral_runner.py": "072b824fd3b9f7c2392e6adaa3a053a1e4d2b8c7b08c5431df199f316100dffb",
+          "tests/test_numerics.py": "8468e9b238466306879799d09a5b07152c819a6ab764eb7578005e12aca0ebe0",
+          "tests/test_quality_size.py": "99725766fc362b8ba816df54bbcb1c6a51db186127b06b3e669ca4fb89320497",
+          "tests/test_report.py": "636ad32fe607d6573cc8d526b1446412e0e5de9dd707fca724b4167be35ce2e2",
+          "tests/test_reproduce.py": "e2011fc476645c7f5de24f8485335ee49a68604b0c8ba63fbc22531ac6c4e83d",
+          "tests/test_shared_framework.py": "de23691d816b28e1e9c9fb58699b15457ec811c1fc70f1489c48df589de16f02",
+          "tests/test_stable_execution.py": "1636a30295aa5688fe9358fb0ed428512b8912a1d03743a215950a792418748e",
+          "tests/test_tinyllama_config.py": "ffa9def0a0f3e97f578283320f91704c76edff9637847a7708ac102a1d155b92",
+          "tests/test_ttft.py": "7f571513b3da0ec7ea7ea1c75947a3d521c83e22d0b319bfb01276a15d8fb704",
+          "tests/test_v3_mechanisms.py": "0a9c2b909317ac9e9a790d8bdf6c7ad75d05ff130f53149a83687adf135412a1",
+          "tests/test_workspace.py": "58885a1089373cefbd09df471355da912307e38739b58b794dd4cb7a342d2326"
+        },
+        "data": {
+          "test_data/longchat.jsonl": "00908018c100549f71dbd45d1a7889e1ab9fb8985a3b4cf05426605e5ef89a5f",
+          "test_data/tqa.jsonl": "76a8f8b5b9f8a45b7a02a31e9bda9bb670e15037c98ae421839499f56c923d9d",
+          "test_data/bw.jsonl": "260527ab8033aa37439c7f6f2dc341ac567c0ed40f848bf18bf7a4f6fe9285cb"
+        }
+      },
+      "selection": "e4f86214afd04d7b6dd478bba29b7bb6ce3fc607386240e4582afe4f4d633202",
+      "runtime": {
+        "packages": {
+          "torch": "2.3.1+cu121",
+          "transformers": "4.42.3",
+          "numpy": "1.26.4",
+          "fschat": "0.2.36",
+          "accelerate": "0.32.1",
+          "lmcache": "0.1",
+          "torchac": "0.9.3",
+          "torchac_cuda": "0.0.0",
+          "matplotlib": "3.8.4"
+        },
+        "python": "3.10.12",
+        "cuda": "12.1",
+        "gpu_name": "NVIDIA GeForce RTX 4090 D",
+        "capability": [
+          8,
+          9
+        ],
+        "driver": "580.105.08",
+        "gpu_uuid_inventory": "GPU-ec71dfdd-7e85-91bf-4d96-2658fb724a5e",
+        "visible_devices": "all",
+        "codec_binary_sha256": "df0b6c1320305e5084029f8ab31fb22bfbd25acab8ee5e20b11e14a4d8b6819b",
+        "threads": 8,
+        "cpu": "x86_64",
+        "cpu_quota": "1000000 100000",
+        "memory_limit": "32212254720",
+        "tf32_matmul": false,
+        "fp16_reduced_precision_reduction": false,
+        "bf16_reduced_precision_reduction": true,
+        "sdpa_backends": {
+          "flash": false,
+          "memory_efficient": true,
+          "math": false
+        },
+        "cublas_workspace_config": null,
+        "deterministic_algorithms": false
+      }
+    },
+    "attempts": [
+      {
+        "started_utc": "2026-10-25T04:08:42.720173+00:00",
+        "pid": 26883,
+        "resume": false,
+        "memory_scope": "after_model_load",
+        "peak_gpu_allocated_bytes": 14446948352,
+        "peak_gpu_reserved_bytes": 23381147648,
+        "peak_host_rss_bytes": 6138175488,
+        "host_peak_scope": "whole_process_attempt_including_model_load",
+        "finished_utc": "2026-10-25T04:25:02.868472+00:00",
+        "exit_code": 143
+      }
+    ],
+    "pid": 26883,
+    "runner_pid": 26883,
+    "progress": {
+      "stage": "ttft",
+      "current_observation": "ttft/longchat-0-4096/10/1/cachegen2/whole/chunk-4096/queue-1",
+      "completed": 315,
+      "expected": 469
+    },
+    "expected_observations": 469,
+    "peak_gpu_allocated_bytes": 14446948352,
+    "peak_gpu_reserved_bytes": 23381147648,
+    "peak_host_rss_bytes": 6138175488,
+    "error": "KeyboardInterrupt(15)",
+    "finished_utc": "2026-10-25T04:25:02.868446+00:00",
+    "exit_code": 143
+  },
+  "initial_launch": {
+    "status": "interrupted",
+    "command": [
+      "bash",
+      "/home/aaa/CacheGen/experiments/run.sh",
+      "--config",
+      "experiments/configs/larger-validation.json",
+      "--run-id",
+      "v3-larger-validation-03"
+    ],
+    "environment": {
+      "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen",
+      "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+      "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+      "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+    },
+    "run_directory": "/home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03",
+    "started_utc": "2026-10-25T04:08:39.839441+00:00",
+    "log": "/home/aaa/CacheGen/.local/launches/mistral-v3-readiness-03.log",
+    "pid": 26880,
+    "exit_code": 143,
+    "finished_utc": "2026-10-25T04:25:04.198830+00:00"
+  }
+}

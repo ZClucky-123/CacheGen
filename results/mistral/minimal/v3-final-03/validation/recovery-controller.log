@@ -1,0 +1,7 @@
+Controlled TERM sent; prior durable rows: 81
+{
+  "session": "mistral-v3-resume-03",
+  "log": "/home/aaa/CacheGen/.local/launches/mistral-v3-resume-03.log",
+  "attach": "tmux -L cachegen attach -t mistral-v3-resume-03",
+  "status": "python3 -m experiments.background status --name mistral-v3-resume-03"
+}

@@ -59,13 +59,23 @@ class Workspace:
         runs = self.results / entry.get("results_subdir", name)
         if run_directory is not None:
             run = Path(run_directory).expanduser().resolve()
-        elif (runs / "latest/manifest.json").is_file():
-            run = (runs / "latest").resolve()
         else:
-            candidates = sorted(p.parent for p in runs.glob("*/manifest.json") if p.parent.name != "latest")
+            manifests = list(runs.glob('*/manifest.json'))
+            for scale in ('minimal', 'small', 'larger'):
+                manifests.extend((runs / scale).glob('*/manifest.json'))
+            candidates = {p.parent.resolve(): p.resolve() for p in manifests}
             if not candidates:
                 return {"experiment": name, "status": "not_started", "results_directory": str(runs)}
-            run = candidates[-1].resolve()
+            def recency(item):
+                directory, path = item
+                data = json.loads(path.read_text())
+                active = data.get('status') in ('running', 'initializing')
+                timestamps = [path.stat().st_mtime]
+                for field in ('started_utc', 'finished_utc'):
+                    if data.get(field):
+                        timestamps.append(datetime.fromisoformat(data[field]).timestamp())
+                return active, max(timestamps), str(directory)
+            run = max(candidates.items(), key=recency)[0]
         manifest = json.loads((run / "manifest.json").read_text())
         result = {"experiment": name, "run_directory": str(run), "status": manifest["status"],
                   "progress": manifest.get("progress", manifest.get("stages", {}))}
@@ -81,6 +91,15 @@ class Workspace:
                                "observations": job.get("observations", 0)} for job in manifest.get("jobs", [])]
             result["protocol"] = manifest["protocol"]
             result["pid"] = manifest.get("pid")
+            pid = manifest.get('runner_pid', manifest.get('pid'))
+            if isinstance(pid, int) and pid > 0:
+                try:
+                    os.kill(pid, 0)
+                    result['runner_alive'] = True
+                except ProcessLookupError:
+                    result['runner_alive'] = False
+                except PermissionError:
+                    result['runner_alive'] = None
         if (run / "quality.json").exists():
             quality = json.loads((run / "quality.json").read_text())
             spec = config.get("quality", {})

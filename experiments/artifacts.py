@@ -6,6 +6,7 @@ import os
 import platform
 import shutil
 import subprocess
+import time
 from pathlib import Path
 from experiments.records import fingerprint, save
 
@@ -34,6 +35,27 @@ def code_data_identity(repo, cfg):
             'data': {str(p): sha256(repo / p) for p in cfg['data'].values()}}
 
 
+class InputGuard:
+    """Detect edits during long measurements, outside any timed request."""
+    def __init__(self, repo, cfg, identity, interval=60):
+        self.repo, self.cfg, self.identity, self.interval = repo, cfg, identity, interval
+        self.last_check = 0.
+        self.stamp = self._stamp()
+
+    def _stamp(self):
+        paths = set(source_paths(self.repo)) | {self.repo / p for p in self.cfg['data'].values()}
+        return {str(p): (p.stat().st_size, p.stat().st_mtime_ns, p.stat().st_ino) for p in paths}
+
+    def check(self, force=False):
+        now = time.perf_counter()
+        if not force and now - self.last_check < self.interval:
+            return
+        latest = self._stamp()
+        if (force or latest != self.stamp) and code_data_identity(self.repo, self.cfg) != self.identity:
+            raise RuntimeError('Code/data changed during measurement; stopping before further observations')
+        self.stamp, self.last_check = latest, now
+
+
 def runtime_identity():
     import torch
     import torchac_cuda
@@ -49,6 +71,12 @@ def runtime_identity():
             'cpu': platform.processor(), 'cpu_quota': read_limit('/sys/fs/cgroup/cpu.max'),
             'memory_limit': read_limit('/sys/fs/cgroup/memory.max'),
             'tf32_matmul': torch.backends.cuda.matmul.allow_tf32,
+            'fp16_reduced_precision_reduction': torch.backends.cuda.matmul.allow_fp16_reduced_precision_reduction,
+            'bf16_reduced_precision_reduction': torch.backends.cuda.matmul.allow_bf16_reduced_precision_reduction,
+            'sdpa_backends': {'flash': torch.backends.cuda.flash_sdp_enabled(),
+                              'memory_efficient': torch.backends.cuda.mem_efficient_sdp_enabled(),
+                              'math': torch.backends.cuda.math_sdp_enabled()},
+            'cublas_workspace_config': os.environ.get('CUBLAS_WORKSPACE_CONFIG'),
             'deterministic_algorithms': torch.are_deterministic_algorithms_enabled()}
 
 
@@ -87,8 +115,10 @@ def preflight(engine, cfg, selected, run):
             max_tokens = max(max_tokens, total)
     text_wire_checks = []
     for case in selected['ttft']:
-        payload = engine.text_payload(case['context_ids'])
-        text_wire_checks.append(engine.text_metadata(payload))
+        for size in [len(case['context_ids'])] + cfg['ttft']['chunk_sizes']:
+            for start in range(0, len(case['context_ids']), size):
+                payload = engine.text_payload(case['context_ids'][start:start + size])
+                text_wire_checks.append(engine.text_metadata(payload))
     for case in selected['adaptive']:
         for start in range(0, len(case['input_ids']), cfg['adaptive']['chunk_size']):
             payload = engine.text_payload(case['input_ids'][start:start + cfg['adaptive']['chunk_size']])
@@ -100,8 +130,10 @@ def preflight(engine, cfg, selected, run):
     if not weights:
         raise ValueError('Pinned local model weights are missing')
     loaded_weights = weights if spec['weight_loading'] == 'fp16' else weights * 0.6
-    # Conservative reserve for decode CDF/indices, attention activations, allocator.
-    gpu_required = int(loaded_weights + kv_bytes * 8 + 3 * 2**30)
+    # Full/chunk decoders coexist; vector audits also need FP32 temporaries.
+    gpu_required = int(loaded_weights + kv_bytes * 12 + 3 * 2**30)
+    stable_reserve = 4 * 2**30 if cfg['execution']['linear_tile_tokens'] else 0
+    gpu_required += stable_reserve
     free_gpu, total_gpu = torch.cuda.mem_get_info()
     host_limit = read_limit('/sys/fs/cgroup/memory.max')
     host_total = int(host_limit) if host_limit and host_limit.isdigit() else os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES')
@@ -111,9 +143,12 @@ def preflight(engine, cfg, selected, run):
     host_used = max(0, host_used - int(reclaimable))
     host_required = int(weights * 1.2 + kv_bytes * 4 + 2 * 2**30)
     disk_free = shutil.disk_usage(run).free
-    disk_required = max(512 << 20, len(selected['quality']) * 100000 + len(selected['controlled']) * 50000)
+    # One unfinished TTFT case persists exact prepared bytes across interrupts.
+    # Whole and chunked containers coexist; released only after all rows commit.
+    disk_required = max(512 << 20, kv_bytes * (4 + 3 * len(cfg['ttft']['chunk_sizes'])))
     report = {'maximum_total_tokens': max_tokens, 'largest_fp16_kv_bytes': kv_bytes,
               'estimated_gpu_required_bytes': gpu_required, 'gpu_free_bytes': free_gpu, 'gpu_total_bytes': total_gpu,
+              'stable_execution_allocator_reserve_bytes': stable_reserve,
               'estimated_host_required_bytes': host_required, 'host_limit_bytes': host_total,
               'host_used_bytes': host_used, 'disk_free_bytes': disk_free, 'disk_required_bytes': disk_required,
               'host_reclaimable_inactive_file_bytes': int(reclaimable),

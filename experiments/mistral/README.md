@@ -1,16 +1,17 @@
 # Mistral 兼容入口
 
-当前正式算法统一使用 [公共 v2 框架](../../docs/reproduction/SHARED_FRAMEWORK.md)，覆盖体积质量、TTFT 和四个自适应配置任务，另含真实 TriviaQA。
+Mistral 使用 [公共 v3 框架](../../docs/reproduction/SHARED_FRAMEWORK.md)，与 TinyLlama 共用质量、三模式 TTFT、历史吞吐自适应和轻量消融。此目录保留薄兼容入口和历史报告工具。
 
 ```bash
+# 默认 small，新批次进入 results/mistral/small/<run-id>
 bash experiments/mistral/run.sh --config experiments/mistral/config.json
-bash mistral_repro/run.sh --config experiments/configs/small.json
-python3 -m experiments.background start --name mistral-new -- --model mistral --config experiments/configs/small.json
-python3 experiments/mistral/status.py
+python3 -m experiments.background start --name mistral-v3-new -- \
+  --model mistral --config experiments/configs/minimal.json --run-id v3-new
+python3 -m experiments status mistral
 ```
 
-config.json 继承公共 small.json。模型仍固定为 mistral-community/Mistral-7B-v0.2 的 80cf49b18de6354fd8a6d1e81c177dd830e05eea，原 FastChat groupwise 8bit 权重、FP16 KV。新结果保存到 results/mistral/<scale>/<run-id>，不使用旧批次路径。
+`config.json` 继承公共 `small.json`。固定模型为 `mistral-community/Mistral-7B-v0.2`，revision `80cf49b18de6354fd8a6d1e81c177dd830e05eea`，保留 FastChat groupwise 8bit 权重和 FP16 KV。较大配置为 `experiments/configs/larger-mistral.json`。
 
-experiment.py 与 measure.sh 是兼容包装。原独立实现保存在历史批次 source/ 中；build_document.py 是固定 20261024 设计的历史中文报告器，旧 plot_results.py/finalize.py 主要服务旧批次，新批次由公共 analysis/artifacts 自动完成。
+`experiment.py`、`run.sh`、`measure.sh` 和 `mistral_repro` 保持兼容；续跑使用 `--resume <原批次>`。原独立测量器保存在历史 `source/`；`build_document.py` 是固定 2026-10-24 设计的报告器，新协议由公共 `analysis`/`artifacts` 自动完成。
 
-历史记录和已知限制见 [历史索引](../../docs/reproduction/HISTORY.md)。旧 NLL、完整输出 QA、缺失自适应的记录不与 v2 混合。
+历史评分和旧结果见 [历史索引](../../docs/reproduction/HISTORY.md)，不与 v3 合并；论文差距见 [论文对照](../../docs/reproduction/PAPER_ALIGNMENT.md)。

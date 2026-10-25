@@ -1,10 +1,10 @@
-# CacheGen 小规模复现实验
+# TinyLlama 环境与历史 v1 入口
 
-> 当前正式实验统一使用 [公共 v2 框架](../docs/reproduction/SHARED_FRAMEWORK.md)：`bash experiments/run.sh --model tinyllama --config experiments/configs/small.json`，后台用 `python3 -m experiments.background start ...`。以下保留 v1 环境、API 和历史协议供核查；新旧 NLL/评分不能混合。
+> 当前正式实验使用 [公共 v3 框架](../docs/reproduction/SHARED_FRAMEWORK.md)，四组实验默认七任务。新实验用 `bash experiments/run.sh --model tinyllama --config experiments/configs/minimal.json`，后台入口为 `python3 -m experiments.background`。以下环境安装方式可参考，测量命令、规模和协议均为历史 v1；新实验使用公共配置、评分及恢复规则。论文边界见 [对照表](../docs/reproduction/PAPER_ALIGNMENT.md)。
 
 本目录使用 TinyLlama 的真实 KV cache，执行压缩体积与质量、传输与首 token 延迟、带宽自适应三组实验。本文说明如何准备环境、执行实验和读取结果；实验条件及评价口径见 [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)，已归档批次的机器配置和实测结果见 [结果索引](../results/reproduction/README.md)。
 
-当前实验使用仓库编解码器和探索性的 TinyLlama 量化配置，尚未实现论文的差分编码、跨服务器传输及传输与解码重叠，不能作为论文完整复现。自适应实验的网络时间按带宽轨迹估算。
+以下 v1 实验使用仓库编解码器和探索性的 TinyLlama 配置，没有差分编码、跨服务器传输或传输与解码重叠，自适应网络时间来自轨迹估算。当前 v3 已增加本地 socket 三模式和历史吞吐反馈；未补做论文 anchor/delta、模型级离线共用 CDF 或完整调度器。
 
 ## 1. 准备环境
 

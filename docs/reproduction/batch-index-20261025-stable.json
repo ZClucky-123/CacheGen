@@ -1,0 +1,25 @@
+{
+  "protocol": "cachegen-shared-v3",
+  "scope": "fixed public-code subset; no new anchor/delta or paper scheduler",
+  "batches": [
+    {
+      "run": "results/mistral/small/v3-larger-validation-03",
+      "role": "accepted_large_context_readiness",
+      "observations": 469,
+      "status": "completed",
+      "exit_code": 0,
+      "archive_files": 190
+    },
+    {
+      "run": "results/tinyllama/minimal/v3-stable-acceptance-20261025",
+      "role": "accepted_fixed_source_functional",
+      "observations": 274,
+      "status": "completed",
+      "exit_code": 0,
+      "archive_files": 175
+    }
+  ],
+  "larger_mistral_planned_formal_observations": 12594,
+  "source_and_larger_mistral_configuration_fingerprint": "c0cf4640a4ef49d7de8dd495157c2b423ac0c7178065f90fa7e191f10197bdc3",
+  "note": "Different execution profiles and immutable batches are not pooled. Formal larger runs are tracked by their own manifest and are not acceptance evidence until completed."
+}

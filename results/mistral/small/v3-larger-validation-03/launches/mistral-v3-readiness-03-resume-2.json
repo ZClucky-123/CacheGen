@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/experiments/run.sh",
+    "--resume",
+    "results/mistral/small/v3-larger-validation-03"
+  ],
+  "environment": {
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "results/mistral/small/v3-larger-validation-03",
+  "started_utc": "2026-10-25T05:07:48.381421+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/mistral-v3-readiness-03-resume-2.log",
+  "pid": 2833,
+  "exit_code": 0,
+  "finished_utc": "2026-10-25T05:17:00.220330+00:00"
+}

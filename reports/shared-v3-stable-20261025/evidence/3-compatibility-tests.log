@@ -1,0 +1,8 @@
+test_qa_alias_normalization_and_partial_credit (test_experiment.ExperimentTests) ... ok
+test_real_packed_size_error_and_zero_groups (test_experiment.ExperimentTests) ... ok
+test_transport_and_balanced_repeats (test_experiment.ExperimentTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.039s
+
+OK

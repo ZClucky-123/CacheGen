@@ -1,6 +1,8 @@
-# Mistral-7B 环境验证
+# Mistral-7B 运行环境与历史验证
 
-本文说明 Mistral 环境的配置、存储位置和验证方法。验证通过后，按[复现操作说明](MISTRAL_REPRODUCTION.md)运行实验。记录日期：2026-10-23。
+当前实验按 [公共 v3 框架](SHARED_FRAMEWORK.md)运行，目录和环境覆盖见 [工作区指南](WORKSPACE_GUIDE.md)。2026-10-25 稳定版本已在 RTX 4090 D 24GiB、30GiB 主存限制下完成大上下文验证；软件为 Python 3.10.12、PyTorch 2.3.1+cu121、Transformers 4.42.3、fschat 0.2.36、CUDA Toolkit 12.1，模型 revision 和原 FastChat 8bit 权重保持不变。当前扩展缓存默认 `.local/torch_extensions`，测试与实测证据见 [稳定版本记录](LARGER_READINESS_20261025.md)。
+
+以下保留 2026-10-23 的源实例安装和迁移记录。T4、41 项测试、`.venv/torch_extensions` 及当时容量描述均属历史现场，不代表当前 4090 D 测量设置；[原始脚本说明](MISTRAL_REPRODUCTION.md)也按历史入口解释。
 
 ## 1. 环境与验证记录
 

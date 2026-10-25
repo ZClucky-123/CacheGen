@@ -1,0 +1,2555 @@
+diff --git a/.gitattributes b/.gitattributes
+index 767390b..d47e438 100644
+--- a/.gitattributes
++++ b/.gitattributes
+@@ -12,3 +12,8 @@ reports/mistral/v2-small-final-20261024/** -text -whitespace
+ *.zip binary
+ *.png binary
+ *.pdf binary
++
++# Protocol-v3 accepted evidence preserves its exact archived bytes.
++results/tinyllama/minimal/v3-final-03/** -text -whitespace
++results/mistral/minimal/v3-final-03/** -text -whitespace
++reports/shared-v3-20261025/** -text -whitespace
+diff --git a/.gitignore b/.gitignore
+index a28a821..d67f0b8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -52,6 +52,16 @@ results/tinyllama/minimal/*
+ !/reports/mistral/v2-small-final-20261024/
+ !/reports/mistral/v2-small-final-20261024/**
+ 
++# Verified shared-v3 mechanism acceptance batches, distinct from v2.
++!results/tinyllama/minimal/v3-final-03/
++!results/tinyllama/minimal/v3-final-03/**
++!results/mistral/minimal/
++results/mistral/minimal/*
++!results/mistral/minimal/v3-final-03/
++!results/mistral/minimal/v3-final-03/**
++!/reports/shared-v3-20261025/
++!/reports/shared-v3-20261025/**
++
+ # Canonical SQLite databases are archived after checkpoint; sidecars are transient.
+ **/records.sqlite3-wal
+ **/records.sqlite3-shm
+diff --git a/LMCache/lmcache/storage_backend/serde/cachegen_basics.py b/LMCache/lmcache/storage_backend/serde/cachegen_basics.py
+index da59ece..2d22471 100644
+--- a/LMCache/lmcache/storage_backend/serde/cachegen_basics.py
++++ b/LMCache/lmcache/storage_backend/serde/cachegen_basics.py
+@@ -6,6 +6,12 @@ from typing import List
+ from lmcache.utils import _lmcache_nvtx_annotate
+ import os
+ CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK = 256
++# The CUDA kernel's shared output capacity is 256 BYTES per channel, not
++# 256 arbitrary symbols. Its CDF has 16-bit precision: a rare symbol can cost
++# 16 bits even though the alphabet needs only 4/5 bits. Keep ample termination
++# headroom without modifying CUDA kernels or their supported symbol range.
++CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL = 256
++CACHEGEN_SAFE_ENCODE_TOKENS = 96
+ 
+ @dataclass
+ class CacheGenConfig:
+diff --git a/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py b/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
+index 4cb9f4d..b9f6932 100644
+--- a/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
++++ b/LMCache/lmcache/storage_backend/serde/cachegen_encoder.py
+@@ -232,6 +232,10 @@ def encode_ntokens(cdf_int, encode_input, output_buffer, output_lengths) -> torc
+     Returns:
+         byte_tensor: the byte tensor
+     """
++    if encode_input.shape[1] > CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS:
++        raise ValueError('Split arithmetic symbols into safe segments before CUDA encoding')
++    if output_buffer.shape[-1] < CGBasics.CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL:
++        raise ValueError('Arithmetic output buffer is too small')
+     torchac_cuda.encode_fast_new(
+             cdf_int,
+             encode_input,
+@@ -267,7 +271,7 @@ def encode_function(
+     cdf_int = torch.cat([new_cdf_key, new_cdf_value])
+ 
+     output_buffer = torch.zeros(
+-            (nlayers, nchannels, CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK), 
++            (nlayers, nchannels, CGBasics.CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL),
+             dtype=torch.uint8, 
+             device=encode_input.device)
+     output_lengths = torch.zeros(
+@@ -276,9 +280,9 @@ def encode_function(
+             device=encode_input.device)
+ 
+     data_chunks = []
+-    for i in range(0, chunk_size, CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK):
++    for i in range(0, chunk_size, CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS):
+         start = i
+-        end = min(i + CGBasics.CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK, chunk_size)
++        end = min(i + CGBasics.CACHEGEN_SAFE_ENCODE_TOKENS, chunk_size)
+         bytestream = encode_ntokens(
+             cdf_int,
+             encode_input[:, start:end, :],
+diff --git a/README.md b/README.md
+index 5dfb1e9..29a2ab1 100644
+--- a/README.md
++++ b/README.md
+@@ -1,8 +1,10 @@
+ # 当前 TinyLlama / Mistral 公共复现入口
+ 
+-已完成 [共享框架中文验收报告](reports/mistral/v2-small-final-20261024/验收报告.md)：Mistral 小规模 6/6 任务、552 条正式观测；TinyLlama 相同源码的最小 6/6 任务、134 条观测。原始数据、完整源码与图表均已归档，质量未通过项照实保留。
++已完成 [v3 功能验收报告](reports/shared-v3-20261025/验收报告.md)：TinyLlama 与 Mistral 使用相同公共源码，各完成 7/7 任务、274 条正式观测；覆盖同字节串行／流水线、历史吞吐与轻量机制消融，并通过真实中断恢复。86 项公共回归、3 项兼容检查通过。较大配置已同步预检，未自动启动测量。
+ 
+-共享 `cachegen-shared-v2` 框架已放入现有 `experiments/` 与 `mini_repro/`，覆盖三组实验、六个任务，支持 tmux 后台、逐观测检查点和严格恢复。请先阅读 [运行、查看、恢复及较大配置](docs/reproduction/SHARED_FRAMEWORK.md)、[对齐审查](docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)及[历史批次边界](docs/reproduction/HISTORY.md)。下文原论文入口和旧批次说明保留用于历史核查。
++[v2 完整小规模报告](reports/mistral/v2-small-final-20261024/验收报告.md)及全部历史原始结果保留，分别解释，不混入 v3。
++
++共享 `cachegen-shared-v3` 框架已放入现有 `experiments/` 与 `mini_repro/`，覆盖四组实验、七个任务，新增同字节分块串行／流水线、历史吞吐反馈和轻量机制消融，支持 tmux 后台、逐观测检查点和严格恢复。请先阅读 [运行、查看、恢复及较大配置](docs/reproduction/SHARED_FRAMEWORK.md)、[对齐审查](docs/reproduction/SHARED_FRAMEWORK_AUDIT.md)及[历史批次边界](docs/reproduction/HISTORY.md)。下文原论文入口和旧批次说明保留用于历史核查。
+ 
+ # CacheGen：KV 缓存压缩与小规模复现
+ 
+@@ -17,7 +19,7 @@
+ | Mistral-7B，2026-10-24 | RTX 4090 D；30 个自然文本条件、10 个完整问答、540 次正式 TTFT 计时 | [中文完整报告](reports/mistral/20261024-mistral7b/小规模复现实验报告.md) · [图表 PDF](reports/mistral/20261024-mistral7b/图表合集.pdf) · [原始批次](results/mistral/README.md) |
+ | TinyLlama，2026-10-13 | RTX 4070 Laptop；质量/体积、TTFT、带宽自适应，6 个任务完成 | [批次说明](results/reproduction/20261013T060232923276Z/README.md) · [自动报告](results/reproduction/20261013T060232923276Z/report.md) |
+ 
+-Mistral 本轮 CacheGen 3 的体积压缩比约为 **4.41–4.91 倍**，相对 uniform8 的 TTFT 速度比约为 **2.16–2.49**；相对文本重算未见中位 TTFT 优势，问答联合质量门槛未获得支持。具体分组、评分口径和适用范围以报告为准。
++2026-10-24 首批 v1 Mistral 的 CacheGen 3 体积压缩比约为 **4.41–4.91 倍**，相对 uniform8 的 TTFT 速度比约为 **2.16–2.49**；相对文本重算未见中位 TTFT 优势，问答联合质量门槛未获得支持。具体分组、评分口径和适用范围以报告为准。
+ 
+ 这些实验使用单卡和简化传输实现，覆盖作者仓库实现的小规模测量；完整执行与质量门槛是否得到支持，应分别根据记录判断。不同模型、设备和问答设计的结果分别保存。
+ 
+diff --git a/docs/reproduction/SHARED_FRAMEWORK.md b/docs/reproduction/SHARED_FRAMEWORK.md
+index 1c06661..c0834d9 100644
+--- a/docs/reproduction/SHARED_FRAMEWORK.md
++++ b/docs/reproduction/SHARED_FRAMEWORK.md
+@@ -1,99 +1,118 @@
+-# TinyLlama / Mistral 公共实验框架
++# TinyLlama / Mistral 公共实验框架 v3
+ 
+-当前协议为 `cachegen-shared-v2`，三个核心实验组、六个执行任务。初始差异见 [审查表](SHARED_FRAMEWORK_AUDIT.md)，历史限制见 [历史索引](HISTORY.md)。所有命令从仓库根目录执行，不依赖机器绝对路径。
++当前协议为 `cachegen-shared-v3`，四个实验组、七个任务：质量、TTFT、四组倍率×SLO 自适应、轻量机制消融。评分和质量门槛继承 v2，传输与机制实验有新定义，必须开新批次。旧结果保持原样，不能与 v3 合并；旧运行口径见 [v2 指南](SHARED_FRAMEWORK_V2.md)，原始差异见 [审查表](SHARED_FRAMEWORK_AUDIT.md)。
+ 
+ ## 配置与入口
+ 
+-| 配置 | 用途 | 覆盖 |
+-| --- | --- | --- |
+-| `experiments/configs/minimal.json` | 功能与实际恢复检查 | 两长度、全部六质量方法、七种 TTFT 方法、四组自适应；一 token 尾块 |
+-| `experiments/configs/small.json` | 本轮小规模验收 | 2 源文档×2 长度、2 事实×3 位置×2 长度、4 完整 TQA、144 TTFT、288 自适应观测 |
+-| `experiments/configs/larger-mistral.json` | 增大同一 Mistral 的矩阵 | 20 源文档×3 长度、90 位置 QA、20 TQA、3150 TTFT、1800 自适应观测 |
+-| `experiments/configs/larger-tinyllama.json` | 增大 TinyLlama 矩阵 | 512/1024/1536 长度、相同方法和策略、7 完整 TQA |
++| 配置 | 质量正式观测 | TTFT 正式观测 | 自适应正式观测 | 消融正式观测 | 合计 |
++| --- | ---: | ---: | ---: | ---: | ---: |
++| `experiments/configs/minimal.json` | 54 | 168 | 28 | 24 | 274 |
++| `experiments/configs/small.json` | 120 | 432 | 336 | 24 | 912 |
++| `experiments/configs/larger-mistral.json` | 1020 | 9450 | 2100 | 24 | 12594 |
++| `experiments/configs/larger-tinyllama.json` | 942 | 9450 | 2100 | 24 | 12516 |
+ 
+-最小/小规模配置通过 `--model tinyllama|mistral` 切换适配器；较大配置各自声明模型。参数控制数据文件、样本数、长度、生成长度、分块、方法、带宽、轨迹、倍率、SLO、预热、重复、种子与 CPU 线程。模型也可给出完整适配器字典，但新增架构必须验证位置和模型输出接口。权重模式固定为 TinyLlama FP16 和原 Mistral FastChat groupwise 8bit；KV 均为 FP16。模型权重量化与 KV 量化分别记录。
++正式观测不含预热：minimal 另有 196 次 TTFT/自适应预热，small 312 次，larger 2590 次；消融每行内部另保存三次编解码计时和一次预热。计时重复、长度/位置/轨迹条件均不是新增独立样本。最终精确矩阵见每批 `selection.json` / `expected.json`。
+ 
+-完整适配器字典通过 `bash experiments/run.sh --config custom.json` 使用；不要同时传用于整体选择默认适配器的 `--model`。应用级编解码分块由 adaptive.chunk_size 控制，作者 CUDA 算术编码器内部最多 256 token/段的实现边界保持不变。
++最小配置质量长度为 128/257，TTFT 应用块 128，覆盖一 token 尾块。小配置为 256/512，应用块 256。Mistral 较大配置自然文本 1024/2048/4096，TinyLlama 为 512/1024/1536；较大配置仍未自动启动。v2 的较大配置预检与耗时估算不代表 v3 的更大矩阵。
+ 
+-```bash
+-# 只看配置与六个任务：不加载 GPU、不写结果
+-bash experiments/run.sh --model mistral --config experiments/configs/small.json --dry-run
+-
+-# 前台最小检查；每次使用新的 run ID
+-bash experiments/run.sh --model tinyllama --config experiments/configs/minimal.json
++两个适配器共用全部实验代码。TinyLlama 使用 FP16 权重，Mistral 保持 FastChat groupwise 8bit 权重；KV 均为 FP16。模型权重量化与 KV 量化分开记录。
+ 
+-# 注册入口与兼容入口均执行公共框架
+-python3 -m experiments run mistral -- --config experiments/configs/small.json
+-python3 -m experiments run tinyllama -- --config experiments/configs/small.json
+-bash mistral_repro/run.sh --config experiments/mistral/config.json
++```bash
++# 只生成计划，不加载模型、不写实验结果
++bash experiments/run.sh --model tinyllama --config experiments/configs/minimal.json --dry-run
++# 检查本地数据、窗口、资源、文本修补与绘图，不加载权重
++bash experiments/run.sh --model mistral --config experiments/configs/small.json --preflight-only
+ ```
+ 
+-`python3 -m experiments run ... --dry-run` 预览调度命令；需要查看内部矩阵时直接调用 `experiments/run.sh --dry-run`。结果使用 `results/<模型>/<minimal|small|larger>/<唯一run-id>/`，不覆写已有目录。
++完整适配器字典使用 `--config custom.json`，不要同时用整体选择默认适配器的 `--model`。结果进入 `results/<model>/<scale>/<unique-run-id>/`，不会覆盖已有目录。
+ 
+ ## 脱离终端运行、查询与恢复
+ 
+ ```bash
+-python3 -m experiments.background start --name mistral-small-new -- \
+-  --model mistral --config experiments/configs/small.json --run-id small-new
++python3 -m experiments.background start --name tiny-v3-new -- \
++  --model tinyllama --config experiments/configs/minimal.json --run-id v3-new
++python3 -m experiments.background status --name tiny-v3-new
++python3 -m experiments status tinyllama
++tail -f .local/launches/tiny-v3-new.log
++# Ctrl-b 然后 d 可脱离；关闭 SSH/IDE 不影响服务器上的任务
++tmux -L cachegen attach -t tiny-v3-new
++
++# 中断后必须用新的会话名；原批次配置自动读取
++python3 -m experiments.background start --name tiny-v3-resume -- \
++  --resume results/tinyllama/minimal/v3-new
++python3 -m experiments.suite --verify results/tinyllama/minimal/v3-new
++```
+ 
+-# 查看启动器状态、tmux 是否仍在；会话结束后 JSON 和日志继续保留
+-python3 -m experiments.background status --name mistral-small-new
+-tail -f .local/launches/mistral-small-new.log
+-python3 -m experiments status mistral
++tmux 不能抵御服务器重启，但持久化目录支持恢复。所有同 GPU 入口应共用 `CACHEGEN_LOCAL_DIR`，GPU 锁竞争返回 75。停止某批时先验证当前 manifest 的 runner PID，发送 TERM 后逐行检查点保留、退出码为 143。
+ 
+-# 如需交互查看；Ctrl-b 然后 d 脱离，不会停止测量
+-tmux -L cachegen attach -t mistral-small-new
++SQLite WAL/FULL 按观测提交。恢复验证配置、代码、数据、选择、模型/tokenizer、CUDA 二进制、依赖和执行环境；变化则拒绝继续旧批次。TTFT 编码结果暂存在该批 `pending-prepared/ttft/`：每个方法/分块只编码一次，串行与流水线复用。中断后读取相同字节并检查 SHA256，全部对应观测提交后才移除暂存。摘要保留包头、字节、哈希和离线成本。不要手工删除未完成批次的暂存。
+ 
+-# 中断后用新的 tmux 会话名恢复原批次；模型/配置来自批次本身
+-python3 -m experiments.background start --name mistral-small-resume -- \
+-  --resume results/mistral/small/small-new
++## ② TTFT：整包参考、分块串行、分块流水线
+ 
+-# 成功批次只核验完整归档
+-python3 -m experiments.suite --verify results/mistral/small/small-new
+-```
++`ttft.modes` 显式包含 `whole`、`chunk_serial`、`chunk_pipeline`；`ttft.chunk_sizes` 可设置多个应用块大小。`transport.queue_capacity` 是接收队列/接收中消息的容量，默认 1；正在主线程恢复的块不占该队列容量。`transport.pacing_quantum_bytes` 为 null 时按目标带宽自动选择 64KiB 至 1MiB 的发送预算小段，也可固定为正整数。
+ 
+-tmux 由服务器持有，关闭 SSH、IDE 或本地终端不会终止任务。服务器重启或实例销毁仍会停止进程；持久化结果目录后可按相同指纹恢复。对 manifest 的当前 runner PID 发送 TERM 可正常中断并保存 143；不能用旧 PID 停止另一个进程。GPU 锁竞争返回 75，不会启动第二个计时任务。请让同一 GPU 的所有入口共用 `CACHEGEN_LOCAL_DIR`。
++从完整原上下文的预计算 KV 沿 token 维切块，每块独立编码、恢复和存储 CDF/尺度/形状。共同外层帧保存 magic、元数据长度、payload 长度、块编号、token 起止、方法、形状、CUDA 内部分段。全部头和元数据计入字节。应用块与 CUDA 最多 256-token 算术小段分别保存；尾块保持真实长度。
+ 
+-每条正式观测使用稳定唯一 ID，SQLite WAL/FULL 提交；中断不丢失已提交的行。恢复前验证配置、全部测量辅助源码、数据、选择、权重/tokenizer、依赖/CUDA/驱动/GPU/线程与资源配额；不一致拒绝续拼并要求新批次。未完成的观测重新执行，已完成的观测跳过；恢复会重新预热，原运行和恢复尝试均可追溯。只有预期 ID 集合完整匹配后才生成成功报告。失败样本及异常在 `failures.jsonl`，运行状态在 `manifest.json`，终止码在 `exit_code`。
++两种分块模式使用同一连接、相同字节、限速与 KV 拼接代码。串行在当前块恢复并完成 CUDA 同步后才发放下一块发送许可；流水线在主线程取走当前块时释放队列容量，使 CPU 接收线程能准备并接收后续块。发送许可在接收容量及缓冲准备好后才发放，防止 socket 缓冲无限预取。发送/接收线程只做 CPU 工作，GPU 解码、文本 prefill、KV 拼接和推理均由主线程执行。
+ 
+-完整性检查同时要求离线 prefill、编码、传输、恢复、剩余输入和总计时等必要字段，以及逐 token NLL/生成输出；只有数量齐全仍会失败。离线成本在逐行结果中作为“该上下文准备一次”的注记重复出现，不能按网络计时重复次数累加。自适应还记录全档编码和准备 wall time，后者包含原始 QA、预热与校验，不代表最小生产预计算成本。
++限速预算在发送前等待，最后不足一段时按实际字节预算等待。校准在模型加载前完成，保留接收端的数据可用时刻、目标及实测吞吐。网络区间为接收缓冲 ready 至完整消息 bytes 可用，包含限速等待、socket 和 bytes 物化，不含接收容量等待及上一块 GPU 等待；连接建立和线程开销仍计入端到端 TTFT。没有修改服务器网卡。
+ 
+-## 协议边界
++TTFT 从建立连接前开始，到首个生成 token 的 CPU 整数 ID 可用为止，GPU 阶段均确认完成。离线 prefill/编码与后续完整回答生成排除在 TTFT 之外。文本按同一 token 区间发送 `utf8_token_patch_v1`，接收端实际重分词并使用收到的修补信息，再在已恢复前缀上逐块 prefill；修补字节也计入体积。整包参考独立报告，整包文本继续使用原单次“上下文＋问题”优化 forward；两种分块文本均采用逐块 prefill 后仅处理问题。流水线主比较为同块同字节的串行模式。
+ 
+-QA 在运行前固定为作者的 `lstrip('\n').split('\n')[0]`，标准规范化 EM/F1、仅数据自带别名，EOS 或生成上限停止；完整原文与 token IDs 一并保存。真实 TQA 与受控位置 QA 分开。每长度门槛使用同长度的受控题；raw EM 正确数为零则保留率为 null、验收为 unassessable。原短语包含规则仅留作诊断，不作为放宽后的主分数。语义人工诊断可另建分析记录，不改标准分或历史主指标。
++每次记录 receive/send/data_available/restore 起止、容量/发送许可/主线程队列等待、队列停留、发送阻塞、限速等待及重叠区间。重叠表示有效接收区间（含限速等待）与主线程恢复区间相交，不代表真实 NIC 与 GPU 的硬件并发证据。
+ 
+-v2 NLL 评分全部续写 token：恢复完整 KV 后取 `KV[0:L-1]`，重放最后一个上下文 token 并 teacher force 后续 `N-1` 个输入，共得到 N 个目标分数。记录实际目标 token IDs 和逐 token NLL。v1 漏首目标的 NLL 不混入汇总。负 ΔNLL 本身不能解释为质量改善。
++正确性覆盖所有方法与真实条件：传输字节、顺序、位置、尾块、最终 KV 长度；同字节串行/流水线 KV 完全一致且多 token 输出一致；原始 KV 分块重组完全一致；文本逐块 prefill 与整段 prefill 数值及生成检查。见 `ttft_checks.json`。串行/流水线逐对哈希或首 token 不同，汇总拒绝通过。
+ 
+-文本首 token 路径执行相同 transformer 和权重，只将最后一位置 hidden state 送入同一 lm_head。实测前对多个真实输入和长度，比较未改动完整 forward、优化 forward、raw KV 复用、多 token generate、重复初始化和分块拼接；有损恢复另检查形状/类型/有限值和质量。
++## ③ 串行自适应：当前带宽与历史吞吐
+ 
+-TTFT 从建立本地 socket 之前开始，到首个生成 token 的 CPU ID 可用时结束。CUDA 同步一致，传输、恢复/分词、剩余输入推理和完整 wall time 分别记录。离线 prefill/编码单列；收完再恢复与分块串行分别命名，没有传输—解码重叠。带宽校准覆盖 64KiB/1MiB/8MiB（较大配置另含64MiB）、不限速及全部目标带宽；在线实测中记录实际吞吐，调试字节比对不计入传输区间。没有调整 SSH 主网卡。
++保留 `adaptive`（本块设定带宽）、`adaptive_static`、`fixed1/2/3`、`text`，新增 `adaptive_history`（历史吞吐版本）。两种动态策略调用完全相同的候选档位、剩余预算、全剩余块成本预测、首 token 预留和文本回退规则，只替换带宽输入。本地启发式仍有别于论文调度器。
+ 
+-自适应每块仅观察当前带宽，以当前带宽预测剩余已知块成本，并扣除已耗时和首 token 预留。保留剩余预算、原等分静态预算、固定 1/2/3 和文本六策略。默认实际传输、恢复/重算；`trace_estimate` 明确记录估算网络时间。后面的缓存块来自完整原上下文的预计算，而文本回退在当前已拼接的前缀 KV 上计算；记录块起止、实际缓存长度和回退。SLO 用于 TTFT，完整回答延迟另存。
++`adaptive.throughput_estimator=previous_completed_message`，首块固定使用 `adaptive.initial_bandwidth_gbps`（默认 1），不得根据本块轨迹初始化。随后用“上一块完整消息字节数×8÷有效传输区间”。历史策略函数只接受带块编号、字节和有效区间的已完成记录，无法读取本块/未来轨迹。轨迹仅在决策完成后用于执行传输，实际设定带宽与吞吐在决策中事后记录。
+ 
+-## 较大规模：已提供配置，不自动启动
++默认 `socket_serial`：每块单独连接、实际传输、主线程完成恢复后再决定下一块，不与流水线混合。保留块级轨迹含义，每块期间设定带宽固定。v3 不接受 `trace_estimate` 伪装为历史实测反馈；旧估算流程留在 v1 历史入口。
+ 
+-```bash
+-# 先审阅配置；正式运行会重新核对实际环境和数据
+-bash experiments/run.sh --config experiments/configs/larger-mistral.json --dry-run
+-bash experiments/run.sh --config experiments/configs/larger-mistral.json --preflight-only
++每块保存估计值及来源块、设定带宽、实测吞吐、决策时刻及耗时、剩余预算、各候选剩余/当前成本、档位、回退、传输与恢复区间。请求保存 TTFT、SLO 违约、完整答案/ID/EM/F1、决策序列及完整回答延迟。SLO 只作用于 TTFT。缓存块来自完整原上下文，后层 KV 保留原始前缀依赖；文本回退实际在已恢复前缀上计算。
+ 
+-# 由用户决定启动时间；以下命令不是本轮自动执行的任务
+-python3 -m experiments.background start --name mistral-larger-new -- \
+-  --config experiments/configs/larger-mistral.json --run-id larger-new
++## ④ 轻量机制消融
+ 
+-# TinyLlama 的对应入口
+-python3 -m experiments.background start --name tiny-larger-new -- \
+-  --config experiments/configs/larger-tinyllama.json --run-id larger-new
+-```
++明确任务类型为 `ablation`。默认一个自然源文档与一个独立事实的三个位置，单一声明长度；与原质量任务使用相同案例，保留原 raw/uniform4/uniform8/CacheGen1/2/3 基线不改名、不替换。
++
++`ablation.precisions` 默认 `uniform16`、`uniform32`、`layered2`（可另加 `layered1`）；名字中的 16/32 表示 bins，实际符号位宽分别为 4/5 bit。`ablation.entropy` 固定包含 `packed` 与 `arithmetic`。
++
++每个精度配置只调用一次现有按 token/层的最大绝对值尺度量化，产生共同的符号、尺度、形状及每层 bins。两条路径分别执行实际 4/5-bit 位打包及原 CUDA 分组算术编码（CDF、stream lengths 完整计入），使用相同 torch 容器规则和共同反量化。每次重复逐符号比对全部层/通道/token，恢复 KV 要与共同参考完全一致，再计算完整续写 NLL 与 QA；两条熵路径的 NLL/生成输出也必须相同。
++
++统一/分层仅改变每层 bins 分配，尺度规则、编码、概率分组和容器保持一致；使用现有 12/16/32 符号范围，不改 CUDA 内核。统一 16/32 两端和分层 2 的不同平均位宽均明示，不能仅根据更高精度带来的质量提高断言分层有效。
++
++输出纯符号流字节、CDF tensor 字节、完整容器字节、共同量化耗时、排除共同量化的编码耗时及解码耗时。每行保存全部计时重复、符号/尺度哈希、恢复一致性、NLL 或 QA，便于区分熵收益与量化质量。
+ 
+-较大配置针对本机约 24GiB GPU、30GiB 主存配额、固定缓存模型与 CUDA 扩展。Mistral 保留 FastChat 8bit，最大自然文本 4096 token；资源预检估算权重、KV 及恢复临时空间，逐样本处理，不积累所有已解码 KV。建议保留至少 2GiB 额外磁盘给记录/快照和日志，实际预检根据可用空间拒绝不足环境。增加到 8K/16K 前应重新核对预检与峰值，不能由窗口上限直接推出显存够用。低带宽的大 payload 和重复矩阵会显著增加耗时，预计需数小时，具体取决于实际吞吐和策略回退。本配置不支持单张 4090 运行官方 70B 规模。
++## 汇总、归档与质量边界
++
++`ttft.csv` 按方法、模式、应用块大小、队列容量、长度和带宽分组；`ttft_pairs.csv` 保存逐源/重复串行÷流水线速度比，`pipeline_comparison.csv` 汇总，数值小于 1 表示流水线更慢。`ttft_timeline.csv` / `ttft_overlap.csv` 保存全量时间线及相交区间。示例图只展示一对实际条件，全量证据在 CSV/JSONL。
++
++`adaptive.csv` 按策略、估计器、块大小和任务分组。`ablation.csv` 分开精度/熵编码，`entropy_pairs.csv` 保存同符号对照。PNG/SVG/PDF 覆盖原三类图及流水线配对、接收/恢复时间线、消融体积—质量图。
++
++配置校验、观测 ID、指纹、矩阵和恢复均包含新增维度，未知任务种类直接报错。每行必要计时、NLL 目标、答案及块连续性均需校验；只有行数齐全仍不能标记完成。
++
++QA 继续采用 `lstrip('\n').split('\n')[0]`、标准规范化 EM/F1、仅原数据别名、EOS/生成上限停止。完整答案与生成 IDs 保留。NLL 评分全部续写 token，最后上下文 token 在恢复 KV[0:L-1] 上重放。v1 漏首目标分数不混用，负 ΔNLL 不能视为质量改善。原质量门槛继续为同长度 ΔNLL≤0.02 且 raw-correct 受控题保留率≥0.9，无 raw-correct 则不可评估。
++
++离线成本是每上下文/精度准备一次的注记，不能按重复计时累加；自适应准备 wall time 包含 raw QA、预热与校验，不等同最小生产建缓存成本。按源文档/事实整体重采样保留关联，少量源的区间和 P95 仅作描述。
++
++归档包含配置、数据、源码/依赖快照、权重/tokenizer 与 CUDA 指纹、选择、原始输出、事件、检查点、图表和 SHA256 清单。新增加的 `chunks.py`、`ttft.py`、`feedback.py`、`mechanisms.py`、`ablation.py`、`analysis_v3.py` 均自动进入源码快照和指纹。失败/中断保留原目录，协议或代码变化需要新 run ID。
++
++## 较大配置只预检，不自动运行
++
++```bash
++bash experiments/run.sh --config experiments/configs/larger-mistral.json --preflight-only
++python3 -m experiments.background start --name mistral-v3-larger-new -- \
++  --config experiments/configs/larger-mistral.json --run-id v3-larger-new
++```
+ 
+-TinyLlama 只有 7 个 <=2000 token 的完整 TQA，较大规模主要增加自然文本和条件/计时矩阵；若要增加独立真实问题，需另备适配窗口的新数据并建立新批次。事实仍只有 10 个独立事实，不能通过取模重复计数。
++较大 TTFT 三模式使矩阵明显扩展，不能继续使用 v2 的 6–8 小时估计。4096-token Mistral raw KV 约 512MiB，在 0.1Gbps 仅字节预算就约 43 秒/次。磁盘还要容纳一个未完成案例的整包/分块暂存字节，预检会估算并拒绝不足空间。增加长度/块大小/队列前需重新检查窗口、主存、显存和峰值。
+ 
+-两份较大配置已执行实际数据/窗口/资源/绘图预检，未加载权重或执行测量：见 [Mistral 证据](larger-mistral-preflight-20261024.json)与 [TinyLlama 证据](larger-tinyllama-preflight-20261024.json)。预检包含所有文本传输条件的精确 token 恢复；TinyLlama 有一个条件需要修补一个 token。
++最终两模型功能验收见 [中文报告](../../reports/shared-v3-20261025/验收报告.md)。v3 较大配置只预检已通过：[Mistral](larger-mistral-preflight-20261025-v3.json)、[TinyLlama](larger-tinyllama-preflight-20261025-v3.json)，均记录 `model_loaded=false` 与 `measurements_executed=false`；本次批次角色见 [索引](batch-index-20261025-v3.json)。
+ 
+-文本传输使用 `utf8_token_patch_v1`：发送 UTF-8 文本与显式 token 修补信息，接收端实际重分词后按收到的元数据修补。全部 JSON framing 与修补 token 都计入传输体积，逐次记录 patch 数量。这样可保持部分词 token 或拼接 token 段的原输入，不能把它描述成未经修补的纯文本网络基线。
++### 大上下文 FP16 数值敏感性审计
+ 
+-绘图依赖固定在 `mini_repro/requirements-mini.txt`，运行前会验证当前解释器能实际输出图片，避免测量完成后才发现其他 Python 版本的二进制库不兼容。
++2026-10-25 较大启动检查发现 `longchat-1-2048` 的自然续写第8个 token 分歧：完整生成选择2859、原始KV复用选择264，参考候选差0.0078125，恰为该值的一次FP16间隔；此前7个token相同。关闭半精度归约或换用math注意力仍会在近并列时产生差异。首个尝试在写入任何正式观测前自动停止，其目录保留。
+ 
+-归档保存配置、协议、模型/权重/tokenizer 指纹、Git HEAD 与补丁、完整公共源码和相关依赖源码、数据/选择、环境、逐例记录/生成/顺序、检查点、图表与 SHA-256 清单。区间按源文档/问题/事实整体重采样，跨长度共享来源保持关联；重复计时不增加独立样本，小样本 P95 仅作描述。
++后续批次对完整生成、原始复用及文本分块执行逐步参考前缀 logits 审计，保留两条实际生成序列及首个分歧。数值容差仍为既有 atol=0.1 / rtol=0.02；不同候选只能在最多两次FP16表示间隔内分类为近并列敏感性，明确差异或无法解释的首个分歧仍失败。该分类不会把非相同序列标为相同，不修改实际答案或QA/NLL分数，不改变质量阈值。同字节串行/流水线的KV及输出仍需完全一致，原始KV分块拼接也仍需逐元素相同。源码变更后使用新批次，旧观测不续拼。详见 `experiments/numerics.py`、`tests/test_numerics.py` 和每批 `cache_checks.json`。
+diff --git a/experiments/analysis.py b/experiments/analysis.py
+index 268f500..b160584 100644
+--- a/experiments/analysis.py
++++ b/experiments/analysis.py
+@@ -79,14 +79,14 @@ def summarize(cfg, rows):
+     ttft = defaultdict(list)
+     for row in rows:
+         if row['kind'] == 'ttft':
+-            ttft[(row['context_tokens'], row['bandwidth_gbps'], row['method'])].append(row)
++            ttft[(row['context_tokens'], row['bandwidth_gbps'], row['method'], row['mode'], row['chunk_size'], row['queue_capacity'])].append(row)
+     medians = {key: stats.median(r['ttft_wall_seconds'] for r in group) for key, group in ttft.items()}
+     timing_rows = []
+-    for (length, bw, method), group in sorted(ttft.items()):
++    for (length, bw, method, mode, chunk_size, capacity), group in sorted(ttft.items()):
+         values = [r['ttft_wall_seconds'] for r in group]
+         raw_method = 'raw' if method == 'text' else method
+         gate = next(r['acceptance'] for r in qrows if r['context_tokens'] == length and r['method'] == raw_method) if length in cfg['quality']['lengths'] else 'unassessable'
+-        timing_rows.append({'context_tokens': length, 'target_bandwidth_gbps': bw, 'method': method,
++        timing_rows.append({'context_tokens': length, 'target_bandwidth_gbps': bw, 'method': method, 'mode': mode, 'chunk_size': chunk_size, 'queue_capacity': capacity,
+             'independent_source_documents': len(set(r['source_id'] for r in group)), 'timing_observations': len(group),
+             'repeats_per_condition': cfg['ttft']['repeats'], 'median_seconds': stats.median(values), 'p95_descriptive_seconds': quantile(values, .95),
+             'median_cluster_ci95': _median_ci(group, cfg['seed']),
+@@ -97,20 +97,20 @@ def summarize(cfg, rows):
+             'mean_offline_encode_once_per_context_seconds': stats.mean(r['offline_encode_seconds'] for r in group),
+             'mean_actual_bandwidth_gbps': stats.mean(r['actual_bandwidth_gbps'] for r in group),
+             'actual_target_ratio': stats.mean(r['actual_to_target'] for r in group),
+-            'speedup_vs_text': medians[(length, bw, 'text')] / stats.median(values),
+-            'speedup_vs_uniform8': medians[(length, bw, 'uniform8')] / stats.median(values),
++            'speedup_vs_text': medians[(length, bw, 'text', mode, chunk_size, capacity)] / stats.median(values),
++            'speedup_vs_uniform8': medians[(length, bw, 'uniform8', mode, chunk_size, capacity)] / stats.median(values),
+             'same_length_quality_acceptance': gate})
+     adaptive = defaultdict(list)
+     for row in rows:
+         if row['kind'] == 'adaptive':
+-            adaptive[(row['task'], row['strategy'])].append(row)
++            adaptive[(row['task'], row['strategy'], row['throughput_estimator'], row['chunk_size'])].append(row)
+     arows = []
+-    for (task, strategy), group in sorted(adaptive.items()):
++    for (task, strategy, estimator, chunk_size), group in sorted(adaptive.items()):
+         conditions = defaultdict(list)
+         for r in group:
+             conditions[(r['case_id'], r['trace_id'])].append(r)
+         raw_correct_conditions = [items for items in conditions.values() if items[0]['raw_em'] == 1]
+-        arows.append({'task': task, 'strategy': strategy, 'mode': cfg['adaptive']['mode'],
++        arows.append({'task': task, 'strategy': strategy, 'mode': cfg['adaptive']['mode'], 'throughput_estimator': estimator, 'chunk_size': chunk_size,
+             'independent_facts': len(set(r['source_id'] for r in group)), 'fact_trace_conditions': len(conditions),
+             'timing_observations': len(group), 'repeats_per_condition': cfg['adaptive']['repeats'],
+             'median_ttft_seconds': stats.median(r['ttft_seconds'] for r in group),
+@@ -130,7 +130,11 @@ def summarize(cfg, rows):
+     # Resample source documents jointly across lengths to preserve their correlation.
+     across = {m: cluster_interval([(r['source_id'], r['nll'] - raw[r['case_id']]['nll']) for r in quality if r['method'] == m], cfg['seed'])
+               for m in cfg['quality']['methods']}
+-    return {'protocol': cfg['protocol'], 'quality': qrows, 'qa': qa_rows, 'ttft': timing_rows,
++    from experiments.analysis_v3 import pipeline_pairs, pipeline_summary, ablation_summary
++    paired = pipeline_pairs(rows)
++    ablation, entropy_pairs = ablation_summary(rows)
++    return {'ttft_pairs': paired, 'pipeline_comparison': pipeline_summary(paired, cfg['seed']),
++            'ablation': ablation, 'entropy_pairs': entropy_pairs, 'protocol': cfg['protocol'], 'quality': qrows, 'qa': qa_rows, 'ttft': timing_rows,
+             'adaptive': arows, 'all_lengths_paired_nll_source_cluster_ci95': across,
+             'interval_note': '2000 seeded source-cluster bootstrap draws; with few sources these are descriptive, not equivalence evidence'}
+ 
+@@ -158,8 +162,12 @@ def report(run, cfg, journal, expected):
+     journal.validate([key for keys in expected.values() for key in keys])
+     result = summarize(cfg, journal.rows())
+     save(run / 'summary.json', result)
+-    for name in ('quality', 'qa', 'ttft', 'adaptive'):
++    for name in ('quality', 'qa', 'ttft', 'adaptive', 'ttft_pairs', 'pipeline_comparison', 'ablation', 'entropy_pairs'):
+         csv_file(run / f'{name}.csv', result[name])
++    from experiments.analysis_v3 import timeline_rows, extra_plots
++    timeline, overlap = timeline_rows(journal.rows())
++    csv_file(run / 'ttft_timeline.csv', timeline)
++    csv_file(run / 'ttft_overlap.csv', overlap)
+     text = [f'# {cfg["model"]["name"]} / {cfg["scale"]} / {cfg["protocol"]}',
+         f'Model: {cfg["model"]["id"]} @ {cfg["model"]["revision"]}; weights: {cfg["model"]["weight_loading"]}.',
+         f'All {len(expected)} core tasks and {sum(map(len, expected.values()))} expected observations verified. TriviaQA is supplementary inside the quality task.',
+@@ -170,21 +178,34 @@ def report(run, cfg, journal, expected):
+         'TTFT starts before socket setup and ends after the first generated token ID is available on CPU, including transfer, restore/tokenization, and remaining-input inference with CUDA synchronization. It excludes offline prefill/encoding, validation, and subsequent generation. Only the final required hidden state is projected to vocabulary for both text and cache methods. No network interface shaping is used.',
+         'Offline prefill and representation encoding are measured separately. Their durations are once-per-context annotations repeated on rows for traceability, not costs incurred on each timed transfer. Adaptive calibration additionally records all-level encoding and preparation wall time, including raw QA/warmups/validation; it is not a minimal production cache-build estimate.',
+         'Text wire format utf8_token_patch_v1 sends UTF-8 and explicit token-repair metadata for standalone subword boundaries or concatenated token segments. The receiver actually retokenizes and applies only the transmitted edits; all framing and token patches count in bytes. Patch counts are recorded. This is not an unmodified plain-text-only wire benchmark.',
+-        f'Adaptive mode: {cfg["adaptive"]["mode"]}. socket_serial means actual paced local socket bytes and sequential restoration/recomputation. trace_estimate means estimated bytes/bandwidth network time plus executed local work, never a measured end-to-end network result. SLO applies to TTFT; full answer latency is separate.',
+-        'Each adaptive cached chunk comes from a full original-context prefill, so later-layer KV retains original-prefix dependence. Text fallback actually recomputes on the assembled prior KV with explicit positions. This is the repository heuristic, not the paper scheduler. Transfer/decode overlap and anchor/delta coding are absent.',
++        'The independent whole-text reference retains its original optimized single context+suffix forward. Both chunk controls instead execute the same dependent context prefill per chunk, then suffix-only inference. Pipeline benefit is primarily evaluated against chunk serial with identical messages, not attributed from a whole/chunk comparison.',
++        'FP16 full-prefill and cache-reuse shapes can produce different greedy tokens at near-tied logits. cache_checks.json records actual IDs, first-divergence position and all reference-prefix logit comparisons. A nonidentical sequence is classified as numerical sensitivity only when its first divergent choices are within two FP16 representable steps and all vectors satisfy the existing atol=0.1/rtol=0.02 check; otherwise execution fails. Actual generations and QA/NLL scores are never repaired. Same-payload serial/pipeline tensors and generated IDs still require exact equality.',
++        'Text full-vs-chunk KV retains the strict elementwise atol=0.1/rtol=0.02 check. Per-head RMS and all elementwise outliers are additional diagnostics, never a substitute for the strict check. Stable execution uses fixed FP16 projection row tiles and explicit causal masks with the original efficient SDPA; all methods use the same execution settings and the final-position LM head remains untouched. Arithmetic calls use safe 96-token internal segments inside the existing <=256-token CUDA kernel, preventing rare 16-bit-CDF symbols from overflowing its 256-byte shared buffer. Actual segment sizes and their complete stream metadata count in bytes.',
++        f'Execution settings (also checkpointed and fingerprinted): {json.dumps(cfg["execution"], sort_keys=True)}. Results with automatic kernels and stable kernels are separate batches; execution scheduling can affect absolute timing.',
++        f'Adaptive mode: {cfg["adaptive"]["mode"]}. Protocol v3 executes measured, serial paced socket transfers; it rejects trace_estimate for history feedback. SLO applies to TTFT; full answer latency is separate.',
++        f'History throughput variant adaptive_history uses a fixed first-block estimate of {cfg["adaptive"]["initial_bandwidth_gbps"]} Gbps, then the previous completed full-message bytes * 8 / effective receive interval. The interval starts after receiver capacity/buffer readiness, includes pre-send pacing and socket overhead, and excludes queue-capacity and previous GPU waits. The history policy cannot access current or future trace values; those are executor inputs and posthoc diagnostics. Both adaptive variants share candidate costs, remaining budget, first-token reserve and fallback rules. This is a block-level trace simulation, not the complete paper scheduler.',
++        'Each adaptive cached chunk comes from a full original-context prefill, so later-layer KV retains original-prefix dependence. Text fallback actually recomputes on the assembled prior KV with explicit positions. This is the repository heuristic, not the paper scheduler. Adaptive execution is serial. TTFT separately compares whole, chunk serial and bounded chunk pipeline; anchor/delta coding is absent.',
+         'Byte ratios divide sums of actual serialized FP16 containers by sums of transmitted containers, including scales, CDFs, shapes and other metadata. Tensor-only ratios are separately named. Local socket target bandwidth is not measured throughput; see calibration.json and ttft.csv.',
+         '## Paired quality by length', table(result['quality'], ['context_tokens', 'method', 'raw_serialized_over_method', 'paired_nll_delta', 'raw_em_correct', 'em_retention', 'acceptance']),
+         '## Separate QA datasets', table(result['qa'], ['dataset', 'method', 'independent_questions_or_facts', 'conditions', 'mean_em', 'mean_f1']),
+-        '## TTFT', table(result['ttft'], ['context_tokens', 'target_bandwidth_gbps', 'method', 'timing_observations', 'median_seconds', 'mean_actual_bandwidth_gbps', 'speedup_vs_text']),
+-        '## Four adaptive configurations', table(result['adaptive'], ['task', 'strategy', 'mode', 'fact_trace_conditions', 'timing_observations', 'median_ttft_seconds', 'slo_violation_rate', 'condition_mean_em', 'text_fallback_chunks']),
++        '## TTFT', table(result['ttft'], ['context_tokens', 'target_bandwidth_gbps', 'method', 'mode', 'chunk_size', 'timing_observations', 'median_seconds', 'mean_actual_bandwidth_gbps', 'speedup_vs_text']),
++        '## Paired pipeline comparison (same bytes)', table(result['pipeline_comparison'], ['context_tokens', 'target_bandwidth_gbps', 'method', 'chunk_size', 'paired_observations', 'median_paired_speedup', 'mean_pipeline_overlap_seconds']),
++        'Pipeline speedup is serial/pipeline for each matched source, length, bandwidth, method, chunk size and repeat. Values below 1 mean slower pipeline. Chunk payload hashes and first tokens must match. Receiver capacity and send-permission waits, pacing, socket blocking, restoration, and overlap intervals are exported in ttft_timeline.csv / ttft_overlap.csv. All GPU restoration timestamps wait for CUDA completion.',
++        '## Adaptive configurations', table(result['adaptive'], ['task', 'strategy', 'throughput_estimator', 'mode', 'fact_trace_conditions', 'timing_observations', 'median_ttft_seconds', 'slo_violation_rate', 'condition_mean_em', 'text_fallback_chunks']),
++        '## Controlled mechanism ablations', table(result['ablation'], ['context_tokens', 'precision', 'entropy', 'mean_symbol_bits', 'mean_symbol_data_bytes', 'mean_complete_bytes', 'paired_nll_delta', 'mean_em', 'mean_encode_excluding_quantize_seconds', 'mean_decode_seconds']),
++        'Each precision setting quantizes once; both entropy paths consume identical symbols/scales and share dequantization. Encoding timings exclude the separately recorded common quantization cost; complete sizes include CDF, stream lengths, scales, shapes and container overhead. uniform16 and uniform32 bracket layered2; differences in precision budget confound quality attribution. This small sweep shows size/quality tradeoffs, not isolated proof of layer allocation benefit.',
+         '## Statistical interpretation', result['interval_note'],
+         'Independent documents/questions/facts, derived length/position/trace conditions and timing repeats are separately counted. Cluster intervals keep all conditions and repeats of a source together. Small-sample P95 is descriptive. A completed matrix establishes execution coverage, not paper-scale reproduction or statistical equivalence.',
+         '## Evidence',
+-        'config.json, selection.json, metadata.json, preflight.json, cache_checks.json, calibration.json, records.jsonl, events.jsonl, records.sqlite3, manifest.json, failures.jsonl (if any), dependencies.txt, hardware.txt, source/, artifacts.json, and run.log preserve the protocol, data, code, environment, order, outputs and checkpoints.',
++        'config.json, selection.json, metadata.json, preflight.json, cache_checks.json, ttft_checks.json, calibration.json, records.jsonl, events.jsonl, records.sqlite3, manifest.json, failures.jsonl (if any), dependencies.txt, hardware.txt, source/, artifacts.json, and run.log preserve the protocol, data, code, environment, order, outputs and checkpoints.',
+         f'Resume: `bash experiments/run.sh --resume {run}`. Integrity: `python3 -m experiments.suite --verify {run}`.',
+-        '## Figures', '![Size and NLL](figures/quality.png)', '![TTFT](figures/ttft.png)', '![Adaptive](figures/adaptive.png)']
++        '## Figures', '![Size and NLL](figures/quality.png)', '![TTFT](figures/ttft.png)', '![Adaptive](figures/adaptive.png)',
++        '![Paired pipeline speedup](figures/pipeline_speedup.png)', '![Receive and restore timeline](figures/receive_restore_timeline.png)']
++    if result['ablation']:
++        text.append('![Mechanism size-quality sweep](figures/ablation.png)')
+     (run / 'report.md').write_text('\n\n'.join(text) + '\n', encoding='utf-8')
+     plots(run, result)
++    extra_plots(run, result, journal.rows())
+     return result
+ 
+ 
+@@ -209,11 +230,12 @@ def plots(run, result):
+     lengths = sorted(set(r['context_tokens'] for r in result['ttft']))
+     fig, axes = plt.subplots(1, len(lengths), figsize=(5 * len(lengths), 4), squeeze=False, constrained_layout=True)
+     for axis, length in zip(axes[0], lengths):
+-        for method in dict.fromkeys(r['method'] for r in result['ttft']):
+-            rows = [r for r in result['ttft'] if r['method'] == method and r['context_tokens'] == length]
+-            axis.plot([r['target_bandwidth_gbps'] for r in rows], [r['median_seconds'] for r in rows], marker='o', label=method)
++        variants = dict.fromkeys((r['method'], r['mode'], r['chunk_size']) for r in result['ttft'] if r['context_tokens'] == length)
++        for method, mode, size in variants:
++            rows = [r for r in result['ttft'] if (r['method'], r['mode'], r['chunk_size'], r['context_tokens']) == (method, mode, size, length)]
++            axis.plot([r['target_bandwidth_gbps'] for r in rows], [r['median_seconds'] for r in rows], marker='o', label=f'{method}/{mode}/c{size}')
+         axis.set(xscale='log', yscale='log', xlabel='Target Gbps (actual in CSV)', ylabel='Measured TTFT seconds', title=f'{length} tokens')
+-        axis.legend(fontsize=8)
++        axis.legend(fontsize=5, ncol=2)
+     _savefig(fig, folder, 'ttft', plt)
+     fig, axes = plt.subplots(1, 2, figsize=(12, 4), constrained_layout=True)
+     names = list(dict.fromkeys(r['task'] for r in result['adaptive']))
+diff --git a/experiments/artifacts.py b/experiments/artifacts.py
+index 37d08cb..c1dfa57 100644
+--- a/experiments/artifacts.py
++++ b/experiments/artifacts.py
+@@ -6,6 +6,7 @@ import os
+ import platform
+ import shutil
+ import subprocess
++import time
+ from pathlib import Path
+ from experiments.records import fingerprint, save
+ 
+@@ -34,6 +35,27 @@ def code_data_identity(repo, cfg):
+             'data': {str(p): sha256(repo / p) for p in cfg['data'].values()}}
+ 
+ 
++class InputGuard:
++    """Detect edits during long measurements, outside any timed request."""
++    def __init__(self, repo, cfg, identity, interval=60):
++        self.repo, self.cfg, self.identity, self.interval = repo, cfg, identity, interval
++        self.last_check = 0.
++        self.stamp = self._stamp()
++
++    def _stamp(self):
++        paths = set(source_paths(self.repo)) | {self.repo / p for p in self.cfg['data'].values()}
++        return {str(p): (p.stat().st_size, p.stat().st_mtime_ns, p.stat().st_ino) for p in paths}
++
++    def check(self, force=False):
++        now = time.perf_counter()
++        if not force and now - self.last_check < self.interval:
++            return
++        latest = self._stamp()
++        if (force or latest != self.stamp) and code_data_identity(self.repo, self.cfg) != self.identity:
++            raise RuntimeError('Code/data changed during measurement; stopping before further observations')
++        self.stamp, self.last_check = latest, now
++
++
+ def runtime_identity():
+     import torch
+     import torchac_cuda
+@@ -49,6 +71,12 @@ def runtime_identity():
+             'cpu': platform.processor(), 'cpu_quota': read_limit('/sys/fs/cgroup/cpu.max'),
+             'memory_limit': read_limit('/sys/fs/cgroup/memory.max'),
+             'tf32_matmul': torch.backends.cuda.matmul.allow_tf32,
++            'fp16_reduced_precision_reduction': torch.backends.cuda.matmul.allow_fp16_reduced_precision_reduction,
++            'bf16_reduced_precision_reduction': torch.backends.cuda.matmul.allow_bf16_reduced_precision_reduction,
++            'sdpa_backends': {'flash': torch.backends.cuda.flash_sdp_enabled(),
++                              'memory_efficient': torch.backends.cuda.mem_efficient_sdp_enabled(),
++                              'math': torch.backends.cuda.math_sdp_enabled()},
++            'cublas_workspace_config': os.environ.get('CUBLAS_WORKSPACE_CONFIG'),
+             'deterministic_algorithms': torch.are_deterministic_algorithms_enabled()}
+ 
+ 
+@@ -87,8 +115,10 @@ def preflight(engine, cfg, selected, run):
+             max_tokens = max(max_tokens, total)
+     text_wire_checks = []
+     for case in selected['ttft']:
+-        payload = engine.text_payload(case['context_ids'])
+-        text_wire_checks.append(engine.text_metadata(payload))
++        for size in [len(case['context_ids'])] + cfg['ttft']['chunk_sizes']:
++            for start in range(0, len(case['context_ids']), size):
++                payload = engine.text_payload(case['context_ids'][start:start + size])
++                text_wire_checks.append(engine.text_metadata(payload))
+     for case in selected['adaptive']:
+         for start in range(0, len(case['input_ids']), cfg['adaptive']['chunk_size']):
+             payload = engine.text_payload(case['input_ids'][start:start + cfg['adaptive']['chunk_size']])
+@@ -100,8 +130,10 @@ def preflight(engine, cfg, selected, run):
+     if not weights:
+         raise ValueError('Pinned local model weights are missing')
+     loaded_weights = weights if spec['weight_loading'] == 'fp16' else weights * 0.6
+-    # Conservative reserve for decode CDF/indices, attention activations, allocator.
+-    gpu_required = int(loaded_weights + kv_bytes * 8 + 3 * 2**30)
++    # Full/chunk decoders coexist; vector audits also need FP32 temporaries.
++    gpu_required = int(loaded_weights + kv_bytes * 12 + 3 * 2**30)
++    stable_reserve = 4 * 2**30 if cfg['execution']['linear_tile_tokens'] else 0
++    gpu_required += stable_reserve
+     free_gpu, total_gpu = torch.cuda.mem_get_info()
+     host_limit = read_limit('/sys/fs/cgroup/memory.max')
+     host_total = int(host_limit) if host_limit and host_limit.isdigit() else os.sysconf('SC_PAGE_SIZE') * os.sysconf('SC_PHYS_PAGES')
+@@ -111,9 +143,12 @@ def preflight(engine, cfg, selected, run):
+     host_used = max(0, host_used - int(reclaimable))
+     host_required = int(weights * 1.2 + kv_bytes * 4 + 2 * 2**30)
+     disk_free = shutil.disk_usage(run).free
+-    disk_required = max(512 << 20, len(selected['quality']) * 100000 + len(selected['controlled']) * 50000)
++    # One unfinished TTFT case persists exact prepared bytes across interrupts.
++    # Whole and chunked containers coexist; released only after all rows commit.
++    disk_required = max(512 << 20, kv_bytes * (4 + 3 * len(cfg['ttft']['chunk_sizes'])))
+     report = {'maximum_total_tokens': max_tokens, 'largest_fp16_kv_bytes': kv_bytes,
+               'estimated_gpu_required_bytes': gpu_required, 'gpu_free_bytes': free_gpu, 'gpu_total_bytes': total_gpu,
++              'stable_execution_allocator_reserve_bytes': stable_reserve,
+               'estimated_host_required_bytes': host_required, 'host_limit_bytes': host_total,
+               'host_used_bytes': host_used, 'disk_free_bytes': disk_free, 'disk_required_bytes': disk_required,
+               'host_reclaimable_inactive_file_bytes': int(reclaimable),
+diff --git a/experiments/config.py b/experiments/config.py
+index 2e6c504..fe844dd 100644
+--- a/experiments/config.py
++++ b/experiments/config.py
+@@ -5,9 +5,13 @@ import math
+ import re
+ from pathlib import Path
+ 
+-PROTOCOL = 'cachegen-shared-v2'
++PROTOCOL = 'cachegen-shared-v3'
+ METHODS = ('raw', 'uniform4', 'uniform8', 'cachegen1', 'cachegen2', 'cachegen3')
+-STRATEGIES = ('adaptive', 'adaptive_static', 'fixed1', 'fixed2', 'fixed3', 'text')
++STRATEGIES = ('adaptive', 'adaptive_history', 'adaptive_static', 'fixed1', 'fixed2', 'fixed3', 'text')
++TRANSPORT_MODES = ('whole', 'chunk_serial', 'chunk_pipeline')
++TASK_KINDS = ('quality', 'ttft', 'adaptive', 'ablation')
++DEFAULT_EXECUTION = {'linear_tile_tokens': 0, 'explicit_causal_mask': False,
++                     'sdpa_backend': 'auto', 'fp16_reduced_precision_reduction': True}
+ MODEL_SPECS = {
+     'tinyllama': {
+         'id': 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
+@@ -35,6 +39,22 @@ def load_config(path, model=None):
+     if 'extends' in cfg:
+         base = load_config(path.parent / cfg.pop('extends'))
+         cfg = base | cfg
++    return validate_config(cfg, model)
++
++
++def validate_config(cfg, model=None):
++    """Apply the same checks to files, adapter overrides and migrated profiles."""
++    cfg = copy.deepcopy(cfg)
++    execution = cfg.setdefault('execution', copy.deepcopy(DEFAULT_EXECUTION))
++    require(set(execution) == set(DEFAULT_EXECUTION), 'Provide all execution settings')
++    require(type(execution['linear_tile_tokens']) is int and execution['linear_tile_tokens'] in (0, 32, 64, 128, 256, 512),
++            'Invalid stable linear tile')
++    require(type(execution['explicit_causal_mask']) is bool and type(execution['fp16_reduced_precision_reduction']) is bool,
++            'Execution switches must be boolean')
++    require(execution['sdpa_backend'] in ('auto', 'flash', 'efficient', 'math'), 'Invalid SDPA backend')
++    if execution['linear_tile_tokens']:
++        require(execution['explicit_causal_mask'] and execution['sdpa_backend'] == 'efficient'
++                and not execution['fp16_reduced_precision_reduction'], 'Stable tiling requires explicit masks, efficient SDPA and FP32 reduction')
+     require(cfg.get('protocol') == PROTOCOL, f'Expected protocol {PROTOCOL}; legacy profiles require migration')
+     if model:
+         cfg['model'] = model
+@@ -63,8 +83,38 @@ def load_config(path, model=None):
+     require(set(cfg['ttft']['methods']).issubset({'text', *METHODS})
+             and {'text', 'uniform8', 'cachegen2', 'cachegen3'}.issubset(cfg['ttft']['methods'])
+             and len(set(cfg['ttft']['methods'])) == len(cfg['ttft']['methods']), 'Invalid TTFT methods')
+-    require(tuple(cfg['adaptive']['strategies']) == STRATEGIES, 'Preserve all original adaptive controls')
++    require(tuple(cfg['adaptive']['strategies']) == STRATEGIES, 'Preserve original controls and the history variant')
+     require(cfg['adaptive']['mode'] in ('socket_serial', 'trace_estimate'), 'Invalid adaptive timing mode')
++    require(cfg['adaptive']['mode'] == 'socket_serial', 'Protocol v3 history feedback requires measured serial transfers')
++    require(cfg['adaptive']['throughput_estimator'] == 'previous_completed_message', 'Unsupported throughput estimator')
++    initial = cfg['adaptive']['initial_bandwidth_gbps']
++    require(type(initial) in (int, float) and math.isfinite(initial) and initial > 0, 'Fix positive initial bandwidth before measurement')
++    modes = cfg['ttft']['modes']
++    require(isinstance(modes, list) and set(modes) == set(TRANSPORT_MODES) and len(modes) == 3,
++            'Keep whole reference and both chunk controls')
++    sizes = cfg['ttft']['chunk_sizes']
++    require(isinstance(sizes, list) and sizes and len(set(sizes)) == len(sizes)
++            and all(type(v) is int and v > 0 for v in sizes), 'Invalid application chunk sizes')
++    if execution['linear_tile_tokens']:
++        require(all(size % execution['linear_tile_tokens'] == 0 for size in sizes + [cfg['adaptive']['chunk_size']]),
++                'Application chunks must align with the stable linear tile')
++    capacity = cfg['transport']['queue_capacity']
++    require(type(capacity) is int and capacity > 0, 'Invalid bounded receive queue capacity')
++    quantum = cfg['transport']['pacing_quantum_bytes']
++    require(quantum is None or type(quantum) is int and quantum > 0, 'Invalid pacing quantum')
++    ablation = cfg['ablation']
++    require(type(ablation['enabled']) is bool, 'ablation.enabled must be boolean')
++    for field in ('samples', 'qa_per_position', 'warmup', 'repeats'):
++        require(type(ablation[field]) is int and ablation[field] > 0, f'Invalid ablation.{field}')
++    require(ablation['samples'] <= cfg['quality']['samples'] and ablation['qa_per_position'] <= cfg['quality']['qa_per_position'],
++            'Ablation uses a declared subset of quality cases')
++    require(isinstance(ablation['lengths'], list) and ablation['lengths'] and len(set(ablation['lengths'])) == len(ablation['lengths'])
++            and set(ablation['lengths']).issubset(cfg['quality']['lengths']), 'Invalid ablation lengths')
++    require(isinstance(ablation['precisions'], list) and len(set(ablation['precisions'])) == len(ablation['precisions'])
++            and {'uniform16', 'uniform32', 'layered2'}.issubset(ablation['precisions'])
++            and set(ablation['precisions']).issubset({'uniform16', 'uniform32', 'layered1', 'layered2'}),
++            'Declare both uniform bounds and at least layered2')
++    require(ablation['entropy'] == ['packed', 'arithmetic'], 'Keep paired entropy controls')
+     for section, keys in {
+         'quality': ('samples', 'continuation', 'qa_per_position', 'max_new_tokens'),
+         'triviaqa': ('samples', 'max_prompt_tokens', 'max_new_tokens'),
+@@ -91,7 +141,7 @@ def load_config(path, model=None):
+     for key in ('longchat', 'triviaqa', 'bandwidth'):
+         require(isinstance(cfg['data'][key], str), f'Missing data.{key}')
+     require(cfg['quality_tolerances'] == {'max_nll_delta': 0.02, 'minimum_retention': 0.9},
+-            'Protocol v2 fixes the existing tolerances; change protocol to change thresholds')
++            'Protocol v3 preserves the existing quality tolerances')
+     require(cfg['scoring'] == {'answer': 'author_first_lf_line', 'normalization': 'standard_em_f1',
+                                'aliases': 'dataset_only', 'stop': 'eos_or_token_limit'}, 'Scoring is frozen by protocol')
+     return cfg
+@@ -100,4 +150,21 @@ def load_config(path, model=None):
+ def jobs(cfg):
+     return [{'name': 'quality', 'kind': 'quality'}, {'name': 'ttft', 'kind': 'ttft'}] + [
+         {'name': f'adaptive-scale-{scale}-slo-{slo}', 'kind': 'adaptive', 'scale': scale, 'slo': slo}
+-        for scale in cfg['adaptive']['bandwidth_scales'] for slo in cfg['adaptive']['slos']]
++        for scale in cfg['adaptive']['bandwidth_scales'] for slo in cfg['adaptive']['slos']] + (
++            [{'name': 'ablation', 'kind': 'ablation'}] if cfg['ablation']['enabled'] else [])
++
++
++def ttft_variants(cfg, context_tokens):
++    for mode in cfg['ttft']['modes']:
++        for size in ([context_tokens] if mode == 'whole' else cfg['ttft']['chunk_sizes']):
++            yield mode, size
++
++
++def ablation_cases(cfg, selected):
++    p = cfg['ablation']
++    natural_sources = list(dict.fromkeys(c['source_id'] for c in selected['quality']))[:p['samples']]
++    for kind in ('quality', 'controlled'):
++        for case in selected[kind]:
++            if case['context_tokens'] in p['lengths'] and (
++                    case['source_id'] in natural_sources if kind == 'quality' else case['source_id'] < p['qa_per_position']):
++                yield kind, case
+diff --git a/experiments/configs/larger-mistral.json b/experiments/configs/larger-mistral.json
+index 99df7a1..00b4187 100644
+--- a/experiments/configs/larger-mistral.json
++++ b/experiments/configs/larger-mistral.json
+@@ -1,16 +1,148 @@
+ {
+-  "protocol": "cachegen-shared-v2", "scale": "larger", "model": "mistral", "seed": 0, "cpu_threads": 8,
+-  "data": {"longchat": "test_data/longchat.jsonl", "triviaqa": "test_data/tqa.jsonl", "bandwidth": "test_data/bw.jsonl"},
+-  "scoring": {"answer": "author_first_lf_line", "normalization": "standard_em_f1", "aliases": "dataset_only", "stop": "eos_or_token_limit"},
+-  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_retention": 0.9},
+-  "quality": {"samples": 20, "lengths": [1024, 2048, 4096], "continuation": 32, "qa_per_position": 10, "max_new_tokens": 24,
+-              "methods": ["raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "triviaqa": {"samples": 20, "max_prompt_tokens": 4096, "max_new_tokens": 32},
+-  "ttft": {"samples": 5, "lengths": [1024, 2048, 4096], "bandwidth_gbps": [0.1, 1, 10], "warmup": 2, "repeats": 10,
+-           "methods": ["text", "raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "adaptive": {"cases": 5, "length": 1024, "chunk_size": 256, "traces": 5, "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+-               "max_new_tokens": 20, "warmup": 1, "repeats": 3, "mode": "socket_serial",
+-               "strategies": ["adaptive", "adaptive_static", "fixed1", "fixed2", "fixed3", "text"]},
+-  "calibration": {"payload_bytes": [65536, 1048576, 8388608, 67108864], "repeats": 5},
+-  "checks": {"generation_tokens": 8}
++  "protocol": "cachegen-shared-v3",
++  "scale": "larger",
++  "model": "mistral",
++  "seed": 0,
++  "cpu_threads": 8,
++  "data": {
++    "longchat": "test_data/longchat.jsonl",
++    "triviaqa": "test_data/tqa.jsonl",
++    "bandwidth": "test_data/bw.jsonl"
++  },
++  "scoring": {
++    "answer": "author_first_lf_line",
++    "normalization": "standard_em_f1",
++    "aliases": "dataset_only",
++    "stop": "eos_or_token_limit"
++  },
++  "quality_tolerances": {
++    "max_nll_delta": 0.02,
++    "minimum_retention": 0.9
++  },
++  "quality": {
++    "samples": 20,
++    "lengths": [
++      1024,
++      2048,
++      4096
++    ],
++    "continuation": 32,
++    "qa_per_position": 10,
++    "max_new_tokens": 24,
++    "methods": [
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ]
++  },
++  "triviaqa": {
++    "samples": 20,
++    "max_prompt_tokens": 4096,
++    "max_new_tokens": 32
++  },
++  "ttft": {
++    "samples": 5,
++    "lengths": [
++      1024,
++      2048,
++      4096
++    ],
++    "bandwidth_gbps": [
++      0.1,
++      1,
++      10
++    ],
++    "warmup": 2,
++    "repeats": 10,
++    "methods": [
++      "text",
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ],
++    "modes": [
++      "whole",
++      "chunk_serial",
++      "chunk_pipeline"
++    ],
++    "chunk_sizes": [
++      256
++    ]
++  },
++  "adaptive": {
++    "cases": 5,
++    "length": 1024,
++    "chunk_size": 256,
++    "traces": 5,
++    "bandwidth_scales": [
++      1,
++      0.01
++    ],
++    "slos": [
++      0.2,
++      0.5
++    ],
++    "max_new_tokens": 20,
++    "warmup": 1,
++    "repeats": 3,
++    "mode": "socket_serial",
++    "strategies": [
++      "adaptive",
++      "adaptive_history",
++      "adaptive_static",
++      "fixed1",
++      "fixed2",
++      "fixed3",
++      "text"
++    ],
++    "throughput_estimator": "previous_completed_message",
++    "initial_bandwidth_gbps": 1.0
++  },
++  "calibration": {
++    "payload_bytes": [
++      65536,
++      1048576,
++      8388608,
++      67108864
++    ],
++    "repeats": 5
++  },
++  "checks": {
++    "generation_tokens": 8
++  },
++  "transport": {
++    "queue_capacity": 1,
++    "pacing_quantum_bytes": null
++  },
++  "ablation": {
++    "enabled": true,
++    "samples": 1,
++    "qa_per_position": 1,
++    "lengths": [
++      1024
++    ],
++    "precisions": [
++      "uniform16",
++      "uniform32",
++      "layered2"
++    ],
++    "entropy": [
++      "packed",
++      "arithmetic"
++    ],
++    "warmup": 1,
++    "repeats": 3
++  },
++  "execution": {
++    "linear_tile_tokens": 256,
++    "explicit_causal_mask": true,
++    "sdpa_backend": "efficient",
++    "fp16_reduced_precision_reduction": false
++  }
+ }
+diff --git a/experiments/configs/larger-tinyllama.json b/experiments/configs/larger-tinyllama.json
+index 895c50b..5c4d213 100644
+--- a/experiments/configs/larger-tinyllama.json
++++ b/experiments/configs/larger-tinyllama.json
+@@ -1,16 +1,148 @@
+ {
+-  "protocol": "cachegen-shared-v2", "scale": "larger", "model": "tinyllama", "seed": 0, "cpu_threads": 8,
+-  "data": {"longchat": "test_data/longchat.jsonl", "triviaqa": "test_data/tqa.jsonl", "bandwidth": "test_data/bw.jsonl"},
+-  "scoring": {"answer": "author_first_lf_line", "normalization": "standard_em_f1", "aliases": "dataset_only", "stop": "eos_or_token_limit"},
+-  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_retention": 0.9},
+-  "quality": {"samples": 20, "lengths": [512, 1024, 1536], "continuation": 32, "qa_per_position": 10, "max_new_tokens": 24,
+-              "methods": ["raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "triviaqa": {"samples": 7, "max_prompt_tokens": 2000, "max_new_tokens": 32},
+-  "ttft": {"samples": 5, "lengths": [512, 1024, 1536], "bandwidth_gbps": [0.1, 1, 10], "warmup": 2, "repeats": 10,
+-           "methods": ["text", "raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "adaptive": {"cases": 5, "length": 1024, "chunk_size": 256, "traces": 5, "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+-               "max_new_tokens": 20, "warmup": 1, "repeats": 3, "mode": "socket_serial",
+-               "strategies": ["adaptive", "adaptive_static", "fixed1", "fixed2", "fixed3", "text"]},
+-  "calibration": {"payload_bytes": [65536, 1048576, 8388608, 67108864], "repeats": 5},
+-  "checks": {"generation_tokens": 8}
++  "protocol": "cachegen-shared-v3",
++  "scale": "larger",
++  "model": "tinyllama",
++  "seed": 0,
++  "cpu_threads": 8,
++  "data": {
++    "longchat": "test_data/longchat.jsonl",
++    "triviaqa": "test_data/tqa.jsonl",
++    "bandwidth": "test_data/bw.jsonl"
++  },
++  "scoring": {
++    "answer": "author_first_lf_line",
++    "normalization": "standard_em_f1",
++    "aliases": "dataset_only",
++    "stop": "eos_or_token_limit"
++  },
++  "quality_tolerances": {
++    "max_nll_delta": 0.02,
++    "minimum_retention": 0.9
++  },
++  "quality": {
++    "samples": 20,
++    "lengths": [
++      512,
++      1024,
++      1536
++    ],
++    "continuation": 32,
++    "qa_per_position": 10,
++    "max_new_tokens": 24,
++    "methods": [
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ]
++  },
++  "triviaqa": {
++    "samples": 7,
++    "max_prompt_tokens": 2000,
++    "max_new_tokens": 32
++  },
++  "ttft": {
++    "samples": 5,
++    "lengths": [
++      512,
++      1024,
++      1536
++    ],
++    "bandwidth_gbps": [
++      0.1,
++      1,
++      10
++    ],
++    "warmup": 2,
++    "repeats": 10,
++    "methods": [
++      "text",
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ],
++    "modes": [
++      "whole",
++      "chunk_serial",
++      "chunk_pipeline"
++    ],
++    "chunk_sizes": [
++      256
++    ]
++  },
++  "adaptive": {
++    "cases": 5,
++    "length": 1024,
++    "chunk_size": 256,
++    "traces": 5,
++    "bandwidth_scales": [
++      1,
++      0.01
++    ],
++    "slos": [
++      0.2,
++      0.5
++    ],
++    "max_new_tokens": 20,
++    "warmup": 1,
++    "repeats": 3,
++    "mode": "socket_serial",
++    "strategies": [
++      "adaptive",
++      "adaptive_history",
++      "adaptive_static",
++      "fixed1",
++      "fixed2",
++      "fixed3",
++      "text"
++    ],
++    "throughput_estimator": "previous_completed_message",
++    "initial_bandwidth_gbps": 1.0
++  },
++  "calibration": {
++    "payload_bytes": [
++      65536,
++      1048576,
++      8388608,
++      67108864
++    ],
++    "repeats": 5
++  },
++  "checks": {
++    "generation_tokens": 8
++  },
++  "transport": {
++    "queue_capacity": 1,
++    "pacing_quantum_bytes": null
++  },
++  "ablation": {
++    "enabled": true,
++    "samples": 1,
++    "qa_per_position": 1,
++    "lengths": [
++      512
++    ],
++    "precisions": [
++      "uniform16",
++      "uniform32",
++      "layered2"
++    ],
++    "entropy": [
++      "packed",
++      "arithmetic"
++    ],
++    "warmup": 1,
++    "repeats": 3
++  },
++  "execution": {
++    "linear_tile_tokens": 256,
++    "explicit_causal_mask": true,
++    "sdpa_backend": "efficient",
++    "fp16_reduced_precision_reduction": false
++  }
+ }
+diff --git a/experiments/configs/minimal.json b/experiments/configs/minimal.json
+index 71c70a4..8e8db9a 100644
+--- a/experiments/configs/minimal.json
++++ b/experiments/configs/minimal.json
+@@ -1,16 +1,138 @@
+ {
+-  "protocol": "cachegen-shared-v2", "scale": "minimal", "model": "mistral", "seed": 0, "cpu_threads": 8,
+-  "data": {"longchat": "test_data/longchat.jsonl", "triviaqa": "test_data/tqa.jsonl", "bandwidth": "test_data/bw.jsonl"},
+-  "scoring": {"answer": "author_first_lf_line", "normalization": "standard_em_f1", "aliases": "dataset_only", "stop": "eos_or_token_limit"},
+-  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_retention": 0.9},
+-  "quality": {"samples": 1, "lengths": [128, 257], "continuation": 4, "qa_per_position": 1, "max_new_tokens": 8,
+-              "methods": ["raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "triviaqa": {"samples": 1, "max_prompt_tokens": 1792, "max_new_tokens": 8},
+-  "ttft": {"samples": 2, "lengths": [128, 257], "bandwidth_gbps": [0.1, 10], "warmup": 1, "repeats": 1,
+-           "methods": ["text", "raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "adaptive": {"cases": 1, "length": 257, "chunk_size": 128, "traces": 1, "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+-               "max_new_tokens": 8, "warmup": 1, "repeats": 1, "mode": "socket_serial",
+-               "strategies": ["adaptive", "adaptive_static", "fixed1", "fixed2", "fixed3", "text"]},
+-  "calibration": {"payload_bytes": [65536, 1048576, 8388608], "repeats": 2},
+-  "checks": {"generation_tokens": 4}
++  "protocol": "cachegen-shared-v3",
++  "scale": "minimal",
++  "model": "mistral",
++  "seed": 0,
++  "cpu_threads": 8,
++  "data": {
++    "longchat": "test_data/longchat.jsonl",
++    "triviaqa": "test_data/tqa.jsonl",
++    "bandwidth": "test_data/bw.jsonl"
++  },
++  "scoring": {
++    "answer": "author_first_lf_line",
++    "normalization": "standard_em_f1",
++    "aliases": "dataset_only",
++    "stop": "eos_or_token_limit"
++  },
++  "quality_tolerances": {
++    "max_nll_delta": 0.02,
++    "minimum_retention": 0.9
++  },
++  "quality": {
++    "samples": 1,
++    "lengths": [
++      128,
++      257
++    ],
++    "continuation": 4,
++    "qa_per_position": 1,
++    "max_new_tokens": 8,
++    "methods": [
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ]
++  },
++  "triviaqa": {
++    "samples": 1,
++    "max_prompt_tokens": 1792,
++    "max_new_tokens": 8
++  },
++  "ttft": {
++    "samples": 2,
++    "lengths": [
++      128,
++      257
++    ],
++    "bandwidth_gbps": [
++      0.1,
++      10
++    ],
++    "warmup": 1,
++    "repeats": 1,
++    "methods": [
++      "text",
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ],
++    "modes": [
++      "whole",
++      "chunk_serial",
++      "chunk_pipeline"
++    ],
++    "chunk_sizes": [
++      128
++    ]
++  },
++  "adaptive": {
++    "cases": 1,
++    "length": 257,
++    "chunk_size": 128,
++    "traces": 1,
++    "bandwidth_scales": [
++      1,
++      0.01
++    ],
++    "slos": [
++      0.2,
++      0.5
++    ],
++    "max_new_tokens": 8,
++    "warmup": 1,
++    "repeats": 1,
++    "mode": "socket_serial",
++    "strategies": [
++      "adaptive",
++      "adaptive_history",
++      "adaptive_static",
++      "fixed1",
++      "fixed2",
++      "fixed3",
++      "text"
++    ],
++    "throughput_estimator": "previous_completed_message",
++    "initial_bandwidth_gbps": 1.0
++  },
++  "calibration": {
++    "payload_bytes": [
++      65536,
++      1048576,
++      8388608
++    ],
++    "repeats": 2
++  },
++  "checks": {
++    "generation_tokens": 4
++  },
++  "transport": {
++    "queue_capacity": 1,
++    "pacing_quantum_bytes": null
++  },
++  "ablation": {
++    "enabled": true,
++    "samples": 1,
++    "qa_per_position": 1,
++    "lengths": [
++      257
++    ],
++    "precisions": [
++      "uniform16",
++      "uniform32",
++      "layered2"
++    ],
++    "entropy": [
++      "packed",
++      "arithmetic"
++    ],
++    "warmup": 1,
++    "repeats": 3
++  }
+ }
+diff --git a/experiments/configs/small.json b/experiments/configs/small.json
+index 61f6bb9..fdd7a49 100644
+--- a/experiments/configs/small.json
++++ b/experiments/configs/small.json
+@@ -1,16 +1,136 @@
+ {
+-  "protocol": "cachegen-shared-v2", "scale": "small", "model": "mistral", "seed": 0, "cpu_threads": 8,
+-  "data": {"longchat": "test_data/longchat.jsonl", "triviaqa": "test_data/tqa.jsonl", "bandwidth": "test_data/bw.jsonl"},
+-  "scoring": {"answer": "author_first_lf_line", "normalization": "standard_em_f1", "aliases": "dataset_only", "stop": "eos_or_token_limit"},
+-  "quality_tolerances": {"max_nll_delta": 0.02, "minimum_retention": 0.9},
+-  "quality": {"samples": 2, "lengths": [256, 512], "continuation": 16, "qa_per_position": 2, "max_new_tokens": 20,
+-              "methods": ["raw", "uniform4", "uniform8", "cachegen1", "cachegen2", "cachegen3"]},
+-  "triviaqa": {"samples": 4, "max_prompt_tokens": 2000, "max_new_tokens": 24},
+-  "ttft": {"samples": 2, "lengths": [256, 512], "bandwidth_gbps": [0.1, 1, 10], "warmup": 1, "repeats": 3,
+-           "methods": ["text", "uniform8", "cachegen2", "cachegen3"]},
+-  "adaptive": {"cases": 3, "length": 576, "chunk_size": 256, "traces": 2, "bandwidth_scales": [1, 0.01], "slos": [0.2, 0.5],
+-               "max_new_tokens": 20, "warmup": 1, "repeats": 2, "mode": "socket_serial",
+-               "strategies": ["adaptive", "adaptive_static", "fixed1", "fixed2", "fixed3", "text"]},
+-  "calibration": {"payload_bytes": [65536, 1048576, 8388608], "repeats": 3},
+-  "checks": {"generation_tokens": 8}
++  "protocol": "cachegen-shared-v3",
++  "scale": "small",
++  "model": "mistral",
++  "seed": 0,
++  "cpu_threads": 8,
++  "data": {
++    "longchat": "test_data/longchat.jsonl",
++    "triviaqa": "test_data/tqa.jsonl",
++    "bandwidth": "test_data/bw.jsonl"
++  },
++  "scoring": {
++    "answer": "author_first_lf_line",
++    "normalization": "standard_em_f1",
++    "aliases": "dataset_only",
++    "stop": "eos_or_token_limit"
++  },
++  "quality_tolerances": {
++    "max_nll_delta": 0.02,
++    "minimum_retention": 0.9
++  },
++  "quality": {
++    "samples": 2,
++    "lengths": [
++      256,
++      512
++    ],
++    "continuation": 16,
++    "qa_per_position": 2,
++    "max_new_tokens": 20,
++    "methods": [
++      "raw",
++      "uniform4",
++      "uniform8",
++      "cachegen1",
++      "cachegen2",
++      "cachegen3"
++    ]
++  },
++  "triviaqa": {
++    "samples": 4,
++    "max_prompt_tokens": 2000,
++    "max_new_tokens": 24
++  },
++  "ttft": {
++    "samples": 2,
++    "lengths": [
++      256,
++      512
++    ],
++    "bandwidth_gbps": [
++      0.1,
++      1,
++      10
++    ],
++    "warmup": 1,
++    "repeats": 3,
++    "methods": [
++      "text",
++      "uniform8",
++      "cachegen2",
++      "cachegen3"
++    ],
++    "modes": [
++      "whole",
++      "chunk_serial",
++      "chunk_pipeline"
++    ],
++    "chunk_sizes": [
++      256
++    ]
++  },
++  "adaptive": {
++    "cases": 3,
++    "length": 576,
++    "chunk_size": 256,
++    "traces": 2,
++    "bandwidth_scales": [
++      1,
++      0.01
++    ],
++    "slos": [
++      0.2,
++      0.5
++    ],
++    "max_new_tokens": 20,
++    "warmup": 1,
++    "repeats": 2,
++    "mode": "socket_serial",
++    "strategies": [
++      "adaptive",
++      "adaptive_history",
++      "adaptive_static",
++      "fixed1",
++      "fixed2",
++      "fixed3",
++      "text"
++    ],
++    "throughput_estimator": "previous_completed_message",
++    "initial_bandwidth_gbps": 1.0
++  },
++  "calibration": {
++    "payload_bytes": [
++      65536,
++      1048576,
++      8388608
++    ],
++    "repeats": 3
++  },
++  "checks": {
++    "generation_tokens": 8
++  },
++  "transport": {
++    "queue_capacity": 1,
++    "pacing_quantum_bytes": null
++  },
++  "ablation": {
++    "enabled": true,
++    "samples": 1,
++    "qa_per_position": 1,
++    "lengths": [
++      256
++    ],
++    "precisions": [
++      "uniform16",
++      "uniform32",
++      "layered2"
++    ],
++    "entropy": [
++      "packed",
++      "arithmetic"
++    ],
++    "warmup": 1,
++    "repeats": 3
++  }
+ }
+diff --git a/experiments/engine.py b/experiments/engine.py
+index 9b6a35b..330e7ab 100644
+--- a/experiments/engine.py
++++ b/experiments/engine.py
+@@ -36,8 +36,12 @@ def snapshot_path(spec):
+ 
+ 
+ class Engine:
+-    def __init__(self, spec, *, load=True):
++    def __init__(self, spec, *, load=True, execution=None):
+         self.spec = spec
++        from experiments.config import DEFAULT_EXECUTION
++        from experiments.stable import configure_execution
++        self.execution = dict(execution or DEFAULT_EXECUTION)
++        configure_execution(self.execution)
+         self.snapshot = snapshot_path(spec)
+         self.tokenizer = AutoTokenizer.from_pretrained(str(self.snapshot), local_files_only=True)
+         if load:
+@@ -60,6 +64,12 @@ class Engine:
+             raise ValueError(f'Adapter/model geometry mismatch: {actual} vs {expected}')
+         if getattr(c, 'pretraining_tp', 1) != 1 or getattr(c, 'sliding_window', None):
+             raise ValueError('This adapter requires pretraining_tp=1 and full attention')
++        if self.execution['linear_tile_tokens']:
++            from experiments.stable import install_stable_transformer
++            install_stable_transformer(self.model, self.execution['linear_tile_tokens'])
++        elif self.execution['explicit_causal_mask']:
++            from experiments.stable import explicit_causal_mask
++            self.model.model.register_forward_pre_hook(explicit_causal_mask, with_kwargs=True)
+ 
+     @torch.inference_mode()
+     def forward(self, ids, blob=None, *, project=True, last_only=True):
+@@ -130,17 +140,20 @@ class Engine:
+         return {'nll': float(losses.mean()), 'token_nll': losses.tolist(),
+                 'scored_ids': continuation, 'tokens_scored': len(continuation)}
+ 
+-    def codec(self, tokens, level):
+-        from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
++    def codec_schedule(self, level):
+         from lmcache.storage_backend.serde.cachegen_basics import CacheGenConfig
+-        from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
+-        from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
+         keys = {1: (16, 16, 12), 2: (32, 16, 16), 3: (32, 32, 32)}[level]
+         values = {1: (16, 12), 2: (32, 16), 3: (32, 32)}[level]
+         spec = self.spec
+-        schedule = CacheGenConfig(*spec['key_boundaries'], *keys, spec['value_boundary'], *values)
++        return CacheGenConfig(*spec['key_boundaries'], *keys, spec['value_boundary'], *values)
++
++    def codec(self, tokens, level):
++        from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
++        from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
++        from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
++        schedule = self.codec_schedule(level)
+         config = LMCacheEngineConfig.from_defaults(chunk_size=tokens)
+-        metadata = LMCacheEngineMetadata(spec['id'], 1, 0, 'huggingface')
++        metadata = LMCacheEngineMetadata(self.spec['id'], 1, 0, 'huggingface')
+         return (CacheGenSerializer(config, metadata, cachegen_config=schedule),
+                 CacheGenDeserializer(config, metadata, cachegen_config=schedule))
+ 
+@@ -161,6 +174,18 @@ class Engine:
+             restore = decoder.from_bytes
+         return payload, seconds, restore
+ 
++    def restore_function(self, method, tokens):
++        """Reopen a persisted prepared payload without encoding it a second time."""
++        if method == 'text':
++            return self.restore_text
++        if method == 'raw':
++            return lambda p: torch.load(io.BytesIO(p), map_location='cuda', weights_only=True)
++        if method in ('uniform4', 'uniform8'):
++            return unpack_uniform
++        if method in ('cachegen1', 'cachegen2', 'cachegen3'):
++            return self.codec(tokens, int(method[-1]))[1].from_bytes
++        raise ValueError(f'Unknown representation: {method}')
++
+     def text_payload(self, ids):
+         text = self.tokenizer.decode(ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)
+         encoded = self.tokenizer.encode(text, add_special_tokens=False)
+diff --git a/experiments/mistral/finalize.py b/experiments/mistral/finalize.py
+index 68aa5c5..048f517 100644
+--- a/experiments/mistral/finalize.py
++++ b/experiments/mistral/finalize.py
+@@ -41,7 +41,7 @@ def main(argv=None):
+     run=args.run_dir;root=Path(__file__).resolve().parent
+     workspace=Workspace.discover()
+     manifest_path=run/'manifest.json'
+-    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol')=='cachegen-shared-v2':
++    if manifest_path.exists() and json.loads(manifest_path.read_text()).get('protocol') in ('cachegen-shared-v2', 'cachegen-shared-v3'):
+         from experiments.artifacts import verify
+         if json.loads(manifest_path.read_text())['status']!='completed':
+             raise RuntimeError('Shared batch is incomplete; resume it with experiments/run.sh --resume')
+diff --git a/experiments/records.py b/experiments/records.py
+index f67a40c..10e2b01 100644
+--- a/experiments/records.py
++++ b/experiments/records.py
+@@ -3,8 +3,10 @@ import hashlib
+ import json
+ import sqlite3
+ import math
++import os
+ from datetime import datetime, timezone
+ from pathlib import Path
++from experiments.config import TASK_KINDS, ttft_variants, ablation_cases
+ 
+ 
+ def canonical(value):
+@@ -19,8 +21,29 @@ def save(path, value):
+     path = Path(path)
+     path.parent.mkdir(parents=True, exist_ok=True)
+     tmp = path.with_name(path.name + '.tmp')
+-    tmp.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n', encoding='utf-8')
++    with tmp.open('w', encoding='utf-8') as stream:
++        stream.write(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + '\n')
++        stream.flush()
++        os.fsync(stream.fileno())
+     tmp.replace(path)
++    if os.name == 'posix':
++        directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
++        try:
++            os.fsync(directory)
++        finally:
++            os.close(directory)
++
++
++def record_memory_peak(manifest, allocated, reserved, host_peak_rss=None):
++    """Resume must preserve a higher peak from an earlier attempt."""
++    attempt = manifest['attempts'][-1]
++    attempt.update(peak_gpu_allocated_bytes=allocated, peak_gpu_reserved_bytes=reserved)
++    fields = ['peak_gpu_allocated_bytes', 'peak_gpu_reserved_bytes']
++    if host_peak_rss is not None:
++        attempt.update(peak_host_rss_bytes=host_peak_rss, host_peak_scope='whole_process_attempt_including_model_load')
++        fields.append('peak_host_rss_bytes')
++    for field in fields:
++        manifest[field] = max([manifest.get(field, 0)] + [a.get(field, 0) for a in manifest['attempts']])
+ 
+ 
+ class Journal:
+@@ -86,23 +109,44 @@ def expected_keys(cfg, selected, jobs):
+                 keys.extend(f'{task}/{kind}/{case["case_id"]}/{method}'
+                             for case in selected[kind] for method in cfg['quality']['methods'])
+         elif job['kind'] == 'ttft':
+-            keys.extend(f'{task}/{case["case_id"]}/{bw}/{repeat}/{method}'
++            keys.extend(ttft_key(task, case['case_id'], bw, repeat, method, mode, size, cfg['transport']['queue_capacity'])
+                         for case in selected['ttft'] for bw in cfg['ttft']['bandwidth_gbps']
+-                        for repeat in range(1, cfg['ttft']['repeats'] + 1) for method in cfg['ttft']['methods'])
+-        else:
+-            keys.extend(f'{task}/{case["case_id"]}/{trace}/{repeat}/{strategy}'
++                        for repeat in range(1, cfg['ttft']['repeats'] + 1) for method in cfg['ttft']['methods']
++                        for mode, size in ttft_variants(cfg, case.get('context_tokens', cfg['ttft']['lengths'][0])))
++        elif job['kind'] == 'adaptive':
++            keys.extend(adaptive_key(task, case['case_id'], trace, repeat, strategy, cfg)
+                         for case in selected['adaptive'] for trace in range(cfg['adaptive']['traces'])
+                         for repeat in range(1, cfg['adaptive']['repeats'] + 1) for strategy in cfg['adaptive']['strategies'])
++        elif job['kind'] == 'ablation':
++            keys.extend(f'{task}/{kind}/{case["case_id"]}/{precision}/{entropy}'
++                        for kind, case in ablation_cases(cfg, selected)
++                        for precision in cfg['ablation']['precisions'] for entropy in cfg['ablation']['entropy'])
++        else:
++            raise ValueError(f'Unknown task kind: {job["kind"]}')
+         if len(keys) != len(set(keys)):
+             raise ValueError('Experiment matrix generated duplicate keys')
+         result[task] = keys
+     return result
+ 
+ 
++def ttft_key(task, case_id, bandwidth, repeat, method, mode, chunk_size, capacity):
++    return f'{task}/{case_id}/{bandwidth}/{repeat}/{method}/{mode}/chunk-{chunk_size}/queue-{capacity}'
++
++
++def adaptive_key(task, case_id, trace, repeat, strategy, cfg):
++    estimator = cfg['adaptive']['throughput_estimator'] if strategy == 'adaptive_history' else 'current_trace'
++    return f'{task}/{case_id}/{trace}/{repeat}/{strategy}/{estimator}/chunk-{cfg["adaptive"]["chunk_size"]}'
++
++
+ def validate_task_records(journal, job, expected):
+     """A full key matrix must also contain the promised measurements and outputs."""
++    if job['kind'] not in TASK_KINDS:
++        raise ValueError(f'Unknown task kind: {job["kind"]}')
+     count = journal.validate(expected, job['name'])
+     for row in journal.rows(job['name']):
++        value = row.get('offline_prefill_seconds')
++        if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
++            raise ValueError(f'Missing/invalid offline_prefill_seconds in {row["record_id"]}')
+         numeric = ['offline_prefill_seconds']
+         if job['kind'] == 'adaptive':
+             numeric += ['offline_all_levels_encode_seconds', 'offline_preparation_wall_seconds',
+@@ -115,22 +159,63 @@ def validate_task_records(journal, job, expected):
+                 if decision['start'] != previous or decision['end'] <= previous or decision['cache_tokens_after'] != decision['end'] or decision['level'] != level:
+                     raise ValueError('Adaptive cache positions or tail are inconsistent')
+                 previous = decision['end']
++                if decision.get('source_chunk_index') is not None and decision['source_chunk_index'] != decision['chunk_index'] - 1:
++                    raise ValueError('History estimator read a nonprevious chunk')
++                if row.get('strategy') == 'adaptive_history':
++                    source = decision.get('estimate_source')
++                    if source != ('fixed_initial' if decision['chunk_index'] == 0 else 'previous_completed_message'):
++                        raise ValueError('Invalid history information boundary')
++                for field in ('estimate_gbps', 'actual_bandwidth_gbps', 'effective_transfer_seconds', 'decision_seconds'):
++                    if type(decision.get(field)) not in (int, float) or not math.isfinite(decision[field]) or decision[field] < 0:
++                        raise ValueError(f'Missing adaptive {field}')
++                if set(decision.get('candidate_forecasts_seconds', {})) != {'0', '1', '2', '3'}:
++                    raise ValueError('Missing per-representation cost forecasts')
+             if previous != row['context_tokens']:
+                 raise ValueError('Adaptive context tail is missing')
+         else:
+             numeric += ['offline_encode_seconds']
+             if job['kind'] == 'ttft':
+                 numeric += ['transfer_seconds', 'reconstruct_seconds', 'remaining_input_seconds', 'ttft_wall_seconds', 'actual_bandwidth_gbps']
+-            elif row['kind'] == 'quality':
++                validate_timeline(row)
++            if job['kind'] == 'ablation':
++                numeric += ['quantize_seconds', 'decode_seconds', 'symbol_data_bytes', 'bytes']
++                if not row.get('symbols_identical') or not row.get('entropy_reconstructions_identical'):
++                    raise ValueError('Missing exact entropy-path equality checks')
++                if len(row.get('encode_timings_seconds', [])) != row.get('timing_repeats') or len(row.get('decode_timings_seconds', [])) != row.get('timing_repeats'):
++                    raise ValueError('Incomplete ablation timing repetitions')
++            if row['kind'] == 'quality' or row.get('evaluation_kind') == 'quality':
+                 if row.get('tokens_scored') != len(row.get('scored_ids', [])) or row['tokens_scored'] != len(row.get('token_nll', [])) or not row['tokens_scored']:
+                     raise ValueError('Incomplete continuation token scores')
+         for field in numeric:
+             value = row.get(field)
+             if type(value) not in (int, float) or not math.isfinite(value) or value < 0:
+                 raise ValueError(f'Missing/invalid {field} in {row["record_id"]}')
+-        if row['kind'] in ('controlled', 'triviaqa', 'adaptive'):
++        if row['kind'] in ('controlled', 'triviaqa', 'adaptive') or row.get('evaluation_kind') == 'controlled':
+             if not isinstance(row.get('prediction'), str) or not isinstance(row.get('generated_ids'), list):
+                 raise ValueError('QA generation evidence is missing')
+             if any(type(row.get(field)) not in (int, float) or not 0 <= row[field] <= 1 for field in ('em', 'f1')):
+                 raise ValueError('QA scores are missing/invalid')
+     return count
++
++
++def validate_timeline(row):
++    chunks = row.get('chunks', [])
++    if not chunks:
++        raise ValueError('Missing receive/restore timeline')
++    previous = 0
++    for i, c in enumerate(chunks):
++        if c['chunk_index'] != i or c['token_start'] != previous or c['token_end'] <= previous:
++            raise ValueError('Timeline order or tail differs')
++        if not 0 <= c['receive_start'] <= c['receive_end'] <= c['data_available'] <= c['restore_start'] <= c['restore_end'] <= row['ttft_wall_seconds']:
++            raise ValueError('Invalid receive/GPU completion times')
++        if not c['receive_start'] <= c['send_start'] <= c['data_available']:
++            raise ValueError('Sender started without receiver readiness')
++        if row['mode'] == 'chunk_serial' and i and c['send_start'] < chunks[i - 1]['restore_end']:
++            raise ValueError('Serial sent before previous restore completed')
++        # Bounded receiving/queued lookahead: current restore + capacity ahead.
++        cap = row['queue_capacity']
++        if row['mode'] == 'chunk_pipeline' and i >= cap and c['send_start'] < chunks[i - cap]['dequeue_time']:
++            raise ValueError('Pipeline exceeded receiver credits')
++        previous = c['token_end']
++    if previous != row['context_tokens'] or sum(c['message_bytes'] for c in chunks) != row['bytes']:
++        raise ValueError('Incomplete timeline bytes/context')
+diff --git a/experiments/scoring.py b/experiments/scoring.py
+index 393aa4c..144ed55 100644
+--- a/experiments/scoring.py
++++ b/experiments/scoring.py
+@@ -1,4 +1,4 @@
+-"""Frozen QA scoring for protocol cachegen-shared-v2."""
++"""Frozen QA scoring shared by protocols v2 and v3."""
+ import re
+ import string
+ from collections import Counter
+diff --git a/experiments/suite.py b/experiments/suite.py
+index 640a67c..ce6b40e 100644
+--- a/experiments/suite.py
++++ b/experiments/suite.py
+@@ -1,10 +1,11 @@
+-"""Run/resume the shared six-task protocol in an immutable, unique batch."""
++"""Run/resume the shared versioned protocol in an immutable, unique batch."""
+ import argparse
+ import fcntl
+ import json
+ import os
+ import random
+ import re
++import resource
+ import signal
+ import shutil
+ import sys
+@@ -12,8 +13,8 @@ import time
+ import traceback
+ from datetime import datetime, timezone
+ from pathlib import Path
+-from experiments.config import jobs, load_config
+-from experiments.records import Journal, expected_keys, save, fingerprint, validate_task_records
++from experiments.config import jobs, load_config, validate_config, TASK_KINDS
++from experiments.records import Journal, expected_keys, save, fingerprint, validate_task_records, record_memory_peak
+ from experiments.workspace import Workspace
+ 
+ 
+@@ -36,7 +37,7 @@ class Tee:
+ 
+ 
+ def run(args, workspace, cfg):
+-    from experiments.artifacts import (code_data_identity, runtime_identity, preflight,
++    from experiments.artifacts import (code_data_identity, runtime_identity, preflight, InputGuard,
+                                         collect_metadata, sha256, seal, verify)
+     import torch
+     from experiments.engine import Engine
+@@ -58,11 +59,16 @@ def run(args, workspace, cfg):
+     # A resume mismatch must not mutate a prior batch's manifest or exit code.
+     initialized = False
+     manifest = None
++    def capture_memory():
++        if manifest and manifest['attempts'] and manifest['attempts'][-1].get('memory_scope') == 'after_model_load':
++            host_peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == 'darwin' else 1024)
++            record_memory_peak(manifest, torch.cuda.max_memory_allocated(), torch.cuda.max_memory_reserved(), host_peak)
+     try:
+         torch.set_num_threads(cfg.get('cpu_threads', 8))
+         torch.manual_seed(cfg['seed'])
+         random.seed(cfg['seed'])
+         current = code_data_identity(workspace.repo, cfg)
++        input_guard = InputGuard(workspace.repo, cfg, current)
+         if args.resume:
+             manifest = json.loads((run_dir / 'manifest.json').read_text())
+             if manifest['identity']['inputs'] != current:
+@@ -95,7 +101,7 @@ def run(args, workspace, cfg):
+             save(Path(state_file), {'run_directory': str(run_dir)})
+         if not torch.cuda.is_available():
+             raise RuntimeError('CUDA is required for real measurements')
+-        engine = Engine(cfg['model'], load=False)
++        engine = Engine(cfg['model'], load=False, execution=cfg['execution'])
+         selected = selection(workspace.repo, cfg, engine.tokenizer)
+         preflight(engine, cfg, selected, run_dir)
+         attempt_dir = run_dir / 'attempts' / f'{len(manifest["attempts"]):03d}'
+@@ -133,17 +139,20 @@ def run(args, workspace, cfg):
+                     attention_class=type(engine.model.model.layers[0].self_attn).__name__)
+         save(run_dir / 'metadata.json', meta)
+         torch.cuda.reset_peak_memory_stats()
+-        if not (run_dir / 'cache_checks.json').is_file() or json.loads((run_dir / 'cache_checks.json').read_text())['status'] != 'passed':
+-            manifest['progress']['stage'] = 'cache_checks'
+-            save(run_dir / 'manifest.json', manifest)
+-            with torch.inference_mode():
+-                tasks.cache_checks(engine, cfg, selected, run_dir)
++        manifest['attempts'][-1]['memory_scope'] = 'after_model_load'
+         def progress(task, key):
++            input_guard.check()
+             manifest['progress'] = {'stage': task, 'current_observation': key,
+                                     'completed': len(journal.keys), 'expected': manifest['expected_observations']}
+             save(run_dir / 'manifest.json', manifest)
++        if not (run_dir / 'cache_checks.json').is_file() or json.loads((run_dir / 'cache_checks.json').read_text())['status'] != 'passed':
++            manifest['progress']['stage'] = 'cache_checks'
++            save(run_dir / 'manifest.json', manifest)
++            with torch.inference_mode():
++                tasks.cache_checks(engine, cfg, selected, run_dir, progress=progress)
+         with torch.inference_mode():
+             for job in manifest['jobs']:
++                input_guard.check(force=True)
+                 if set(expected[job['name']]).issubset(journal.keys):
+                     validate_task_records(journal, job, expected[job['name']])
+                     job['status'] = 'completed'
+@@ -151,6 +160,8 @@ def run(args, workspace, cfg):
+                 job.update(status='running', started_utc=now())
+                 job.pop('exit_code', None)
+                 save(run_dir / 'manifest.json', manifest)
++                if job['kind'] not in TASK_KINDS:
++                    raise ValueError(f'Unknown task kind: {job["kind"]}')
+                 getattr(tasks, job['kind'])(engine, cfg, selected, run_dir, journal, job, progress)
+                 count = validate_task_records(journal, job, expected[job['name']])
+                 job.update(status='completed', observations=count, finished_utc=now(), exit_code=0)
+@@ -166,8 +177,8 @@ def run(args, workspace, cfg):
+         report(run_dir, cfg, journal, expected)
+         journal.close()
+         journal = None
++        capture_memory()
+         manifest.update(status='completed', finished_utc=now(), exit_code=0,
+-            peak_gpu_allocated_bytes=torch.cuda.max_memory_allocated(), peak_gpu_reserved_bytes=torch.cuda.max_memory_reserved(),
+             progress={'stage': 'completed', 'completed': manifest['expected_observations'], 'expected': manifest['expected_observations']})
+         manifest['attempts'][-1].update(finished_utc=now(), exit_code=0)
+         save(run_dir / 'manifest.json', manifest)
+@@ -177,6 +188,7 @@ def run(args, workspace, cfg):
+     except BaseException as error:
+         if not initialized:
+             raise
++        capture_memory()
+         code = (128 + (error.args[0] if error.args and type(error.args[0]) is int else 2)) if isinstance(error, KeyboardInterrupt) else 1
+         manifest.update(status='interrupted' if isinstance(error, KeyboardInterrupt) else 'failed', error=repr(error),
+                         finished_utc=now(), exit_code=code)
+@@ -238,7 +250,7 @@ def main(argv=None, configuration=None):
+     if args.resume and (args.config or args.model or args.output_root):
+         parser.error('Resume uses the recorded configuration; do not override config/model/output-root')
+     path = args.resume / 'config.json' if args.resume else args.config or workspace.repo / 'experiments/configs/small.json'
+-    cfg = configuration if configuration is not None else load_config(path, args.model)
++    cfg = validate_config(configuration, args.model) if configuration is not None else load_config(path, args.model)
+     if args.dry_run:
+         print(json.dumps({'configuration': cfg, 'jobs': jobs(cfg),
+                           'run_directory': str(args.resume or (args.output_root or workspace.results / cfg['model']['name'] / cfg['scale']) / args.run_id),
+@@ -263,7 +275,7 @@ def check_configuration(workspace, cfg):
+             return 75
+         if not torch.cuda.is_available():
+             raise RuntimeError('CUDA resource inspection requires the target GPU')
+-        engine = Engine(cfg['model'], load=False)
++        engine = Engine(cfg['model'], load=False, execution=cfg['execution'])
+         selected = selection(workspace.repo, cfg, engine.tokenizer)
+         target = workspace.local / 'checked-configs' / fingerprint(cfg)[:16]
+         target.mkdir(parents=True, exist_ok=True)
+diff --git a/experiments/tasks.py b/experiments/tasks.py
+index a40368b..ba08726 100644
+--- a/experiments/tasks.py
++++ b/experiments/tasks.py
+@@ -1,15 +1,17 @@
+-"""The same three experiment implementations run against every model adapter."""
++"""Shared quality/adaptive tasks and TTFT/ablation exports for every adapter."""
+ import json
+-import random
+ import statistics
+ import time
+ import torch
+ from experiments.engine import timed, validate_blob
+-from experiments.records import save
++from experiments.records import save, adaptive_key
+ from experiments.scoring import extract_answer, score_qa, phrase_match
+-from mini_repro.adaptive import next_decision, representation_cost
++from mini_repro.adaptive import next_decision
+ from mini_repro.ttft import measurement_schedule
+-from mini_repro.transport import rate_limited_transfer
++from mini_repro.transport import transfer_chunks
++from experiments.chunks import prepare_chunk, unframe, restore_chunk
++from experiments.feedback import CompletedTransfer, history_decision
++from experiments.numerics import compare_logits, compare_kv, audit_generation, cached_reference, MAX_TIE_ULPS
+ 
+ 
+ def case_fields(case):
+@@ -26,31 +28,44 @@ def calibrate(cfg, run):
+     for size in cfg['calibration']['payload_bytes']:
+         payload = bytes(range(256)) * (size // 256) + bytes(range(size % 256))
+         for bw in [None] + cfg['ttft']['bandwidth_gbps']:
+-            rate_limited_transfer(payload, bw, validate=True)
++            transfer_chunks([payload], bw, lambda _, data: data, mode='whole',
++                            chunk_bytes=cfg['transport']['pacing_quantum_bytes'])
+             for repeat in range(cfg['calibration']['repeats']):
+-                received, seconds = rate_limited_transfer(payload, bw, validate=True)
+-                if received != payload:
++                result = transfer_chunks([payload], bw, lambda _, data: data, mode='whole',
++                                         chunk_bytes=cfg['transport']['pacing_quantum_bytes'])
++                if result['value'] != payload:
+                     raise RuntimeError('Calibration transport mismatch')
++                network = result['chunks'][0]
++                seconds = network['effective_transfer_seconds']
+                 realized = size * 8 / seconds / 1e9
+                 rows.append({'payload_bytes': size, 'target_gbps': bw, 'repeat': repeat,
+                              'seconds': seconds, 'actual_gbps': realized,
++                             'transport_wall_seconds': result['transport_wall_seconds'],
++                             'receiver_data_available': network['data_available'],
++                             'timeline': network, 'pacing_quantum_bytes': result['pacing_quantum_bytes'],
+                              'actual_to_target': realized / bw if bw else None,
+                              'target_reached_90pct': realized >= bw * .9 if bw else None})
+-                save(run / 'calibration.json', {'mode': 'local_socket_serial',
+-                    'boundary': 'socket setup + sender/receiver + pacing + bytes materialization; debug equality outside transfer clock',
++                save(run / 'calibration.json', {'mode': 'local_socket_pre_send_budget',
++                    'boundary': 'receiver buffer ready to complete bytes available; includes pre-send pacing and socket/materialization, excludes setup and capacity wait; wall/setup separately recorded',
+                     'rows': rows})
+ 
+ 
+-def cache_checks(engine, cfg, selected, run):
++def cache_checks(engine, cfg, selected, run, progress=None):
+     rows = []
+     def full_generate(ids, limit):
+-        expected = engine.model.generate(torch.tensor([ids], device='cuda'),
++        output = engine.model.generate(torch.tensor([ids], device='cuda'),
+             attention_mask=torch.ones((1, len(ids)), dtype=torch.long, device='cuda'),
+-            max_new_tokens=limit, do_sample=False, pad_token_id=engine.tokenizer.eos_token_id)[0, len(ids):].tolist()
+-        return expected[:expected.index(engine.tokenizer.eos_token_id)] if engine.tokenizer.eos_token_id in expected else expected
++            max_new_tokens=limit, do_sample=False, pad_token_id=engine.tokenizer.eos_token_id,
++            return_dict_in_generate=True, output_scores=True)
++        expected = output.sequences[0, len(ids):].tolist()
++        if engine.tokenizer.eos_token_id in expected:
++            expected = expected[:expected.index(engine.tokenizer.eos_token_id)]
++        return expected, [s[0] for s in output.scores]
+     # Multiple independent real documents at all configured lengths, multistep generation.
+     candidates = selected['ttft']
+     for case in candidates:
++        if progress:
++            progress('cache_checks', case['case_id'])
+         context, suffix = case['context_ids'], case['suffix_ids']
+         blob = engine.prefill(context)
+         before = blob.clone()
+@@ -60,44 +75,65 @@ def cache_checks(engine, cfg, selected, run):
+         reused, _ = engine.forward(suffix, blob)
+         error = float((direct - reused[0, -1]).abs().max())
+         optimized_error = float((direct - optimized[0, -1]).abs().max())
+-        if not torch.allclose(direct, optimized[0, -1], atol=.1, rtol=.02) or int(direct.argmax()) != int(optimized[0, -1].argmax()):
++        optimized_audit = compare_logits(direct, optimized[0, -1])
++        raw_audit = compare_logits(direct, reused[0, -1])
++        if not optimized_audit['passed']:
+             raise RuntimeError(f'Optimized text logits differ: {case["case_id"]}')
+-        if not torch.allclose(direct, reused[0, -1], atol=.1, rtol=.02) or int(direct.argmax()) != int(reused[0, -1].argmax()):
++        if not raw_audit['passed']:
+             raise RuntimeError(f'Raw cache logits differ: {case["case_id"]}')
+         del full, direct, reused, optimized
+         limit = cfg['checks']['generation_tokens']
+-        expected = full_generate(context + suffix, limit)
++        expected, expected_scores = full_generate(context + suffix, limit)
+         generated = engine.generate(suffix, blob, limit)
+         repeated = engine.generate(suffix, blob, limit)
+-        if expected != generated['generated_ids'] or expected != repeated['generated_ids'] or not torch.equal(blob, before):
++        if generated['generated_ids'] != repeated['generated_ids'] or not torch.equal(blob, before):
+             raise RuntimeError(f'Multitoken cache generation or mutation check failed: {case["case_id"]}')
++        question_audit = audit_generation(engine, suffix, blob, limit, expected, expected_scores, generated['generated_ids'])
+         natural_suffix = case['continuation_ids']
+-        natural_expected = full_generate(context + natural_suffix, limit)
++        natural_expected, natural_scores = full_generate(context + natural_suffix, limit)
+         natural_reused = engine.generate(natural_suffix, blob, limit)['generated_ids']
+-        if natural_expected != natural_reused:
+-            raise RuntimeError(f'Natural multistep cache generation differs: {case["case_id"]}')
++        natural_audit = audit_generation(engine, natural_suffix, blob, limit, natural_expected, natural_scores, natural_reused)
+         # Full-context cache sliced into raw chunks must reproduce all tokens, including a tail.
+         chunk_size = cfg['adaptive']['chunk_size']
+         slices = [blob[:, :, :, start:start + chunk_size, :] for start in range(0, len(context), chunk_size)]
+         merged = torch.cat(slices, dim=3)
+-        if not torch.equal(merged, blob) or engine.generate(suffix, merged, limit)['generated_ids'] != expected:
++        if not torch.equal(merged, blob) or engine.generate(suffix, merged, limit)['generated_ids'] != generated['generated_ids']:
+             raise RuntimeError('Chunk assembly lost positions or tail')
+         # Text recomputation must depend on prior chunks, rather than independent chunk prefills.
+         text_merged = None
+         for start in range(0, len(context), chunk_size):
+             text_merged = engine.prefill(context[start:start + chunk_size], text_merged)
+-        if engine.generate(suffix, text_merged, limit)['generated_ids'] != expected:
+-            raise RuntimeError('Sequential text chunk cache differs from full prefill')
++        text_kv_audit = compare_kv(blob, text_merged)
++        if not text_kv_audit['elementwise_allclose']:
++            save(run / 'cache_check_failure.json', {'case_id': case['case_id'],
++                'stage': 'text_chunk_kv', 'audit': text_kv_audit})
++            raise RuntimeError('Sequential text chunk cache exceeds numerical bounds')
++        reference_ids, reference_scores = cached_reference(engine, suffix, blob, limit)
++        if reference_ids != generated['generated_ids']:
++            raise RuntimeError('Repeated same-cache reference generation changed')
++        text_audit = audit_generation(engine, suffix, text_merged, limit, reference_ids, reference_scores)
+         rows.append({'case_id': case['case_id'], 'context_tokens': len(context), 'suffix_tokens': len(suffix),
+             'kv_shape': list(blob.shape), 'raw_logits_max_error': error, 'optimized_logits_max_error': optimized_error,
+             'generated_ids': expected, 'natural_suffix_ids': natural_suffix, 'natural_generated_ids': natural_expected,
+-            'repeat_cache_unchanged': True, 'raw_chunks_and_text_chunks_match': True})
++            'raw_reused_generated_ids': generated['generated_ids'],
++            'optimized_first_token_numeric_audit': optimized_audit, 'raw_first_token_numeric_audit': raw_audit,
++            'question_generation_audit': question_audit, 'natural_generation_audit': natural_audit,
++            'text_chunk_generation_audit': text_audit,
++            'text_chunk_kv_audit': text_kv_audit,
++            'text_chunk_kv_exact': torch.equal(blob, text_merged),
++            'repeat_cache_unchanged': True, 'raw_chunks_tensor_identical': True,
++            'text_chunks_numerically_close': True,
++            'raw_chunks_and_text_chunks_match': text_audit['generated_ids_identical']})
+         save(run / 'cache_checks.json', {'status': 'running', 'tolerances': {'atol': .1, 'rtol': .02}, 'cases': rows})
+-        del before, blob, merged, text_merged, slices
++        del before, blob, merged, text_merged, slices, expected_scores, natural_scores, reference_scores
+         torch.cuda.empty_cache()
+     # Check complete continuation scoring against the unmodified model's teacher forcing.
+     nll_rows = []
+-    for case in selected['quality'][:2]:
++    nll_cases = [case for length in cfg['quality']['lengths']
++                 for case in [r for r in selected['quality'] if r['context_tokens'] == length][:2]]
++    for case in nll_cases:
++        if progress:
++            progress('cache_checks', f'nll/{case["case_id"]}')
+         ids, continuation = case['context_ids'], case['continuation_ids']
+         blob = engine.prefill(ids)
+         result = engine.nll(blob, ids, continuation)
+@@ -109,7 +145,8 @@ def cache_checks(engine, cfg, selected, run):
+         nll_rows.append({'case_id': case['case_id'], 'tokens_scored': len(continuation),
+                          'full_nll': float(losses.mean()), 'reuse_nll': result['nll'], 'absolute_error': delta})
+         del blob, logits, losses
+-    save(run / 'cache_checks.json', {'status': 'passed', 'tolerances': {'atol': .1, 'rtol': .02, 'nll_abs': .01},
++    save(run / 'cache_checks.json', {'status': 'passed', 'tolerances': {'atol': .1, 'rtol': .02, 'nll_abs': .01, 'fp16_near_tie_ulps': MAX_TIE_ULPS},
++                                    'generation_policy': 'record exact matches or bounded FP16 near-tie divergence; unchanged actual IDs and QA/NLL scoring',
+                                     'cases': rows, 'complete_nll_checks': nll_rows})
+ 
+ 
+@@ -150,104 +187,45 @@ def quality(engine, cfg, selected, run, journal, job, progress):
+             torch.cuda.empty_cache()
+ 
+ 
+-def ttft(engine, cfg, selected, run, journal, job, progress):
+-    task, p = job['name'], cfg['ttft']
+-    for index, case in enumerate(selected['ttft']):
+-        prefix = f'{task}/{case["case_id"]}/'
+-        expected = len(p['methods']) * len(p['bandwidth_gbps']) * p['repeats']
+-        if sum(k.startswith(prefix) for k in journal.keys) == expected:
+-            continue
+-        context, suffix = case['context_ids'], case['suffix_ids']
+-        progress(task, f'{prefix}offline-prefill')
+-        blob, prefill_s = timed(lambda: engine.prefill(context))
+-        direct = engine.first(context, suffix)
+-        if engine.first(context, suffix, blob) != direct:
+-            raise RuntimeError('TTFT raw cache parity failed')
+-        payloads = {}
+-        for method in p['methods']:
+-            if method == 'text':
+-                payloads[method] = (engine.text_payload(context), 0.0, engine.restore_text)
+-            else:
+-                payloads[method] = engine.encode(blob, method)
+-                restored = payloads[method][2](payloads[method][0])
+-                validate_blob(restored, blob)
+-                del restored
+-        del blob
+-        schedule = measurement_schedule(p['methods'], p['bandwidth_gbps'], warmup=p['warmup'],
+-                                         repeats=p['repeats'], seed=cfg['seed'] + index)
+-        event(run, event='ttft_schedule', task=task, case_id=case['case_id'], schedule=schedule)
+-        for step_index, step in enumerate(schedule):
+-            key = f'{prefix}{step["bandwidth_gbps"]}/{step["repetition"]}/{step["method"]}'
+-            if step['phase'] == 'measure' and key in journal.keys:
+-                continue
+-            progress(task, key)
+-            payload, encode_s, restore = payloads[step['method']]
+-            torch.cuda.synchronize()
+-            start = time.perf_counter()
+-            received, transfer_s = rate_limited_transfer(payload, step['bandwidth_gbps'])
+-            restored, decode_s = timed(lambda: restore(received))
+-            if step['method'] == 'text':
+-                token, first_s = timed(lambda: engine.first(restored, suffix))
+-            else:
+-                token, first_s = timed(lambda: engine.first(context, suffix, restored))
+-            wall = time.perf_counter() - start
+-            # Debug checks outside the measured window.
+-            if received != payload or (step['method'] == 'text' and restored != context):
+-                raise RuntimeError('TTFT transport/token identity failed')
+-            row = {**case_fields(case), 'kind': 'ttft', **step, 'schedule_position': step_index,
+-                'bytes': len(payload), 'offline_encode_seconds': encode_s, 'transfer_seconds': transfer_s,
+-                'offline_prefill_seconds': prefill_s, 'offline_prefill_scope': 'once_per_context_annotation',
+-                'reconstruct_seconds': decode_s, 'remaining_input_seconds': first_s, 'ttft_wall_seconds': wall,
+-                'actual_bandwidth_gbps': len(payload) * 8 / transfer_s / 1e9,
+-                'actual_to_target': len(payload) * 8 / transfer_s / 1e9 / step['bandwidth_gbps'],
+-                'first_token_id': token, 'matches_raw': token == direct, 'mode': 'socket_receive_then_restore'}
+-            if step['method'] == 'text':
+-                row.update(engine.text_metadata(payload))
+-            if step['phase'] == 'measure':
+-                journal.add(key, task, row)
+-            else:
+-                event(run, event='warmup', task=task, observation=row)
+-            del received, restored
+-        del payloads, payload, restore
+-        torch.cuda.empty_cache()
++# Same TTFT implementation for every adapter.
++from experiments.ttft import ttft
+ 
+ 
+ def prepare_chunks(engine, cfg, case, blob):
+     p = cfg['adaptive']
+     chunks = []
+     ids = case['input_ids']
+-    for start in range(0, len(ids), p['chunk_size']):
++    for index, start in enumerate(range(0, len(ids), p['chunk_size'])):
+         end = min(start + p['chunk_size'], len(ids))
+         previous = blob[:, :, :, :start, :] if start else None
+-        text = engine.text_payload(ids[start:end])
+-        def text_work():
+-            decoded = engine.restore_text(text)
+-            return engine.prefill(decoded, previous)
+-        for _ in range(p['warmup']):
+-            text_work()
+-        text_times = []
+-        for _ in range(p['repeats']):
+-            restored, elapsed = timed(text_work)
+-            text_times.append(elapsed)
+-            del restored
+-        row = {'start': start, 'end': end, 'ids': ids[start:end], 'text_payload': text,
+-               'text': {'bytes': len(text), 'prefill_seconds': statistics.median(text_times),
+-                        'calibration_seconds': text_times, **engine.text_metadata(text)},
+-               'levels': {}, 'payloads': {}, 'restores': {}}
+-        chunk_blob = blob[:, :, :, start:end, :]
+-        for level in (1, 2, 3):
+-            payload, encode_s, restore = engine.encode(chunk_blob, f'cachegen{level}')
++        prepared = {}
++        row = {'start': start, 'end': end, 'levels': {}, 'prepared': prepared}
++        for level in (0, 1, 2, 3):
++            packet = prepare_chunk(engine, ids, blob, 'text' if level == 0 else f'cachegen{level}', index, start, end)
++            prepared[level] = packet
++            def work():
++                return restore_chunk(engine, packet, packet.wire, previous)
+             for _ in range(p['warmup']):
+-                restore(payload)
+-            times = []
++                work()
++            timings = []
+             for _ in range(p['repeats']):
+-                restored, elapsed = timed(lambda: restore(payload))
+-                validate_blob(restored, chunk_blob)
+-                times.append(elapsed)
++                restored, elapsed = timed(work)
++                timings.append(elapsed)
++                if restored.shape[3] != end or not bool(torch.isfinite(restored).all()):
++                    raise RuntimeError('Adaptive preparation shape or finite check failed')
+                 del restored
+-            row['levels'][level] = {'bytes': len(payload), 'decode_seconds': statistics.median(times),
+-                                     'calibration_seconds': times, 'offline_encode_seconds': encode_s}
+-            row['payloads'][level], row['restores'][level] = payload, restore
++            cost = {'bytes': len(packet.wire), 'calibration_seconds': timings,
++                    'offline_encode_seconds': packet.encode_seconds,
++                    'message_sha256': packet.sha256, **packet.metadata}
++            # Wire byte count includes frame; payload_bytes remains separately named.
++            cost['bytes'] = len(packet.wire)
++            if level == 0:
++                cost.update(prefill_seconds=statistics.median(timings),
++                            **engine.text_metadata(unframe(packet.wire)[1]))
++                row['text'] = cost
++            else:
++                cost['decode_seconds'] = statistics.median(timings)
++                row['levels'][level] = cost
+         chunks.append(row)
+     return chunks
+ 
+@@ -255,59 +233,63 @@ def prepare_chunks(engine, cfg, case, blob):
+ def execute_adaptive(engine, cfg, case, chunks, trace, strategy, slo, reserve):
+     merged = None
+     decisions = []
+-    estimated_transfer = 0.0
++    completed = []
+     torch.cuda.synchronize()
+     start = time.perf_counter()
+     for index, chunk in enumerate(chunks):
+-        elapsed = time.perf_counter() - start + estimated_transfer
+-        decision = next_decision(chunks, index, trace[index], slo, elapsed, strategy, reserve)
+-        level = decision['level']
+-        payload = chunk['payloads'][level] if level else chunk['text_payload']
+-        if cfg['adaptive']['mode'] == 'socket_serial':
+-            received, transfer_s = rate_limited_transfer(payload, trace[index])
++        decision_start = time.perf_counter()
++        elapsed = decision_start - start
++        if strategy == 'adaptive_history':
++            decision = history_decision(chunks, index, tuple(completed),
++                cfg['adaptive']['initial_bandwidth_gbps'], slo, elapsed, reserve)
+         else:
+-            received = payload
+-            transfer_s, _ = representation_cost(chunk, level, trace[index])
+-            estimated_transfer += transfer_s
+-        def reconstruct():
+-            if level == 0:
+-                ids = engine.restore_text(received)
+-                return engine.prefill(ids, merged)
+-            decoded = chunk['restores'][level](received)
+-            return decoded if merged is None else torch.cat((merged, decoded), dim=3)
+-        merged, reconstruct_s = timed(reconstruct)
++            decision = next_decision(chunks, index, trace[index], slo, elapsed, strategy, reserve)
++            decision.update(estimate_gbps=trace[index], estimate_source='current_trace', source_chunk_index=None)
++        decision.update(decision_start=decision_start - start,
++                        decision_seconds=time.perf_counter() - decision_start)
++        level = decision['level']
++        packet = chunk['prepared'][level]
++        def reconstruct(_, received):
++            nonlocal merged
++            merged = restore_chunk(engine, packet, received, merged)
++            torch.cuda.synchronize()
++            return merged
++        # Only the executor reads the current trace for the history variant.
++        result = transfer_chunks([packet.wire], trace[index], reconstruct, mode='whole',
++            queue_capacity=1, chunk_bytes=cfg['transport']['pacing_quantum_bytes'], origin=start)
++        network = result['chunks'][0]
++        transfer_s = network['effective_transfer_seconds']
++        completed.append(CompletedTransfer(index, len(packet.wire), transfer_s))
+         decision.update(start=chunk['start'], end=chunk['end'], cache_tokens_after=merged.shape[3],
+-                        bytes=len(payload), transfer_seconds=transfer_s, reconstruct_seconds=reconstruct_s,
+-                        fallback_to_text=level == 0)
++                        bytes=len(packet.wire), message_sha256=packet.sha256,
++                        transfer_seconds=transfer_s, effective_transfer_seconds=transfer_s,
++                        reconstruct_seconds=network['restore_seconds'], network_timeline=network,
++                        configured_bandwidth_gbps=trace[index], actual_bandwidth_gbps=network['actual_bandwidth_gbps'],
++                        fallback_to_text=level == 0, byte_identity_checked=result['received'] == [packet.wire])
++        if not decision['byte_identity_checked']:
++            raise RuntimeError('Adaptive received bytes differ')
+         if level == 0:
+-            decision.update(engine.text_metadata(payload))
+-        if merged.shape[3] != chunk['end']:
+-            raise RuntimeError('Adaptive cache position or tail was lost')
++            decision.update(engine.text_metadata(unframe(packet.wire)[1]))
+         decisions.append(decision)
+     initial, first_s = timed(lambda: engine.first_state([], case['suffix_ids'], merged))
+     wall = time.perf_counter() - start
+-    # Generation reuses the actual measured first token and resulting cache.
+     generated = engine.generate(case['suffix_ids'], merged, cfg['adaptive']['max_new_tokens'], initial=initial)
+     torch.cuda.synchronize()
+     answer_wall = time.perf_counter() - start
+-    total = wall + estimated_transfer
+     if not bool(torch.isfinite(merged).all()):
+         raise RuntimeError('Adaptive merged cache contains nonfinite values')
+-    row = {**generated, **score_qa(generated['prediction'], case['answers']),
++    return {**generated, **score_qa(generated['prediction'], case['answers']),
+            'scored_answer': extract_answer(generated['prediction']), 'decisions': decisions,
+            'levels': [d['level'] for d in decisions], 'text_fallback_chunks': sum(d['level'] == 0 for d in decisions),
+-           'mode': cfg['adaptive']['mode'], 'transfer_seconds': sum(d['transfer_seconds'] for d in decisions),
++           'mode': 'socket_serial', 'throughput_estimator': cfg['adaptive']['throughput_estimator'] if strategy == 'adaptive_history' else 'current_trace',
++           'initial_bandwidth_gbps': cfg['adaptive']['initial_bandwidth_gbps'], 'chunk_size': cfg['adaptive']['chunk_size'],
++           'transfer_seconds': sum(d['transfer_seconds'] for d in decisions),
+            'reconstruct_seconds': sum(d['reconstruct_seconds'] for d in decisions),
+-           'remaining_input_seconds': first_s, 'local_wall_seconds': wall, 'ttft_seconds': total,
+-           'answer_latency_seconds': answer_wall + estimated_transfer,
+-           'slo_seconds': slo, 'slo_violation': total > slo, 'first_token_reserve_seconds': reserve,
+-           'estimated_network_seconds': estimated_transfer,
++           'remaining_input_seconds': first_s, 'local_wall_seconds': wall, 'ttft_seconds': wall,
++           'measured_ttft_seconds': wall, 'answer_latency_seconds': answer_wall,
++           'slo_seconds': slo, 'slo_violation': wall > slo, 'first_token_reserve_seconds': reserve,
++           'estimated_network_seconds': 0.,
+            'historical_phrase_match': phrase_match(generated['prediction'], case['answer'])}
+-    if cfg['adaptive']['mode'] == 'socket_serial':
+-        row['measured_ttft_seconds'] = wall
+-    else:
+-        row['estimated_ttft_seconds'] = total
+-    return row
+ 
+ 
+ def adaptive(engine, cfg, selected, run, journal, job, progress):
+@@ -342,7 +324,7 @@ def adaptive(engine, cfg, selected, run, journal, job, progress):
+             event(run, event='adaptive_schedule', task=task, case_id=case['case_id'], trace_id=trace_id, schedule=schedule)
+             for step_index, step in enumerate(schedule):
+                 strategy = step['method']
+-                key = f'{prefix}{trace_id}/{step["repetition"]}/{strategy}'
++                key = adaptive_key(task, case['case_id'], trace_id, step['repetition'], strategy, cfg)
+                 if step['phase'] == 'measure' and key in journal.keys:
+                     continue
+                 progress(task, key)
+@@ -359,3 +341,6 @@ def adaptive(engine, cfg, selected, run, journal, job, progress):
+                     event(run, event='warmup', task=task, observation=row)
+         del chunks
+         torch.cuda.empty_cache()
++
++
++from experiments.ablation import ablation
+diff --git a/experiments/workspace.py b/experiments/workspace.py
+index 96b3bd4..db35682 100644
+--- a/experiments/workspace.py
++++ b/experiments/workspace.py
+@@ -59,13 +59,23 @@ class Workspace:
+         runs = self.results / entry.get("results_subdir", name)
+         if run_directory is not None:
+             run = Path(run_directory).expanduser().resolve()
+-        elif (runs / "latest/manifest.json").is_file():
+-            run = (runs / "latest").resolve()
+         else:
+-            candidates = sorted(p.parent for p in runs.glob("*/manifest.json") if p.parent.name != "latest")
++            manifests = list(runs.glob('*/manifest.json'))
++            for scale in ('minimal', 'small', 'larger'):
++                manifests.extend((runs / scale).glob('*/manifest.json'))
++            candidates = {p.parent.resolve(): p.resolve() for p in manifests}
+             if not candidates:
+                 return {"experiment": name, "status": "not_started", "results_directory": str(runs)}
+-            run = candidates[-1].resolve()
++            def recency(item):
++                directory, path = item
++                data = json.loads(path.read_text())
++                active = data.get('status') in ('running', 'initializing')
++                timestamps = [path.stat().st_mtime]
++                for field in ('started_utc', 'finished_utc'):
++                    if data.get(field):
++                        timestamps.append(datetime.fromisoformat(data[field]).timestamp())
++                return active, max(timestamps), str(directory)
++            run = max(candidates.items(), key=recency)[0]
+         manifest = json.loads((run / "manifest.json").read_text())
+         result = {"experiment": name, "run_directory": str(run), "status": manifest["status"],
+                   "progress": manifest.get("progress", manifest.get("stages", {}))}
+@@ -81,6 +91,15 @@ class Workspace:
+                                "observations": job.get("observations", 0)} for job in manifest.get("jobs", [])]
+             result["protocol"] = manifest["protocol"]
+             result["pid"] = manifest.get("pid")
++            pid = manifest.get('runner_pid', manifest.get('pid'))
++            if isinstance(pid, int) and pid > 0:
++                try:
++                    os.kill(pid, 0)
++                    result['runner_alive'] = True
++                except ProcessLookupError:
++                    result['runner_alive'] = False
++                except PermissionError:
++                    result['runner_alive'] = None
+         if (run / "quality.json").exists():
+             quality = json.loads((run / "quality.json").read_text())
+             spec = config.get("quality", {})
+diff --git a/mini_repro/adaptive.py b/mini_repro/adaptive.py
+index f4d888c..ba7b24e 100644
+--- a/mini_repro/adaptive.py
++++ b/mini_repro/adaptive.py
+@@ -48,6 +48,8 @@ def next_decision(chunks, index, bandwidth, slo, elapsed, strategy, first_token_
+         level = 0 if strategy == 'text' else int(strategy[-1])
+     return {'chunk_index': index, 'bandwidth_gbps': bandwidth, 'remaining_budget_seconds': remaining,
+             'level': level, 'forecast_seconds': forecasts[level],
++            'candidate_forecasts_seconds': forecasts,
++            'candidate_current_costs_seconds': {candidate: sum(representation_cost(chunk, candidate, bandwidth)) for candidate in (3, 2, 1, 0)},
+             'forecast_feasible': forecasts[level] <= remaining + 1e-12}
+ 
+ 
+diff --git a/mini_repro/reproduce.py b/mini_repro/reproduce.py
+index c1d4396..d1d8882 100644
+--- a/mini_repro/reproduce.py
++++ b/mini_repro/reproduce.py
+@@ -278,7 +278,7 @@ def legacy_main(argv=None):
+ 
+ 
+ def main(argv=None):
+-    """Current entrypoint; v1 is explicit and old profiles migrate to shared v2."""
++    """Current entrypoint; v1 is explicit and old profiles migrate to shared v3."""
+     argv = list(sys.argv[1:] if argv is None else argv)
+     if '--legacy-v1' in argv:
+         argv.remove('--legacy-v1')
+@@ -290,15 +290,18 @@ def main(argv=None):
+         profile = load_profile(argv[index + 1])
+         del argv[index:index + 2]
+         if profile['quality_tolerances'] != {'max_nll_delta': .02, 'max_qa_drop': .1}:
+-            raise ValueError('v2 fixes tolerances; use --legacy-v1 for a historical protocol')
++            raise ValueError('v3 preserves fixed tolerances; use --legacy-v1 for a historical protocol')
+         cfg = load_config(ROOT / 'experiments/configs/small.json', 'tinyllama')
+         cfg['quality'].update(profile['quality'])
+         cfg['ttft'].update({k: v for k, v in profile['ttft'].items() if k != 'cachegen_levels'})
+         cfg['ttft']['methods'] = ['text', 'uniform8'] + [f'cachegen{n}' for n in profile['ttft']['cachegen_levels']]
+         cfg['adaptive'].update(profile['adaptive'])
++        cfg['ablation'].update(lengths=[cfg['quality']['lengths'][0]],
++                               samples=min(1, cfg['quality']['samples']),
++                               qa_per_position=min(1, cfg['quality']['qa_per_position']))
+         cfg['seed'] = profile['seed']
+         cfg['scale'] = 'minimal' if profile['purpose'] == 'pipeline-validation-only' else 'small'
+-        print('Migrating v1 profile to shared v2; NLL/QA/network protocol changes. Use --legacy-v1 for historical execution.', file=sys.stderr)
++        print('Migrating v1 profile to shared v3; NLL/QA/network protocol changes and controlled mechanism tasks are added. Use --legacy-v1 for historical execution.', file=sys.stderr)
+         return shared_main(argv, configuration=cfg)
+     if '--resume' not in argv:
+         argv = ['--model', 'tinyllama'] + argv
+diff --git a/mini_repro/transport.py b/mini_repro/transport.py
+index 4207b62..d5b2dca 100644
+--- a/mini_repro/transport.py
++++ b/mini_repro/transport.py
+@@ -1,58 +1,222 @@
+-"""Measured, paced local socket transport with bounded copies and no NIC changes."""
++"""CPU socket threads with pre-send pacing and bounded receiver credits.
++
++GPU work belongs to the caller's restore callback on the main thread. Serial
++credits return after restoration; pipeline credits return when a message is
++taken. Socket buffering therefore cannot bypass the application lookahead cap.
++"""
+ import math
++import queue
+ import socket
+ import threading
+ import time
+ 
+ 
+-def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=None, *, validate=False):
+-    if bandwidth_gbps is not None and (not math.isfinite(bandwidth_gbps) or bandwidth_gbps <= 0):
++def _bandwidth(value):
++    if value is not None and (not math.isfinite(value) or value <= 0):
+         raise ValueError('bandwidth must be positive or None for unlimited')
+-    if chunk_bytes is not None and chunk_bytes <= 0:
++
++
++def _acquire(semaphore, cancelled):
++    while not cancelled.is_set():
++        if semaphore.acquire(timeout=.02):
++            return
++    raise RuntimeError('Transport cancelled')
++
++
++def _get(items, cancelled):
++    while not cancelled.is_set():
++        try:
++            return items.get(timeout=.02)
++        except queue.Empty:
++            pass
++    raise RuntimeError('Transport cancelled')
++
++
++def transfer_chunks(messages, bandwidth_gbps, restore, *, mode='chunk_serial',
++                    queue_capacity=1, chunk_bytes=None, origin=None, analyze_timeline=True):
++    """Transfer prepared complete messages over ONE connection and restore them.
++
++    All times are relative to origin, taken by TTFT callers before socket setup.
++    Effective network intervals start after receive capacity/buffer readiness;
++    they include pre-send pacing and socket work, excluding capacity/GPU waits.
++    Equality/debug checks should run after the first-token measurement.
++    """
++    _bandwidth(bandwidth_gbps)
++    if mode not in ('whole', 'chunk_serial', 'chunk_pipeline'):
++        raise ValueError('Unknown transfer mode')
++    if type(queue_capacity) is not int or queue_capacity < 1:
++        raise ValueError('queue capacity must be positive')
++    if chunk_bytes is not None and (type(chunk_bytes) is not int or chunk_bytes <= 0):
+         raise ValueError('chunk size must be positive')
+-    # About 1 ms of target traffic per send, bounded at 64 KiB..1 MiB.
++    if not messages or any(not isinstance(m, bytes) for m in messages):
++        raise ValueError('Expected nonempty sequence of immutable byte messages')
++    if mode == 'whole' and len(messages) != 1:
++        raise ValueError('whole mode requires one message')
++    origin = time.perf_counter() if origin is None else origin
++    clock = lambda: time.perf_counter() - origin
+     quantum = chunk_bytes or min(1 << 20, max(65536, int((bandwidth_gbps or 10) * 125000)))
+-    start = time.perf_counter()
+     sender, receiver = socket.socketpair()
+-    sender.settimeout(60)
+-    receiver.settimeout(60)
++    sender.settimeout(.2)
++    receiver.settimeout(.2)
++    cancelled = threading.Event()
++    slots = threading.BoundedSemaphore(queue_capacity)
++    serial_gate = threading.Semaphore(1)
++    ready = queue.Queue(maxsize=1)
++    completed = queue.Queue(maxsize=queue_capacity)
+     errors = []
+-    view = memoryview(payload)
++    rows = [{} for _ in messages]
++    received_messages = []
+ 
+-    def send():
++    def sending():
+         try:
+-            with sender:
++            for index, payload in enumerate(messages):
++                wait_start = clock()
++                permitted = _get(ready, cancelled)
++                if permitted != index:
++                    raise RuntimeError('Send permission order differs')
++                send_start = clock()
++                row = rows[index]
++                row.update(send_permission_wait_start=wait_start, send_start=send_start,
++                           send_permission_wait_seconds=send_start - wait_start)
++                pacing, blocking = 0., 0.
++                view = memoryview(payload)
+                 for offset in range(0, len(view), quantum):
+                     end = min(offset + quantum, len(view))
+-                    sender.sendall(view[offset:end])
++                    # The tail earns its actual bytes BEFORE send, too.
+                     if bandwidth_gbps is not None:
+-                        remaining = start + end * 8 / (bandwidth_gbps * 1e9) - time.perf_counter()
+-                        if remaining > 0:
+-                            time.sleep(remaining)
++                        deadline = origin + send_start + end * 8 / (bandwidth_gbps * 1e9)
++                        before = time.perf_counter()
++                        delay = deadline - before
++                        if delay > 0 and cancelled.wait(delay):
++                            raise RuntimeError('Transport cancelled during pacing')
++                        pacing += time.perf_counter() - before
++                    offset_sent = offset
++                    while offset_sent < end:
++                        if cancelled.is_set():
++                            raise RuntimeError('Transport cancelled during send')
++                        before = time.perf_counter()
++                        try:
++                            count = sender.send(view[offset_sent:end])
++                        except socket.timeout:
++                            count = 0
++                        blocking += time.perf_counter() - before
++                        offset_sent += count
++                row.update(send_end=clock(), pacing_wait_seconds=pacing,
++                           send_blocking_seconds=blocking)
+         except BaseException as error:
+             errors.append(error)
++            cancelled.set()
+ 
+-    worker = threading.Thread(target=send, daemon=True)
+-    worker.start()
+-    buffer = bytearray(len(payload))
+-    target = memoryview(buffer)
+-    offset = 0
++    def receiving():
++        try:
++            for index, payload in enumerate(messages):
++                row = rows[index]
++                permission_start = clock()
++                if mode != 'chunk_pipeline':
++                    _acquire(serial_gate, cancelled)
++                capacity_start = clock()
++                _acquire(slots, cancelled)
++                capacity_end = clock()
++                buffer = bytearray(len(payload))
++                target = memoryview(buffer)
++                row.update(chunk_index=index, message_bytes=len(payload),
++                    receiver_permission_wait_seconds=capacity_start - permission_start,
++                    capacity_wait_start=capacity_start, capacity_wait_end=capacity_end,
++                    capacity_wait_seconds=capacity_end - capacity_start,
++                    receive_start=clock())
++                ready.put(index)
++                offset = 0
++                while offset < len(buffer):
++                    if cancelled.is_set():
++                        raise RuntimeError('Transport cancelled during receive')
++                    try:
++                        count = receiver.recv_into(target[offset:], min(len(buffer) - offset, 1 << 20))
++                    except socket.timeout:
++                        continue
++                    if not count:
++                        raise RuntimeError('Truncated local transport')
++                    offset += count
++                row['receive_end'] = clock()
++                received = bytes(buffer)
++                row['data_available'] = clock()
++                row['effective_transfer_seconds'] = row['data_available'] - row['receive_start']
++                row['actual_bandwidth_gbps'] = len(payload) * 8 / max(row['effective_transfer_seconds'], 1e-12) / 1e9
++                completed.put((index, received))
++        except BaseException as error:
++            errors.append(error)
++            cancelled.set()
++
++    workers = [threading.Thread(target=fn, name='cachegen-' + name, daemon=True)
++               for fn, name in ((sending, 'sender'), (receiving, 'receiver'))]
++    value = None
+     try:
+-        with receiver:
+-            while offset < len(buffer):
+-                count = receiver.recv_into(target[offset:], min(len(buffer) - offset, 1 << 20))
+-                if not count:
+-                    raise RuntimeError('Truncated local transport')
+-                offset += count
++        for worker in workers:
++            worker.start()
++        for expected in range(len(messages)):
++            wait_start = clock()
++            index, received = _get(completed, cancelled)
++            if index != expected:
++                raise RuntimeError('Receive order differs')
++            row = rows[index]
++            row.update(dequeue_time=clock(), main_queue_wait_start=wait_start)
++            row['main_queue_wait_seconds'] = row['dequeue_time'] - wait_start
++            row['queue_residence_seconds'] = row['dequeue_time'] - row['data_available']
++            if mode == 'chunk_pipeline':
++                slots.release()
++            row['restore_start'] = clock()
++            value = restore(index, received)  # callback synchronizes GPU completion
++            row['restore_end'] = clock()
++            row['restore_seconds'] = row['restore_end'] - row['restore_start']
++            received_messages.append(received)
++            if mode != 'chunk_pipeline':
++                slots.release()
++                serial_gate.release()
++    except BaseException:
++        if errors:
++            raise errors[0]
++        raise
+     finally:
+-        worker.join(timeout=65)
+-    if worker.is_alive():
+-        raise RuntimeError('Transport worker did not terminate')
++        cancelled.set()
++        for endpoint in (sender, receiver):
++            try:
++                endpoint.shutdown(socket.SHUT_RDWR)
++            except OSError:
++                pass
++            endpoint.close()
++        for worker in workers:
++            if worker.ident is not None:
++                worker.join(timeout=2)
++        if any(w.is_alive() for w in workers):
++            raise RuntimeError('Transport worker did not terminate')
+     if errors:
+         raise errors[0]
+-    received = bytes(buffer)
+-    elapsed = time.perf_counter() - start
+-    # Debug equality costs are deliberately outside the reported transfer interval.
++    result = {'value': value, 'received': received_messages, 'chunks': rows,
++              'transport_wall_seconds': clock(), 'queue_capacity': queue_capacity,
++              'pacing_quantum_bytes': quantum}
++    if analyze_timeline:
++        result.update(overlap_timeline(rows))
++    return result
++
++
++def overlap_timeline(rows):
++    """Postprocessing; TTFT callers run this only AFTER the CPU token is ready."""
++    intervals = []
++    for recv_row in rows:
++        for restore_row in rows:
++            lo = max(recv_row['receive_start'], restore_row['restore_start'])
++            hi = min(recv_row['data_available'], restore_row['restore_end'])
++            if hi > lo:
++                intervals.append({'receiving_chunk': recv_row['chunk_index'],
++                                  'restoring_chunk': restore_row['chunk_index'], 'start': lo, 'end': hi})
++    return {'overlap_intervals': intervals,
++            'overlap_seconds': sum(r['end'] - r['start'] for r in intervals)}
++
++
++def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=None, *, validate=False):
++    start = time.perf_counter()
++    result = transfer_chunks([payload], bandwidth_gbps, lambda _, data: data,
++                             mode='whole', chunk_bytes=chunk_bytes, origin=start, analyze_timeline=False)
++    received, elapsed = result['value'], time.perf_counter() - start
+     if validate and received != payload:
+         raise RuntimeError('Local transport corrupted payload')
+     return received, elapsed
+diff --git a/reports/README.md b/reports/README.md
+index a85700d..ff99d03 100644
+--- a/reports/README.md
++++ b/reports/README.md
+@@ -1,5 +1,7 @@
+ # 可分享的实验报告
+ 
++- [共享 v3：两模型功能验收](shared-v3-20261025/验收报告.md)：各 7/7 任务、274 条观测，含流水线配对、时间线、历史吞吐及消融。
++
+ - [共享 v2：Mistral 完整小规模验收](mistral/v2-small-final-20261024/验收报告.md)：6/6 任务、552 条观测，含逐例 QA、三组 PNG/SVG/PDF 与完整原始记录链接。
+ 
+ - [Mistral-7B / RTX 4090 D，2026-10-24](mistral/README.md)：中文报告、7 组图表和逐题问答。
+diff --git a/results/mistral/README.md b/results/mistral/README.md
+index 88cf221..31012cc 100644
+--- a/results/mistral/README.md
++++ b/results/mistral/README.md
+@@ -1,3 +1,7 @@
++## v3 功能验证（2026-10-25）
++
++[原始批次](minimal/v3-final-03/) · [完整报告](minimal/v3-final-03/report.md) · [两模型中文验收](../../reports/shared-v3-20261025/验收报告.md)。7/7 任务、274/274 正式观测完成，真实 TERM 后同字节恢复，退出 0。以下 v1/v2 小规模批次分别保留。
++
+ # Mistral-7B 原始实验批次
+ 
+ 共享 v2 正式验收：[small/v2-small-final-20261024](small/v2-small-final-20261024/)，6/6 任务、552/552 观测、退出码 0；[中文报告](../../reports/mistral/v2-small-final-20261024/验收报告.md)。
+diff --git a/results/tinyllama/README.md b/results/tinyllama/README.md
+index a6c77ac..360899d 100644
+--- a/results/tinyllama/README.md
++++ b/results/tinyllama/README.md
+@@ -1,3 +1,7 @@
++## v3 功能验证（2026-10-25）
++
++[原始批次](minimal/v3-final-03/) · [完整报告](minimal/v3-final-03/report.md) · [两模型中文验收](../../reports/shared-v3-20261025/验收报告.md)。7/7 任务、274/274 正式观测完成，退出 0。以下 v2 与历史 v1 指标分别保留。
++
+ # TinyLlama 共享 v2 验证
+ 
+ 验收批次为 [minimal/v2-final-check](minimal/v2-final-check/)，6/6 任务、134/134 正式观测、退出 0。该批次与 Mistral 完整小规模使用完全相同的仓库源码；[源码核对](../../docs/reproduction/shared-helper-validation-20261024.json)和[完整交付](../../reports/mistral/v2-small-final-20261024/验收报告.md)可供核查。
+diff --git a/tests/test_shared_framework.py b/tests/test_shared_framework.py
+index 99a439b..501d510 100644
+--- a/tests/test_shared_framework.py
++++ b/tests/test_shared_framework.py
+@@ -19,10 +19,10 @@ REPO = Path(__file__).resolve().parents[1]
+ 
+ 
+ class SharedProtocolTests(unittest.TestCase):
+-    def test_both_adapters_use_six_jobs_and_fixed_scoring(self):
++    def test_both_adapters_use_seven_jobs_and_fixed_scoring(self):
+         for name in ('tinyllama', 'mistral'):
+             cfg = load_config(REPO / 'experiments/configs/small.json', name)
+-            self.assertEqual(len(jobs(cfg)), 6)
++            self.assertEqual(len(jobs(cfg)), 7)
+             self.assertEqual(cfg['model']['name'], name)
+             self.assertEqual(set(cfg['quality']['methods']), set(METHODS))
+ 
+@@ -31,7 +31,7 @@ class SharedProtocolTests(unittest.TestCase):
+             load_config(path)
+         cfg = load_config(REPO / 'experiments/configs/small.json')
+         cfg['adaptive']['bandwidth_scales'] = [.01, .010000001]
+-        self.assertEqual(len({j['name'] for j in jobs(cfg)}), 6)
++        self.assertEqual(len({j['name'] for j in jobs(cfg)}), 7)
+ 
+     def test_first_line_aliases_and_raw_prediction_are_not_rewritten(self):
+         raw = '\n\nThe Fruit!\nAdditional words'
+@@ -135,11 +135,12 @@ class SharedProtocolTests(unittest.TestCase):
+ 
+     def test_matrix_covers_real_qa_and_all_methods_and_repetitions(self):
+         cfg = load_config(REPO / 'experiments/configs/small.json')
+-        selected = {k: [{'case_id': k}] for k in ('quality', 'controlled', 'triviaqa', 'ttft', 'adaptive')}
++        selected = {k: [{'case_id': k, 'source_id': 0, 'context_tokens': 256}] for k in ('quality', 'controlled', 'triviaqa', 'ttft', 'adaptive')}
+         expected = expected_keys(cfg, selected, jobs(cfg))
+         self.assertEqual(len(expected['quality']), 18)
+-        self.assertEqual(len(expected['ttft']), 36)
+-        self.assertEqual(len(expected[jobs(cfg)[2]['name']]), 24)
++        self.assertEqual(len(expected['ttft']), 108)
++        self.assertEqual(len(expected[jobs(cfg)[2]['name']]), 28)
++        self.assertEqual(len(expected['ablation']), 12)
+ 
+     def test_zero_raw_correct_is_unassessable_and_length_qa_is_separate(self):
+         cfg = load_config(REPO / 'experiments/configs/small.json')
+diff --git a/tests/test_workspace.py b/tests/test_workspace.py
+index 3263eba..a1a618b 100644
+--- a/tests/test_workspace.py
++++ b/tests/test_workspace.py
+@@ -129,6 +129,20 @@ class WorkspaceTests(unittest.TestCase):
+         self.assertEqual(data['previous_attempt_exit_code'], 143)
+         self.assertNotIn('exit_code', data)
+ 
++    def test_nested_active_batch_is_found_before_legacy_latest_link(self):
++        legacy = self.repo / 'results/toy/old'
++        current = self.repo / 'results/toy/larger/current'
++        legacy.mkdir(parents=True)
++        current.mkdir(parents=True)
++        (legacy / 'manifest.json').write_text(json.dumps({'status': 'completed'}))
++        (legacy.parent / 'latest').symlink_to('old')
++        (current / 'manifest.json').write_text(json.dumps({'status': 'running', 'protocol': 'cachegen-shared-v3',
++            'jobs': [], 'progress': {'completed': 9, 'expected': 100}}))
++        result = self.cli('status', 'toy')
++        data = json.loads(result.stdout)
++        self.assertEqual(data['run_directory'], str(current.resolve()))
++        self.assertEqual(data['progress']['completed'], 9)
++
+     def test_child_failure_exit_code_is_preserved(self):
+         self.registry["toy"]["command"] = ["{python}", "-c", "raise SystemExit(7)"]
+         self.save_registry()

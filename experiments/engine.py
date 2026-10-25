@@ -36,8 +36,12 @@ def snapshot_path(spec):
 
 
 class Engine:
-    def __init__(self, spec, *, load=True):
+    def __init__(self, spec, *, load=True, execution=None):
         self.spec = spec
+        from experiments.config import DEFAULT_EXECUTION
+        from experiments.stable import configure_execution
+        self.execution = dict(execution or DEFAULT_EXECUTION)
+        configure_execution(self.execution)
         self.snapshot = snapshot_path(spec)
         self.tokenizer = AutoTokenizer.from_pretrained(str(self.snapshot), local_files_only=True)
         if load:
@@ -60,6 +64,12 @@ class Engine:
             raise ValueError(f'Adapter/model geometry mismatch: {actual} vs {expected}')
         if getattr(c, 'pretraining_tp', 1) != 1 or getattr(c, 'sliding_window', None):
             raise ValueError('This adapter requires pretraining_tp=1 and full attention')
+        if self.execution['linear_tile_tokens']:
+            from experiments.stable import install_stable_transformer
+            install_stable_transformer(self.model, self.execution['linear_tile_tokens'])
+        elif self.execution['explicit_causal_mask']:
+            from experiments.stable import explicit_causal_mask
+            self.model.model.register_forward_pre_hook(explicit_causal_mask, with_kwargs=True)
 
     @torch.inference_mode()
     def forward(self, ids, blob=None, *, project=True, last_only=True):
@@ -130,17 +140,20 @@ class Engine:
         return {'nll': float(losses.mean()), 'token_nll': losses.tolist(),
                 'scored_ids': continuation, 'tokens_scored': len(continuation)}
 
-    def codec(self, tokens, level):
-        from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
+    def codec_schedule(self, level):
         from lmcache.storage_backend.serde.cachegen_basics import CacheGenConfig
-        from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
-        from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
         keys = {1: (16, 16, 12), 2: (32, 16, 16), 3: (32, 32, 32)}[level]
         values = {1: (16, 12), 2: (32, 16), 3: (32, 32)}[level]
         spec = self.spec
-        schedule = CacheGenConfig(*spec['key_boundaries'], *keys, spec['value_boundary'], *values)
+        return CacheGenConfig(*spec['key_boundaries'], *keys, spec['value_boundary'], *values)
+
+    def codec(self, tokens, level):
+        from lmcache.config import LMCacheEngineConfig, LMCacheEngineMetadata
+        from lmcache.storage_backend.serde.cachegen_encoder import CacheGenSerializer
+        from lmcache.storage_backend.serde.cachegen_decoder import CacheGenDeserializer
+        schedule = self.codec_schedule(level)
         config = LMCacheEngineConfig.from_defaults(chunk_size=tokens)
-        metadata = LMCacheEngineMetadata(spec['id'], 1, 0, 'huggingface')
+        metadata = LMCacheEngineMetadata(self.spec['id'], 1, 0, 'huggingface')
         return (CacheGenSerializer(config, metadata, cachegen_config=schedule),
                 CacheGenDeserializer(config, metadata, cachegen_config=schedule))
 
@@ -160,6 +173,18 @@ class Engine:
             payload, seconds = timed(lambda: encoder.to_bytes(blob))
             restore = decoder.from_bytes
         return payload, seconds, restore
+
+    def restore_function(self, method, tokens):
+        """Reopen a persisted prepared payload without encoding it a second time."""
+        if method == 'text':
+            return self.restore_text
+        if method == 'raw':
+            return lambda p: torch.load(io.BytesIO(p), map_location='cuda', weights_only=True)
+        if method in ('uniform4', 'uniform8'):
+            return unpack_uniform
+        if method in ('cachegen1', 'cachegen2', 'cachegen3'):
+            return self.codec(tokens, int(method[-1]))[1].from_bytes
+        raise ValueError(f'Unknown representation: {method}')
 
     def text_payload(self, ids):
         text = self.tokenizer.decode(ids, skip_special_tokens=False, clean_up_tokenization_spaces=False)

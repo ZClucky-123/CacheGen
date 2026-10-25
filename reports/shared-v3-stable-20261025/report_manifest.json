@@ -1,0 +1,44 @@
+{
+  "files": {
+    "evidence/112-tests.log": {
+      "bytes": 12616,
+      "sha256": "962354275dfdb010368f367f8f956ec40ca164123b79940b5565c327f6e0c7d1"
+    },
+    "evidence/3-compatibility-tests.log": {
+      "bytes": 348,
+      "sha256": "afad41d6cac3b0ceb3fc837939b9795c4a8af4195a244c3a862dd734fb1becbe"
+    },
+    "evidence/fixed-source-version.json": {
+      "bytes": 18110,
+      "sha256": "1a3c8635afd8bab4fe70c6941408b0c16c8011caa1793f6c379b4a92da502a1d"
+    },
+    "evidence/mistral-large-preflight.json": {
+      "bytes": 2044,
+      "sha256": "69c74f0fff75f0f8ac375fd518d25160a3a7d13cfe3ad155f98497c92cfcbb7c"
+    },
+    "evidence/readiness-validation.json": {
+      "bytes": 1190,
+      "sha256": "015ed73361a0d9975563d823bcc0d26896d8562fc543a53c314adf7a605df2b4"
+    },
+    "evidence/time-estimate.json": {
+      "bytes": 1531,
+      "sha256": "d2ff7053b1667dca11ab9b059bfb7d6168e59e45d64add793b39c27e8c84f93f"
+    },
+    "evidence/tiny-full-acceptance.json": {
+      "bytes": 387,
+      "sha256": "40f7ce60a96731bcec5bae4d38691b26d3965b2e830084700b2b0c5c6552ad5c"
+    },
+    "evidence/tiny-large-cache-checks.json": {
+      "bytes": 321040,
+      "sha256": "27e0db5e1f3d5d136e9cfd438e6cb8a60ab00a673de4bd6fc01aba4d6262ec2a"
+    },
+    "evidence/tiny-large-correctness.json": {
+      "bytes": 14564,
+      "sha256": "0c609b09f2a0c3081f422f63769e137aed3ecbb2b5293dcc7c83f5f078a17542"
+    },
+    "验收报告.md": {
+      "bytes": 6482,
+      "sha256": "b8c983a288464cacd0adc64fab625277d573d4e1086f9f0a31666f63c29b7753"
+    }
+  }
+}

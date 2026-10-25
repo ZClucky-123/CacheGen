@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "purpose": "pipeline-validation-only",
+  "seed": 0,
+  "quality_tolerances": {"max_nll_delta": 0.02, "max_qa_drop": 0.10},
+  "quality": {
+    "samples": 1, "lengths": [512], "continuation": 8,
+    "qa_per_position": 1, "max_new_tokens": 20
+  },
+  "ttft": {
+    "samples": 1, "lengths": [512], "bandwidth_gbps": [1],
+    "cachegen_levels": [2, 3], "warmup": 1, "repeats": 2
+  },
+  "adaptive": {
+    "cases": 1, "length": 512, "chunk_size": 256, "traces": 1,
+    "bandwidth_scales": [1, 0.01], "slos": [0.2],
+    "max_new_tokens": 20, "warmup": 1, "repeats": 2
+  }
+}

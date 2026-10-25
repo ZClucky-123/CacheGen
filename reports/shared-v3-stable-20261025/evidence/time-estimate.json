@@ -1,0 +1,29 @@
+{
+  "basis": "/home/aaa/CacheGen/results/mistral/small/v3-larger-validation-03",
+  "type": "projection_not_guaranteed_finish_time",
+  "formal_observations": 12594,
+  "configured_network_warmups": 2590,
+  "ttft_ideal_network_hours": 10.304832430200001,
+  "ttft_ideal_network_hours_by_method": {
+    "text": 0.000183097608,
+    "cachegen1": 0.7276167941200002,
+    "cachegen3": 1.2404567187679993,
+    "raw": 4.171615192720003,
+    "uniform8": 2.089973445600001,
+    "uniform4": 1.04710161468,
+    "cachegen2": 1.0278855667039997
+  },
+  "ttft_projected_wall_hours": 11.670668606993287,
+  "quality_projected_hours": 0.5059023277777778,
+  "adaptive_execution_projected_hours": 6.498587962239981,
+  "ablation_hours": 0.08589668972222222,
+  "additional_preparation_and_checks_allowance_hours": 0.5,
+  "central_projection_hours": 19.261055586733264,
+  "notes": [
+    "Uses actual fully serialized stable-profile payload sizes and high-rate timings, including both whole and chunk containers.",
+    "All 15 formal TTFT contexts are identical to readiness. Twelve executions per condition account for ten formal and two warmups.",
+    "Quality matrix is ten times readiness; adaptive formal plus warmup executions are fifty times readiness executions.",
+    "Adaptive estimate extrapolates one fact/trace to five facts/five traces; decisions, trace values, generation length, pacing and load can change runtime.",
+    "Pipeline overlap varies with bandwidth; low-rate socket overhead is not perfectly additive. Reserve further time."
+  ]
+}

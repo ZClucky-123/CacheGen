@@ -1,0 +1,13 @@
+evaluation_kind,case_id,precision,packed_symbol_bytes,arithmetic_symbol_bytes,packed_complete_bytes,arithmetic_complete_bytes,complete_packed_over_arithmetic,symbols_and_scales_identical,quality_identical
+quality,longchat-0-257,uniform16,8421376,4189014,8471763,6977032,1.2142359387200747,True,True
+quality,longchat-0-257,uniform32,10526720,6257516,10577107,11142664,0.949244004844802,True,True
+quality,longchat-0-257,layered2,8816128,4548152,8866515,9433288,0.9399177678027004,True,True
+controlled,fact-0-257-start,uniform16,8421376,3736326,8471763,6524360,1.2984818434298537,True,True
+controlled,fact-0-257-start,uniform32,10526720,5709580,10577107,10594760,0.9983337989723222,True,True
+controlled,fact-0-257-start,layered2,8816128,4076012,8866515,8961160,0.9894383093260247,True,True
+controlled,fact-0-257-middle,uniform16,8421376,3786634,8471763,6574664,1.2885469128156206,True,True
+controlled,fact-0-257-middle,uniform32,10526720,5780321,10577107,10665544,0.9917081585336857,True,True
+controlled,fact-0-257-middle,layered2,8816128,4128716,8866515,9013896,0.983649578384308,True,True
+controlled,fact-0-257-end,uniform16,8421376,3743815,8471763,6531848,1.2969932858204907,True,True
+controlled,fact-0-257-end,uniform32,10526720,5716546,10577107,10601736,0.9976768898980318,True,True
+controlled,fact-0-257-end,layered2,8816128,4084794,8866515,8969992,0.9884640922756676,True,True

@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/releases/cachegen-shared-v3-stable-20261025/experiments/run.sh",
+    "--model",
+    "tinyllama",
+    "--config",
+    "experiments/configs/minimal.json",
+    "--run-id",
+    "v3-stable-acceptance-20261025"
+  ],
+  "environment": {
+    "TORCH_EXTENSIONS_DIR": "/home/aaa/CacheGen/.local/torch_extensions",
+    "CACHEGEN_PYTHON": "/home/aaa/CacheGen/.venv/bin/python",
+    "HF_HOME": "/home/aaa/CacheGen/.venv/huggingface",
+    "OMP_NUM_THREADS": "8",
+    "CUDA_HOME": "/home/aaa/CacheGen/.cuda-12.1",
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen/releases/cachegen-shared-v3-stable-20261025",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "/home/aaa/CacheGen/results/tinyllama/minimal/v3-stable-acceptance-20261025",
+  "started_utc": "2026-10-25T05:24:48.088531+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/tiny-v3-stable-acceptance-20261025.log",
+  "pid": 4191,
+  "exit_code": 0,
+  "finished_utc": "2026-10-25T05:27:11.845185+00:00"
+}

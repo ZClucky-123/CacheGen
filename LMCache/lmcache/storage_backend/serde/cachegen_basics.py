@@ -6,6 +6,12 @@ from typing import List
 from lmcache.utils import _lmcache_nvtx_annotate
 import os
 CACHEGEN_GPU_MAX_TOKENS_PER_CHUNK = 256
+# The CUDA kernel's shared output capacity is 256 BYTES per channel, not
+# 256 arbitrary symbols. Its CDF has 16-bit precision: a rare symbol can cost
+# 16 bits even though the alphabet needs only 4/5 bits. Keep ample termination
+# headroom without modifying CUDA kernels or their supported symbol range.
+CACHEGEN_GPU_OUTPUT_BYTES_PER_CHANNEL = 256
+CACHEGEN_SAFE_ENCODE_TOKENS = 96
 
 @dataclass
 class CacheGenConfig:

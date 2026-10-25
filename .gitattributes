@@ -12,3 +12,11 @@ reports/mistral/v2-small-final-20261024/** -text -whitespace
 *.zip binary
 *.png binary
 *.pdf binary
+
+# Protocol-v3 accepted evidence preserves its exact archived bytes.
+results/tinyllama/minimal/v3-final-03/** -text -whitespace
+results/mistral/minimal/v3-final-03/** -text -whitespace
+reports/shared-v3-20261025/** -text -whitespace
+results/mistral/small/v3-larger-validation-03/** -text -whitespace
+results/tinyllama/minimal/v3-stable-acceptance-20261025/** -text -whitespace
+reports/shared-v3-stable-20261025/** -text -whitespace

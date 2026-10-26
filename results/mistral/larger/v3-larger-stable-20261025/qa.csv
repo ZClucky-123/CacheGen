@@ -1,0 +1,13 @@
+dataset,method,independent_questions_or_facts,conditions,mean_em,mean_f1,paired_em_delta,paired_em_cluster_ci95
+controlled,raw,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+controlled,uniform4,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+controlled,uniform8,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+controlled,cachegen1,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+controlled,cachegen2,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+controlled,cachegen3,10,90,1.0,1.0,0.0,"[0.0, 0.0]"
+triviaqa,raw,20,20,0.8,0.8333333333333334,0.0,"[0.0, 0.0]"
+triviaqa,uniform4,20,20,0.75,0.7833333333333333,-0.05,"[-0.15, 0.0]"
+triviaqa,uniform8,20,20,0.8,0.8333333333333334,0.0,"[0.0, 0.0]"
+triviaqa,cachegen1,20,20,0.75,0.7833333333333333,-0.05,"[-0.15, 0.0]"
+triviaqa,cachegen2,20,20,0.75,0.7833333333333333,-0.05,"[-0.15, 0.0]"
+triviaqa,cachegen3,20,20,0.75,0.7833333333333333,-0.05,"[-0.15, 0.0]"

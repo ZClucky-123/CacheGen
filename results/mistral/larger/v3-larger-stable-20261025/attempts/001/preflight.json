@@ -1,0 +1,22 @@
+{
+  "maximum_total_tokens": 4136,
+  "largest_fp16_kv_bytes": 542113792,
+  "estimated_gpu_required_bytes": 22711657081,
+  "gpu_free_bytes": 24877072384,
+  "gpu_total_bytes": 25250627584,
+  "stable_execution_allocator_reserve_bytes": 4294967296,
+  "estimated_host_required_bytes": 21696136435,
+  "host_limit_bytes": 32212254720,
+  "host_used_bytes": 1918164992,
+  "disk_free_bytes": 48997658624,
+  "disk_required_bytes": 3794796544,
+  "host_reclaimable_inactive_file_bytes": 91099136,
+  "plot_preflight": "passed",
+  "matplotlib": "3.8.4",
+  "text_wire_checks": {
+    "conditions": 175,
+    "patched_conditions": 31,
+    "maximum_inserted_patch_tokens": 1
+  },
+  "resource_estimates_are_conservative_not_allocations": true
+}

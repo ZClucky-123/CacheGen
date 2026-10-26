@@ -20,3 +20,7 @@ reports/shared-v3-20261025/** -text -whitespace
 results/mistral/small/v3-larger-validation-03/** -text -whitespace
 results/tinyllama/minimal/v3-stable-acceptance-20261025/** -text -whitespace
 reports/shared-v3-stable-20261025/** -text -whitespace
+
+# Full completed Mistral larger batch; keep evidence bytes unchanged.
+results/mistral/larger/v3-larger-stable-20261025/** -text -whitespace
+results/mistral/larger/v3-larger-stable-20261025/archive/*.part* binary

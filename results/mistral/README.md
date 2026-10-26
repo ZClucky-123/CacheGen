@@ -2,6 +2,10 @@
 
 当前框架为 [共享 v3](../../docs/reproduction/SHARED_FRAMEWORK.md)。结果按 `minimal/`、`small/`、`larger/` 和唯一批次分层，默认状态查询覆盖这些目录。当前论文边界见 [对照表](../../docs/reproduction/PAPER_ALIGNMENT.md)。
 
+## 较大规模完整结果（2026-10-26）
+
+[v3-larger-stable-20261025](larger/v3-larger-stable-20261025/) 已完成 12594/12594 条正式观测、7/7 任务，退出码 0；含报告、图表、逐条原始结果及完整分卷归档，可离线进行本地分析。
+
 ## 大上下文稳定性验收
 
 [small/v3-larger-validation-03](small/v3-larger-validation-03/) 完成 469/469 条观测、105 组配对、15 个严格文本 KV 和6个 NLL 对照，包含 TERM 及环境重建后恢复；[新验收报告](../../reports/shared-v3-stable-20261025/验收报告.md)。这是较大长度的预验证，不是 12594 条正式较大矩阵。

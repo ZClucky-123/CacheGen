@@ -1,0 +1,20 @@
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+{"event": "start", "time_utc": "2026-10-25T05:31:22.750837+00:00", "run_directory": "/home/aaa/CacheGen/results/mistral/larger/v3-larger-stable-20261025", "resume": false}
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|###3      | 1/3 [00:14<00:28, 14.41s/it] 67%|######6   | 2/3 [00:28<00:14, 14.42s/it]100%|##########| 3/3 [00:41<00:00, 13.43s/it]100%|##########| 3/3 [00:41<00:00, 13.70s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+{"event": "task_completed", "task": "quality", "observations": 1020, "time_utc": "2026-10-25T06:05:37.362465+00:00"}
+{"event": "task_completed", "task": "ttft", "observations": 9450, "time_utc": "2026-10-25T18:05:50.900602+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.2", "observations": 525, "time_utc": "2026-10-25T18:25:38.890034+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-1-slo-0.5", "observations": 525, "time_utc": "2026-10-25T18:45:35.004545+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.2", "observations": 525, "time_utc": "2026-10-25T20:00:43.065990+00:00"}
+{"event": "task_completed", "task": "adaptive-scale-0.01-slo-0.5", "observations": 525, "time_utc": "2026-10-25T21:18:54.220088+00:00"}
+{"event": "task_completed", "task": "ablation", "observations": 24, "time_utc": "2026-10-25T21:23:46.835567+00:00"}
+Measurements and report complete; finalizing archive: /home/aaa/CacheGen/results/mistral/larger/v3-larger-stable-20261025
+COMPLETED /home/aaa/CacheGen/results/mistral/larger/v3-larger-stable-20261025; 173 artifacts verified

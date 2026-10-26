@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "command": [
+    "bash",
+    "/home/aaa/CacheGen/releases/cachegen-shared-v3-stable-20261025/experiments/run.sh",
+    "--config",
+    "experiments/configs/larger-mistral.json",
+    "--run-id",
+    "v3-larger-stable-20261025"
+  ],
+  "environment": {
+    "TORCH_EXTENSIONS_DIR": "/home/aaa/CacheGen/.local/torch_extensions",
+    "CACHEGEN_PYTHON": "/home/aaa/CacheGen/.venv/bin/python",
+    "HF_HOME": "/home/aaa/CacheGen/.venv/huggingface",
+    "OMP_NUM_THREADS": "8",
+    "CUDA_HOME": "/home/aaa/CacheGen/.cuda-12.1",
+    "CACHEGEN_REPO_ROOT": "/home/aaa/CacheGen/releases/cachegen-shared-v3-stable-20261025",
+    "CACHEGEN_RESULTS_DIR": "/home/aaa/CacheGen/results",
+    "CACHEGEN_REPORTS_DIR": "/home/aaa/CacheGen/reports",
+    "CACHEGEN_LOCAL_DIR": "/home/aaa/CacheGen/.local"
+  },
+  "run_directory": "/home/aaa/CacheGen/results/mistral/larger/v3-larger-stable-20261025",
+  "started_utc": "2026-10-25T05:31:20.050833+00:00",
+  "log": "/home/aaa/CacheGen/.local/launches/mistral-v3-larger-stable-20261025.log",
+  "pid": 5926,
+  "exit_code": 0,
+  "finished_utc": "2026-10-25T21:24:56.016401+00:00"
+}

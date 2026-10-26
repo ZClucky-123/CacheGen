@@ -1,0 +1,18 @@
+{
+  "archive": "raw.tar.gz",
+  "sha256": "3739d93847bf33c3da78d16da4b30ac10424aa463d37aaca83f09f0ed7e85f55",
+  "bytes": 79826288,
+  "parts": [
+    {
+      "file": "raw.tar.gz.part000",
+      "bytes": 41943040,
+      "sha256": "39143723d84e6f785045d57aaf3f9626d11a4b7f82f5571ef7d9fa11f03b21fc"
+    },
+    {
+      "file": "raw.tar.gz.part001",
+      "bytes": 37883248,
+      "sha256": "edda6e188e0d290ed16840534490e109670dba81e1b8fcb8d00107b8dd4477da"
+    }
+  ],
+  "original_artifacts": 175
+}

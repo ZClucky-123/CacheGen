@@ -2,12 +2,13 @@
 
 TinyLlama 与 Mistral 共用 `cachegen-shared-v3`：质量与体积、TTFT、带宽自适应、轻量机制消融四组实验，默认七个任务。配置、测量、恢复、评分、汇总和归档共用代码，模型差异集中在适配器。
 
-本项目复现作者公开代码路径，并实现用户要求的受控对照。按最新范围，不补做 anchor/delta 和完整论文调度器；[论文对照](docs/reproduction/PAPER_ALIGNMENT.md)明确实现边界。流程完成与论文质量、性能结论分别判断。
+目标是复现论文核心方法与结论。现有公共框架和历史结果作为基线保留；新增独立的 [核心复现路径](docs/reproduction/PAPER_COMPRESSION.md)，覆盖三个 insight、分集校准/扫描、压缩消融、TTFT及因果自适应。新路径仅完成本地代码和文档修改，未运行测试或模型，量化单位仍属披露的实现解释。详细边界见 [论文对照](docs/reproduction/PAPER_ALIGNMENT.md)。
 
 ## 文档入口
 
 | 目的 | 文档 |
 | --- | --- |
+| 新压缩路径、参数不确定项及服务器验收命令 | [论文压缩规格](docs/reproduction/PAPER_COMPRESSION.md) |
 | 配置、协议、后台启动、监控与恢复 | [公共框架指南](docs/reproduction/SHARED_FRAMEWORK.md) |
 | 模块、目录、路径与扩展方式 | [工作区指南](docs/reproduction/WORKSPACE_GUIDE.md) |
 | 大上下文修复、固定版本、规模和耗时 | [稳定版本记录](docs/reproduction/LARGER_READINESS_20261025.md) |
@@ -15,6 +16,8 @@ TinyLlama 与 Mistral 共用 `cachegen-shared-v3`：质量与体积、TTFT、带
 | 已完成的实测、验收和原始记录 | [报告索引](reports/README.md) |
 | v1/v2/v3 批次与评分边界 | [历史索引](docs/reproduction/HISTORY.md) |
 | 依赖、CUDA 和固定模型准备 | [环境说明](docs/reproduction/MISTRAL_ENVIRONMENT.md) |
+
+新核心研究分两阶段，服务器同步分支后运行 `bash tools/run_paper_core.sh stage1 .local/paper-core-run01`；完成压缩与绘图后，再独立运行 `bash tools/run_paper_core.sh stage2 .local/paper-core-run01` 做网络实验。详见上方核心复现文档。本地交付未运行测试或模型。
 
 ## 项目结构
 

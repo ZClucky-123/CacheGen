@@ -6,7 +6,7 @@ from tools.paper_compression import provenance, sha256, save
 
 
 def manifest(root):
-    sources = provenance()
+    sources = provenance('stage1')
     paths = []
     for phase in ('insights', 'profiles', 'validation', 'test'):
         folder = root / phase
@@ -25,7 +25,7 @@ def manifest(root):
         paths.extend(p for p in folder.rglob('*') if p.is_file())
     if not (root / 'test-plots/encoding-error.pdf').is_file():
         raise ValueError('Stage1 encoding-error plot missing')
-    return {'format': 'paper-core-stage1-v1', 'source_hashes': sources,
+    return {'format': 'paper-core-stage1-v2', 'source_scope': 'stage1', 'source_hashes': sources,
             'files': {str(p.relative_to(root)): sha256(p) for p in sorted(paths)}}
 
 

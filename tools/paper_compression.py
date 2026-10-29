@@ -9,6 +9,7 @@ import os
 import importlib.metadata
 import statistics
 from paper_compression.config import CodecConfig, fingerprint
+from paper_compression.provenance import provenance
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -19,23 +20,6 @@ def sha256(path):
         for data in iter(lambda: stream.read(8 << 20), b''):
             h.update(data)
     return h.hexdigest()
-
-
-def provenance():
-    paths = list((ROOT / 'paper_compression').rglob('*.py'))
-    paths += list((ROOT / 'paper_compression/configs').glob('*.json'))
-    paths += [ROOT / 'tools/paper_compression.py', ROOT / 'tools/run_paper_compression.sh',
-              ROOT / 'tools/paper_study.py', ROOT / 'tools/paper_stages.py',
-              ROOT / 'tools/run_paper_study.sh', ROOT / 'tools/run_paper_core.sh',
-              ROOT / 'tests/test_paper_compression.py', ROOT / 'tests/test_paper_study.py',
-              ROOT / 'scripts/experiment-env.sh']
-    paths += list((ROOT / 'experiments').glob('*.py'))
-    paths += list((ROOT / 'mini_repro').glob('*.py'))
-    paths += list((ROOT / 'LMCache/lmcache/storage_backend/serde').glob('*.py'))
-    paths += [ROOT / 'LMCache/lmcache/config.py']
-    paths += list((ROOT / 'LMCache/third_party/torchac_cuda').glob('*.cu'))
-    paths += list((ROOT / 'LMCache/third_party/torchac_cuda').glob('*.cuh'))
-    return {str(p.relative_to(ROOT)): sha256(p) for p in sorted(set(paths))}
 
 
 def load_config(path):

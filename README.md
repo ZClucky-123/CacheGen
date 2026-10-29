@@ -2,7 +2,7 @@
 
 TinyLlama 与 Mistral 共用 `cachegen-shared-v3`：质量与体积、TTFT、带宽自适应、轻量机制消融四组实验，默认七个任务。配置、测量、恢复、评分、汇总和归档共用代码，模型差异集中在适配器。
 
-目标是复现论文核心方法与结论。现有公共框架和历史结果作为基线保留；新增独立的 [核心复现路径](docs/reproduction/PAPER_COMPRESSION.md)，覆盖三个 insight、分集校准/扫描、压缩消融、TTFT及因果自适应。新路径仅完成本地代码和文档修改，未运行测试或模型，量化单位仍属披露的实现解释。详细边界见 [论文对照](docs/reproduction/PAPER_ALIGNMENT.md)。
+目标是复现论文核心方法与结论。现有公共框架和历史结果作为基线保留；新增独立的 [核心复现路径](docs/reproduction/PAPER_COMPRESSION.md)，覆盖三个 insight、分集校准/扫描、压缩消融、TTFT及因果自适应。2026-10-29已在4090D编译CUDA扩展，30项单测通过；正式模型实验尚未执行，量化单位仍属披露的实现解释。详细边界见 [论文对照](docs/reproduction/PAPER_ALIGNMENT.md)。
 
 ## 文档入口
 
@@ -17,7 +17,7 @@ TinyLlama 与 Mistral 共用 `cachegen-shared-v3`：质量与体积、TTFT、带
 | v1/v2/v3 批次与评分边界 | [历史索引](docs/reproduction/HISTORY.md) |
 | 依赖、CUDA 和固定模型准备 | [环境说明](docs/reproduction/MISTRAL_ENVIRONMENT.md) |
 
-新核心研究分两阶段，服务器同步分支后运行 `bash tools/run_paper_core.sh stage1 .local/paper-core-run01`；完成压缩与绘图后，再独立运行 `bash tools/run_paper_core.sh stage2 .local/paper-core-run01` 做网络实验。详见上方核心复现文档。本地交付未运行测试或模型。
+新核心研究分两阶段，服务器同步分支后运行 `bash tools/run_paper_core.sh stage1 .local/paper-core-run01`；完成压缩与绘图后，再独立运行 `bash tools/run_paper_core.sh stage2 .local/paper-core-run01` 做网络实验。stage1只绑定核心源码，stage2另记录网络源码指纹。详见上方核心复现文档。所有编译与测试仅在服务器执行。
 
 ## 项目结构
 

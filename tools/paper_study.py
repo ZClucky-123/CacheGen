@@ -24,7 +24,8 @@ def records(path):
 @contextmanager
 def run_folder(args, cfg):
     args.output.mkdir(parents=True, exist_ok=False)
-    sources = provenance()
+    scope = 'stage2' if args.action in ('ttft', 'adaptive') else 'stage1'
+    sources = provenance(scope)
     data_hash = sha256(ROOT / cfg['dataset'])
     dependencies = {}
     if args.profiles is not None:
@@ -35,12 +36,16 @@ def run_folder(args, cfg):
             dependencies[str(p)] = sha256(p)
     save(args.output / 'config.json', cfg)
     save(args.output / 'source_hashes.json', sources)
+    save(args.output / 'source_scope.json', {'scope': scope})
+    if scope == 'stage2':
+        save(args.output / 'stage1_source_hashes.json', provenance('stage1'))
+        save(args.output / 'stage2_source_hashes.json', sources)
     save(args.output / 'dependency_hashes.json', dependencies)
     save(args.output / 'status.json', {'status': 'running', 'action': args.action})
     start = time.monotonic()
     try:
         yield data_hash
-        if sources != provenance() or data_hash != sha256(ROOT / cfg['dataset']):
+        if sources != provenance(scope) or data_hash != sha256(ROOT / cfg['dataset']):
             raise ValueError('Source code or dataset changed during run')
         if any(sha256(p) != expected for p, expected in dependencies.items()):
             raise ValueError('Profile or frozen validation dependency changed during run')

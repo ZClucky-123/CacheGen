@@ -1,6 +1,6 @@
 # 核心方法复现：压缩、传输与验收
 
-范围是以一张 24GB 4090D、Mistral-7B FP16 验证核心方法与结论，不追求论文完整模型、数据或并发规模。顺序为 §5.1 三个 insight → 压缩曲线与消融 → TTFT → 因果自适应。**本次仅本地修改和静态阅读；未运行测试、Python、模型或 CUDA 编译。以下入口待服务器验证。**
+范围是以一张 24GB 4090D、Mistral-7B FP16 验证核心方法与结论，不追求论文完整模型、数据或并发规模。顺序为 §5.1 三个 insight → 压缩曲线与消融 → TTFT → 因果自适应。**2026-10-29 已在服务器完成新CUDA扩展编译和30项单测；没有在本地运行测试，也没有加载Mistral或运行正式实验。**
 
 旧 `experiments/`、`mini_repro/`、LMCache 实现及历史结果保留。新网络路径通过适配器复用旧 Engine、分块、socket 和 TTFT replay。不能把旧 FastChat8 权重结果拼入此次 FP16 对照。
 
@@ -103,12 +103,17 @@ bash tools/run_paper_core.sh stage1 .local/paper-core-run01
 bash tools/run_paper_core.sh stage2 .local/paper-core-run01
 ```
 
-stage1根目录须不存在；成功后写 `stage1-complete.json`，绑定全部第一阶段产物及源码。stage2先检查完整状态、图、源码和产物哈希，拒绝缺失、失败或已更改的第一阶段；stage2目录也不能已存在。二者不自动连续执行。需要单独执行各子步骤时：
+stage1根目录须不存在；成功后写 `stage1-complete.json`（v2），绑定全部第一阶段产物和影响其结果的源码。`paper_compression.provenance` 显式区分两阶段：stage1保留量化/CDF/编解码、insight、共用模型/评分/数据辅助、执行设置、研究入口及配置；排除 `network.py`、`policy.py`、网络传输模块、测试和启动脚本。仅修复这些网络文件不会改变校准index、冻结选择或stage1封存指纹；共享编解码、模型、研究入口或配置变化仍需重新验证stage1。
+
+stage2先检查完整状态、图、stage1源码及产物哈希，拒绝缺失、失败或已更改的stage1；每个网络阶段另写 `stage2_source_hashes.json`，记录其网络代码与共享依赖，并写 `stage1_source_hashes.json` 标识所复用的核心版本。运行期间修改stage2代码会让该网络阶段失败，但不会改写或作废已封存的stage1。测试文件自身不作为数值结果依赖。旧v1封存不自动改写为v2。
+
+stage2目录也不能已存在，二者不自动连续执行。需要单独执行各子步骤时：
 
 ```bash
 source scripts/experiment-env.sh
 (
   cachegen_lock_gpu
+  "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_provenance.py -v
   "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_compression.py -v
   "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_study.py -v
 )
@@ -143,4 +148,14 @@ bash tools/run_paper_study.sh adaptive --profiles .local/paper-core/profiles \
 
 阶段一按 **约2–6小时**、阶段二 **约0.5–1.5小时**预留（总计约2.5–7.5小时）。这不是实测承诺。首次运行后用校准 `timings.jsonl`、index的`seconds`、评估的`method_seconds`、各阶段`status.json.wall_seconds`修正估计。校准逐候选重新prefill，不落盘约10GB原始KV，不同时保留50份GPU计数；预留约6–8GB额外磁盘给profile、图、日志和扩展缓存。
 
-输出包括三个insight记录、profile/index、验证/测试records与summary、冻结selected、PNG/PDF曲线及真实/估算字节散点图、网络时序与决策/SLO违约。源码/数据/profile/验证记录变更阻止串用；中断写failed、不自动认定完成。**当前交付是代码和运行说明，没有测试通过或论文结论成立的实测证据。**
+输出包括三个insight记录、profile/index、验证/测试records与summary、冻结selected、PNG/PDF曲线及真实/估算字节散点图、网络时序与决策/SLO违约。源码/数据/profile/验证记录变更阻止串用；中断写failed、不自动认定完成。**当前已验证编译及合成输入单测，尚无论文模型实验结论的实测证据。**
+
+## 2026-10-29 服务器编译与回归
+
+4090D、PyTorch2.3.1+cu121、CUDA Toolkit12.1、架构8.9。在服务器临时源码副本运行，不修改已有诊断文件；编译缓存直接存入项目 `.local/torch_extensions/paper_ac256_a9bde53b6f099ec6/`，该目录应随镜像保留。全部检查约64秒：
+
+- `test_paper_provenance.py`：3/3；网络文件变化不改变stage1，量化变化会改变，产物篡改仍被拒绝。
+- `test_paper_compression.py`：13/13；含完整字母表、低概率符号、4096/257尾段、CPU/CUDA量化符号与恢复KV一致性。
+- `test_paper_study.py`：14/14；含GPU/CPU校准一致性、交叉熵、固定策略、预算以及新codec的串行/流水线适配器检查。
+
+服务器日志为 `.local/cuda-build-check-20261029/tests.log`，退出码0。没有执行stage1、stage2、Mistral推理或正式TTFT计时；这30项测试不能替代模型级质量和性能验收。后续从镜像恢复仍需验证驱动兼容和扩展加载。

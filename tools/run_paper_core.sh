@@ -16,6 +16,7 @@ mkdir -p -- "$core_run"
 (
   source scripts/experiment-env.sh
   cachegen_lock_gpu
+  "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_provenance.py -v
   "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_compression.py -v
   "$CACHEGEN_PYTHON" -m unittest discover -s tests -p test_paper_study.py -v
 ) 2>&1 | tee "$core_run/tests.log"

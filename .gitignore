@@ -74,3 +74,12 @@ results/mistral/minimal/*
 # Canonical SQLite databases are archived after checkpoint; sidecars are transient.
 **/records.sqlite3-wal
 **/records.sqlite3-shm
+
+# Joint optimization: isolated generated runs, packages and local validation env.
+/optimization/output/
+# Machine-local launchers, validation notes, logs and temporary files.
+/optimization/local-validation/
+/LMCache/third_party/cachegen_optim_cuda/build/
+/LMCache/third_party/cachegen_optim_cuda/*.egg-info/
+*.pyd
+*.so

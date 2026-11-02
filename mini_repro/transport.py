@@ -220,3 +220,114 @@ def rate_limited_transfer(payload, bandwidth_gbps, chunk_bytes=None, *, validate
     if validate and received != payload:
         raise RuntimeError('Local transport corrupted payload')
     return received, elapsed
+
+
+class DynamicTransport:
+    """One serial link for joint packets materialized after request start.
+
+    The receiver reads each frame's header. Controller metadata never supplies
+    its length. The runtime owns the capacity-one receive credit and freezes
+    identity in on_start immediately before network service begins.
+    """
+    def __init__(self, *, bandwidth_bps=None, io_idle_timeout_s=30.,
+                 max_frame_bytes=67108864, cancelled=None, origin_ns=None):
+        from concurrent.futures import ThreadPoolExecutor
+        self.sender, self.receiver = socket.socketpair()
+        self.sender.settimeout(.1)
+        self.cancelled = cancelled or threading.Event()
+        self.bandwidth_bps = bandwidth_bps
+        self.io_idle_timeout_s = io_idle_timeout_s
+        self.max_frame_bytes = max_frame_bytes
+        self.pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix='joint-link')
+        self.origin_ns = time.perf_counter_ns() if origin_ns is None else origin_ns
+
+    def send(self, wire, *, identity=None, on_start=None):
+        if not isinstance(wire, bytes) or not wire or len(wire) > self.max_frame_bytes:
+            raise ValueError('Expected bounded immutable frame')
+        return self.pool.submit(self._transfer, wire, identity, on_start)
+
+    def _transfer(self, wire, identity, on_start):
+        from experiments.joint_wire import receive_wire
+        if self.cancelled.is_set():
+            raise RuntimeError('transport_cancelled')
+        start = time.perf_counter_ns()
+        if on_start:
+            frozen_start = on_start(start)
+            if frozen_start is not None:
+                start = frozen_start
+        row = {'identity': identity, 'net_start_ns': start, 'wire_bytes': len(wire)}
+        errors = []
+
+        def send_body():
+            try:
+                offset = 0
+                last = time.perf_counter_ns()
+                while offset < len(wire):
+                    if self.cancelled.is_set():
+                        raise RuntimeError('transport_cancelled')
+                    # Limiter reads its independent wall-clock trace; it exposes
+                    # only completed byte/time observations to the controller.
+                    rate = self.bandwidth_bps
+                    if callable(rate):
+                        rate = rate((time.perf_counter_ns() - self.origin_ns) / 1e9)
+                    if rate is not None and (not math.isfinite(rate) or rate <= 0):
+                        raise ValueError('Invalid link bit/s')
+                    end = min(offset + 16384, len(wire))
+                    if rate is not None and self.cancelled.wait((end - offset) * 8 / rate):
+                        raise RuntimeError('transport_cancelled')
+                    while offset < end:
+                        try:
+                            sent = self.sender.send(memoryview(wire)[offset:end])
+                        except socket.timeout:
+                            sent = 0
+                        if sent:
+                            offset += sent
+                            last = time.perf_counter_ns()
+                        elif time.perf_counter_ns() - last >= self.io_idle_timeout_s * 1e9:
+                            raise TimeoutError('transport_timeout')
+                        if self.cancelled.is_set():
+                            raise RuntimeError('transport_cancelled')
+            except BaseException as exc:
+                errors.append(exc)
+                self.cancelled.set()
+                try:
+                    self.sender.shutdown(socket.SHUT_RDWR)
+                except OSError:
+                    pass
+
+        sending = threading.Thread(target=send_body, name='joint-send', daemon=True)
+        sending.start()
+        try:
+            result = receive_wire(self.receiver, io_idle_timeout_s=self.io_idle_timeout_s,
+                                  max_frame_bytes=self.max_frame_bytes, cancelled=self.cancelled)
+            row['data_available_ns'] = time.perf_counter_ns()
+        except BaseException:
+            self.cancelled.set()
+            for endpoint in (self.sender,self.receiver):
+                try:
+                    endpoint.shutdown(socket.SHUT_RDWR)
+                except OSError:
+                    pass
+            raise
+        finally:
+            sending.join(timeout=self.io_idle_timeout_s + .2)
+        if errors:
+            raise errors[0]
+        row['bandwidth_bps'] = 8 * len(wire) * 1e9 / max(1, row['data_available_ns'] - start)
+        return result, row
+
+    def close(self):
+        self.cancelled.set()
+        for endpoint in (self.sender, self.receiver):
+            try:
+                endpoint.shutdown(socket.SHUT_RDWR)
+            except OSError:
+                pass
+            endpoint.close()
+        self.pool.shutdown(wait=True, cancel_futures=True)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.close()

@@ -1,0 +1,9 @@
+{
+  "protocol": "cachegen-joint-v2",
+  "source": "test_data/longchat.jsonl",
+  "source_key": "test_id",
+  "test": [0, 1, 2, 3, 4],
+  "cost": [5, 6, 7, 8, 9],
+  "residual": [10, 11, 12, 13, 14],
+  "verification": [15, 16, 17, 18, 19]
+}

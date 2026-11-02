@@ -1,5 +1,11 @@
 # CacheGen 公共复现实验框架
 
+本仓库包含两个独立入口。以下公共框架章节记录复现流程和历史证据；联合优化使用 [optimization/README.md](optimization/README.md)，源码位于 `experiments/joint_*` 和独立的 `LMCache/third_party/cachegen_optim_cuda` 扩展。
+
+优化配置、服务器脚本和技术文档分别位于 `optimization/configs`、`optimization/scripts` 和 `optimization/docs`。正式优化运行产物写入基于仓库根目录解析的 `optimization/output/<run_id>`。原 `docs/reproduction`、`results`、`reports` 保留复现职责。
+
+联合优化按CPU参考与状态验证、服务器构建和GPU小规模正确性检查、独立成本标定、残差拟合、独立验收、冻结版本、正式配对实验的顺序执行。接口、执行顺序及待目标GPU验证项见 [优化入口](optimization/README.md)；CPU模拟结果与GPU实测结果分别报告。
+
 TinyLlama 与 Mistral 共用 `cachegen-shared-v3`：质量与体积、TTFT、带宽自适应、轻量机制消融四组实验，默认七个任务。配置、测量、恢复、评分、汇总和归档共用代码，模型差异集中在适配器。
 
 目标是复现论文核心方法与结论。现有公共框架和历史结果作为基线保留；新增独立的 [核心复现路径](docs/reproduction/PAPER_COMPRESSION.md)，覆盖三个 insight、分集校准/扫描、压缩消融、TTFT及因果自适应。2026-10-29已在4090D编译CUDA扩展，30项单测通过；正式模型实验尚未执行，量化单位仍属披露的实现解释。详细边界见 [论文对照](docs/reproduction/PAPER_ALIGNMENT.md)。

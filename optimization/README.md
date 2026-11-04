@@ -19,6 +19,8 @@ tests/test_joint*.py      CPU 参考、状态、集成及目标 GPU 检查
 
 技术入口：[整体方案 v2.2](docs/CacheGen整体优化与代码修改方案.md)、[CDF 组合编码](docs/低带宽CDF组合编码优化方案.md)、[GPU 位打包与融合恢复](docs/高带宽GPU位打包与融合恢复优化方案.md)、[实现与实验指南](docs/implementation-and-experiments.md)。联合准备、缓存、计时与调度规则以整体方案为准。
 
+首轮执行顺序、重点指标与结果驱动的优化方向见[首轮实验与结果分析指导](docs/experiment-guide.md)。
+
 代码接收、职责边界、设备待验证项、阶段通过条件及问题回传格式见[代码交接说明](docs/handoff.md)。交接提交与独立验收后的档案冻结分别记录。
 
 在仓库根目录执行功能测试与无设备预检：

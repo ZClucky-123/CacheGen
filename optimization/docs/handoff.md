@@ -36,6 +36,8 @@ git status --short
 
 完整约束见[整体方案v2.2](CacheGen整体优化与代码修改方案.md)，方法与产物说明见[实现和实验指南](implementation-and-experiments.md)。
 
+首轮实验的执行重点、观测指标和迭代分析见[首轮实验与结果分析指导](experiment-guide.md)。
+
 ## 检查范围与目标环境待确认项
 
 CPU检查覆盖参考协议与数值、选择器和穷举参考对照、模拟资源竞争、小张量与socket集成，以及取消、失败改选、旧结果和断连清理。张量集成依赖CPU PyTorch。GPU与真实模型用例在具备目标条件时执行。

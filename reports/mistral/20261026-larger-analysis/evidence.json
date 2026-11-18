@@ -1,0 +1,148 @@
+{
+  "batch": "results/mistral/larger/v3-larger-stable-20261025",
+  "original_files_verified": 175,
+  "formal_observations": 12594,
+  "observation_kinds": {
+    "quality": 360,
+    "controlled": 540,
+    "triviaqa": 120,
+    "ttft": 9450,
+    "adaptive": 2100,
+    "ablation": 24
+  },
+  "original_manifest_sha256": "e2d2478abb7aba949294087499b08fe003f148be8132921e9d000999cfdc7db6",
+  "cold_start": [
+    {
+      "task": "adaptive-scale-0.01-slo-0.2",
+      "strategy": "adaptive",
+      "requests": 75,
+      "first_level_counts": {
+        "0": 75
+      },
+      "first_transfer_median_seconds": 0.0005192756652832031,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 225,
+      "initial_estimate_gbps": null
+    },
+    {
+      "task": "adaptive-scale-0.01-slo-0.2",
+      "strategy": "adaptive_history",
+      "requests": 75,
+      "first_level_counts": {
+        "1": 75
+      },
+      "first_transfer_median_seconds": 1.0263584926724434,
+      "first_transfer_already_exceeds_slo": 75,
+      "later_text_chunks": 225,
+      "initial_estimate_gbps": 1.0
+    },
+    {
+      "task": "adaptive-scale-0.01-slo-0.5",
+      "strategy": "adaptive",
+      "requests": 75,
+      "first_level_counts": {
+        "0": 75
+      },
+      "first_transfer_median_seconds": 0.0005470961332321167,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 225,
+      "initial_estimate_gbps": null
+    },
+    {
+      "task": "adaptive-scale-0.01-slo-0.5",
+      "strategy": "adaptive_history",
+      "requests": 75,
+      "first_level_counts": {
+        "3": 75
+      },
+      "first_transfer_median_seconds": 1.7935995906591415,
+      "first_transfer_already_exceeds_slo": 75,
+      "later_text_chunks": 225,
+      "initial_estimate_gbps": 1.0
+    },
+    {
+      "task": "adaptive-scale-1-slo-0.2",
+      "strategy": "adaptive",
+      "requests": 75,
+      "first_level_counts": {
+        "0": 15,
+        "3": 60
+      },
+      "first_transfer_median_seconds": 0.01753317564725876,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 15,
+      "initial_estimate_gbps": null
+    },
+    {
+      "task": "adaptive-scale-1-slo-0.2",
+      "strategy": "adaptive_history",
+      "requests": 75,
+      "first_level_counts": {
+        "1": 75
+      },
+      "first_transfer_median_seconds": 0.012413345277309418,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 45,
+      "initial_estimate_gbps": 1.0
+    },
+    {
+      "task": "adaptive-scale-1-slo-0.5",
+      "strategy": "adaptive",
+      "requests": 75,
+      "first_level_counts": {
+        "1": 15,
+        "3": 60
+      },
+      "first_transfer_median_seconds": 0.020214594900608063,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 0,
+      "initial_estimate_gbps": null
+    },
+    {
+      "task": "adaptive-scale-1-slo-0.5",
+      "strategy": "adaptive_history",
+      "requests": 75,
+      "first_level_counts": {
+        "3": 75
+      },
+      "first_transfer_median_seconds": 0.019888125360012054,
+      "first_transfer_already_exceeds_slo": 0,
+      "later_text_chunks": 45,
+      "initial_estimate_gbps": 1.0
+    }
+  ],
+  "triviaqa_changes": [
+    {
+      "case_id": "tqa-29",
+      "method": "uniform4",
+      "scored_answer": "Downton Abbey",
+      "em": 0.0,
+      "raw_answer": "Julian Fellowes",
+      "raw_em": 1.0
+    },
+    {
+      "case_id": "tqa-29",
+      "method": "cachegen1",
+      "scored_answer": "Downton Abbey",
+      "em": 0.0,
+      "raw_answer": "Julian Fellowes",
+      "raw_em": 1.0
+    },
+    {
+      "case_id": "tqa-32",
+      "method": "cachegen2",
+      "scored_answer": "A locomotive",
+      "em": 0.0,
+      "raw_answer": "Train",
+      "raw_em": 1.0
+    },
+    {
+      "case_id": "tqa-32",
+      "method": "cachegen3",
+      "scored_answer": "A locomotive",
+      "em": 0.0,
+      "raw_answer": "Train",
+      "raw_em": 1.0
+    }
+  ]
+}

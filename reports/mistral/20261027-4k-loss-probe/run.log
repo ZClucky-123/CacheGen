@@ -1,0 +1,46 @@
+Checking pinned model file: config.json
+Checking pinned model file: generation_config.json
+Checking pinned model file: model-00001-of-00003.safetensors
+Checking pinned model file: model-00002-of-00003.safetensors
+Checking pinned model file: model-00003-of-00003.safetensors
+Checking pinned model file: model.safetensors.index.json
+Checking pinned model file: special_tokens_map.json
+Checking pinned model file: tokenizer.json
+Checking pinned model file: tokenizer.model
+Checking pinned model file: tokenizer_config.json
+Loading fixed Mistral weights; output: /home/aaa/CacheGen/.local/diagnostics/4k-loss-20261027T140345Z
+/home/aaa/CacheGen/.venv/lib/python3.10/site-packages/transformers/modeling_utils.py:4565: FutureWarning: `_is_quantized_training_enabled` is going to be deprecated in transformers 4.39.0. Please use `model.hf_quantizer.is_trainable` instead
+  warnings.warn(
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|███▎      | 1/3 [00:09<00:19,  9.98s/it] 67%|██████▋   | 2/3 [00:20<00:10, 10.22s/it]100%|██████████| 3/3 [00:29<00:00,  9.78s/it]100%|██████████| 3/3 [00:29<00:00,  9.87s/it]
+Prefill and raw NLL validation, source 3
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+Source 3 variant cachegen1
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+Source 3 variant cachegen2
+Source 3 variant cachegen3
+Source 3 variant cachegen1_k32
+Source 3 variant cachegen1_v32
+Prefill and raw NLL validation, source 5
+Source 5 variant cachegen1
+Source 5 variant cachegen2
+Source 5 variant cachegen3
+Source 5 variant cachegen1_k32
+Source 5 variant cachegen1_v32
+Prefill and raw NLL validation, source 16
+Source 16 variant cachegen1
+Source 16 variant cachegen2
+Source 16 variant cachegen3
+Source 16 variant cachegen1_k32
+Source 16 variant cachegen1_v32
+Prefill and raw NLL validation, source 7
+Source 7 variant cachegen1
+Source 7 variant cachegen2
+Source 7 variant cachegen3
+Source 7 variant cachegen1_k32
+Source 7 variant cachegen1_v32
+COMPLETED: /home/aaa/CacheGen/.local/diagnostics/4k-loss-20261027T140345Z

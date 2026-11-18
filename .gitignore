@@ -71,6 +71,14 @@ results/mistral/minimal/*
 !/reports/shared-v3-stable-20261025/
 !/reports/shared-v3-stable-20261025/**
 
+# Offline interpretation of the completed larger Mistral batch.
+!/reports/mistral/20261026-larger-analysis/
+!/reports/mistral/20261026-larger-analysis/**
+
+# Targeted four-document cloud diagnostic and immutable raw evidence.
+!/reports/mistral/20261027-4k-loss-probe/
+!/reports/mistral/20261027-4k-loss-probe/**
+
 # Canonical SQLite databases are archived after checkpoint; sidecars are transient.
 **/records.sqlite3-wal
 **/records.sqlite3-shm

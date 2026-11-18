@@ -1,0 +1,11 @@
+{
+  "gpu": "NVIDIA GeForce RTX 4090 D",
+  "capability": [
+    8,
+    9
+  ],
+  "torch": "2.3.1+cu121",
+  "cuda": "12.1",
+  "diagnostic_script_sha256": "550165bb1520907210e7bb9327f677e5e1baf51dcaa7e53348634891bda569a3",
+  "original_metadata_sha256": "faf1d964f467af77bb3b4ca2fa544c6fdacb58998f95ac00b08b54b594e90bbf"
+}

@@ -24,3 +24,6 @@ reports/shared-v3-stable-20261025/** -text -whitespace
 # Full completed Mistral larger batch; keep evidence bytes unchanged.
 results/mistral/larger/v3-larger-stable-20261025/** -text -whitespace
 results/mistral/larger/v3-larger-stable-20261025/archive/*.part* binary
+
+# Preserve raw hashes (including CRLF CSV) of the targeted cloud diagnostic.
+reports/mistral/20261027-4k-loss-probe/** -text -whitespace

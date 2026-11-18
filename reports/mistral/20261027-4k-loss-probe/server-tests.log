@@ -1,0 +1,18 @@
+test_real_codec_preserves_quantized_symbols_and_reconstructed_kv (test_4k_loss_probe.LossProbeGPUTests) ... Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+ok
+test_plan_keeps_original_targets_and_control_source (test_4k_loss_probe.LossProbePlanTests) ... ok
+test_rejects_changed_target_even_if_file_hash_updated (test_4k_loss_probe.LossProbePlanTests) ... ok
+test_rejects_corrupt_archive_before_model_loading (test_4k_loss_probe.LossProbePlanTests) ... ok
+test_reserves_new_directory_without_overwriting_evidence (test_4k_loss_probe.LossProbePlanTests) ... ok
+test_single_component_interventions_hold_other_component_fixed (test_4k_loss_probe.LossProbePlanTests) ... ok
+test_identity_check_catches_single_symbol_and_nonfinite_errors (test_4k_loss_probe.LossProbeTensorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.018s
+
+OK

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "score_rows": 44,
+  "codec_checks": 20,
+  "raw_reference_checks": 4,
+  "all_symbols_scales_kv_exact": true,
+  "all_original_method_nll_reproduced_exactly": true,
+  "server_test_count": 7,
+  "server_tests_passed": true
+}

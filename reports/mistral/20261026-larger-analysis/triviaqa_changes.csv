@@ -1,0 +1,5 @@
+case_id,method,scored_answer,em,raw_answer,raw_em
+tqa-29,uniform4,Downton Abbey,0.0,Julian Fellowes,1.0
+tqa-29,cachegen1,Downton Abbey,0.0,Julian Fellowes,1.0
+tqa-32,cachegen2,A locomotive,0.0,Train,1.0
+tqa-32,cachegen3,A locomotive,0.0,Train,1.0

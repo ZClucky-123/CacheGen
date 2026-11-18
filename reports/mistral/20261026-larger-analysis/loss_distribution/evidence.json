@@ -1,0 +1,277 @@
+{
+  "source_batch": "results/mistral/larger/v3-larger-stable-20261025",
+  "paired_document_rows": 300,
+  "paired_token_rows": 9600,
+  "distribution": [
+    {
+      "context_tokens": 1024,
+      "method": "uniform4",
+      "sources": 20,
+      "mean_delta": 0.004764331877231598,
+      "median_delta": 0.007906809449195862,
+      "min_delta": -0.044182926416397095,
+      "max_delta": 0.03646230697631836,
+      "positive_sources": 13,
+      "sources_above_0_02": 4,
+      "mean_kv_mae": 0.2603562459349632,
+      "mae_loss_pearson_descriptive": -0.09287631232950933,
+      "mean_delta_cluster_ci95": [
+        -0.004692717716097832,
+        0.014114532209932798
+      ]
+    },
+    {
+      "context_tokens": 1024,
+      "method": "uniform8",
+      "sources": 20,
+      "mean_delta": 0.0007314734160900116,
+      "median_delta": 0.00034540891647338867,
+      "min_delta": -0.0011979341506958008,
+      "max_delta": 0.0039681196212768555,
+      "positive_sources": 14,
+      "sources_above_0_02": 0,
+      "mean_kv_mae": 0.014477385766804218,
+      "mae_loss_pearson_descriptive": 0.2931765441534167,
+      "mean_delta_cluster_ci95": [
+        0.00015759026631712914,
+        0.0013431712053716173
+      ]
+    },
+    {
+      "context_tokens": 1024,
+      "method": "cachegen1",
+      "sources": 20,
+      "mean_delta": 0.01161484867334366,
+      "median_delta": 0.01753970980644226,
+      "min_delta": -0.08676350116729736,
+      "max_delta": 0.09757423400878906,
+      "positive_sources": 14,
+      "sources_above_0_02": 10,
+      "mean_kv_mae": 0.3064674213528633,
+      "mae_loss_pearson_descriptive": 0.13130949986619486,
+      "mean_delta_cluster_ci95": [
+        -0.008564887307584286,
+        0.031117432899773114
+      ]
+    },
+    {
+      "context_tokens": 1024,
+      "method": "cachegen2",
+      "sources": 20,
+      "mean_delta": 0.005245783925056457,
+      "median_delta": 0.0063121020793914795,
+      "min_delta": -0.03271183371543884,
+      "max_delta": 0.055770277976989746,
+      "positive_sources": 14,
+      "sources_above_0_02": 3,
+      "mean_kv_mae": 0.22619667872786522,
+      "mae_loss_pearson_descriptive": 0.0975704348837328,
+      "mean_delta_cluster_ci95": [
+        -0.0032354750111699103,
+        0.013946518339216708
+      ]
+    },
+    {
+      "context_tokens": 1024,
+      "method": "cachegen3",
+      "sources": 20,
+      "mean_delta": -0.004068183898925781,
+      "median_delta": -0.004306018352508545,
+      "min_delta": -0.041854262351989746,
+      "max_delta": 0.021476328372955322,
+      "positive_sources": 8,
+      "sources_above_0_02": 2,
+      "mean_kv_mae": 0.12246481850743293,
+      "mae_loss_pearson_descriptive": 0.32954931101639245,
+      "mean_delta_cluster_ci95": [
+        -0.011331014633178711,
+        0.00273800130933523
+      ]
+    },
+    {
+      "context_tokens": 2048,
+      "method": "uniform4",
+      "sources": 20,
+      "mean_delta": 0.014099943451583385,
+      "median_delta": 0.00810212641954422,
+      "min_delta": -0.027146518230438232,
+      "max_delta": 0.09296029806137085,
+      "positive_sources": 12,
+      "sources_above_0_02": 8,
+      "mean_kv_mae": 0.26609233766794205,
+      "mae_loss_pearson_descriptive": -0.21327945732428444,
+      "mean_delta_cluster_ci95": [
+        0.0014053366146981716,
+        0.028518820507451883
+      ]
+    },
+    {
+      "context_tokens": 2048,
+      "method": "uniform8",
+      "sources": 20,
+      "mean_delta": 0.00048446301370859147,
+      "median_delta": 0.00032101012766361237,
+      "min_delta": -0.003774881362915039,
+      "max_delta": 0.003609180450439453,
+      "positive_sources": 12,
+      "sources_above_0_02": 0,
+      "mean_kv_mae": 0.014809030201286077,
+      "mae_loss_pearson_descriptive": 0.15830842053445274,
+      "mean_delta_cluster_ci95": [
+        -0.0003349468996748328,
+        0.0012529663462191817
+      ]
+    },
+    {
+      "context_tokens": 2048,
+      "method": "cachegen1",
+      "sources": 20,
+      "mean_delta": 0.014953956939280033,
+      "median_delta": 0.012776762247085571,
+      "min_delta": -0.08452510833740234,
+      "max_delta": 0.12130028009414673,
+      "positive_sources": 13,
+      "sources_above_0_02": 9,
+      "mean_kv_mae": 0.3129826083779335,
+      "mae_loss_pearson_descriptive": 0.1875719071923943,
+      "mean_delta_cluster_ci95": [
+        -0.004959022821858525,
+        0.03461918268352747
+      ]
+    },
+    {
+      "context_tokens": 2048,
+      "method": "cachegen2",
+      "sources": 20,
+      "mean_delta": 0.019415302015841008,
+      "median_delta": 0.011761784553527832,
+      "min_delta": -0.019421234726905823,
+      "max_delta": 0.0803983211517334,
+      "positive_sources": 13,
+      "sources_above_0_02": 9,
+      "mean_kv_mae": 0.23135650008916855,
+      "mae_loss_pearson_descriptive": -0.1590750162671564,
+      "mean_delta_cluster_ci95": [
+        0.0067262276867404575,
+        0.0335339525202289
+      ]
+    },
+    {
+      "context_tokens": 2048,
+      "method": "cachegen3",
+      "sources": 20,
+      "mean_delta": -0.0018979880958795547,
+      "median_delta": -0.003630399703979492,
+      "min_delta": -0.022672057151794434,
+      "max_delta": 0.023774385452270508,
+      "positive_sources": 7,
+      "sources_above_0_02": 2,
+      "mean_kv_mae": 0.1252784166485071,
+      "mae_loss_pearson_descriptive": 0.04314763489552914,
+      "mean_delta_cluster_ci95": [
+        -0.007494676075875759,
+        0.004200915098190307
+      ]
+    },
+    {
+      "context_tokens": 4096,
+      "method": "uniform4",
+      "sources": 20,
+      "mean_delta": 0.006999988853931427,
+      "median_delta": -0.0022548288106918335,
+      "min_delta": -0.04887282848358154,
+      "max_delta": 0.09430208057165146,
+      "positive_sources": 9,
+      "sources_above_0_02": 6,
+      "mean_kv_mae": 0.269990636408329,
+      "mae_loss_pearson_descriptive": 0.20683315675404237,
+      "mean_delta_cluster_ci95": [
+        -0.009825396705418824,
+        0.02544312842190265
+      ]
+    },
+    {
+      "context_tokens": 4096,
+      "method": "uniform8",
+      "sources": 20,
+      "mean_delta": -0.0002715549897402525,
+      "median_delta": -8.843233808875084e-05,
+      "min_delta": -0.005083322525024414,
+      "max_delta": 0.003489553928375244,
+      "positive_sources": 9,
+      "sources_above_0_02": 0,
+      "mean_kv_mae": 0.015033905906602741,
+      "mae_loss_pearson_descriptive": 0.21556597687687315,
+      "mean_delta_cluster_ci95": [
+        -0.0011563689704053104,
+        0.0005383013328537343
+      ]
+    },
+    {
+      "context_tokens": 4096,
+      "method": "cachegen1",
+      "sources": 20,
+      "mean_delta": 0.020897878659889103,
+      "median_delta": 0.017734378576278687,
+      "min_delta": -0.03466081619262695,
+      "max_delta": 0.12027871608734131,
+      "positive_sources": 13,
+      "sources_above_0_02": 10,
+      "mean_kv_mae": 0.3174771830439568,
+      "mae_loss_pearson_descriptive": 0.07386008864475392,
+      "mean_delta_cluster_ci95": [
+        0.002788619991624728,
+        0.03993467674474231
+      ]
+    },
+    {
+      "context_tokens": 4096,
+      "method": "cachegen2",
+      "sources": 20,
+      "mean_delta": 0.009480477683246136,
+      "median_delta": -0.005742624402046204,
+      "min_delta": -0.053796738386154175,
+      "max_delta": 0.07930948585271835,
+      "positive_sources": 9,
+      "sources_above_0_02": 7,
+      "mean_kv_mae": 0.2347881093621254,
+      "mae_loss_pearson_descriptive": 0.1754166923338276,
+      "mean_delta_cluster_ci95": [
+        -0.006541422220179811,
+        0.02622573766857384
+      ]
+    },
+    {
+      "context_tokens": 4096,
+      "method": "cachegen3",
+      "sources": 20,
+      "mean_delta": 0.006391787901520729,
+      "median_delta": 0.004700064659118652,
+      "min_delta": -0.017755210399627686,
+      "max_delta": 0.050997138023376465,
+      "positive_sources": 12,
+      "sources_above_0_02": 4,
+      "mean_kv_mae": 0.12718288823962212,
+      "mae_loss_pearson_descriptive": -0.12083280839101634,
+      "mean_delta_cluster_ci95": [
+        -0.0004700540751218795,
+        0.014176777019165447
+      ]
+    }
+  ],
+  "sensitivity_4k_cachegen1": {
+    "exclude_largest_mean": 0.015667308268970566,
+    "exclude_largest_3_mean": 0.007776212549823172,
+    "leave_one_out_mean_range": [
+      0.015667308268970566,
+      0.023822020494232054
+    ],
+    "note": "Sensitivity only. No observation is removed from the formal result."
+  },
+  "token_4k_cachegen1": {
+    "count": 640,
+    "positive_tokens": 314,
+    "top10_share_of_positive_loss_sum": 0.3155426946941848
+  },
+  "hypothesis": "Coarse quantization and content-specific probability sensitivity; layer/K/V causes unverified."
+}

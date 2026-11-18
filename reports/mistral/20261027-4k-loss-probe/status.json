@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "completed_score_rows": 44,
+  "expected_score_rows": 44,
+  "current_source": 7,
+  "current_variant": "cachegen1_v32",
+  "raw_reference_checks": 4,
+  "note": "Targeted diagnostic sources; do not pool with the formal experiment or infer population quality."
+}

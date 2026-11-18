@@ -27,3 +27,8 @@ results/mistral/larger/v3-larger-stable-20261025/archive/*.part* binary
 
 # Preserve raw hashes (including CRLF CSV) of the targeted cloud diagnostic.
 reports/mistral/20261027-4k-loss-probe/** -text -whitespace
+
+# Full-length LongChat runs: keep downloaded evidence byte-identical to the server SHA256.
+reports/mistral/20261102-fulllength-*/** -text -whitespace
+reports/mistral/20261104-fulllength-*/** -text -whitespace
+reports/mistral/20261114-fulllength-*/** -text -whitespace

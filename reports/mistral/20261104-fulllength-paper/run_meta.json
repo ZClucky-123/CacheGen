@@ -1,0 +1,83 @@
+{
+ "commit": "d6b6626014c30b64011e4348c02510fdfbdb7204",
+ "tool_sha256": "4652411628081c8696a1223138f391d4f498a792605306b0d1c29ceca9aa12e2",
+ "qa_tool_sha256": "53653b283a4922996decc33fc82bd206298068d4dee5fd0f3aecbe0f84061dec",
+ "dataset_sha256": "00908018c100549f71dbd45d1a7889e1ab9fb8985a3b4cf05426605e5ef89a5f",
+ "model": {
+  "name": "mistral",
+  "id": "mistral-community/Mistral-7B-v0.2",
+  "revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "weight_loading": "fp16",
+  "layers": 32,
+  "kv_heads": 8,
+  "head_dim": 128,
+  "context_limit": 32768,
+  "key_boundaries": [
+   10,
+   20,
+   32
+  ],
+  "value_boundary": 2
+ },
+ "execution": {
+  "linear_tile_tokens": 256,
+  "explicit_causal_mask": true,
+  "sdpa_backend": "efficient",
+  "fp16_reduced_precision_reduction": false
+ },
+ "generation_tokens": 20,
+ "calibration_ids": [
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  36,
+  37,
+  38,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49
+ ],
+ "test_ids": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "arms": [
+  "clean_question"
+ ],
+ "ranges": [
+  2.0,
+  3.0,
+  5.0,
+  7.5
+ ],
+ "torch": "2.3.1+cu121"
+}

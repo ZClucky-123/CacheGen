@@ -1,0 +1,18 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.58s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.60s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.52s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.54s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+CALIBRATED 30 89s
+CALIBRATED 31 170s
+0 clean_question raw 1163001856 1 'The first topic we discussed was The role of art in society.' 0.9s
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/paper_ac256_a9bde53b6f099ec6/build.ninja...
+Building extension module paper_ac256_a9bde53b6f099ec6...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module paper_ac256_a9bde53b6f099ec6...
+0 clean_question paper-r4 197299764 1 'The first topic we discussed was The role of art in society.' 20.3s
+0 clean_question nolayer-r4 190803764 1 'The first topic we discussed was the role of art in society.' 17.6s
+0 clean_question nodelta-r4 167351156 1 'The first topic we discussed was the role of art in society.' 19.1s
+0 clean_question paper-abs 191151606 1 'The first topic we discussed was The role of art in society.' 15.6s
+0 clean_question nolayer-abs 186165366 0 '\n Question:1  Question:1  Question: \n USER: 1 USER' 17.6s
+0 clean_question nodelta-abs 181495030 1 'The first topic we discussed was The role of art in society.' 18.6s
+EXIT=0

@@ -1,0 +1,169 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.23s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.08s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.02s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+0 text 43149 1.959s
+0 raw 1163003036 decode 0.849s first 0.062s True
+0 uniform8 582638168 decode 0.421s first 0.062s True
+0 uniform4 291887704 decode 0.225s first 0.063s True
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+0 cachegen3 249776667 decode 0.215s first 0.062s True
+0 cachegen2 189020090 decode 0.195s first 0.062s True
+0 cachegen1 153299081 decode 0.186s first 0.062s True
+0 ac_b12 142984003 decode 0.184s first 0.062s True
+1 text 43986 2.045s
+1 raw 1187775644 decode 0.858s first 0.065s True
+1 uniform8 595048664 decode 0.434s first 0.063s True
+1 uniform4 298105048 decode 0.230s first 0.064s True
+1 cachegen3 255045831 decode 0.218s first 0.063s True
+1 cachegen2 192988668 decode 0.200s first 0.063s True
+1 cachegen1 156539763 decode 0.190s first 0.063s True
+1 ac_b12 146005480 decode 0.188s first 0.063s True
+2 text 42938 1.982s
+2 raw 1159070876 decode 0.843s first 0.062s True
+2 uniform8 580668248 decode 0.422s first 0.062s True
+2 uniform4 290900824 decode 0.225s first 0.063s True
+2 cachegen3 249188858 decode 0.225s first 0.062s True
+2 cachegen2 188626153 decode 0.195s first 0.062s True
+2 cachegen1 153008990 decode 0.186s first 0.062s True
+2 ac_b12 142720994 decode 0.183s first 0.062s True
+3 text 42346 1.967s
+3 raw 1151599772 decode 0.830s first 0.064s True
+3 uniform8 576925400 decode 0.419s first 0.062s True
+3 uniform4 289025752 decode 0.223s first 0.063s True
+3 cachegen3 247580409 decode 0.228s first 0.062s True
+3 cachegen2 187413284 decode 0.195s first 0.062s True
+3 cachegen1 152014232 decode 0.185s first 0.062s True
+3 ac_b12 141800544 decode 0.182s first 0.062s True
+4 text 43132 2.031s
+4 raw 1176372380 decode 0.850s first 0.064s True
+4 uniform8 589335896 decode 0.430s first 0.063s True
+4 uniform4 295243096 decode 0.230s first 0.064s True
+4 cachegen3 252890532 decode 0.221s first 0.063s True
+4 cachegen2 191414337 decode 0.198s first 0.063s True
+4 cachegen1 155293787 decode 0.188s first 0.063s True
+4 ac_b12 144867078 decode 0.186s first 0.063s True
+5 text 43689 2.032s
+5 raw 1190266012 decode 0.856s first 0.063s True
+5 uniform8 596296280 decode 0.432s first 0.063s True
+5 uniform4 298730072 decode 0.237s first 0.065s True
+5 cachegen3 255958089 decode 0.225s first 0.063s True
+5 cachegen2 193741975 decode 0.201s first 0.063s True
+5 cachegen1 157204811 decode 0.191s first 0.063s True
+5 ac_b12 146645522 decode 0.189s first 0.063s True
+6 text 43047 2.020s
+6 raw 1171653788 decode 0.847s first 0.066s True
+6 uniform8 586971992 decode 0.428s first 0.062s True
+6 uniform4 294058840 decode 0.228s first 0.064s True
+6 cachegen3 251547417 decode 0.214s first 0.063s True
+6 cachegen2 190358371 decode 0.197s first 0.062s True
+6 cachegen1 154392911 decode 0.188s first 0.063s True
+6 ac_b12 144012077 decode 0.185s first 0.063s True
+7 text 43062 1.987s
+7 raw 1167328412 decode 0.848s first 0.066s True
+7 uniform8 584805080 decode 0.426s first 0.062s True
+7 uniform4 292973272 decode 0.226s first 0.064s True
+7 cachegen3 250435127 decode 0.216s first 0.062s True
+7 cachegen2 189465593 decode 0.197s first 0.062s True
+7 cachegen1 153621654 decode 0.187s first 0.062s True
+7 ac_b12 143266695 decode 0.185s first 0.062s True
+8 text 42867 2.019s
+8 raw 1170736284 decode 0.847s first 0.064s True
+8 uniform8 586512344 decode 0.423s first 0.062s True
+8 uniform4 293828568 decode 0.233s first 0.064s True
+8 cachegen3 251409442 decode 0.214s first 0.062s True
+8 cachegen2 190262888 decode 0.197s first 0.063s True
+8 cachegen1 154315942 decode 0.188s first 0.062s True
+8 ac_b12 143936317 decode 0.185s first 0.062s True
+9 text 44907 2.106s
+9 raw 1217397916 decode 0.880s first 0.063s True
+9 uniform8 609888728 decode 0.446s first 0.063s True
+9 uniform4 305539544 decode 0.237s first 0.065s True
+9 cachegen3 261467292 decode 0.223s first 0.064s True
+9 cachegen2 197843421 decode 0.206s first 0.064s True
+9 cachegen1 160524867 decode 0.195s first 0.064s True
+9 ac_b12 149740138 decode 0.192s first 0.064s True
+10 text 43697 2.041s
+10 raw 1186202780 decode 0.857s first 0.063s True
+10 uniform8 594260696 decode 0.432s first 0.063s True
+10 uniform4 297710296 decode 0.230s first 0.064s True
+10 cachegen3 254553952 decode 0.218s first 0.063s True
+10 cachegen2 192604638 decode 0.200s first 0.063s True
+10 cachegen1 156220999 decode 0.191s first 0.063s True
+10 ac_b12 145713442 decode 0.188s first 0.063s True
+11 text 42082 1.960s
+11 raw 1141638300 decode 0.825s first 0.065s True
+11 uniform8 571934936 decode 0.415s first 0.062s True
+11 uniform4 286525656 decode 0.221s first 0.063s True
+11 cachegen3 245134616 decode 0.208s first 0.062s True
+11 cachegen2 185505163 decode 0.192s first 0.062s True
+11 cachegen1 150405506 decode 0.183s first 0.062s True
+11 ac_b12 140278453 decode 0.180s first 0.062s True
+12 text 42861 1.982s
+12 raw 1163396252 decode 0.850s first 0.062s True
+12 uniform8 582835160 decode 0.424s first 0.062s True
+12 uniform4 291986392 decode 0.225s first 0.064s True
+12 cachegen3 249954038 decode 0.213s first 0.062s True
+12 cachegen2 189173292 decode 0.196s first 0.062s True
+12 cachegen1 153428273 decode 0.187s first 0.062s True
+12 ac_b12 143102250 decode 0.184s first 0.062s True
+13 text 43527 2.060s
+13 raw 1191838876 decode 0.866s first 0.063s True
+13 uniform8 597084248 decode 0.433s first 0.063s True
+13 uniform4 299124824 decode 0.230s first 0.065s True
+13 cachegen3 256265827 decode 0.220s first 0.063s True
+13 cachegen2 193967542 decode 0.201s first 0.063s True
+13 cachegen1 157386052 decode 0.192s first 0.063s True
+13 ac_b12 146815803 decode 0.189s first 0.063s True
+14 text 43166 1.983s
+14 raw 1157235868 decode 0.846s first 0.064s True
+14 uniform8 579748952 decode 0.422s first 0.062s True
+14 uniform4 290440280 decode 0.224s first 0.063s True
+14 cachegen3 248210020 decode 0.212s first 0.062s True
+14 cachegen2 187771148 decode 0.194s first 0.062s True
+14 cachegen1 152224280 decode 0.186s first 0.062s True
+14 ac_b12 141957497 decode 0.183s first 0.062s True
+15 text 44161 2.059s
+15 raw 1193280668 decode 0.865s first 0.067s True
+15 uniform8 597806552 decode 0.431s first 0.063s True
+15 uniform4 299486680 decode 0.234s first 0.065s True
+15 cachegen3 256312094 decode 0.218s first 0.063s True
+15 cachegen2 193953585 decode 0.200s first 0.063s True
+15 cachegen1 157337791 decode 0.192s first 0.063s True
+15 ac_b12 146754130 decode 0.189s first 0.063s True
+16 text 41629 1.892s
+16 raw 1121846428 decode 0.808s first 0.065s True
+16 uniform8 562019672 decode 0.481s first 0.062s True
+16 uniform4 281558360 decode 0.213s first 0.062s True
+16 cachegen3 241082558 decode 0.202s first 0.061s True
+16 cachegen2 182494512 decode 0.187s first 0.061s True
+16 cachegen1 147973650 decode 0.179s first 0.061s True
+16 ac_b12 138010982 decode 0.177s first 0.061s True
+17 text 44317 2.043s
+17 raw 1194460316 decode 0.855s first 0.065s True
+17 uniform8 598397528 decode 0.429s first 0.063s True
+17 uniform4 299782744 decode 0.226s first 0.065s True
+17 cachegen3 256176462 decode 0.218s first 0.063s True
+17 cachegen2 193782691 decode 0.200s first 0.063s True
+17 cachegen1 157152146 decode 0.191s first 0.063s True
+17 ac_b12 146566037 decode 0.188s first 0.063s True
+18 text 42153 1.975s
+18 raw 1155007644 decode 0.820s first 0.067s True
+18 uniform8 578632664 decode 0.421s first 0.062s True
+18 uniform4 289881048 decode 0.221s first 0.063s True
+18 cachegen3 247973782 decode 0.210s first 0.062s True
+18 cachegen2 187636794 decode 0.193s first 0.062s True
+18 cachegen1 152143905 decode 0.184s first 0.062s True
+18 ac_b12 141896592 decode 0.182s first 0.062s True
+19 text 43168 2.023s
+19 raw 1173882012 decode 0.850s first 0.063s True
+19 uniform8 588088280 decode 0.423s first 0.062s True
+19 uniform4 294618072 decode 0.223s first 0.064s True
+19 cachegen3 252333512 decode 0.224s first 0.063s True
+19 cachegen2 190992411 decode 0.196s first 0.062s True
+19 cachegen1 154940825 decode 0.187s first 0.063s True
+19 ac_b12 144525129 decode 0.185s first 0.062s True
+EXIT=0

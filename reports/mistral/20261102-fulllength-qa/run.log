@@ -1,0 +1,709 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:00<00:01,  1.06it/s]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:01<00:00,  1.05it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:02<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 3/3 [00:02<00:00,  1.10it/s]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+0 author raw 1166804124 1 'The first topic we discussed was The role of art in society.' 3.7s
+0 author uniform8 584542424 1 'The first topic we discussed was The role of art in society.' 2.3s
+0 author uniform4 292841688 1 'The first topic we discussed was The role of art in society.' 1.7s
+0 author uniform3 219916504 1 'The first topic we discussed was the role of art in society. \n ASSISTA' 9.5s
+Using /home/aaa/CacheGen/.local/torch_extensions as PyTorch extensions root...
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/torchac_backend/build.ninja...
+Building extension module torchac_backend...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module torchac_backend...
+0 author cachegen1 153758206 1 'The first topic we discussed was The role of art in society.' 2.1s
+0 author cachegen2 189593633 1 'The first topic we discussed was The role of art in society.' 1.6s
+0 author cachegen3 250556514 1 'The first topic we discussed was The role of art in society.' 1.7s
+0 clean_question raw 1163003036 1 'The first topic we discussed was The role of art in society.' 3.7s
+0 clean_question uniform8 582638168 1 'The first topic we discussed was The role of art in society.' 2.5s
+0 clean_question uniform4 291887704 1 'The first topic we discussed was The role of art in society. \n USER: G' 2.1s
+0 clean_question uniform3 219200088 0 'The first topic we discussed was the psychology of addiction. \n USER: ' 9.9s
+0 clean_question cachegen1 153299081 1 'The first topic we discussed was The role of art in society. \n USER: G' 1.9s
+0 clean_question cachegen2 189020090 1 'The first topic we discussed was The role of art in society. \n USER: G' 2.0s
+0 clean_question cachegen3 249776667 1 'The first topic we discussed was The role of art in society.' 1.7s
+1 author raw 1191576732 1 'The first topic we discussed was The benefits of regular exercise.' 3.7s
+1 author uniform8 596952920 1 'The first topic we discussed was The benefits of regular exercise.' 2.5s
+1 author uniform4 299059032 1 'The first topic we discussed was the benefits of regular exercise.' 1.7s
+1 author uniform3 224585560 1 'The first topic was The benefits of regular exercise. \n ASSISTANT: The' 10.5s
+1 author cachegen1 157000578 1 'The first topic we discussed was the benefits of regular exercise. \n U' 2.2s
+1 author cachegen2 193563143 1 'The first topic we discussed was the benefits of regular exercise.' 1.6s
+1 author cachegen3 255826099 1 'The first topic we discussed was The benefits of regular exercise.' 1.7s
+1 clean_question raw 1187775644 1 'The first topic we discussed was The benefits of regular exercise.' 3.7s
+1 clean_question uniform8 595048664 1 'The first topic we discussed was The benefits of regular exercise.' 2.3s
+1 clean_question uniform4 298105048 1 'The first topic we discussed was the benefits of regular exercise. \n U' 2.2s
+1 clean_question uniform3 223869144 0 'The first topic we discussed was the future of space tourism. \n USER: ' 10.5s
+1 clean_question cachegen1 156539763 1 'The first topic we discussed was the benefits of regular exercise. \n U' 2.0s
+1 clean_question cachegen2 192988668 1 'The first topic we discussed was the benefits of regular exercise. \n U' 2.1s
+1 clean_question cachegen3 255045831 1 'The first topic we discussed was the benefits of regular exercise. \n U' 2.3s
+2 author raw 1162871964 1 'The first topic we discussed was The impact of social media on mental ' 3.9s
+2 author uniform8 582572504 1 'The first topic we discussed was The impact of social media on mental ' 2.7s
+2 author uniform4 291854808 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+2 author uniform3 219175384 1 'The first topic we discussed was the impact of social media on mental ' 9.5s
+2 author cachegen1 153467518 1 'The first topic we discussed was The impact of social media on mental ' 1.8s
+2 author cachegen2 189198549 1 'The first topic we discussed was The impact of social media on mental ' 1.8s
+2 author cachegen3 249967593 1 'The first topic we discussed was The impact of social media on mental ' 1.9s
+2 clean_question raw 1159070876 1 'The first topic we discussed was The impact of social media on mental ' 4.0s
+2 clean_question uniform8 580668248 1 'The first topic we discussed was The impact of social media on mental ' 2.6s
+2 clean_question uniform4 290900824 1 'The first topic we discussed was The impact of social media on mental ' 2.1s
+2 clean_question uniform3 218458968 0 'The first topic we discussed was the history and culture of ancient Eg' 10.1s
+2 clean_question cachegen1 153008990 1 'The first topic we discussed was The impact of social media on mental ' 1.8s
+2 clean_question cachegen2 188626153 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+2 clean_question cachegen3 249188858 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+3 author raw 1155400860 1 'The first topic we discussed was The benefits of mindfulness meditatio' 3.6s
+3 author uniform8 578829656 1 'The first topic we discussed was The benefits of mindfulness meditatio' 2.3s
+3 author uniform4 289979736 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.8s
+3 author uniform3 217767256 1 'The first topic was The benefits of mindfulness meditation.' 10.2s
+3 author cachegen1 152474268 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.5s
+3 author cachegen2 187987186 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.6s
+3 author cachegen3 248358725 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.7s
+3 clean_question raw 1151599772 1 'The first topic we discussed was The benefits of mindfulness meditatio' 3.8s
+3 clean_question uniform8 576925400 1 'The first topic we discussed was The benefits of mindfulness meditatio' 2.3s
+3 clean_question uniform4 289025752 1 'The first topic we discussed was The benefits of mindfulness meditatio' 2.0s
+3 clean_question uniform3 217050840 1 'The first topic we discussed was the benefits of mindfulness meditatio' 10.5s
+3 clean_question cachegen1 152014232 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.5s
+3 clean_question cachegen2 187413284 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.5s
+3 clean_question cachegen3 247580409 1 'The first topic we discussed was The benefits of mindfulness meditatio' 1.6s
+4 author raw 1180173468 1 'The first topic we discussed was The impact of technology on human con' 3.8s
+4 author uniform8 591240152 1 'The first topic we discussed was The impact of technology on human con' 2.8s
+4 author uniform4 296197080 1 'The first topic we discussed was The impact of technology on human con' 1.9s
+4 author uniform3 222436312 1 'The first topic was The impact of technology on human connection.' 9.7s
+4 author cachegen1 155752744 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+4 author cachegen2 191988380 1 'The first topic we discussed was The impact of technology on human con' 1.9s
+4 author cachegen3 253668738 1 'The first topic we discussed was The impact of technology on human con' 1.9s
+4 clean_question raw 1176372380 1 'The first topic we discussed was The impact of technology on human con' 3.8s
+4 clean_question uniform8 589335896 1 'The first topic we discussed was The impact of technology on human con' 2.8s
+4 clean_question uniform4 295243096 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+4 clean_question uniform3 221719896 1 'The first topic we discussed was the impact of technology on human con' 10.2s
+4 clean_question cachegen1 155293787 1 'The first topic we discussed was The impact of technology on human con' 1.7s
+4 clean_question cachegen2 191414337 1 'The first topic we discussed was The impact of technology on human con' 1.7s
+4 clean_question cachegen3 252890532 1 'The first topic we discussed was The impact of technology on human con' 2.0s
+5 author raw 1194067100 1 'The first topic we discussed was The impact of technology on human con' 4.1s
+5 author uniform8 598200536 1 'The first topic we discussed was The impact of technology on human con' 2.4s
+5 author uniform4 299684056 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+5 author uniform3 225054936 0 'The first topic was The impact of social media on communication.' 9.8s
+5 author cachegen1 157664604 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+5 author cachegen2 194315610 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+5 author cachegen3 256737327 1 'The first topic we discussed was The impact of technology on human con' 1.9s
+5 clean_question raw 1190266012 1 'The first topic we discussed was The impact of technology on human con' 3.9s
+5 clean_question uniform8 596296280 1 'The first topic we discussed was The impact of technology on human con' 2.5s
+5 clean_question uniform4 298730072 1 'The first topic we discussed was The impact of technology on human con' 2.2s
+5 clean_question uniform3 224338520 0 'The first topic we discussed was the impact of social media on human c' 11.2s
+5 clean_question cachegen1 157204811 1 'The first topic we discussed was The impact of technology on human con' 2.0s
+5 clean_question cachegen2 193741975 1 'The first topic we discussed was The impact of technology on human con' 2.1s
+5 clean_question cachegen3 255958089 1 'The first topic we discussed was The impact of technology on human con' 2.0s
+6 author raw 1175454876 1 'The first topic we discussed was The future of sustainable agriculture' 3.6s
+6 author uniform8 588876248 1 'The first topic we discussed was The future of sustainable agriculture' 2.3s
+6 author uniform4 295012824 1 'The first topic we discussed was The future of sustainable agriculture' 1.7s
+6 author uniform3 221546968 1 'The first topic was The future of sustainable agriculture. \n ASSISTANT' 10.3s
+6 author cachegen1 154852348 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+6 author cachegen2 190931990 1 'The first topic we discussed was The future of sustainable agriculture' 1.5s
+6 author cachegen3 252327609 1 'The first topic we discussed was The future of sustainable agriculture' 1.7s
+6 clean_question raw 1171653788 1 'The first topic we discussed was The future of sustainable agriculture' 3.7s
+6 clean_question uniform8 586971992 1 'The first topic we discussed was The future of sustainable agriculture' 2.4s
+6 clean_question uniform4 294058840 1 'The first topic we discussed was The future of sustainable agriculture' 2.2s
+6 clean_question uniform3 220830552 0 'The first topic we discussed was the impact of social media on human c' 10.2s
+6 clean_question cachegen1 154392911 1 'The first topic we discussed was The future of sustainable agriculture' 2.0s
+6 clean_question cachegen2 190358371 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+6 clean_question cachegen3 251547417 1 'The first topic we discussed was The future of sustainable agriculture' 1.8s
+7 author raw 1171129500 1 'The first topic we discussed was the psychology of creativity.' 3.7s
+7 author uniform8 586709336 1 'The first topic we discussed was the psychology of creativity.' 2.2s
+7 author uniform4 293927256 1 'The first topic we discussed was the psychology of creativity.' 1.6s
+7 author uniform3 220731736 1 'The first topic is The psychology of creativity.' 9.7s
+7 author cachegen1 154382629 1 'The first topic we discussed was the psychology of creativity.' 1.4s
+7 author cachegen2 190339737 1 'The first topic we discussed was the psychology of creativity.' 1.5s
+7 author cachegen3 251514183 1 'The first topic we discussed was the psychology of creativity.' 1.6s
+7 clean_question raw 1167328412 1 'The first topic we discussed was the psychology of creativity.' 3.6s
+7 clean_question uniform8 584805080 1 'The first topic we discussed was the psychology of creativity.' 2.3s
+7 clean_question uniform4 292973272 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.1s
+7 clean_question uniform3 220015320 1 'The first topic we discussed was the psychology of creativity. \n ASSIS' 10.9s
+7 clean_question cachegen1 153621654 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.0s
+7 clean_question cachegen2 189465593 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.0s
+7 clean_question cachegen3 250435127 1 'The first topic we discussed was the psychology of creativity.' 1.7s
+8 author raw 1174537372 1 'The first topic we discussed was the history and culture of the Middle' 3.9s
+8 author uniform8 588416600 1 'The first topic we discussed was the history and culture of the Middle' 2.6s
+8 author uniform4 294782552 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+8 author uniform3 221374040 1 'The first topic was The history and culture of the Middle Ages.' 10.1s
+8 author cachegen1 154777576 1 'The first topic we discussed was the history and culture of the Middle' 1.7s
+8 author cachegen2 190835888 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+8 author cachegen3 252189747 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+8 clean_question raw 1170736284 1 'The first topic we discussed was the history and culture of the Middle' 3.9s
+8 clean_question uniform8 586512344 1 'The first topic we discussed was the history and culture of the Middle' 2.9s
+8 clean_question uniform4 293828568 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+8 clean_question uniform3 220657624 0 'The first topic we discussed was the benefits of a plant-based diet. \n' 10.1s
+8 clean_question cachegen1 154315942 1 'The first topic we discussed was the history and culture of the Middle' 1.7s
+8 clean_question cachegen2 190262888 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+8 clean_question cachegen3 251409442 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+9 author raw 1221199004 1 'The first topic we discussed was The effects of stress on the body and' 4.1s
+9 author uniform8 611792984 1 'The first topic we discussed was The effects of stress on the body and' 2.6s
+9 author uniform4 306493528 1 'The first topic we discussed was the effects of stress on the body and' 2.0s
+9 author uniform3 230168664 0 'The first topic was The effects of social media on mental health in ad' 10.5s
+9 author cachegen1 161286801 1 'The first topic we discussed was the effects of stress on the body and' 1.9s
+9 author cachegen2 198720230 1 'The first topic we discussed was the effects of stress on the body and' 1.9s
+9 author cachegen3 262548912 1 'The first topic we discussed was The effects of stress on the body and' 2.0s
+9 clean_question raw 1217397916 1 'The first topic we discussed was The effects of stress on the body and' 4.1s
+9 clean_question uniform8 609888728 1 'The first topic we discussed was The effects of stress on the body and' 3.3s
+9 clean_question uniform4 305539544 1 'The first topic we discussed was the effects of stress on the body and' 2.4s
+9 clean_question uniform3 229452248 0 'The first topic we discussed was the benefits of spending time in natu' 10.8s
+9 clean_question cachegen1 160524867 1 'The first topic we discussed was the effects of stress on the body and' 2.1s
+9 clean_question cachegen2 197843421 1 'The first topic we discussed was the effects of stress on the body and' 2.0s
+9 clean_question cachegen3 261467292 1 'The first topic we discussed was the effects of stress on the body and' 2.0s
+10 author raw 1190003868 1 'The first topic we discussed was the history and culture of the Middle' 3.9s
+10 author uniform8 596164952 1 'The first topic we discussed was the history and culture of the Middle' 2.6s
+10 author uniform4 298664280 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+10 author uniform3 224289112 1 'The first topic was the history and culture of the Middle Ages. \n ASSI' 10.9s
+10 author cachegen1 156680504 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+10 author cachegen2 193179913 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+10 author cachegen3 255334255 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+10 clean_question raw 1186202780 1 'The first topic we discussed was the history and culture of the Middle' 4.0s
+10 clean_question uniform8 594260696 1 'The first topic we discussed was the history and culture of the Middle' 2.6s
+10 clean_question uniform4 297710296 1 'The first topic we discussed was the history and culture of the Middle' 2.1s
+10 clean_question uniform3 223572696 1 'The first topic we discussed was the history and culture of the Middle' 11.5s
+10 clean_question cachegen1 156220999 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+10 clean_question cachegen2 192604638 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+10 clean_question cachegen3 254553952 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+11 author raw 1145439388 1 'The first topic we discussed was the psychology of happiness.' 3.5s
+11 author uniform8 573839192 1 'The first topic we discussed was the psychology of happiness.' 2.2s
+11 author uniform4 287479640 1 'The first topic we discussed was the psychology of happiness.' 1.6s
+11 author uniform3 215889752 1 'The first topic we discussed was the psychology of happiness. \n\n\n\n\n\n\n\n' 9.8s
+11 author cachegen1 151163433 1 'The first topic we discussed was the psychology of happiness.' 1.4s
+11 author cachegen2 186377888 1 'The first topic we discussed was the psychology of happiness.' 1.4s
+11 author cachegen3 246218965 1 'The first topic we discussed was the psychology of happiness.' 1.5s
+11 clean_question raw 1141638300 1 'The first topic we discussed was the psychology of happiness.' 3.5s
+11 clean_question uniform8 571934936 1 'The first topic we discussed was the psychology of happiness.' 2.2s
+11 clean_question uniform4 286525656 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 2.1s
+11 clean_question uniform3 215173336 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 9.7s
+11 clean_question cachegen1 150405506 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 1.9s
+11 clean_question cachegen2 185505163 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 2.1s
+11 clean_question cachegen3 245134616 1 'The first topic we discussed was the psychology of happiness.' 1.5s
+12 author raw 1167197340 1 'The first topic we discussed was The psychology of creativity.' 3.6s
+12 author uniform8 584739416 1 'The first topic we discussed was The psychology of creativity.' 2.5s
+12 author uniform4 292940376 1 'The first topic we discussed was the psychology of creativity.' 1.7s
+12 author uniform3 219990616 1 'The first topic is The psychology of creativity. \n ASSISTANT: The psyc' 10.0s
+12 author cachegen1 153888025 1 'The first topic we discussed was The psychology of creativity.' 1.4s
+12 author cachegen2 189747712 1 'The first topic we discussed was the psychology of creativity.' 1.5s
+12 author cachegen3 250733643 1 'The first topic we discussed was The psychology of creativity.' 1.7s
+12 clean_question raw 1163396252 1 'The first topic we discussed was The psychology of creativity.' 3.5s
+12 clean_question uniform8 582835160 1 'The first topic we discussed was The psychology of creativity.' 2.6s
+12 clean_question uniform4 291986392 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.1s
+12 clean_question uniform3 219274200 1 'The first topic we discussed was the psychology of creativity. \n USER:' 11.2s
+12 clean_question cachegen1 153428273 1 'The first topic we discussed was The psychology of creativity. \n USER:' 1.9s
+12 clean_question cachegen2 189173292 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.3s
+12 clean_question cachegen3 249954038 1 'The first topic we discussed was The psychology of creativity.' 1.6s
+13 author raw 1195639964 1 'The first topic we discussed was The impact of technology on human con' 3.9s
+13 author uniform8 598988504 1 'The first topic we discussed was The impact of technology on human con' 2.5s
+13 author uniform4 300078808 1 'The first topic we discussed was the impact of technology on human con' 1.8s
+13 author uniform3 225351384 1 'The first topic was The impact of technology on human connection. \n AS' 10.2s
+13 author cachegen1 158148296 1 'The first topic we discussed was the impact of technology on human con' 1.6s
+13 author cachegen2 194839646 1 'The first topic we discussed was the impact of technology on human con' 1.7s
+13 author cachegen3 257339337 1 'The first topic we discussed was The impact of technology on human con' 1.8s
+13 clean_question raw 1191838876 1 'The first topic we discussed was The impact of technology on human con' 3.8s
+13 clean_question uniform8 597084248 1 'The first topic we discussed was The impact of technology on human con' 2.6s
+13 clean_question uniform4 299124824 1 'The first topic we discussed was the impact of technology on human con' 2.1s
+13 clean_question uniform3 224634968 1 'The first topic we discussed was the impact of technology on human con' 10.2s
+13 clean_question cachegen1 157386052 1 'The first topic we discussed was the impact of technology on human con' 2.0s
+13 clean_question cachegen2 193967542 1 'The first topic we discussed was the impact of technology on human con' 2.1s
+13 clean_question cachegen3 256265827 1 'The first topic we discussed was The impact of technology on human con' 1.9s
+14 author raw 1161036956 1 'The first topic we discussed was the impact of technology on privacy a' 3.8s
+14 author uniform8 581653208 1 'The first topic we discussed was the impact of technology on privacy a' 2.8s
+14 author uniform4 291394264 1 'The first topic we discussed was the impact of technology on privacy a' 2.1s
+14 author uniform3 218829528 1 'The first topic we discussed was the impact of technology on privacy a' 10.3s
+14 author cachegen1 152986146 1 'The first topic we discussed was the impact of technology on privacy a' 1.8s
+14 author cachegen2 188647314 1 'The first topic we discussed was the impact of technology on privacy a' 1.8s
+14 author cachegen3 249290528 1 'The first topic we discussed was the impact of technology on privacy a' 2.0s
+14 clean_question raw 1157235868 1 'The first topic we discussed was the impact of technology on privacy a' 3.8s
+14 clean_question uniform8 579748952 1 'The first topic we discussed was the impact of technology on privacy a' 2.7s
+14 clean_question uniform4 290440280 1 'The first topic we discussed was the impact of technology on privacy a' 2.0s
+14 clean_question uniform3 218113112 0 'The first topic we discussed was the psychology of addiction and recov' 10.4s
+14 clean_question cachegen1 152224280 1 'The first topic we discussed was the impact of technology on privacy a' 1.7s
+14 clean_question cachegen2 187771148 1 'The first topic we discussed was the impact of technology on privacy a' 2.0s
+14 clean_question cachegen3 248210020 1 'The first topic we discussed was the impact of technology on privacy a' 2.0s
+15 author raw 1197081756 1 'The first topic we discussed was the history and culture of the Middle' 4.0s
+15 author uniform8 599710808 1 'The first topic we discussed was the history and culture of the Middle' 2.6s
+15 author uniform4 300440664 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+15 author uniform3 225623128 1 'The first topic was the history and culture of the Middle Ages.' 11.1s
+15 author cachegen1 158096828 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+15 author cachegen2 194828965 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+15 author cachegen3 257391504 1 'The first topic we discussed was the history and culture of the Middle' 2.0s
+15 clean_question raw 1193280668 1 'The first topic we discussed was the history and culture of the Middle' 4.0s
+15 clean_question uniform8 597806552 1 'The first topic we discussed was the history and culture of the Middle' 3.0s
+15 clean_question uniform4 299486680 1 'The first topic we discussed was the history and culture of the Middle' 2.2s
+15 clean_question uniform3 224906712 0 'The first topic we discussed was the history and impact of the Renaiss' 10.6s
+15 clean_question cachegen1 157337791 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+15 clean_question cachegen2 193953585 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+15 clean_question cachegen3 256312094 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+16 author raw 1125647516 1 'The first topic we discussed was the psychology of happiness.' 3.5s
+16 author uniform8 563923928 1 'The first topic we discussed was the psychology of happiness.' 2.1s
+16 author uniform4 282512344 1 'The first topic we discussed was the psychology of happiness.' 1.6s
+16 author uniform3 212159448 1 'The first topic we discussed was the psychology of happiness. \n\n\n\n\n\n\n\n' 9.9s
+16 author cachegen1 148433744 1 'The first topic we discussed was the psychology of happiness.' 1.5s
+16 author cachegen2 183069682 1 'The first topic we discussed was the psychology of happiness.' 1.5s
+16 author cachegen3 241862957 1 'The first topic we discussed was the psychology of happiness.' 1.7s
+16 clean_question raw 1121846428 1 'The first topic we discussed was the psychology of happiness.' 3.5s
+16 clean_question uniform8 562019672 1 'The first topic we discussed was the psychology of happiness.' 2.2s
+16 clean_question uniform4 281558360 1 'The first topic we discussed was the psychology of happiness.' 1.6s
+16 clean_question uniform3 211443032 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 9.7s
+16 clean_question cachegen1 147973650 1 'The first topic we discussed was the psychology of happiness. \n USER: ' 1.9s
+16 clean_question cachegen2 182494512 1 'The first topic we discussed was the psychology of happiness.' 1.5s
+16 clean_question cachegen3 241082558 1 'The first topic we discussed was the psychology of happiness.' 1.6s
+17 author raw 1198261404 1 'The first topic we discussed was the history and impact of the Renaiss' 4.2s
+17 author uniform8 600301784 1 'The first topic we discussed was the history and impact of the Renaiss' 2.5s
+17 author uniform4 300736728 1 'The first topic we discussed was the history and impact of the Renaiss' 1.9s
+17 author uniform3 225845464 1 'The history and impact of the Renaissance.' 9.8s
+17 author cachegen1 157911833 1 'The first topic we discussed was the history and impact of the Renaiss' 2.1s
+17 author cachegen2 194658239 1 'The first topic we discussed was the history and impact of the Renaiss' 1.8s
+17 author cachegen3 257256494 1 'The first topic we discussed was the history and impact of the Renaiss' 1.8s
+17 clean_question raw 1194460316 1 'The first topic we discussed was the history and impact of the Renaiss' 4.0s
+17 clean_question uniform8 598397528 1 'The first topic we discussed was the history and impact of the Renaiss' 2.7s
+17 clean_question uniform4 299782744 1 'The first topic we discussed was the history and impact of the Renaiss' 2.2s
+17 clean_question uniform3 225129048 1 'The first topic we discussed was the history and impact of the Renaiss' 10.2s
+17 clean_question cachegen1 157152146 1 'The first topic we discussed was the history and impact of the Renaiss' 2.0s
+17 clean_question cachegen2 193782691 1 'The first topic we discussed was the history and impact of the Renaiss' 2.1s
+17 clean_question cachegen3 256176462 1 'The first topic we discussed was the history and impact of the Renaiss' 2.0s
+18 author raw 1158808732 1 'The first topic we discussed was The impact of social media on communi' 3.7s
+18 author uniform8 580536920 1 'The first topic we discussed was The impact of social media on communi' 2.4s
+18 author uniform4 290835032 1 'The first topic we discussed was the impact of social media on communi' 2.0s
+18 author uniform3 218409560 1 'The first topic we discussed was the impact of social media on communi' 9.6s
+18 author cachegen1 152903629 1 'The first topic we discussed was the impact of social media on communi' 1.7s
+18 author cachegen2 188510868 1 'The first topic we discussed was The impact of social media on communi' 1.6s
+18 author cachegen3 249053083 1 'The first topic we discussed was The impact of social media on communi' 1.7s
+18 clean_question raw 1155007644 1 'The first topic we discussed was The impact of social media on communi' 3.7s
+18 clean_question uniform8 578632664 1 'The first topic we discussed was The impact of social media on communi' 2.5s
+18 clean_question uniform4 289881048 1 'The first topic we discussed was The impact of social media on communi' 2.1s
+18 clean_question uniform3 217693144 1 'The first topic we discussed was the impact of social media on communi' 10.0s
+18 clean_question cachegen1 152143905 1 'The first topic we discussed was The impact of social media on communi' 2.0s
+18 clean_question cachegen2 187636794 1 'The first topic we discussed was The impact of social media on communi' 1.7s
+18 clean_question cachegen3 247973782 1 'The first topic we discussed was The impact of social media on communi' 1.9s
+19 author raw 1177683100 1 'The first topic we discussed was The effects of climate change on ocea' 3.9s
+19 author uniform8 589992536 1 'The first topic we discussed was The effects of climate change on ocea' 2.6s
+19 author uniform4 295572056 1 'The first topic we discussed was The effects of climate change on ocea' 2.0s
+19 author uniform3 221966936 1 'The first topic was The effects of climate change on ocean ecosystems.' 10.6s
+19 author cachegen1 155399520 1 'The first topic we discussed was The effects of climate change on ocea' 1.8s
+19 author cachegen2 191566357 1 'The first topic we discussed was the effects of climate change on ocea' 1.9s
+19 author cachegen3 253111531 1 'The first topic we discussed was The effects of climate change on ocea' 1.9s
+19 clean_question raw 1173882012 1 'The first topic we discussed was The effects of climate change on ocea' 3.9s
+19 clean_question uniform8 588088280 1 'The first topic we discussed was The effects of climate change on ocea' 2.6s
+19 clean_question uniform4 294618072 1 'The first topic we discussed was The effects of climate change on ocea' 2.1s
+19 clean_question uniform3 221250520 0 'The first topic we discussed was the future of renewable energy storag' 10.0s
+19 clean_question cachegen1 154940825 1 'The first topic we discussed was The effects of climate change on ocea' 2.1s
+19 clean_question cachegen2 190992411 1 'The first topic we discussed was The effects of climate change on ocea' 2.0s
+19 clean_question cachegen3 252333512 1 'The first topic we discussed was The effects of climate change on ocea' 2.1s
+20 author raw 1178469532 1 'The first topic we discussed was the future of renewable energy storag' 3.8s
+20 author uniform8 590386520 1 'The first topic we discussed was the future of renewable energy storag' 2.4s
+20 author uniform4 295769432 1 'The first topic we discussed was the future of renewable energy storag' 1.9s
+20 author uniform3 222115160 1 'The future of renewable energy storage. \n ASSISTANT: The future of ren' 10.0s
+20 author cachegen1 154979918 1 'The first topic we discussed was the future of renewable energy storag' 1.7s
+20 author cachegen2 191135610 1 'The first topic we discussed was the future of renewable energy storag' 1.6s
+20 author cachegen3 252668519 1 'The first topic we discussed was the future of renewable energy storag' 1.8s
+20 clean_question raw 1174668444 1 'The first topic we discussed was the future of renewable energy storag' 3.8s
+20 clean_question uniform8 588482264 1 'The first topic we discussed was the future of renewable energy storag' 2.4s
+20 clean_question uniform4 294815448 1 'The first topic we discussed was the future of renewable energy storag' 1.9s
+20 clean_question uniform3 221398744 1 'The first topic we discussed was the future of renewable energy storag' 10.0s
+20 clean_question cachegen1 154520125 1 'The first topic we discussed was the future of renewable energy storag' 2.0s
+20 clean_question cachegen2 190560841 1 'The first topic we discussed was the future of renewable energy storag' 1.7s
+20 clean_question cachegen3 251888735 1 'The first topic we discussed was the future of renewable energy storag' 1.8s
+21 author raw 1209271452 1 'The first topic we discussed was The future of sustainable agriculture' 3.8s
+21 author uniform8 605817560 1 'The first topic we discussed was The future of sustainable agriculture' 2.4s
+21 author uniform4 303499992 1 'The first topic we discussed was The future of sustainable agriculture' 2.1s
+21 author uniform3 227920600 1 'The first topic we discussed was The future of sustainable agriculture' 10.6s
+21 author cachegen1 159485390 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+21 author cachegen2 196553413 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+21 author cachegen3 259734272 1 'The first topic we discussed was The future of sustainable agriculture' 1.8s
+21 clean_question raw 1205470364 1 'The first topic we discussed was The future of sustainable agriculture' 3.8s
+21 clean_question uniform8 603913304 1 'The first topic we discussed was The future of sustainable agriculture' 2.4s
+21 clean_question uniform4 302546008 1 'The first topic we discussed was The future of sustainable agriculture' 2.2s
+21 clean_question uniform3 227204184 1 'The first topic we discussed was the future of sustainable agriculture' 10.6s
+21 clean_question cachegen1 158724308 1 'The first topic we discussed was The future of sustainable agriculture' 2.0s
+21 clean_question cachegen2 195678968 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+21 clean_question cachegen3 258655795 1 'The first topic we discussed was The future of sustainable agriculture' 1.7s
+22 author raw 1150026908 1 'The first topic we discussed was the future of sustainable agriculture' 3.6s
+22 author uniform8 576137432 1 'The first topic we discussed was the future of sustainable agriculture' 2.2s
+22 author uniform4 288631000 1 'The first topic we discussed was the future of sustainable agriculture' 1.7s
+22 author uniform3 216754392 1 'The first topic we discussed was the future of sustainable agriculture' 9.6s
+22 author cachegen1 151763667 1 'The first topic we discussed was the future of sustainable agriculture' 1.5s
+22 author cachegen2 187120385 1 'The first topic we discussed was the future of sustainable agriculture' 1.5s
+22 author cachegen3 247204927 1 'The first topic we discussed was the future of sustainable agriculture' 1.7s
+22 clean_question raw 1146225820 1 'The first topic we discussed was the future of sustainable agriculture' 3.6s
+22 clean_question uniform8 574233176 1 'The first topic we discussed was the future of sustainable agriculture' 2.3s
+22 clean_question uniform4 287677016 1 'The first topic we discussed was the future of sustainable agriculture' 1.7s
+22 clean_question uniform3 216037976 0 'The first topic we discussed was the future of renewable energy storag' 10.2s
+22 clean_question cachegen1 151302930 1 'The first topic we discussed was the future of sustainable agriculture' 1.9s
+22 clean_question cachegen2 186544998 1 'The first topic we discussed was the future of sustainable agriculture' 1.5s
+22 clean_question cachegen3 246423538 1 'The first topic we discussed was the future of sustainable agriculture' 1.7s
+23 author raw 1136002204 1 'The first topic we discussed was The benefits of reading for pleasure.' 3.6s
+23 author uniform8 569111384 1 'The first topic we discussed was The benefits of reading for pleasure.' 2.3s
+23 author uniform4 285111128 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.8s
+23 author uniform3 214111064 0 'The first topic we discussed was the benefits of spending time in natu' 9.7s
+23 author cachegen1 149692874 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.5s
+23 author cachegen2 184616315 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.6s
+23 author cachegen3 243942418 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.7s
+23 clean_question raw 1132201116 1 'The first topic we discussed was The benefits of reading for pleasure.' 3.7s
+23 clean_question uniform8 567207128 1 'The first topic we discussed was The benefits of reading for pleasure.' 2.4s
+23 clean_question uniform4 284157144 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.7s
+23 clean_question uniform3 213394648 0 'The first topic we discussed was the benefits of volunteering. \n USER:' 9.4s
+23 clean_question cachegen1 148930902 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.5s
+23 clean_question cachegen2 183741303 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.6s
+23 clean_question cachegen3 242863057 1 'The first topic we discussed was The benefits of reading for pleasure.' 1.7s
+24 author raw 1156056220 1 'The first topic we discussed was the history and culture of the Middle' 3.9s
+24 author uniform8 579157976 1 'The first topic we discussed was the history and culture of the Middle' 2.8s
+24 author uniform4 290144216 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+24 author uniform3 217890776 1 'The first topic was the history and culture of the Middle Ages.' 9.0s
+24 author cachegen1 152439302 1 'The first topic we discussed was the history and culture of the Middle' 1.7s
+24 author cachegen2 187968922 1 'The first topic we discussed was the history and culture of the Middle' 1.7s
+24 author cachegen3 248370246 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+24 clean_question raw 1152255132 1 'The first topic we discussed was the history and culture of the Middle' 3.9s
+24 clean_question uniform8 577253720 1 'The first topic we discussed was the history and culture of the Middle' 2.6s
+24 clean_question uniform4 289190232 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+24 clean_question uniform3 217174360 0 'The first topic we discussed was the future of space tourism. \n\n\n\n\n\n' 9.7s
+24 clean_question cachegen1 151979426 1 'The first topic we discussed was the history and culture of the Middle' 1.7s
+24 clean_question cachegen2 187395407 1 'The first topic we discussed was the history and culture of the Middle' 1.8s
+24 clean_question cachegen3 247590315 1 'The first topic we discussed was the history and culture of the Middle' 1.9s
+25 author raw 1151730844 1 'The first topic we discussed was the role of art in society.' 3.6s
+25 author uniform8 576991064 1 'The first topic we discussed was the role of art in society.' 2.3s
+25 author uniform4 289058648 1 'The first topic we discussed was the role of art in society.' 1.7s
+25 author uniform3 217075544 1 'The first topic was the role of art in society. \n\n\n\n\n\n\n\n' 9.3s
+25 author cachegen1 151991390 1 'The first topic we discussed was the role of art in society.' 1.6s
+25 author cachegen2 187395344 1 'The first topic we discussed was the role of art in society.' 1.6s
+25 author cachegen3 247574569 1 'The first topic we discussed was the role of art in society.' 1.7s
+25 clean_question raw 1147929756 1 'The first topic we discussed was the role of art in society.' 3.8s
+25 clean_question uniform8 575086808 1 'The first topic we discussed was the role of art in society.' 2.4s
+25 clean_question uniform4 288104664 1 'The first topic we discussed was the role of art in society.' 1.8s
+25 clean_question uniform3 216359128 1 'The first topic we discussed was the role of art in society. \n USER: G' 10.3s
+25 clean_question cachegen1 151530799 1 'The first topic we discussed was the role of art in society. \n USER: G' 2.1s
+25 clean_question cachegen2 186821116 1 'The first topic we discussed was the role of art in society.' 1.7s
+25 clean_question cachegen3 246795262 1 'The first topic we discussed was the role of art in society.' 1.8s
+26 author raw 1153041564 1 'The first topic we discussed was the role of sports in society.' 3.9s
+26 author uniform8 577647704 1 'The first topic we discussed was the role of sports in society.' 2.4s
+26 author uniform4 289387608 1 'The first topic we discussed was the role of sports in society.' 1.8s
+26 author uniform3 217322584 1 'The first topic was the role of sports in society. \n\n\n\n\n\n\n\n' 10.1s
+26 author cachegen1 151934462 1 'The first topic we discussed was the role of sports in society.' 1.6s
+26 author cachegen2 187370506 1 'The first topic we discussed was the role of sports in society.' 1.6s
+26 author cachegen3 247596594 1 'The first topic we discussed was the role of sports in society.' 1.8s
+26 clean_question raw 1149240476 1 'The first topic we discussed was the role of sports in society.' 3.8s
+26 clean_question uniform8 575743448 1 'The first topic we discussed was the role of sports in society.' 2.5s
+26 clean_question uniform4 288433624 1 'The first topic we discussed was the role of sports in society. \n USER' 2.1s
+26 clean_question uniform3 216606168 1 'The first topic we discussed was the role of sports in society. \n\n\n\n\n\n' 10.5s
+26 clean_question cachegen1 151473408 1 'The first topic we discussed was the role of sports in society. \n USER' 1.8s
+26 clean_question cachegen2 186795050 1 'The first topic we discussed was the role of sports in society.' 1.6s
+26 clean_question cachegen3 246815531 1 'The first topic we discussed was the role of sports in society.' 1.8s
+27 author raw 1173750940 1 'The first topic we discussed was the benefits of learning a new langua' 4.1s
+27 author uniform8 588022616 1 'The first topic we discussed was the benefits of learning a new langua' 2.9s
+27 author uniform4 294585176 1 'The first topic we discussed was the benefits of learning a new langua' 1.9s
+27 author uniform3 221225816 0 'The first topic was the benefits of reading for pleasure.' 10.3s
+27 author cachegen1 154587259 1 'The first topic we discussed was the benefits of learning a new langua' 1.6s
+27 author cachegen2 190616888 1 'The first topic we discussed was the benefits of learning a new langua' 1.7s
+27 author cachegen3 251915243 1 'The first topic we discussed was the benefits of learning a new langua' 1.9s
+27 clean_question raw 1169949852 1 'The first topic we discussed was the benefits of learning a new langua' 3.8s
+27 clean_question uniform8 586118360 1 'The first topic we discussed was the benefits of learning a new langua' 2.5s
+27 clean_question uniform4 293631192 1 'The first topic we discussed was the benefits of learning a new langua' 2.0s
+27 clean_question uniform3 220509400 0 'The first topic we discussed was the benefits of reading for pleasure.' 10.1s
+27 clean_question cachegen1 153827450 1 'The first topic we discussed was the benefits of learning a new langua' 1.9s
+27 clean_question cachegen2 189742332 1 'The first topic we discussed was the benefits of learning a new langua' 1.8s
+27 clean_question cachegen3 250835681 1 'The first topic we discussed was the benefits of learning a new langua' 1.9s
+28 author raw 1192363164 1 'The first topic we discussed was the effects of air pollution on human' 4.2s
+28 author uniform8 597346904 1 'The first topic we discussed was the effects of air pollution on human' 2.9s
+28 author uniform4 299256408 1 'The first topic we discussed was the effects of air pollution on human' 2.1s
+28 author uniform3 224733784 0 'The first topic was the impact of social media on mental health in adu' 10.3s
+28 author cachegen1 156955494 1 'The first topic we discussed was the effects of air pollution on human' 1.8s
+28 author cachegen2 193528044 1 'The first topic we discussed was the effects of air pollution on human' 1.8s
+28 author cachegen3 255813749 1 'The first topic we discussed was the effects of air pollution on human' 2.0s
+28 clean_question raw 1188562076 1 'The first topic we discussed was the effects of air pollution on human' 3.9s
+28 clean_question uniform8 595442648 1 'The first topic we discussed was the effects of air pollution on human' 2.6s
+28 clean_question uniform4 298302424 1 'The first topic we discussed was the effects of air pollution on human' 1.9s
+28 clean_question uniform3 224017368 0 'The first topic we discussed was the impact of social media on mental ' 9.6s
+28 clean_question cachegen1 156495762 1 'The first topic we discussed was the effects of air pollution on human' 2.0s
+28 clean_question cachegen2 192953990 1 'The first topic we discussed was the effects of air pollution on human' 1.8s
+28 clean_question cachegen3 255035579 1 'The first topic we discussed was the effects of air pollution on human' 1.9s
+29 author raw 1188955292 1 'The first topic we discussed was the benefits of spending time in natu' 4.3s
+29 author uniform8 595639640 1 'The first topic we discussed was the benefits of spending time in natu' 2.4s
+29 author uniform4 298401112 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+29 author uniform3 224091480 1 'The first topic was the benefits of spending time in nature. \n\n## Answ' 10.2s
+29 author cachegen1 156452863 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+29 author cachegen2 192907051 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+29 author cachegen3 255002731 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+29 clean_question raw 1185154204 1 'The first topic we discussed was the benefits of spending time in natu' 3.9s
+29 clean_question uniform8 593735384 1 'The first topic we discussed was the benefits of spending time in natu' 2.5s
+29 clean_question uniform4 297447128 1 'The first topic we discussed was the benefits of spending time in natu' 2.2s
+29 clean_question uniform3 223375064 1 'The first topic we discussed was the benefits of spending time in natu' 10.4s
+29 clean_question cachegen1 155992688 1 'The first topic we discussed was the benefits of spending time in natu' 2.1s
+29 clean_question cachegen2 192332809 1 'The first topic we discussed was the benefits of spending time in natu' 2.1s
+29 clean_question cachegen3 254222799 1 'The first topic we discussed was the benefits of spending time in natu' 2.0s
+30 author raw 1175717020 1 'The first topic we discussed was the role of sports in society.' 3.7s
+30 author uniform8 589007576 1 'The first topic we discussed was the role of sports in society.' 2.3s
+30 author uniform4 295078616 1 'The first topic we discussed was the role of sports in society.' 1.8s
+30 author uniform3 221596376 1 'The first topic we discussed was the role of sports in society. \n ASSI' 10.8s
+30 author cachegen1 154709228 1 'The first topic we discussed was the role of sports in society.' 1.6s
+30 author cachegen2 190786209 1 'The first topic we discussed was the role of sports in society.' 1.6s
+30 author cachegen3 252176189 1 'The first topic we discussed was the role of sports in society.' 1.8s
+30 clean_question raw 1171915932 1 'The first topic we discussed was the role of sports in society.' 3.8s
+30 clean_question uniform8 587103320 1 'The first topic we discussed was the role of sports in society.' 2.5s
+30 clean_question uniform4 294124632 1 'The first topic we discussed was the role of sports in society. \n USER' 2.2s
+30 clean_question uniform3 220879960 1 'The first topic we discussed was the role of sports in society. \n ASSI' 10.3s
+30 clean_question cachegen1 154250352 1 'The first topic we discussed was the role of sports in society. \n USER' 2.0s
+30 clean_question cachegen2 190212352 1 'The first topic we discussed was the role of sports in society. \n USER' 2.1s
+30 clean_question cachegen3 251397767 1 'The first topic we discussed was the role of sports in society.' 1.8s
+31 author raw 1129579676 1 'The first topic we discussed was the role of music in society.' 3.6s
+31 author uniform8 565893848 1 'The first topic we discussed was the role of music in society.' 2.7s
+31 author uniform4 283499224 1 'The first topic we discussed was the role of music in society.' 1.8s
+31 author uniform3 212900568 0 'The first topic we discussed was the role of art in society.' 9.4s
+31 author cachegen1 148869607 1 'The first topic we discussed was the role of music in society.' 1.5s
+31 author cachegen2 183613815 1 'The first topic we discussed was the role of music in society.' 1.6s
+31 author cachegen3 242612651 1 'The first topic we discussed was the role of music in society.' 1.7s
+31 clean_question raw 1125778588 1 'The first topic we discussed was the role of music in society.' 3.8s
+31 clean_question uniform8 563989592 1 'The first topic we discussed was the role of music in society.' 2.4s
+31 clean_question uniform4 282545240 1 'The first topic we discussed was the role of music in society.' 1.8s
+31 clean_question uniform3 212184152 0 'The first topic we discussed was the role of art in society. \n USER: G' 9.7s
+31 clean_question cachegen1 148410279 1 'The first topic we discussed was the role of music in society.' 1.5s
+31 clean_question cachegen2 183039885 1 'The first topic we discussed was the role of music in society.' 1.7s
+31 clean_question cachegen3 241833755 1 'The first topic we discussed was the role of music in society.' 1.7s
+32 author raw 1207960732 1 'The first topic we discussed was the benefits of spending time in natu' 4.0s
+32 author uniform8 605160920 1 'The first topic we discussed was the benefits of spending time in natu' 2.5s
+32 author uniform4 303171032 1 'The first topic we discussed was the benefits of spending time in natu' 1.9s
+32 author uniform3 227673560 1 'The first topic was the benefits of spending time in nature. \n ASSISTA' 11.6s
+32 author cachegen1 158885242 1 'The first topic we discussed was the benefits of spending time in natu' 1.6s
+32 author cachegen2 195898007 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+32 author cachegen3 258997662 1 'The first topic we discussed was the benefits of spending time in natu' 1.9s
+32 clean_question raw 1204159644 1 'The first topic we discussed was the benefits of spending time in natu' 3.8s
+32 clean_question uniform8 603256664 1 'The first topic we discussed was the benefits of spending time in natu' 2.4s
+32 clean_question uniform4 302217048 1 'The first topic we discussed was the benefits of spending time in natu' 1.9s
+32 clean_question uniform3 226957144 1 'The first topic we discussed was the benefits of spending time in natu' 10.3s
+32 clean_question cachegen1 158426084 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+32 clean_question cachegen2 195323750 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+32 clean_question cachegen3 258218270 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+33 author raw 1146750108 1 'The first topic we discussed was the future of sustainable agriculture' 3.6s
+33 author uniform8 574495832 1 'The first topic we discussed was the future of sustainable agriculture' 2.3s
+33 author uniform4 287808600 1 'The first topic we discussed was the future of sustainable agriculture' 1.7s
+33 author uniform3 216136792 1 'The future of sustainable agriculture. \n\n## Conclusion\n\nIn conclusion,' 10.0s
+33 author cachegen1 151504373 1 'The first topic we discussed was The future of sustainable agriculture' 1.5s
+33 author cachegen2 186773280 1 'The first topic we discussed was the future of sustainable agriculture' 1.6s
+33 author cachegen3 246703844 1 'The first topic we discussed was the future of sustainable agriculture' 1.8s
+33 clean_question raw 1142949020 1 'The first topic we discussed was the future of sustainable agriculture' 3.6s
+33 clean_question uniform8 572591576 1 'The first topic we discussed was the future of sustainable agriculture' 2.3s
+33 clean_question uniform4 286854616 1 'The first topic we discussed was The future of sustainable agriculture' 1.9s
+33 clean_question uniform3 215420376 1 'The first topic we discussed was the future of sustainable agriculture' 10.2s
+33 clean_question cachegen1 150744373 1 'The first topic we discussed was The future of sustainable agriculture' 1.4s
+33 clean_question cachegen2 185899609 1 'The first topic we discussed was The future of sustainable agriculture' 1.6s
+33 clean_question cachegen3 245625133 1 'The first topic we discussed was the future of sustainable agriculture' 1.8s
+34 author raw 1162478748 1 'The first topic we discussed was the benefits of mindfulness meditatio' 3.7s
+34 author uniform8 582375512 1 'The first topic we discussed was the benefits of mindfulness meditatio' 2.7s
+34 author uniform4 291756120 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.9s
+34 author uniform3 219101272 0 'The benefits of spending time in nature. \n\n\n\n\n\n\n\n\n\n\n' 10.3s
+34 author cachegen1 153442802 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.6s
+34 author cachegen2 189160829 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.6s
+34 author cachegen3 249910362 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.7s
+34 clean_question raw 1158677660 1 'The first topic we discussed was the benefits of mindfulness meditatio' 3.7s
+34 clean_question uniform8 580471256 1 'The first topic we discussed was the benefits of mindfulness meditatio' 2.5s
+34 clean_question uniform4 290802136 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.7s
+34 clean_question uniform3 218384856 1 'The first topic we discussed was the benefits of mindfulness meditatio' 10.0s
+34 clean_question cachegen1 152981804 1 'The first topic we discussed was the benefits of mindfulness meditatio' 2.0s
+34 clean_question cachegen2 188585301 1 'The first topic we discussed was the benefits of mindfulness meditatio' 2.1s
+34 clean_question cachegen3 249130306 1 'The first topic we discussed was the benefits of mindfulness meditatio' 1.9s
+35 author raw 1159726236 1 'The first topic we discussed was The future of renewable energy techno' 3.7s
+35 author uniform8 580996568 1 'The first topic we discussed was The future of renewable energy techno' 2.4s
+35 author uniform4 291065304 1 'The first topic we discussed was the future of renewable energy techno' 1.8s
+35 author uniform3 218582488 1 'The first topic we discussed was The future of renewable energy techno' 10.3s
+35 author cachegen1 153142428 1 'The first topic we discussed was The future of renewable energy techno' 1.6s
+35 author cachegen2 188782177 1 'The first topic we discussed was the future of renewable energy techno' 1.6s
+35 author cachegen3 249381959 1 'The first topic we discussed was The future of renewable energy techno' 1.8s
+35 clean_question raw 1155925148 1 'The first topic we discussed was The future of renewable energy techno' 3.7s
+35 clean_question uniform8 579092312 1 'The first topic we discussed was The future of renewable energy techno' 2.4s
+35 clean_question uniform4 290111320 1 'The first topic we discussed was The future of renewable energy techno' 1.9s
+35 clean_question uniform3 217866072 0 'Sure, the first topic we discussed was the future of renewable energy ' 9.8s
+35 clean_question cachegen1 152382690 1 'The first topic we discussed was The future of renewable energy techno' 1.9s
+35 clean_question cachegen2 187909074 1 'The first topic we discussed was The future of renewable energy techno' 1.6s
+35 clean_question cachegen3 248304036 1 'The first topic we discussed was The future of renewable energy techno' 1.8s
+36 author raw 1177158812 1 'The first topic we discussed was the psychology of addiction and recov' 3.7s
+36 author uniform8 589729880 1 'The first topic we discussed was the psychology of addiction and recov' 2.3s
+36 author uniform4 295440472 1 'The first topic we discussed was the psychology of addiction and recov' 1.8s
+36 author uniform3 221868120 1 'The first topic we discussed was the psychology of addiction and recov' 10.6s
+36 author cachegen1 155090551 1 'The first topic we discussed was the psychology of addiction and recov' 2.0s
+36 author cachegen2 191231909 1 'The first topic we discussed was the psychology of addiction and recov' 1.6s
+36 author cachegen3 252730484 1 'The first topic we discussed was the psychology of addiction and recov' 1.7s
+36 clean_question raw 1173357724 1 'The first topic we discussed was the psychology of addiction and recov' 3.7s
+36 clean_question uniform8 587825624 1 'The first topic we discussed was the psychology of addiction and recov' 2.4s
+36 clean_question uniform4 294486488 1 'The first topic we discussed was the psychology of addiction and recov' 2.1s
+36 clean_question uniform3 221151704 1 'The first topic we discussed was the psychology of addiction and recov' 10.0s
+36 clean_question cachegen1 154630428 1 'The first topic we discussed was the psychology of addiction and recov' 2.0s
+36 clean_question cachegen2 190657664 1 'The first topic we discussed was the psychology of addiction and recov' 1.7s
+36 clean_question cachegen3 251951010 1 'The first topic we discussed was the psychology of addiction and recov' 1.8s
+37 author raw 1157891228 1 'The first topic we discussed was the benefits of spending time in natu' 3.7s
+37 author uniform8 580077272 1 'The first topic we discussed was the benefits of spending time in natu' 2.4s
+37 author uniform4 290604760 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+37 author uniform3 218236632 1 'The first topic we discussed was the benefits of spending time in natu' 10.0s
+37 author cachegen1 152749555 1 'The first topic we discussed was the benefits of spending time in natu' 1.6s
+37 author cachegen2 188316389 1 'The first topic we discussed was the benefits of spending time in natu' 1.6s
+37 author cachegen3 248795529 1 'The first topic we discussed was the benefits of spending time in natu' 1.7s
+37 clean_question raw 1154090140 1 'The first topic we discussed was the benefits of spending time in natu' 3.7s
+37 clean_question uniform8 578173016 1 'The first topic we discussed was the benefits of spending time in natu' 2.5s
+37 clean_question uniform4 289650776 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+37 clean_question uniform3 217520216 1 'The first topic we discussed was the benefits of spending time in natu' 9.9s
+37 clean_question cachegen1 151987622 1 'The first topic we discussed was the benefits of spending time in natu' 1.6s
+37 clean_question cachegen2 187444961 1 'The first topic we discussed was the benefits of spending time in natu' 1.6s
+37 clean_question cachegen3 247721746 1 'The first topic we discussed was the benefits of spending time in natu' 1.8s
+38 author raw 1158022300 1 'The first topic we discussed was The benefits of regular exercise.' 3.5s
+38 author uniform8 580142936 1 'The first topic we discussed was The benefits of regular exercise.' 2.3s
+38 author uniform4 290637656 1 'The first topic we discussed was The benefits of regular exercise.' 1.7s
+38 author uniform3 218261336 1 'The first topic we discussed was The benefits of regular exercise.' 10.6s
+38 author cachegen1 152778593 1 'The first topic we discussed was the benefits of regular exercise.' 1.5s
+38 author cachegen2 188356071 1 'The first topic we discussed was The benefits of regular exercise.' 1.5s
+38 author cachegen3 248847458 1 'The first topic we discussed was The benefits of regular exercise.' 1.6s
+38 clean_question raw 1154221212 1 'The first topic we discussed was The benefits of regular exercise.' 3.6s
+38 clean_question uniform8 578238680 1 'The first topic we discussed was The benefits of regular exercise.' 2.4s
+38 clean_question uniform4 289683672 1 'The first topic we discussed was The benefits of regular exercise. \n U' 2.3s
+38 clean_question uniform3 217544920 1 'The first topic we discussed was the benefits of regular exercise. \n A' 10.5s
+38 clean_question cachegen1 152021731 1 'The first topic we discussed was the benefits of regular exercise. \n U' 1.9s
+38 clean_question cachegen2 187485763 1 'The first topic we discussed was The benefits of regular exercise.' 1.6s
+38 clean_question cachegen3 247765624 1 'The first topic we discussed was The benefits of regular exercise.' 1.7s
+39 author raw 1159201948 1 'The first topic we discussed was The psychology of creativity.' 3.5s
+39 author uniform8 580733912 1 'The first topic we discussed was The psychology of creativity.' 2.3s
+39 author uniform4 290933720 1 'The first topic we discussed was the psychology of creativity.' 1.6s
+39 author uniform3 218483672 1 'The psychology of creativity. \n ASSISTANT: The impact of technology on' 10.1s
+39 author cachegen1 152764959 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.0s
+39 author cachegen2 188372572 1 'The first topic we discussed was the psychology of creativity.' 1.5s
+39 author cachegen3 248909457 1 'The first topic we discussed was The psychology of creativity.' 1.6s
+39 clean_question raw 1155400860 1 'The first topic we discussed was The psychology of creativity.' 3.7s
+39 clean_question uniform8 578829656 1 'The first topic we discussed was The psychology of creativity.' 2.6s
+39 clean_question uniform4 289979736 1 'The first topic we discussed was the psychology of creativity. \n USER:' 2.4s
+39 clean_question uniform3 217767256 1 'The first topic we discussed was the psychology of creativity. \n USER:' 10.5s
+39 clean_question cachegen1 152004119 1 'The first topic we discussed was the psychology of creativity. \n USER:' 1.9s
+39 clean_question cachegen2 187498003 1 'The first topic we discussed was The psychology of creativity.' 1.5s
+39 clean_question cachegen3 247830024 1 'The first topic we discussed was The psychology of creativity.' 1.6s
+40 author raw 1174668444 1 'The first topic we discussed was The future of renewable energy techno' 3.8s
+40 author uniform8 588482264 1 'The first topic we discussed was The future of renewable energy techno' 2.4s
+40 author uniform4 294815448 1 'The first topic we discussed was The future of renewable energy techno' 1.8s
+40 author uniform3 221398744 1 'The future of renewable energy technology. \n ASSISTANT: The future of ' 11.4s
+40 author cachegen1 154961906 1 'The first topic we discussed was The future of renewable energy techno' 1.6s
+40 author cachegen2 191032557 1 'The first topic we discussed was The future of renewable energy techno' 1.7s
+40 author cachegen3 252411369 1 'The first topic we discussed was The future of renewable energy techno' 1.7s
+40 clean_question raw 1170867356 1 'The first topic we discussed was The future of renewable energy techno' 3.8s
+40 clean_question uniform8 586578008 1 'The first topic we discussed was The future of renewable energy techno' 2.5s
+40 clean_question uniform4 293861464 1 'The first topic we discussed was The future of renewable energy techno' 2.2s
+40 clean_question uniform3 220682328 1 'The first topic we discussed was the future of renewable energy techno' 10.6s
+40 clean_question cachegen1 154504440 1 'The first topic we discussed was The future of renewable energy techno' 2.0s
+40 clean_question cachegen2 190460129 1 'The first topic we discussed was The future of renewable energy techno' 2.1s
+40 clean_question cachegen3 251632300 1 'The first topic we discussed was The future of renewable energy techno' 2.2s
+41 author raw 1157366940 1 'The first topic we discussed was The role of art in society.' 3.9s
+41 author uniform8 579814616 1 'The first topic we discussed was the role of art in society.' 2.3s
+41 author uniform4 290473176 1 'The first topic we discussed was the role of art in society.' 1.8s
+41 author uniform3 218137816 1 'The first topic we discussed was the role of art in society.' 9.6s
+41 author cachegen1 152568605 1 'The first topic we discussed was The role of art in society.' 1.5s
+41 author cachegen2 188147255 1 'The first topic we discussed was the role of art in society.' 1.6s
+41 author cachegen3 248620571 1 'The first topic we discussed was The role of art in society.' 1.7s
+41 clean_question raw 1153565852 1 'The first topic we discussed was the role of art in society.' 3.7s
+41 clean_question uniform8 577910360 1 'The first topic we discussed was the role of art in society.' 2.3s
+41 clean_question uniform4 289519192 1 'The first topic we discussed was the role of art in society.' 1.8s
+41 clean_question uniform3 217421400 1 'The first topic we discussed was the role of art in society. \n ASSISTA' 10.1s
+41 clean_question cachegen1 152110063 1 'The first topic we discussed was The role of art in society. \n USER: G' 1.9s
+41 clean_question cachegen2 187572972 1 'The first topic we discussed was the role of art in society.' 1.6s
+41 clean_question cachegen3 247841724 1 'The first topic we discussed was The role of art in society.' 1.7s
+42 author raw 1189610652 1 'The first topic we discussed was The role of education in society.' 3.7s
+42 author uniform8 595967960 1 'The first topic we discussed was The role of education in society.' 2.9s
+42 author uniform4 298565592 1 'The first topic we discussed was the role of education in society.' 1.8s
+42 author uniform3 224215000 1 'The first topic was The role of education in society.' 9.8s
+42 author cachegen1 156844248 1 'The first topic we discussed was The role of education in society.' 1.6s
+42 author cachegen2 193341697 1 'The first topic we discussed was the role of education in society.' 1.6s
+42 author cachegen3 255498065 1 'The first topic we discussed was The role of education in society.' 1.7s
+42 clean_question raw 1185809564 1 'The first topic we discussed was The role of education in society.' 3.8s
+42 clean_question uniform8 594063704 1 'The first topic we discussed was The role of education in society.' 2.4s
+42 clean_question uniform4 297611608 1 'The first topic we discussed was the role of education in society.' 1.7s
+42 clean_question uniform3 223498584 1 'The first topic we discussed was the role of education in society. I h' 11.2s
+42 clean_question cachegen1 156383702 1 'The first topic we discussed was The role of education in society. \n U' 2.0s
+42 clean_question cachegen2 192766028 1 'The first topic we discussed was the role of education in society.' 1.7s
+42 clean_question cachegen3 254717247 1 'The first topic we discussed was The role of education in society.' 1.8s
+43 author raw 1157498012 1 'The first topic we discussed was The impact of social media on mental ' 4.0s
+43 author uniform8 579880280 1 'The first topic we discussed was The impact of social media on mental ' 2.6s
+43 author uniform4 290506072 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+43 author uniform3 218162520 1 'The impact of social media on mental health in adults. \n ASSISTANT: Th' 10.4s
+43 author cachegen1 152523953 1 'The first topic we discussed was The impact of social media on mental ' 1.9s
+43 author cachegen2 188090976 1 'The first topic we discussed was The impact of social media on mental ' 1.9s
+43 author cachegen3 248563133 1 'The first topic we discussed was The impact of social media on mental ' 2.1s
+43 clean_question raw 1153696924 1 'The first topic we discussed was The impact of social media on mental ' 3.9s
+43 clean_question uniform8 577976024 1 'The first topic we discussed was The impact of social media on mental ' 2.9s
+43 clean_question uniform4 289552088 1 'The first topic we discussed was The impact of social media on mental ' 2.1s
+43 clean_question uniform3 217446104 0 'The first topic we discussed was the impact of social media on mental ' 10.2s
+43 clean_question cachegen1 152063856 1 'The first topic we discussed was The impact of social media on mental ' 1.9s
+43 clean_question cachegen2 187515660 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+43 clean_question cachegen3 247783774 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+44 author raw 1165493404 1 'The first topic we discussed was the psychology of addiction and recov' 3.9s
+44 author uniform8 583885784 1 'The first topic we discussed was the psychology of addiction and recov' 2.3s
+44 author uniform4 292512728 1 'The first topic we discussed was the psychology of addiction and recov' 1.8s
+44 author uniform3 219669464 1 'The first topic we discussed was the psychology of addiction and recov' 10.1s
+44 author cachegen1 153798369 1 'The first topic we discussed was the psychology of addiction and recov' 1.6s
+44 author cachegen2 189599492 1 'The first topic we discussed was the psychology of addiction and recov' 1.6s
+44 author cachegen3 250502222 1 'The first topic we discussed was the psychology of addiction and recov' 1.8s
+44 clean_question raw 1161692316 1 'The first topic we discussed was the psychology of addiction and recov' 3.7s
+44 clean_question uniform8 581981528 1 'The first topic we discussed was the psychology of addiction and recov' 2.4s
+44 clean_question uniform4 291558744 1 'The first topic we discussed was the psychology of addiction and recov' 1.7s
+44 clean_question uniform3 218953048 1 'The first topic we discussed was the psychology of addiction and recov' 9.9s
+44 clean_question cachegen1 153338646 1 'The first topic we discussed was the psychology of addiction and recov' 1.5s
+44 clean_question cachegen2 189025317 1 'The first topic we discussed was the psychology of addiction and recov' 1.6s
+44 clean_question cachegen3 249723077 1 'The first topic we discussed was the psychology of addiction and recov' 1.7s
+45 author raw 1145832604 1 'The first topic we discussed was the effects of sleep on overall healt' 3.7s
+45 author uniform8 574036184 1 'The first topic we discussed was the effects of sleep on overall healt' 2.7s
+45 author uniform4 287578328 1 'The first topic we discussed was the effects of sleep on overall healt' 2.1s
+45 author uniform3 215963864 1 'The first topic was the effects of sleep on overall health. \n\n\n\n\n\n\n' 9.5s
+45 author cachegen1 151319800 1 'The first topic we discussed was the effects of sleep on overall healt' 1.6s
+45 author cachegen2 186550381 1 'The first topic we discussed was the effects of sleep on overall healt' 1.9s
+45 author cachegen3 246415899 1 'The first topic we discussed was the effects of sleep on overall healt' 1.7s
+45 clean_question raw 1142031516 1 'The first topic we discussed was the effects of sleep on overall healt' 4.2s
+45 clean_question uniform8 572131928 1 'The first topic we discussed was the effects of sleep on overall healt' 2.8s
+45 clean_question uniform4 286624344 1 'The first topic we discussed was the effects of sleep on overall healt' 2.1s
+45 clean_question uniform3 215247448 0 'The first topic we discussed was the benefits of volunteering. \n ASSIS' 9.8s
+45 clean_question cachegen1 150559010 1 'The first topic we discussed was the effects of sleep on overall healt' 1.9s
+45 clean_question cachegen2 185676572 1 'The first topic we discussed was the effects of sleep on overall healt' 1.9s
+45 clean_question cachegen3 245336838 1 'The first topic we discussed was the effects of sleep on overall healt' 1.7s
+46 author raw 1158939804 1 'The first topic we discussed was the history and impact of the Renaiss' 3.9s
+46 author uniform8 580602584 1 'The first topic we discussed was the history and impact of the Renaiss' 2.4s
+46 author uniform4 290867928 1 'The first topic we discussed was the history and impact of the Renaiss' 1.9s
+46 author uniform3 218434264 1 'The first topic we discussed was the history and impact of the Renaiss' 10.6s
+46 author cachegen1 152990180 1 'The first topic we discussed was the history and impact of the Renaiss' 1.7s
+46 author cachegen2 188600889 1 'The first topic we discussed was the history and impact of the Renaiss' 1.7s
+46 author cachegen3 249150308 1 'The first topic we discussed was the history and impact of the Renaiss' 1.8s
+46 clean_question raw 1155138716 1 'The first topic we discussed was the history and impact of the Renaiss' 3.8s
+46 clean_question uniform8 578698328 1 'The first topic we discussed was the history and impact of the Renaiss' 2.5s
+46 clean_question uniform4 289913944 1 'The first topic we discussed was the history and impact of the Renaiss' 2.1s
+46 clean_question uniform3 217717848 1 'The first topic we discussed was the history and impact of the Renaiss' 9.9s
+46 clean_question cachegen1 152229036 1 'The first topic we discussed was the history and impact of the Renaiss' 1.9s
+46 clean_question cachegen2 187725768 1 'The first topic we discussed was the history and impact of the Renaiss' 2.1s
+46 clean_question cachegen3 248071288 1 'The first topic we discussed was the history and impact of the Renaiss' 1.9s
+47 author raw 1208616092 1 'The first topic we discussed was the benefits of a plant-based diet.' 3.9s
+47 author uniform8 605489240 1 'The first topic we discussed was the benefits of a plant-based diet.' 2.9s
+47 author uniform4 303335512 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.9s
+47 author uniform3 227797080 0 'The first topic was the benefits of reading for pleasure.' 9.6s
+47 author cachegen1 159625707 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.8s
+47 author cachegen2 196693121 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.8s
+47 author cachegen3 259863179 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.9s
+47 clean_question raw 1204815004 1 'The first topic we discussed was the benefits of a plant-based diet.' 4.0s
+47 clean_question uniform8 603584984 1 'The first topic we discussed was the benefits of a plant-based diet.' 2.6s
+47 clean_question uniform4 302381528 1 'The first topic we discussed was the benefits of a plant-based diet.' 2.0s
+47 clean_question uniform3 227080664 0 'The first topic we discussed was the benefits of reading for pleasure.' 10.3s
+47 clean_question cachegen1 158863258 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.8s
+47 clean_question cachegen2 195818192 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.8s
+47 clean_question cachegen3 258782298 1 'The first topic we discussed was the benefits of a plant-based diet.' 1.9s
+48 author raw 1187120284 1 'The first topic we discussed was The effects of stress on the body and' 4.0s
+48 author uniform8 594720344 1 'The first topic we discussed was The effects of stress on the body and' 2.6s
+48 author uniform4 297940568 1 'The first topic we discussed was The effects of stress on the body and' 2.0s
+48 author uniform3 223745624 0 'The first topic is The effects of air pollution on human health.' 9.8s
+48 author cachegen1 156728926 1 'The first topic we discussed was the effects of stress on the body and' 1.8s
+48 author cachegen2 193164531 1 'The first topic we discussed was The effects of stress on the body and' 1.8s
+48 author cachegen3 255202837 1 'The first topic we discussed was The effects of stress on the body and' 1.8s
+48 clean_question raw 1183319196 1 'The first topic we discussed was The effects of stress on the body and' 4.0s
+48 clean_question uniform8 592816088 1 'The first topic we discussed was The effects of stress on the body and' 2.6s
+48 clean_question uniform4 296986584 1 'The first topic we discussed was The effects of stress on the body and' 2.0s
+48 clean_question uniform3 223029208 0 'The first topic we discussed was the future of renewable energy. \n USE' 10.4s
+48 clean_question cachegen1 156266682 1 'The first topic we discussed was the effects of stress on the body and' 2.1s
+48 clean_question cachegen2 192590818 1 'The first topic we discussed was The effects of stress on the body and' 1.8s
+48 clean_question cachegen3 254422862 1 'The first topic we discussed was The effects of stress on the body and' 2.0s
+49 author raw 1175848092 1 'The first topic we discussed was the impact of social media on mental ' 3.9s
+49 author uniform8 589073240 1 'The first topic we discussed was The impact of social media on mental ' 2.6s
+49 author uniform4 295111512 1 'The first topic we discussed was The impact of social media on mental ' 2.2s
+49 author uniform3 221621080 1 'The first topic was The impact of social media on mental health in adu' 10.2s
+49 author cachegen1 155096905 1 'The first topic we discussed was the impact of social media on mental ' 2.0s
+49 author cachegen2 191203658 1 'The first topic we discussed was The impact of social media on mental ' 1.8s
+49 author cachegen3 252636780 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+49 clean_question raw 1172047004 1 'The first topic we discussed was the impact of social media on mental ' 4.0s
+49 clean_question uniform8 587168984 1 'The first topic we discussed was the impact of social media on mental ' 3.1s
+49 clean_question uniform4 294157528 1 'The first topic we discussed was The impact of social media on mental ' 2.2s
+49 clean_question uniform3 220904664 0 'The first topic we discussed was the benefits of regular exercise. \n\n\n' 10.0s
+49 clean_question cachegen1 154636502 1 'The first topic we discussed was the impact of social media on mental ' 1.9s
+49 clean_question cachegen2 190629377 1 'The first topic we discussed was The impact of social media on mental ' 2.0s
+49 clean_question cachegen3 251857350 1 'The first topic we discussed was the impact of social media on mental ' 2.0s
+EXIT=0

@@ -1,0 +1,169 @@
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:02<00:04,  2.30s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.86s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.61s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.72s/it]
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+CALIBRATED 30 82s
+CALIBRATED 31 167s
+CALIBRATED 32 261s
+CALIBRATED 33 367s
+CALIBRATED 34 457s
+CALIBRATED 35 535s
+CALIBRATED 36 611s
+CALIBRATED 37 692s
+CALIBRATED 38 770s
+CALIBRATED 39 845s
+CALIBRATED 40 922s
+CALIBRATED 41 997s
+CALIBRATED 42 1075s
+CALIBRATED 43 1154s
+CALIBRATED 44 1236s
+CALIBRATED 45 1320s
+CALIBRATED 46 1399s
+CALIBRATED 47 1477s
+CALIBRATED 48 1554s
+CALIBRATED 49 1630s
+0 clean_question raw 1163001856 1 'The first topic we discussed was The role of art in society.' 0.9s
+Detected CUDA files, patching ldflags
+Emitting ninja build file /home/aaa/CacheGen/.local/torch_extensions/paper_ac256_a9bde53b6f099ec6/build.ninja...
+Building extension module paper_ac256_a9bde53b6f099ec6...
+Using envvar MAX_JOBS (2) as the number of workers...
+ninja: no work to do.
+Loading extension module paper_ac256_a9bde53b6f099ec6...
+0 clean_question paper-r4 195025844 1 'The first topic we discussed was The role of art in society.' 15.5s
+0 clean_question nolayer-r4 188540788 1 'The first topic we discussed was the role of art in society.' 15.0s
+0 clean_question nodelta-r4 165173492 1 'The first topic we discussed was the role of art in society.' 14.6s
+0 clean_question paper-abs 188900662 1 'The first topic we discussed was The role of art in society.' 13.9s
+0 clean_question nolayer-abs 183954166 0 '\n Question:1  Question:1  Question: \n USER: 1 USER' 13.9s
+0 clean_question nodelta-abs 179256950 1 'The first topic we discussed was The role of art in society.' 13.3s
+1 clean_question raw 1187774464 1 'The first topic we discussed was The benefits of regular exe' 0.8s
+1 clean_question paper-r4 198771888 1 'The first topic we discussed was the benefits of regular exe' 15.3s
+1 clean_question nolayer-r4 192152944 1 'The first topic we discussed was the benefits of regular exe' 15.5s
+1 clean_question nodelta-r4 168398384 1 'The first topic we discussed was the benefits of regular exe' 14.7s
+1 clean_question paper-abs 192697906 1 'The first topic we discussed was the benefits of regular exe' 13.7s
+1 clean_question nolayer-abs 187642930 0 '\n\n\n\n\n\n\n A:\n Question:  Question:\n\n Question:\n' 14.5s
+1 clean_question nodelta-abs 182978226 1 'The first topic we discussed was the benefits of regular exe' 14.0s
+2 clean_question raw 1159069696 1 'The first topic we discussed was The impact of social media ' 1.2s
+2 clean_question paper-r4 194222072 1 'The first topic we discussed was The impact of social media ' 16.4s
+2 clean_question nolayer-r4 187758392 1 'The first topic we discussed was the impact of social media ' 14.8s
+2 clean_question nodelta-r4 164510200 1 'The first topic we discussed was the impact of social media ' 16.3s
+2 clean_question paper-abs 187898426 1 'The first topic we discussed was The impact of social media ' 15.4s
+2 clean_question nolayer-abs 182967674 0 'A:  A USER:\n Question: What are some of the What are some of' 14.5s
+2 clean_question nodelta-abs 178569338 1 'The first topic we discussed was the impact of social media ' 13.5s
+3 clean_question raw 1151598592 1 'The first topic we discussed was The benefits of mindfulness' 0.9s
+3 clean_question paper-r4 193291256 1 'The first topic we discussed was The benefits of mindfulness' 14.7s
+3 clean_question nolayer-r4 186858040 1 'The first topic we discussed was the benefits of mindfulness' 15.4s
+3 clean_question nodelta-r4 163737016 1 'The first topic we discussed was The benefits of mindfulness' 16.2s
+3 clean_question paper-abs 186855738 1 'The first topic we discussed was The benefits of mindfulness' 15.1s
+3 clean_question nolayer-abs 181939898 0 'USER: USER: USER: USER: USER: USER: USER' 15.9s
+3 clean_question nodelta-abs 177499642 1 'The first topic we discussed was The benefits of mindfulness' 15.7s
+4 clean_question raw 1176371200 1 'The first topic we discussed was The impact of technology on' 1.0s
+4 clean_question paper-r4 197476848 1 'The first topic we discussed was The impact of technology on' 17.4s
+4 clean_question nolayer-r4 190915568 1 'The first topic we discussed was the impact of technology on' 17.5s
+4 clean_question nodelta-r4 167292592 1 'The first topic we discussed was The impact of technology on' 17.4s
+4 clean_question paper-abs 190879922 1 'The first topic we discussed was The impact of technology on' 16.4s
+4 clean_question nolayer-abs 185875378 0 'USER: USER:\n Question:1 Mindfulness meditation.\n Question:2 ' 17.2s
+4 clean_question nodelta-abs 181444914 1 'The first topic we discussed was The impact of technology on' 16.7s
+5 clean_question raw 1190264832 1 'The first topic we discussed was The impact of technology on' 1.0s
+5 clean_question paper-r4 199760876 1 'The first topic we discussed was The impact of technology on' 19.0s
+5 clean_question nolayer-r4 193120620 1 'The first topic we discussed was the impact of technology on' 17.1s
+5 clean_question nodelta-r4 169388524 1 'The first topic we discussed was The impact of technology on' 17.1s
+5 clean_question paper-abs 193405550 1 'The first topic we discussed was The impact of technology on' 15.7s
+5 clean_question nolayer-abs 188336942 0 '\n USER: USER US: USER ASSISTANT: USER USER: US' 15.1s
+5 clean_question nodelta-abs 183681326 1 'The first topic we discussed was the impact of technology on' 14.7s
+6 clean_question raw 1171652608 1 'The first topic we discussed was The future of sustainable a' 0.8s
+6 clean_question paper-r4 196427956 1 'The first topic we discussed was The future of sustainable a' 16.7s
+6 clean_question nolayer-r4 189893300 1 'The first topic we discussed was the future of sustainable a' 16.7s
+6 clean_question nodelta-r4 166072500 1 'The first topic we discussed was the topic of the future of ' 16.3s
+6 clean_question paper-abs 190218294 1 'The first topic we discussed was the future of sustainable a' 15.0s
+6 clean_question nolayer-abs 185233462 0 '\n Question:1 USER:  The first topic is the\n Question: USER: ' 16.4s
+6 clean_question nodelta-abs 180438326 1 'The first topic we discussed was the future of sustainable a' 15.7s
+7 clean_question raw 1167327232 1 'The first topic we discussed was the psychology of creativit' 0.8s
+7 clean_question paper-r4 195463796 1 'The first topic we discussed was The psychology of creativit' 18.9s
+7 clean_question nolayer-r4 188958388 1 'The first topic we discussed was the psychology of creativit' 22.2s
+7 clean_question nodelta-r4 165531380 1 'The first topic we discussed was the psychology of creativit' 20.2s
+7 clean_question paper-abs 189298934 1 'The first topic we discussed was the psychology of creativit' 15.0s
+7 clean_question nolayer-abs 184334646 0 '\n Question:1 What is the USER:\n QUESTION: What is the USER' 16.3s
+7 clean_question nodelta-abs 179844854 1 'The first topic we discussed was the psychology of creativit' 16.5s
+8 clean_question raw 1170735104 1 'The first topic we discussed was the history and culture of ' 1.1s
+8 clean_question paper-r4 196046900 1 'The first topic we discussed was the history and culture of ' 17.4s
+8 clean_question nolayer-r4 189518388 1 'The first topic we discussed was the history and culture of ' 18.4s
+8 clean_question nodelta-r4 165966516 1 'The first topic we discussed was the history and culture of ' 16.4s
+8 clean_question paper-abs 189921846 1 'The first topic we discussed was the history and culture of ' 14.8s
+8 clean_question nolayer-abs 184936950 0 '\n Question:1  Question:  A:\n Question:1 1  Question: A' 13.9s
+8 clean_question nodelta-abs 180314166 1 'The first topic we discussed was the history and culture of ' 13.7s
+9 clean_question raw 1217396736 1 'The first topic we discussed was The effects of stress on th' 1.1s
+9 clean_question paper-r4 204064740 1 'The first topic we discussed was The effects of stress on th' 15.3s
+9 clean_question nolayer-r4 197282660 1 'The first topic we discussed was The effects of stress on th' 15.2s
+9 clean_question nodelta-r4 173010084 1 'The first topic we discussed was the effects of stress on th' 16.5s
+9 clean_question paper-abs 197629094 1 'The first topic we discussed was The effects of stress on th' 14.6s
+9 clean_question nolayer-abs 192451942 0 '\n Question:1 Answer: A: A:\n Question: 1 ASSISTANT: A' 16.7s
+9 clean_question nodelta-abs 187745318 1 'The first topic we discussed was the effects of stress on th' 15.4s
+10 clean_question raw 1186201600 1 'The first topic we discussed was the history and culture of ' 1.1s
+10 clean_question paper-r4 198731184 0 'The first topic we discussed was the history and impact of t' 17.6s
+10 clean_question nolayer-r4 192116720 1 'The first topic we discussed was the history and culture of ' 17.1s
+10 clean_question nodelta-r4 168055536 1 'The first topic we discussed was the history and culture of ' 14.9s
+10 clean_question paper-abs 192360242 1 'The first topic we discussed was the history and culture of ' 15.8s
+10 clean_question nolayer-abs 187310898 0 'USER US:\n\n Question:\n Question:\n Question:\n\n\n\n\n\n' 18.5s
+10 clean_question nodelta-abs 182673714 1 'The first topic we discussed was the history and culture of ' 18.7s
+11 clean_question raw 1141637120 1 'The first topic we discussed was the psychology of happiness' 0.8s
+11 clean_question paper-r4 191520380 1 'The first topic we discussed was the psychology of happiness' 17.4s
+11 clean_question nolayer-r4 185147580 1 'The first topic we discussed was the psychology of happiness' 18.0s
+11 clean_question nodelta-r4 162037948 0 'The first topic we discussed was the benefits of spending ti' 16.4s
+11 clean_question paper-abs 185435902 1 'The first topic we discussed was the psychology of happiness' 15.4s
+11 clean_question nolayer-abs 180571710 0 '\n Question:1 What is the USER: What is the What is the What ' 15.4s
+11 clean_question nodelta-abs 175900030 1 'The first topic we discussed was the psychology of happiness' 14.9s
+12 clean_question raw 1163395072 1 'The first topic we discussed was The psychology of creativit' 0.8s
+12 clean_question paper-r4 194929140 1 'The first topic we discussed was the psychology of creativit' 17.6s
+12 clean_question nolayer-r4 188447988 1 'The first topic we discussed was the psychology of creativit' 17.0s
+12 clean_question nodelta-r4 165281140 1 'The first topic we discussed was the psychology of creativit' 17.2s
+12 clean_question paper-abs 188751286 1 'The first topic we discussed was the psychology of creativit' 15.3s
+12 clean_question nolayer-abs 183794998 0 '\n Question: What is the \n USER: \n USER:  A: ' 16.0s
+12 clean_question nodelta-abs 179354102 1 'The first topic we discussed was the psychology of creativit' 15.3s
+13 clean_question raw 1191837696 1 'The first topic we discussed was The impact of technology on' 1.0s
+13 clean_question paper-r4 200067756 1 'The first topic we discussed was The impact of technology on' 17.5s
+13 clean_question nolayer-r4 193415532 1 'The first topic we discussed was the impact of technology on' 17.0s
+13 clean_question nodelta-r4 169575340 1 'The first topic we discussed was The impact of technology on' 16.8s
+13 clean_question paper-abs 193478190 1 'The first topic we discussed was The impact of technology on' 16.6s
+13 clean_question nolayer-abs 188407342 0 'USER: USER USER: USER USER:  A: USER USER' 15.6s
+13 clean_question nodelta-abs 183812590 1 'The first topic we discussed was the impact of technology on' 16.3s
+14 clean_question raw 1157234688 1 'The first topic we discussed was the impact of technology on' 1.0s
+14 clean_question paper-r4 193780280 1 'The first topic we discussed was the impact of technology on' 17.0s
+14 clean_question nolayer-r4 187333304 1 'The first topic we discussed was the impact of technology on' 16.8s
+14 clean_question nodelta-r4 164003576 1 'The first topic we discussed was the impact of technology on' 16.7s
+14 clean_question paper-abs 187685498 1 'The first topic we discussed was the impact of technology on' 15.4s
+14 clean_question nolayer-abs 182769146 0 'A:\n Question:1 What is the  Question:\n\n Question: 2 Answer:' 15.9s
+14 clean_question nodelta-abs 178235578 1 'The first topic we discussed was the impact of technology on' 15.3s
+15 clean_question raw 1193279488 1 'The first topic we discussed was the history and culture of ' 1.1s
+15 clean_question paper-r4 200114540 1 'The first topic we discussed was the history and culture of ' 17.2s
+15 clean_question nolayer-r4 193465900 1 'The first topic we discussed was the history and culture of ' 17.0s
+15 clean_question nodelta-r4 169548780 1 'The first topic we discussed was the history and culture of ' 16.7s
+15 clean_question paper-abs 193682542 1 'The first topic we discussed was the history and culture of ' 16.0s
+15 clean_question nolayer-abs 188603694 0 'ASSISTANT: A: USER: ASSISTANT: A USER: A USER' 16.5s
+15 clean_question nodelta-abs 184074862 1 'The first topic we discussed was the history and culture of ' 15.6s
+16 clean_question raw 1121845248 1 'The first topic we discussed was the psychology of happiness' 0.8s
+16 clean_question paper-r4 187907396 1 'The first topic we discussed was the psychology of happiness' 16.4s
+16 clean_question nolayer-r4 181655940 1 'The first topic we discussed was the psychology of happiness' 16.5s
+16 clean_question nodelta-r4 159045892 1 'The first topic we discussed was the psychology of happiness' 16.3s
+16 clean_question paper-abs 182019526 1 'The first topic we discussed was the psychology of happiness' 15.4s
+16 clean_question nolayer-abs 177246726 1 'USER: The topic of The psychology of happiness.\n\n A: USER: W' 15.8s
+16 clean_question nodelta-abs 172685190 1 'The first topic we discussed was the psychology of happiness' 14.6s
+17 clean_question raw 1194459136 1 'The first topic we discussed was the history and impact of t' 1.0s
+17 clean_question paper-r4 199963308 1 'The first topic we discussed was the history and impact of t' 17.3s
+17 clean_question nolayer-r4 193296748 1 'The first topic we discussed was the history and impact of t' 17.4s
+17 clean_question nodelta-r4 169379564 1 'The first topic we discussed was the history and impact of t' 17.2s
+17 clean_question paper-abs 193841454 1 'The first topic we discussed was The history and impact of t' 16.2s
+17 clean_question nolayer-abs 188754222 0 '\n\n\n\n\n\n 1  Question: A  Question ASS ASS:\n\n Q' 16.4s
+17 clean_question nodelta-abs 184091950 1 'The first topic we discussed was the history and impact of t' 15.5s
+18 clean_question raw 1155006464 1 'The first topic we discussed was The impact of social media ' 1.0s
+18 clean_question paper-r4 193555640 1 'The first topic we discussed was the impact of social media ' 17.0s
+18 clean_question nolayer-r4 187125112 1 'The first topic we discussed was the impact of social media ' 16.8s
+18 clean_question nodelta-r4 163911096 1 'The first topic we discussed was the impact of social media ' 16.7s
+18 clean_question paper-abs 187400890 1 'The first topic we discussed was the impact of social media ' 15.6s
+18 clean_question nolayer-abs 182483706 0 '\n\n\n\n\n A: A:\n\n Q: A:\n\n\n\n\n' 15.8s
+18 clean_question nodelta-abs 177940794 1 'The first topic we discussed was the impact of social media ' 14.9s
+19 clean_question raw 1173880832 1 'The first topic we discussed was The effects of climate chan' 1.1s
+19 clean_question paper-r4 196643572 1 'The first topic we discussed was The effects of climate chan' 17.1s
+19 clean_question nolayer-r4 190100660 1 'The first topic we discussed was the effects of climate chan' 17.0s
+19 clean_question nodelta-r4 166602420 1 'The first topic we discussed was The effects of climate chan' 16.9s
+19 clean_question paper-abs 190157238 1 'The first topic we discussed was The effects of climate chan' 16.0s
+19 clean_question nolayer-abs 185161142 0 '\n Question:1 What is the\n Question: 2 Answer: The Question: ' 16.2s
+19 clean_question nodelta-abs 180777718 1 'The first topic we discussed was the effects of climate chan' 15.5s
+EXIT=0

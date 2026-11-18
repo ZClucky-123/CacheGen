@@ -79,6 +79,25 @@ results/mistral/minimal/*
 !/reports/mistral/20261027-4k-loss-probe/
 !/reports/mistral/20261027-4k-loss-probe/**
 
+# Paper-difference record and the full-length LongChat runs (2026-11-02 to 11-14), with their run logs.
+!/reports/mistral/20261029-paper-core-analysis/
+!/reports/mistral/20261029-paper-core-analysis/**
+!/reports/mistral/20261102-fulllength-qa/
+!/reports/mistral/20261102-fulllength-qa/**
+!/reports/mistral/20261102-fulllength-qa/**/*.log
+!/reports/mistral/20261102-fulllength-ac/
+!/reports/mistral/20261102-fulllength-ac/**
+!/reports/mistral/20261102-fulllength-ac/**/*.log
+!/reports/mistral/20261104-fulllength-paper/
+!/reports/mistral/20261104-fulllength-paper/**
+!/reports/mistral/20261104-fulllength-paper/**/*.log
+!/reports/mistral/20261114-fulllength-paper-abs/
+!/reports/mistral/20261114-fulllength-paper-abs/**
+!/reports/mistral/20261114-fulllength-paper-abs/**/*.log
+!/reports/mistral/20261114-fulllength-ttft/
+!/reports/mistral/20261114-fulllength-ttft/**
+!/reports/mistral/20261114-fulllength-ttft/**/*.log
+
 # Canonical SQLite databases are archived after checkpoint; sidecars are transient.
 **/records.sqlite3-wal
 **/records.sqlite3-shm

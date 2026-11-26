@@ -1,0 +1,18 @@
+{
+  "protocol": "delta-diagnostics-v1",
+  "stage": "three_document_raw_statistics_pilot",
+  "dataset": "test_data/longchat-expansion/longchat_200_expanded_candidate.jsonl",
+  "dataset_manifest": "test_data/longchat-expansion/manifest.json",
+  "core_config": "paper_compression/configs/core-study.json",
+  "model_id": "mistral-community/Mistral-7B-v0.2",
+  "model_revision": "80cf49b18de6354fd8a6d1e81c177dd830e05eea",
+  "weight_loading": "fp16",
+  "expected_samples": 200,
+  "group_size": 10,
+  "anchor": "first_token_in_group",
+  "pilot_source_ids": [0,50,199],
+  "generation_tokens": 20,
+  "data_groups": {"historical": [0,49], "new_permutations": [50,199]},
+  "next_stage": "raw_K_and_V_vs_anchor_deltas_on_matching_nonanchor_positions; no CDF fitting or parameter selection",
+  "inference_authorized_by_this_config": true
+}

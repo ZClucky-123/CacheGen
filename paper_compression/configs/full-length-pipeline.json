@@ -1,0 +1,13 @@
+{
+  "protocol": "full-length-pipeline-v1",
+  "source_ids": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],
+  "methods": ["cachegen1", "cachegen3"],
+  "modes": ["whole", "chunk_serial", "chunk_pipeline"],
+  "bandwidth_gbps": [0.5,1,3,10],
+  "chunk_tokens": 1536,
+  "repeats": 3,
+  "generation_tokens": 20,
+  "queue_capacity": 1,
+  "pacing_quantum_bytes": 65536,
+  "seed": 0
+}
